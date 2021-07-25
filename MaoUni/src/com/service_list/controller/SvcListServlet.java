@@ -28,10 +28,12 @@ public class SvcListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/html; charset=UTF-8"); 
+		
 		String action = req.getParameter("action");
 		Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
-		res.setContentType("text/html; charset=UTF-8"); 
+		
 		if("addService".equals(action)) {
 			Integer groomerId = new Integer(req.getParameter("groomerId"));
 			Integer svcId = new Integer(req.getParameter("svcId"));
@@ -45,7 +47,6 @@ public class SvcListServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
 			}
-
 		}
 		
 		
@@ -59,12 +60,11 @@ public class SvcListServlet extends HttpServlet {
 				String jsonList = new JSONArray(list).toString();
 				PrintWriter out = res.getWriter();
 				out.print(jsonList);
+				out.flush();
+				out.close();
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
-		
 		}
-
 	}
-
 }

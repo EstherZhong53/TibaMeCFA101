@@ -38,7 +38,6 @@ public class WorkServlet extends HttpServlet {
 		if("uploadItems".equals(action)) {
 			
 			Integer groomerId = new Integer(req.getParameter("groomerId"));
-			System.out.println("groomerId: " + groomerId);
 			try {
 				WorkService workSvc = new WorkService();
 				Set<Part> parts = new HashSet(req.getParts());
@@ -49,9 +48,10 @@ public class WorkServlet extends HttpServlet {
 						byte[] item = new byte[fin.available()];
 						fin.read(item);
 						workSvc.addItem(groomerId, item);
-						System.out.println("success!");
+						fin.close();
 					}
 				}
+				
 				
 				// 檢查上傳的檔案類型是否為照片檔
 				res.sendRedirect("front-end/groomer/groomer_infoEdit.jsp");
@@ -64,17 +64,10 @@ public class WorkServlet extends HttpServlet {
 		if("deleteItem".equals(action)) {
 			res.setContentType("text/html; charset=UTF-8");
 			Integer wid = new Integer(req.getParameter("wid"));
-			List<WorkVO> list = new ArrayList<WorkVO>();
-			String jsonStr = "";
 			
 			try {
 				WorkService workSvc = new WorkService();
 				workSvc.delete(wid);
-//				list = workSvc.getOneList(2);
-				
-//				jsonStr = new JSONArray(list).toString();
-//				PrintWriter out = res.getWriter();
-//				out.print(jsonStr);
 				
 			} catch (Exception e) {
 				e.printStackTrace(System.err);

@@ -28,7 +28,6 @@ public class SvcServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		String url = "/back-end/groomer/svcItemList.jsp";
 		
 		if("insert".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
@@ -44,21 +43,24 @@ public class SvcServlet extends HttpServlet {
 				}
 				
 				if(!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req.getRequestDispatcher(url);
-					failureView.forward(req, res);
+//					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/svcItemList.jsp");
+//					failureView.forward(req, res);
+					res.sendRedirect("draft/groomer/svcItemList.jsp");
 					return;
 				}
 				
 				SvcService svcService = new SvcService();
 				svcService.addServiceItem(item, pet);
 				
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+//				RequestDispatcher successView = req.getRequestDispatcher("/back-end/groomer/svcItemList.jsp");
+//				successView.forward(req, res);
+				res.sendRedirect("draft/groomer/svcItemList.jsp");
 				
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(url);
-				failureView.forward(req, res);
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/svcItemList.jsp");
+//				failureView.forward(req, res);
+				res.sendRedirect("draft/groomer/svcItemList.jsp");
 			} 
 
 		}
@@ -78,11 +80,14 @@ public class SvcServlet extends HttpServlet {
 				String jsonList = new JSONArray(list).toString();
 				PrintWriter out = res.getWriter();
 				out.print(jsonList);
+				out.flush();
+				out.close();
 				
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher(url);
-				failureView.forward(req, res);
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/svcItemList.jsp");
+//				failureView.forward(req, res);
+				res.sendRedirect("draft/groomer/svcItemList.jsp");
 			}
 		}
 

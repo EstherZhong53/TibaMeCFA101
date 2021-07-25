@@ -29,8 +29,10 @@ public class SchServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		String action = req.getParameter("action");
+		res.setContentType("text/plain");
+		res.setCharacterEncoding("UTF-8");
 		
+		String action = req.getParameter("action");
 		
 		if("autoInsertData".equals(action)) {
 			SchService schSvc = new SchService();
@@ -50,10 +52,11 @@ public class SchServlet extends HttpServlet {
 				String jsonList = new JSONArray(list).toString();
 				PrintWriter out = res.getWriter();
 				out.print(jsonList);
+				out.flush();
+				out.close();
 			} catch (IOException e) {
 				e.printStackTrace(System.err);
 			}
-			
 		}
 		
 //		if("getSchStatus".equals(action)) {
@@ -78,19 +81,14 @@ public class SchServlet extends HttpServlet {
 				SchVO schVO = schSvc.getOneDaySchdule(apmDate, groomerId);
 				String schVOjson = new JSONObject(schVO).toString();
 				
-				res.setContentType("text/plain");
-				res.setCharacterEncoding("UTF-8");
-				
 				PrintWriter out = res.getWriter();
 				out.write(schVOjson);
-				
+				out.flush();
+				out.close();
 			} catch (IOException e) {
 				e.printStackTrace(System.err);
 			}
-			
 		}
-		
-		
 	}
 
 }

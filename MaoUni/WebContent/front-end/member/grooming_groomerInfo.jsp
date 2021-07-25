@@ -29,13 +29,13 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/owl-carousel.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/templatemo-style.css">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/jquery-ui.css"> 
 
 <script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/header.css">
 

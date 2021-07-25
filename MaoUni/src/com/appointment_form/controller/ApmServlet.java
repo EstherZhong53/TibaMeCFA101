@@ -81,6 +81,8 @@ public class ApmServlet extends HttpServlet {
 				String apmList = new JSONArray(list).toString();
 				PrintWriter out = res.getWriter();
 				out.print(apmList);
+				out.flush();
+				out.close();
 			} catch (IOException e) {
 				e.printStackTrace(System.err);
 			}
@@ -113,11 +115,10 @@ public class ApmServlet extends HttpServlet {
 				ApmService apmSvc = new ApmService();
 				completeNum = apmSvc.addComment(apmId, groomerId, star, apmComment, photo);
 				
-				res.setContentType("text/plain");
-				res.setCharacterEncoding("UTF-8");
 				PrintWriter out = res.getWriter();
 				out.write(completeNum.toString());
-				
+				out.flush();
+				out.close();
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
@@ -130,13 +131,10 @@ public class ApmServlet extends HttpServlet {
 			ApmService apmSvc = new ApmService();
 			Integer completeNum = apmSvc.updateStatus(apmId, apmStatus);
 			
-			res.setContentType("text/plain");
-			res.setCharacterEncoding("UTF-8");
 			PrintWriter out = res.getWriter();
 			out.write(completeNum.toString());
-			
+			out.flush();
+			out.close();
 		}
-		
-		
 	}
 }

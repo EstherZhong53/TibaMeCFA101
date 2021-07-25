@@ -20,6 +20,9 @@ public class GrepServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		res.setContentType("text/plain");
+		res.setCharacterEncoding("UTF-8");
+		
 		String action = req.getParameter("action");
 
 		if("addGreport".equals(action)) {
@@ -31,32 +34,21 @@ public class GrepServlet extends HttpServlet {
 			GrepService grepSvc = new GrepService();
 			Integer completeNum = null;
 
-			System.out.println("apmId: " + action);
-			System.out.println("memId: " + action);
-			System.out.println("groomerId: " + action);
-			System.out.println("content: " + action);
-			
-			
-			
-			
 			try {
 				completeNum = grepSvc.addGreport(apmId, memId, groomerId, content);
-				res.setContentType("text/plain");
-				res.setCharacterEncoding("UTF-8");
+				
 				PrintWriter out = res.getWriter();
 				
 				out.write(completeNum.toString());
+				out.flush();
+				out.close();
 				
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
-			
 		}
-System.out.println("action: " + action);		
-		if("update".equals(action)) {
-			System.out.println("rptId: " + req.getParameter("rptId"));			
-			System.out.println("rptStatus: " + req.getParameter("rptStatus"));			
-			System.out.println("groomerId: " + req.getParameter("groomerId"));			
+
+		if("update".equals(action)) {		
 			Integer rptId = new Integer(req.getParameter("rptId"));
 			Integer rptStatus = new Integer(req.getParameter("rptStatus"));
 			Integer groomerId = new Integer(req.getParameter("groomerId"));
@@ -65,21 +57,14 @@ System.out.println("action: " + action);
 			try {
 				message += grepSvc.update(rptId, rptStatus, groomerId);
 				
-				res.setContentType("text/plain");
-				res.setCharacterEncoding("UTF-8");
-				
 				PrintWriter out = res.getWriter();
 				out.write(message);
-				
+				out.flush();
+				out.close();
 				
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}
 		}
-		
-		
-		
-		
 	}
-
 }

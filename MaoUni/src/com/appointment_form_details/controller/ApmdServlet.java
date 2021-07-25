@@ -35,6 +35,8 @@ public class ApmdServlet extends HttpServlet {
 				String listJson = new JSONArray(list).toString();
 				PrintWriter out = res.getWriter();
 				out.print(listJson);
+				out.flush();
+				out.close();
 			} catch (IOException e) {
 				e.printStackTrace(System.err);
 			}
