@@ -5,12 +5,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Chat Box</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/reset.min.css"> 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/chatbox.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.0/handlebars.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/list.js/1.1.1/list.min.js'></script>ㄋ
+<script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/handlebars.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/list.min.js"></script>
 </head>
 <style>
 
