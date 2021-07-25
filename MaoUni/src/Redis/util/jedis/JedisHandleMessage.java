@@ -30,4 +30,39 @@ public class JedisHandleMessage {
 		jedis.close();
 	}
 	
+	
+	public static String saveUnreadNum(String sender, String receiver) {
+		String key = new StringBuilder("unread").append(":").append(sender).append(":").append(receiver).toString();	// receiver是自己
+		Jedis jedis = null;
+		jedis = pool.getResource();
+		if(!jedis.exists(key)) {
+			jedis.set(key,"0");
+		}
+		jedis.incr(key);
+		String unReadNum = jedis.get(key);
+		jedis.close();
+		return unReadNum;
+	}
+	
+	
+	public static void cleanUnreadNum(String sender, String receiver) {
+		String key = new StringBuilder("unread").append(":").append(sender).append(":").append(receiver).toString();	// receiver是自己
+		Jedis jedis = null;
+		jedis = pool.getResource();
+		String unReadNum = jedis.get(key);
+
+		if(unReadNum != null) {
+			jedis.decrBy(key, new Integer(unReadNum)); 		
+		}
+		jedis.close();
+	}
+	
+//	public static void getUnreadNumInLastMsg(String sender, String receiver) {
+//		String key = new StringBuilder("unread").append(":").append(sender).append(":").append(receiver).toString();	// receiver是自己
+//		Jedis jedis = null;
+//		jedis = pool.getResource();
+//		System.out.println("zzzzzzzzzz" + jedis.lindex(key, -1));
+//		
+//	}
+	
 }

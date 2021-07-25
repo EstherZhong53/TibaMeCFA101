@@ -6,6 +6,11 @@ public class ChatMessageVO {
 	private String receiver;
 	private String message;
 	private String timestamp;
+	private String unreadNum;
+	
+	public ChatMessageVO() {
+		
+	}
 	
 	public ChatMessageVO(String type, String sender, String receiver, String message, String timestamp) {
 		this.type = type;
@@ -54,7 +59,15 @@ public class ChatMessageVO {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
-	
+
+	public String getUnreadNum() {
+		return unreadNum;
+	}
+
+	public void setUnreadNum(String unreadNum) {
+		this.unreadNum = unreadNum;
+	}
+
 	
 	
 }
