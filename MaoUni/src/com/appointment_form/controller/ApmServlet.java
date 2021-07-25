@@ -20,6 +20,8 @@ import org.json.JSONArray;
 import com.addressGeo.model.GeocodingService;
 import com.appointment_form.model.ApmService;
 import com.appointment_form.model.ApmVO;
+import com.gschedule.model.SchService;
+import com.gschedule.model.SchVO;
 
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 5 * 1024 * 1024, maxRequestSize =  5 * 5 * 1024 * 1024)
 public class ApmServlet extends HttpServlet {
@@ -40,7 +42,7 @@ public class ApmServlet extends HttpServlet {
 			Integer memId = new Integer(req.getParameter("memId"));
 			Integer groomerId = new Integer(req.getParameter("groomerId"));
 			Integer pid = new Integer(req.getParameter("pid"));
-			Integer schId = new Integer(req.getParameter("schId"));
+			String apmDate = req.getParameter("apmDate");
 			Integer stime = new Integer(req.getParameter("stime"));
 			Integer etime = new Integer(req.getParameter("etime"));
 			Integer total = new Integer(req.getParameter("total"));
@@ -52,6 +54,9 @@ public class ApmServlet extends HttpServlet {
 				Integer svcId = new Integer(i);
 				svcIdList.add(svcId);
 			}
+			
+			SchService schSvc = new SchService();
+			Integer schId = schSvc.getOneDaySchdule(apmDate, groomerId).getSchId();
 			
 			try {
 				// add appointment into mySQL

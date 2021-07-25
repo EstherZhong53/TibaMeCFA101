@@ -8,7 +8,7 @@
 <jsp:useBean id="schSvc" scope="page" class="com.gschedule.model.SchService"/>
 
 <%
-	List<SchVO> list = schSvc.getByGroomerId(1, 7);
+	List<SchVO> list = schSvc.getByGroomerId(1, 8);
 	pageContext.setAttribute("list", list);
 %>
 
@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/tooplate-gymso-style.css">
 
+<script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
 <style>
 
@@ -110,7 +111,7 @@ background-color: #8CD790;
                 </div>
 
                 <div class="col-lg-12 py-5 col-md-12 col-12 schduleTable">
-                    <div class="guide">7<span> 月</span></div>
+                    <div class="guide">8<span> 月</span></div>
                     <table class="table table-bordered table-responsive schedule-table" data-aos="fade-up"
                         data-aos-delay="300">
 
@@ -149,9 +150,9 @@ background-color: #8CD790;
             <c:forEach var="i" begin="17" end="41" step="1"> 
 <!--             			charAt(i) return char -->
            				<c:if test="${schVO.schStatus.charAt(i) == '0'.charAt(0)}"><td class=""></td></c:if>           			
-           				<c:if test="${schVO.schStatus.charAt(i) == '1'.charAt(0)}"><td class=""></td></c:if>           
-           				<c:if test="${schVO.schStatus.charAt(i) == '2'.charAt(0)}"><td class="booked"></td></c:if>          				
-          				<c:if test="${schVO.schStatus.charAt(i) == '3'.charAt(0)}"><td class="done"></td></c:if>             				
+           				<c:if test="${schVO.schStatus.charAt(i) == '1'.charAt(0)}"><td class="booked"></td></c:if>           
+           				<c:if test="${schVO.schStatus.charAt(i) == '2'.charAt(0)}"><td class="booked"><i class="fas fa-paw"></i></td></c:if>          				
+          				<c:if test="${schVO.schStatus.charAt(i) == '3'.charAt(0)}"><td class="done"><i class="fas fa-check"></i></td></c:if>             				
            				<c:if test="${schVO.schStatus.charAt(i) == '4'.charAt(0)}"><td class=""></td></c:if>               
             </c:forEach>
                             </tr>

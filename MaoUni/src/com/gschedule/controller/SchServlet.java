@@ -56,20 +56,20 @@ public class SchServlet extends HttpServlet {
 			
 		}
 		
-		if("getSchStatus".equals(action)) {
-			Integer schId = new Integer(req.getParameter("schId"));
-			SchService schSvc = new SchService();
-			try {
-				SchVO schVO = schSvc.getOneDaySchdule(schId);
-				PrintWriter out = res.getWriter();
-				String schStatus = schVO.getSchStatus();
-				out.print(schStatus);
-			} catch (IOException e) {
-				e.printStackTrace(System.err);
-			}
-
-		}
-		
+//		if("getSchStatus".equals(action)) {
+//			Integer schId = new Integer(req.getParameter("schId"));
+//			SchService schSvc = new SchService();
+//			try {
+//				SchVO schVO = schSvc.getOneDaySchdule(schId);
+//				PrintWriter out = res.getWriter();
+//				String schStatus = schVO.getSchStatus();
+//				out.print(schStatus);
+//			} catch (IOException e) {
+//				e.printStackTrace(System.err);
+//			}
+//
+//		}
+//		
 		if("getSchStatusByDate".equals(action)) {
 			String apmDate = req.getParameter("apmDate");
 			Integer groomerId = new Integer(req.getParameter("groomerId"));

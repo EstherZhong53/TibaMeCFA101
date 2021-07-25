@@ -36,9 +36,9 @@ public class SchService {
 		dao.update(groomerId, date, status, stime, etime);
 	}
 	
-	public SchVO getOneDaySchdule(Integer schId) {
-		return dao.getOneDaySchdule(schId);
-	}
+//	public SchVO getOneDaySchdule(Integer schId) {
+//		return dao.getOneDaySchdule(schId);
+//	}
 	
 	public SchVO getOneDaySchdule(String apmDate, Integer groomerId) {
 		return dao.getOneDaySchdule(apmDate, groomerId);

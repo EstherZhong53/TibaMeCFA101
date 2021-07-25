@@ -29,12 +29,13 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/owl-carousel.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/templatemo-style.css">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
 <script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
-
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/header.css">
 
@@ -248,18 +249,20 @@ margin: 10px 5px;
 			</tbody>
 																</table>
 																<fieldset>
-<select class="apmDate apminput" name="schId">
-	<option selected>選擇日期</option>
-	<!-- 			Ajax 動態產生 -->
-</select> 
-<select class="stime apminput" name="stime">
+<!-- <select class="apmDate apminput" name="schId"> -->
+<!-- 	<option selected>選擇日期</option> -->
+<!-- 	<!-- 			Ajax 動態產生 --> 
+<!-- </select>  -->
+<p>Date: <input class="apmDate apminput" type="text" name="apmDate" ></p>
+
+<select class="stime apminput form-control" name="stime">
 	<option selected>選擇時間</option>
 	<!-- 			Ajax 動態產生 -->
 </select> 
 <input type="hidden" class="needtime v" value="0">
 <input type="hidden" class="etime apminput" name="etime" value="0">
 <input type="text" class="total apminput" name="total" value="0">
-<input type="text" class="address apminput" name="address" value="220新北市板橋區萬板路55號" disable>
+<input type="text" class="address apminput mb-2" name="address" value="220新北市板橋區萬板路55號" disable>
 <input type="hidden" name="action" value="addAppointment">	
 
 																</fieldset> 
@@ -364,7 +367,6 @@ margin: 10px 5px;
     </section>
 
 
-
     <section class="contact" id="contact">
         <div class="container">
             <div class="row">
@@ -422,65 +424,19 @@ margin: 10px 5px;
 			header.classList.toggle('sticky', window.scrollY > 0);
 		});
 
-		
-		
-// WebSocket
-		
-		let MyPoint = "/ApmWS/3";
-		let host = window.location.host;
-		let path = window.location.pathname;
-		let webCtx = path.substring(0, path.indexOf('/', 1));
-		let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
-
-		let self = "3";
-		let webSocket;
-		
-		window.onload = function(){
-			webSocket = new WebSocket(endPointURL);
-			
-			webSocket.onopen = function(e){
-				console.log("Connect Success!");
-			}
-			
-			webSocket.onmessage = function(e){
-				let jsonObj = JSON.parse(e.data);
-					alert(jsonObj.message);
-			}
-			
-			webSocket.onclose = function(e){
-				console.log("Disconnected!")
-			}
-		}
-		
-		window.onunload = function(){
-			webSocket.close();
-		}
+		$( ".apmDate" ).datepicker({
+			minDate: -0,
+			beforeShowDay: function(date){
+				  let string = jQuery.datepicker.formatDate("yy-mm-dd", date);
+			  	  return [disableDate.indexOf(string) == -1]	
+			  },
+			  maxDate: "+1M",
+			  dateFormat: "yy-mm-dd"
+		  });
 		
 
 	
-// 送出預約
-	
-	$(".submit").click(function(){
-		let receiverId = ${groVO.memId};
-		$.ajax({
-			url: "/MaoUni/appointment.do",
-			type: "GET",
-			data: $("#apmForm").serialize(),
-			success: function(data){
-				swal("送出預約單","預約單已送出，請耐心等候美容師回覆","success").then((result) => {
-					let jsonObj = {
-							"type": "newApm",
-							"sender": self,
-							"receiver": receiverId,
-							"message":"收到一筆新的預約！"
-						}
-						webSocket.send(JSON.stringify(jsonObj));
-					window.location.reload();
-				});
-			}
-		})
-
-	})	
+	let receiverId = ${groVO.memId};
 
 		
 	</script>

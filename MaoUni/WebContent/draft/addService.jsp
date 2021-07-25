@@ -1,31 +1,103 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
+<meta charset="UTF-8"">
 <title>Add Service</title>
 <script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
 
-<form method="post" action="/MaoUni/svc.do" name="form1">
+<!-- <form method="post" action="/MaoUni/svc.do" name="form1"> -->
 
-<div>ªA°È¶µ¥Ø: <input type="text" name="svcItem"></div>
-<div>¤ò«ÄÃş«¬: 
-<select name="svcPet">
-		<option value="ª¯">ª¯
-		<option value="¿ß">¿ß
-</select>
-</div>
+<!-- <div>æœå‹™é …ç›®: <input type="text" name="svcItem"></div> -->
+<!-- <div>æ¯›å­©é¡å‹:  -->
+<!-- <select name="svcPet"> -->
+<!-- 		<option value="ç‹—">ç‹— -->
+<!-- 		<option value="è²“">è²“ -->
+<!-- </select> -->
+<!-- </div> -->
 
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="·s¼W">
+<!-- <input type="hidden" name="action" value="insert"> -->
+<!-- <input type="submit" value="æ–°å¢"> -->
 
+
+
+
+
+<%-- <jsp:include page="/draft/svcItemList.jsp" flush="true"></jsp:include> --%>
+
+<hr>
+
+<p>Date: <input type="text" id="datepicker"></p>
 </form>
 
-<jsp:include page="/draft/svcItemList.jsp" flush="true"></jsp:include>
+  <script>
+  
+  
+  
+//   let disableDate = ["2021-07-26","2021-08-01"];
+//   $( ".apmDate" ).datepicker({
+// 	  beforeShowDay: function(date){
+// 		  let string = jQuery.datepicker.formatDate('yy-mm-dd', date)
+// 	  	  return [disableDate.indexOf(string) == -1]	
+// 	  }
+//   });
+  
+  
+  
+  
+	$.ajax({
+		url: "/MaoUni/schedule.do",
+		type: "GET",
+		data:{
+			action: "getByGroomerId",
+			groomerId: "1"
+		},
+		success: function(data){
+			let obj = JSON.parse(data);
+			 let disableDate = [];
+			
+			for(let i = 0; i < obj.length; i++){
+				let schStatus = obj[i].schStatus;
+				
+				if(schStatus.indexOf("1") == -1){
+					disableDate.push(obj[i].schDate);
+				}
+				
+			}
+			 
+			  $( "#datepicker" ).datepicker({
+				  beforeShowDay: function(date){
+					  let string = jQuery.datepicker.formatDate('yy-mm-dd', date)
+				  	  return [disableDate.indexOf(string) == -1]	
+				  },
+				  minDate: -0,
+				  maxDate: "+1M"
+			  });
+			}
+		})	
+ 
+  
+  
 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </script>
 </body>
 </html>

@@ -229,6 +229,7 @@ $(".appointmentList").click(function(e){
 				swal("班表已更新!","","success");
 				memId = e.target.dataset.memid;
 				sendmessage();
+				window.location.reload();
 			}
 		})
 	})

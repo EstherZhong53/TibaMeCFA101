@@ -1,4 +1,72 @@
 
+// WebSocket
+let MyPoint = "/ApmWS/3";
+let host = window.location.host;
+let path = window.location.pathname;
+let webCtx = path.substring(0, path.indexOf('/', 1));
+let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
+let webSocket = new WebSocket(endPointURL);
+
+let self = "3";
+
+
+// datepicker
+let disableDate = [];
+
+function init(){
+	connect();
+	getDisableDate();
+}
+
+function getDisableDate(){
+	$.ajax({
+		url: "/MaoUni/schedule.do",
+		type: "GET",
+		data:{
+			action: "getByGroomerId",
+			groomerId: "1"
+		},
+		success: function(data){
+			let obj = JSON.parse(data);
+	
+			for(let i = 0; i < obj.length; i++){
+				let schStatus = obj[i].schStatus;
+				
+				if(schStatus.indexOf("1") == -1){
+					disableDate.push(obj[i].schDate);
+				}
+			}
+		}
+	})	
+}
+		
+		
+
+function connect(){
+	
+	webSocket.onopen = function(e){
+		console.log("Connect Success!");
+	}
+	
+	webSocket.onmessage = function(e){
+		let jsonObj = JSON.parse(e.data);
+			alert(jsonObj.message);
+	}
+	
+	webSocket.onclose = function(e){
+		console.log("Disconnected!");
+	}
+}
+
+
+window.onload = init;
+
+window.onunload = function(){
+	webSocket.close();
+}
+
+
+
 // 選擇預約後，自動生成未來30日班表
 	
 	$("#modBtn").click(function(e){
@@ -49,40 +117,50 @@
 	})
 	
 // 選擇寵物後，動態產生該美容師可預約日期 (剔除未營業日)	
+//	
+//	$(".pid").change(function(e){
+//		$.ajax({
+//			url: "/MaoUni/schedule.do",
+//			type: "GET",
+//			data:{
+//				action: "getByGroomerId",
+//				groomerId: "1"
+//			},
+//			success: function(data){
+//				let obj = JSON.parse(data);
+//				let apmDateHtml = "<option selected>選擇日期</option>";
+//				
+//				for(let i = 0; i < obj.length; i++){
+//					let schStatus = obj[i].schStatus;
+//					
+//					if(schStatus.indexOf("1") !== -1){
+//						apmDateHtml += `
+//							<option value="${obj[i].schId}">${obj[i].schDate}</option>
+//							`
+//					}
+//					
+//				}
+//				$(".apmDate").html(apmDateHtml);		
+//			}
+//			
+//		})	
+//	})
 	
-	$(".pid").change(function(e){
-		$.ajax({
-			url: "/MaoUni/schedule.do",
-			type: "GET",
-			data:{
-				action: "getByGroomerId",
-				groomerId: "1"
-			},
-			success: function(data){
-				let obj = JSON.parse(data);
-				let apmDateHtml = "<option selected>選擇日期</option>";
-				
-				for(let i = 0; i < obj.length; i++){
-					let schStatus = obj[i].schStatus;
-					
-					if(schStatus.indexOf("1") !== -1){
-						apmDateHtml += `
-							<option value="${obj[i].schId}">${obj[i].schDate}</option>
-							`
-					}
-					
-				}
-				$(".apmDate").html(apmDateHtml);		
-			}
-			
-		})	
-	})
+//	
+//	window.onload = function(){
+//		
+//
+//	}
+//
+//	
 	
 	
+
 	
 // 動態更新 Total、服務時間
 
 	$(document).on("click", ".showSvcList", function(e){
+		$(".apmDate").val("");
 		if(e.target.classList.contains("item")){
 		$(".etime").val();
 		let price = e.target.parentElement.previousElementSibling.innerText;
@@ -109,18 +187,21 @@
 			url: "/MaoUni/schedule.do",
 			type: "GET",
 			data: {
-				schId: $(e.target).val(),
-				action: "getSchStatus"
+				apmDate: e.target.value,
+				groomerId: "1",
+				action: "getSchStatusByDate"
 			},
 			success: function(data){
 				let needtime = parseInt($(".needtime").val());
 				let stimeHtml = "<option selected>選擇時間</option>";
-				for(let i = 0; i < data.length; i++){
+				let schStatus = JSON.parse(data).schStatus;
+				let count = 0;
+				for(let i = 0; i < schStatus.length; i++){
 	
 					// if(data.charAt(i) !== "1") continue;
 					
 					// 只顯示stime ~ etime間均為1的時間;
-					let interval = data.slice(i, i + needtime);
+					let interval = schStatus.slice(i, i + needtime);
 					
 					if((i + needtime) > 41) continue; // etime 超過21:00不顯示
 					
@@ -141,6 +222,11 @@
 						else
 							stimeHtml += `<option value="${i}">${(i)/2}:30</option>`;
 					}
+					count++;
+					console.log(count)
+				}
+				if(count === 0){
+					swal("您所選擇的日期未有足夠時間服務","請調整服務項目或更改日期","warning");
 				}
 				$(".stime").html(stimeHtml);
 			}
@@ -161,7 +247,28 @@
 
 	
 	
+	// 送出預約
 	
+	$(".submit").click(function(){
+		$.ajax({
+			url: "/MaoUni/appointment.do",
+			type: "GET",
+			data: $("#apmForm").serialize(),
+			success: function(data){
+				swal("送出預約單","預約單已送出，請耐心等候美容師回覆","success").then((result) => {
+					let jsonObj = {
+							"type": "newApm",
+							"sender": self,
+							"receiver": receiverId,
+							"message":"收到一筆新的預約！"
+						}
+						webSocket.send(JSON.stringify(jsonObj));
+					window.location.reload();
+				});
+			}
+		})
+
+	})	
 
 	
 	
