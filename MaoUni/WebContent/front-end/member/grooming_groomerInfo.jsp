@@ -342,7 +342,7 @@ margin: 10px 5px;
                             <div class="overlay-content">
                                 <ul>
                                 <c:forEach var="i" begin="1" end="${apmVO.star}" step="1">    
-                                    <li><i class="fa fa-star" style="color: #feee7d;"></i></li>
+                                    <li><i class="fa fa-star fa-2x" style="color: #feee7d;"></i></li>
 <!--                                     <li><i class="fa fa-star"></i></li> -->
 <!--                                     <li><i class="fa fa-star"></i></li> -->
 <!--                                     <li><i class="fa fa-star"></i></li> -->

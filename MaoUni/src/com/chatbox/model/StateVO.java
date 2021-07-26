@@ -2,7 +2,7 @@ package com.chatbox.model;
 
 import java.util.Set;
 
-public class StateVO {
+public class StateVO implements java.io.Serializable{
 	private String type;
 	// the user changing the state
 	private String user;

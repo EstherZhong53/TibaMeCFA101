@@ -1,6 +1,6 @@
 package com.chatbox.model;
 
-public class ChatMessageVO {
+public class ChatMessageVO implements java.io.Serializable{
 	private String type;
 	private String sender;
 	private String receiver;

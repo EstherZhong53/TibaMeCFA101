@@ -124,5 +124,15 @@
 		<servlet-name>GeocodingServlet</servlet-name>
 		<url-pattern>/geocoding.do</url-pattern>
 	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>ShoppingCartService</servlet-name>
+		<servlet-class>com.shopping_cart.controller.ShoppingCartService</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShoppingCartService</servlet-name>
+		<url-pattern>/shoppingcart.do</url-pattern>
+	</servlet-mapping>
 
 </web-app>

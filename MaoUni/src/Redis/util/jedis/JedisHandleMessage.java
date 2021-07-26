@@ -57,12 +57,4 @@ public class JedisHandleMessage {
 		jedis.close();
 	}
 	
-//	public static void getUnreadNumInLastMsg(String sender, String receiver) {
-//		String key = new StringBuilder("unread").append(":").append(sender).append(":").append(receiver).toString();	// receiver是自己
-//		Jedis jedis = null;
-//		jedis = pool.getResource();
-//		System.out.println("zzzzzzzzzz" + jedis.lindex(key, -1));
-//		
-//	}
-	
 }
