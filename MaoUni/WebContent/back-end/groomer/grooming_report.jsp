@@ -176,7 +176,7 @@ input.update:hover {
 						<!-- 以下為標題"商城管理"，作為回到商城管理首頁的按鈕，可以用在href那邊改成你要的位置，要注意路徑(我這邊只要寫檔名)  -->
 						<p
 							style="width: 266px; height: 5px; margin-top: 30px; margin-left: -13px; font-weight: bold;">
-							<a class="btsp" href="Item_select_page.jsp">美容師管理</a>
+							<a class="btsp" href="Item_select_page.jsp">美容預約檢舉管理</a>
 						</p>
 
 						<!-- 以下為右上角三個下拉式選單內容，分別為小鈴鐺 / 信箱 / 員工名稱+頭像 ，這部分歡迎更改，因為我也還不確定下拉後該出現什麼選項QQ -->

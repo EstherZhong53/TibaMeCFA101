@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.groomer.model.*"%>
 <%@ page import="java.io.*"%>
@@ -419,7 +420,7 @@ input.update:hover {
 					     	 	</div>
 					     	 	<div class="row my-3">
 					     	 			<div class="col-md-3" style="font-weight: bold">評分</div>
-					      				<div class="col-md-9 ml-auto">${groVO.comg / groVO.com} <span> 分</span></div>
+					      				<div class="col-md-9 ml-auto"><i class="fa fa-star" style="color: #feee7d;"></i>  <fmt:formatNumber value="${groVO.comg / groVO.com}" pattern="0.0#"/></span></div>
 					     	 	</div>
 					     	 	<div class="row my-3">
 					     	 			<div class="col-md-3" style="font-weight: bold">檢舉</div>

@@ -212,6 +212,10 @@ public class GroDAO implements GroDAO_interface {
 				groVO.setCom(rs.getInt(10));
 				groVO.setComg(rs.getInt(11));
 				groVO.setReped(rs.getInt(12));
+				
+				if(rs.getBytes(13) != null) {
+					groVO.setAvatarBase64(Base64.getEncoder().encodeToString(rs.getBytes(13)).toString());
+				}
 				list.add(groVO);
 			}
 		} catch (ClassNotFoundException e) {
@@ -274,6 +278,7 @@ public class GroDAO implements GroDAO_interface {
 				groVO.setReped(rs.getInt(12));
 				groVO.setAvatar(rs.getBytes(13));
 				groVO.setIntro(rs.getString(14));
+				
 				list.add(groVO);
 			}
 
