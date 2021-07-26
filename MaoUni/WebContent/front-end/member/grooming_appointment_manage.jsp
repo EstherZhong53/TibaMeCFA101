@@ -16,7 +16,6 @@
 <meta charset="UTF-8">
 <title>毛孩有你 MaoUni</title>
 
-<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="description" content="">
 <meta name="keywords" content="">

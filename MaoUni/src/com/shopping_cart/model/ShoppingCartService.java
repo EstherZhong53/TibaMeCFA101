@@ -45,15 +45,18 @@ public class ShoppingCartService {
 		return cartItemsList;	// 讓servlet取得後渲染於購物車頁面
 	}
 	
-	public void addCart(String sessionId, Integer itemId, Integer count) {
+	public void addItem(String sessionId, Integer itemId, Integer count) {
 		
 		ShoppingCartItemVO cartItemVO = new ShoppingCartItemVO();
 		cartItemVO.setItemId(itemId);
 		cartItemVO.setCount(count);
 		
-		String shoppingCartItemVO = gson.toJson(cartItemVO);
-		JedisHandleShoppingCart.addCart(sessionId, shoppingCartItemVO);
+		JedisHandleShoppingCart.addItem(sessionId, cartItemVO);
 		
+	}
+	
+	public void deleteItem(String sessionId, Integer itemId) {
+		JedisHandleShoppingCart.deleteItem(sessionId, itemId);
 	}
 
 }
