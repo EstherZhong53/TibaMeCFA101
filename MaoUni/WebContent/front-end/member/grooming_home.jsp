@@ -14,8 +14,18 @@
 <meta charset="UTF-8">
 <title>Grooming Home</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css"  type="text/css"/>
-<script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
+
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的CSS,有再調過細部效果 -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/fontawesome-all.min.css"> <!-- 左邊這個是右上角聊天室ICON的引入 -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/newheader.css">
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
+<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
+
+
 
 <style>
  body 
@@ -192,41 +202,62 @@ box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
 <!-- 以下為header ******************************************************************************************* -->
 
 <header>
-  <div class="icontrue">
-
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/dodge.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/user.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/shopping_cart.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/paper_plane.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/public_access.png" border="0"></a>
-      <!--iconu一定要在top-flex之上，不然會被移動條給蓋爆777777-->
-  </div>
-
-<div class="Top-Flex">
-
-<ul class="LOOP">
-  <li class="two">
-  <img src="<%=request.getContextPath()%>/resources/images/MaoUni2.png" 
-        width="" alt=""></li>
-</ul>
-
-</div>
-
-  <div class="shopbody">
-      <nav>
-          <!-- <a href="https://tw.yahoo.com/">首　頁</a> -->
-          <a href="#">有你來買</a>
-          <a href="#">有你來講</a>
-          <a href="#">有你來玩</a>
-          <a href="#">到府美容</a>
-          <a href="#">浪浪找家</a>
-          <a href="#">友善店家</a>
-          <a href="<%=request.getContextPath()%>/front-end/article/listAllArt_f.jsp">知識站</a>
-          <a href="<%=request.getContextPath()%>/front-end/announcemet/listAllAnnf.jsp">公告</a>
-      </div>
-      <div class="Shopping-ul"></div>
-  </nav>
-</header>
+	
+	    <div class="icontrue" style="margin: 10px 10px 0px 0px;">
+		
+		  <a href="#" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
+		  <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
+<!-------------------------------------------- shopping cart ------------------------------------------------>
+	      <div class="dropdown ml-auto">
+           
+            <button class="btn btn-cart btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" >
+                <i class="fas fa-shopping-cart fa-2x shoppingCart" style="color:#fff;"></i>
+                <span class="badge badge-pill badge-danger totalItems">0</span>
+            </button>
+           
+            <div class="dropdown-menu dropdown-menu-right" style="min-width: 300px" aria-labelledby="dropdownMenuButton">
+                <div class="p-3">
+                    <table class="table table-sm">
+                        <h6>已選擇商品</h6>
+                        <tbody class="cartbody" style="color:black;">
+                        </tbody>
+                    </table>
+                    <a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
+                </div>
+            </div>
+        </div>
+	   
+	        <a href="#" class="iconbth"><i class="fas fa-search fa-1x" style="color:white;font-size:25px;"></i></a>	        	        	
+	   
+	    </div>
+<!---------------------------------------------------------------------------------------------------------------------->	    
+		<!--icon一定要在top-flex之上，不然會被移動條給蓋爆777777-->
+	
+		<div class="Top-Flex">
+			<div class="LOOP">
+			    	<a class="two" href="<%=request.getContextPath()%>/back-end/listAllItem">
+			    	<img class="img-responsive" src="<%=request.getContextPath()%>/resources/images/Logo/MaoUni2.png" width="" alt="">
+			    	</a>
+			</div>
+		</div>
+		
+		<div class="shopbody">
+		    <nav style="margin-bottom:-15px;margin-left:15px;">
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">首　頁</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來買</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來講</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來玩</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">到府美容</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">浪浪找家</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">友善店家</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">知識站</a></p>
+		 	</nav>
+		</div>
+		<div class="Shopping-ul"></div>
+	    
+	</header>
 
 <!--以上為header ***********************************************************************-->
 <main>
@@ -274,6 +305,9 @@ pageContext.setAttribute("list", list);
             });
             
     </script>
-
+    <script>
+        const sessionId = "${sessionId}";
+    </script>
+    <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
 </body>
 </html>

@@ -38,67 +38,11 @@ function init(){
 		})
 	})
 	
-	
-//	$(document).on("click", ".shoppingCart", function(e){
-//		$.ajax({
-//			url: "/MaoUni//shoppingcart.do",
-//			type: "GET",
-//			data: {
-//				action: "getCart",
-//				sessionId: sessionId
-//			},
-//			success: function(data){
-//				console.log(data);
-//				let objs = JSON.parse(data);
-//				console.log(objs);
-//				let html = "";
-//				for(let i = 0; i < objs.length; i++){
-//					let obj = objs[i];
-//					let itemSum = obj.count * obj.itemPrice;
-//					html += `<tr>
-//                                <td class="align-middle text-center">
-//                                    <i id="${obj.itemId}" class="far fa-trash-alt deleteItem"></i>
-//                                </td>
-//                                <td class="align-middle">${obj.itemName}</td>
-//                                <td class="align-middle count">${obj.count}</td>
-//                                <td class="align-middle text-right">$ ${itemSum}</td>
-//                            </tr>`;
-//				}
-//				$(".cartbody").html(html);
-//			}
-//		})
-//	})
+
 	
 	
 	$(".shoppingCart").click(function(e){
 		getCart();	
-//		$.ajax({
-//			url: "/MaoUni//shoppingcart.do",
-//			type: "GET",
-//			data: {
-//				action: "getCart",
-//				sessionId: sessionId
-//			},
-//			success: function(data){
-//				console.log(data);
-//				let objs = JSON.parse(data);
-//				console.log(objs);
-//				let html = "";
-//				for(let i = 0; i < objs.length; i++){
-//					let obj = objs[i];
-//					let itemSum = obj.count * obj.itemPrice;
-//					html += `<tr>
-//                                <td class="align-middle text-center">
-//                                    <i id="${obj.itemId}" class="far fa-trash-alt deleteItem"></i>
-//                                </td>
-//                                <td class="align-middle">${obj.itemName}</td>
-//                                <td class="align-middle count">${obj.count}</td>
-//                                <td class="align-middle text-right">$ ${itemSum}</td>
-//                            </tr>`;
-//				}
-//				$(".cartbody").html(html);
-//			}
-//		})
 	})
 	
 	
@@ -123,12 +67,7 @@ function init(){
 				}
 			})
 		}
-		
 	})
-	
-	
-	
-	
 }
 
 

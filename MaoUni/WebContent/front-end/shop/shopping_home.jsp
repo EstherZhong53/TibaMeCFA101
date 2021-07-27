@@ -853,23 +853,6 @@ line-height: 1.5;
                     <table class="table table-sm">
                         <h6>已選擇商品</h6>
                         <tbody class="cartbody" style="color:black;">
-<!--                             <tr> -->
-<!--                                 <td class="align-middle text-center"> -->
-<!--                                     <i class="far fa-trash-alt"></i> -->
-<!--                                 </td> -->
-<!--                                 <td class="align-middle">精選狗糧</td> -->
-<!--                                 <td class="align-middle">1件</td> -->
-<!--                                 <td class="align-middle text-right">$1999</td> -->
-<!--                             </tr> -->
-<!--                             <tr> -->
-<!--                                 <td class="align-middle text-center"> -->
-<!--                                     <a href="#removeModal" data-price="999" data-title="逗貓棒" data-toggle="modal" -->
-<!--                                         data-target="#removeModal"><i class="far fa-trash-alt "></i></a> -->
-<!--                                 </td> -->
-<!--                                 <td class="align-middle">逗貓棒</td> -->
-<!--                                 <td class="align-middle">1件</td> -->
-<!--                                 <td class="align-middle text-right">$999</td> -->
-<!--                             </tr> -->
                         </tbody>
                     </table>
                     <a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
@@ -1187,18 +1170,6 @@ line-height: 1.5;
 
 
     <script>
-//         $(document).ready(function () {
-//             $('#removeModal').on('show.bs.modal', function (event) {
-//                 var btn = $(event.relatedTarget);
-//                 var title = btn.data('title');
-//                 var price = btn.data('price');
-//                 var modal = $(this);
-//                 modal.find('.modal-title').text('確認刪除 ' + title);
-//                 modal.find('.modal-body').text('您要刪除 ' + title + ' $ ' + price + '元 嗎?');
-//             });
-
-//         });
-        
         const sessionId = "${sessionId}";
     </script>
     <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>

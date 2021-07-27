@@ -25,19 +25,24 @@
 <!-- MAIN CSS -->
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/fontawesome-all.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/hero-slider.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/owl-carousel.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/templatemo-style.css">
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/jquery-ui.css"> 
+<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/header.css">
+<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/newheader.css"> --%>
 
 <script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery-ui.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
 
-<link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/header.css">
 
 
 </head>
@@ -78,19 +83,40 @@ margin: 10px 5px;
     min-height: 45vh;
 }
 
+
 </style>
 
 <body data-spy="scroll" data-target="#navbarNav" data-offset="50">
 	<header id="header">
-			<div class="icontrue">
+		<div class="icontrue">
 	
-				<a href="#" class="iconbth"><img src="<%= request.getContextPath() %>/resources/images/dodge.png"
-					border="0"></a> <a href="#" class="iconbth"><img
-					src="<%= request.getContextPath() %>/resources/images/user.png" border="0"></a> <a href="#"
-					class="iconbth"><img src="<%= request.getContextPath() %>/resources/images/shopping_cart.png" border="0"></a>
-				<a href="#" class="iconbth"><img src="<%= request.getContextPath() %>/resources/images/paper_plane.png"
-					border="0"></a> <a href="#" class="iconbth"><img
-					src="<%= request.getContextPath() %>/resources/images/public_access.png" border="0"></a>
+			 <a href="#" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
+		  	 <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+		     <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
+<!-------------------------------------------- shopping cart ------------------------------------------------>
+	     <div class="dropdown ml-auto">
+           
+            	<button class="btn btn-cart mt-1 " type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" >
+                	<i class="fas fa-shopping-cart fa-2x shoppingCart" style="color:#fff;"></i>
+                	<span class="badge badge-pill badge-danger totalItems">0</span>
+            	</button>
+           
+            	<div class="dropdown-menu dropdown-menu-right" style="min-width: 300px" aria-labelledby="dropdownMenuButton">
+                	<div class="p-3">
+	                    <table class="table table-sm">
+	                        <h6>已選擇商品</h6>
+	                        <tbody class="cartbody" style="color:black;">
+	                        </tbody>
+	                    </table>
+                    	<a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
+                	</div>
+            	</div>
+       	 </div>
+<!-------------------------------------------- shopping cart ------------------------------------------------>	   
+	        <a href="#" class="iconbth"><i class="fas fa-search fa-1x" style="color:white;font-size:25px;"></i></a>	        	        	
+	   
+	    </div>
 				<!--iconu一定要在top-flex之上，不然會被移動條給蓋爆777777-->
 			</div>
 			<div class="Top-Flex">
@@ -100,16 +126,16 @@ margin: 10px 5px;
 			</div>
 	
 			<div class="shopbody">
-				<nav>
-					<a href="#">首 頁</a> 
-					<a href="#">有你來買</a> 
-					<a href="#">有你來講</a> 
-					<a href="#">有你來玩</a> 
-					<a href="#">到府美容</a> 
-					<a href="#">浪浪找家</a> 
-					<a href="#">友善店家</a> 
-					<a href="#">知識站</a>
-				</nav>
+				<nav style="margin-bottom:-15px;margin-left:15px;">
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">首　頁</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來買</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來講</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來玩</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">到府美容</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">浪浪找家</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">友善店家</a></p>
+		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">知識站</a></p>
+		 	</nav>
 			</div>
 	</header>
 <main>
@@ -342,7 +368,7 @@ margin: 10px 5px;
                             <div class="overlay-content">
                                 <ul>
                                 <c:forEach var="i" begin="1" end="${apmVO.star}" step="1">    
-                                    <li><i class="fa fa-star fa-2x" style="color: #feee7d;"></i></li>
+                                    <li><i class="fa fa-star fa-1x" style="color: #feee7d;"></i></li>
 <!--                                     <li><i class="fa fa-star"></i></li> -->
 <!--                                     <li><i class="fa fa-star"></i></li> -->
 <!--                                     <li><i class="fa fa-star"></i></li> -->
@@ -430,16 +456,18 @@ margin: 10px 5px;
 				  let string = jQuery.datepicker.formatDate("yy-mm-dd", date);
 			  	  return [disableDate.indexOf(string) == -1]	
 			  },
-			  maxDate: "+1M",
+			  maxDate: "+29D",
 			  dateFormat: "yy-mm-dd"
 		  });
 		
 
 	
 	let receiverId = ${groVO.memId};
-
+	const sessionId = "${sessionId}";
 		
 	</script>
+	
+    <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/datepicker.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/plugins.js"></script>
