@@ -30,20 +30,32 @@ public class JedisHandleShoppingCart {
 		
 		List<String> cartItems = getCart(sessionId);
 		
-		for(int i = 0; i < cartItems.size(); i++) {
-			ShoppingCartItemVO itemVOtoAdd = gson.fromJson(cartItems.get(i), ShoppingCartItemVO.class);
-			
-			// 若購物車內已有該商品ID則增加數量
-			if(cartItemVO.getItemId() == itemVOtoAdd.getItemId()) {
-				Integer count = itemVOtoAdd.getCount();
-				count += 1;									// 購物車內無調整數量功能，由使用者觸發「add」按鈕後+1
-				itemVOtoAdd.setCount(count);
-				String str = gson.toJson(itemVOtoAdd);
-				jedis.lset(sessionId, i, str);
-				jedis.close();
-				return;
-			}
-			
+		if(cartItems != null) {
+			for(int i = 0; i < cartItems.size(); i++) {
+				ShoppingCartItemVO itemVOtoAdd = gson.fromJson(cartItems.get(i), ShoppingCartItemVO.class);
+				
+				// 若購物車內已有該商品ID則增加數量
+				
+				Integer cartItemId = cartItemVO.getItemId();
+				Integer itemVOtoAddId = itemVOtoAdd.getItemId();
+				
+//System.out.println("cartItemId: " + cartItemId);
+//System.out.println("itemVOtoAddId: " + itemVOtoAddId);
+System.out.println(cartItemId == itemVOtoAddId);  // got false ??????
+				
+				if( cartItemId.equals(itemVOtoAddId)) {
+					Integer count = itemVOtoAdd.getCount();
+					
+					count += 1;									// 購物車內無調整數量功能，由使用者觸發「add」按鈕後+1
+					itemVOtoAdd.setCount(count);
+					
+					String str = gson.toJson(itemVOtoAdd);
+					jedis.lset(sessionId, i, str);
+					jedis.close();
+					return;
+				}
+		}
+		
 			// 若沒有該商品ID則新增
 			String strVO = gson.toJson(cartItemVO);
 			jedis.rpush(sessionId, strVO);
@@ -62,8 +74,8 @@ public class JedisHandleShoppingCart {
 		for(int i = 0; i < cartItems.size(); i++) {
 			ShoppingCartItemVO itemVO = gson.fromJson(cartItems.get(i), ShoppingCartItemVO.class);
 			
-			if(itemVO.getItemId() == itemId) {
-				jedis.lrem(sessionId, 0, itemVO.getItemId().toString());	// 刪除該商品
+			if(itemVO.getItemId().equals(itemId)) {
+				jedis.lrem(sessionId, 0, cartItems.get(i));	// 刪除該商品
 				jedis.close();
 				return;
 			}

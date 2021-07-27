@@ -28,12 +28,12 @@ public class ShoppingCartServlet extends HttpServlet {
 		res.setContentType("text/plain; charset = UTF-8");
 
 		String action = req.getParameter("action");
-
+		HttpSession session = req.getSession();
+		
 		// ========== 頁面先設一個假button作為進入網站得住發事件，須改為filter註冊到網站每個頁面 =============
 		if ("init".equals(action)) {
 
 			Cookie[] cookies = req.getCookies();
-			HttpSession session = req.getSession();
 
 			// 檢視user是否已經有存放cookie，cookie 的值以List型態存放於Redis：(cookieValue, {"itemId": "xxx",
 			// "count": "x"})
@@ -49,11 +49,18 @@ public class ShoppingCartServlet extends HttpServlet {
 				// 若未找到shoppingCart，新增cookie，並將session作為key存入Redis
 				Cookie shoppingCart = new Cookie("shoppingCart", session.getId());
 				shoppingCart.setMaxAge(3 * 24 * 60 * 60); // 存活3天，以秒為單位
+				session.setAttribute("sessionId", session.getId());
 				res.addCookie(shoppingCart);
+				
+				PrintWriter out = res.getWriter();
+				out.write(session.getId());
+				out.flush();
+				out.close();
 			}
 		}
 		// ===============================================================================
 
+		//	點擊購物車時
 		if ("getCart".equals(action)) {
 			Gson gson = new Gson();
 			String sessionId = (String) req.getSession().getAttribute("sessionId");
@@ -64,9 +71,13 @@ public class ShoppingCartServlet extends HttpServlet {
 			PrintWriter out = res.getWriter();
 			String cartItemsJson = gson.toJson(cartItems);
 			out.write(cartItemsJson);
+			out.flush();
+			out.close();
 		}
-
-		if ("addCart".equals(action)) {
+		
+		
+		// 點擊加入購物車時
+		if ("addItem".equals(action)) {
 			Integer itemId = new Integer(req.getParameter("itemId"));
 			Integer count = new Integer(req.getParameter("count"));
 			String sessionId = (String) req.getSession().getAttribute("sessionId");
@@ -74,6 +85,7 @@ public class ShoppingCartServlet extends HttpServlet {
 			shoppingCartSvc.addItem(sessionId, itemId, count);
 		}
 
+		//	點擊刪除商品時
 		if ("deleteItem".equals(action)) {
 			Integer itemId = new Integer(req.getParameter("itemId"));
 			String sessionId = (String) req.getSession().getAttribute("sessionId");

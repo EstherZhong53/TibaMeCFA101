@@ -127,11 +127,11 @@
 	
 	
 	<servlet>
-		<servlet-name>ShoppingCartService</servlet-name>
-		<servlet-class>com.shopping_cart.controller.ShoppingCartService</servlet-class>
+		<servlet-name>ShoppingCartServlet</servlet-name>
+		<servlet-class>com.shopping_cart.controller.ShoppingCartServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ShoppingCartService</servlet-name>
+		<servlet-name>ShoppingCartServlet</servlet-name>
 		<url-pattern>/shoppingcart.do</url-pattern>
 	</servlet-mapping>
 
