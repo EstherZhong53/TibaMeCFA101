@@ -92,6 +92,15 @@ public class ShoppingCartServlet extends HttpServlet {
 			ShoppingCartService shoppingCartSvc = new ShoppingCartService();
 			shoppingCartSvc.deleteItem(sessionId, itemId);
 		}
+		
+		
+		// 成功結帳欲清空購物車時
+		if("deleteCart".equals(action)) {
+			String sessionId = (String) req.getSession().getAttribute("sessionId");
+			ShoppingCartService shoppingCartSvc = new ShoppingCartService();
+			shoppingCartSvc.deleteCart(sessionId);
+		}
+		
 	}
 
 }

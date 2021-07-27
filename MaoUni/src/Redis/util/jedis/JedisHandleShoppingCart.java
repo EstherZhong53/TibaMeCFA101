@@ -12,6 +12,8 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
 public class JedisHandleShoppingCart {
+	
+	////////////////   需再做個EXPIREAT控制，COOKIE是設定3天
 	private static JedisPool pool = JedisPoolUtil.getJedisPool();
 	
 	public static List<String> getCart(String sessionId){
@@ -80,5 +82,12 @@ System.out.println(cartItemId == itemVOtoAddId);  // got false ??????
 				return;
 			}
 		}
+	}
+	
+	public static void deleteCart(String sessionId) {
+		Jedis jedis = null;
+		jedis = pool.getResource();
+		jedis.ltrim(sessionId, 0, -1);	// 清空購物車
+		jedis.close();
 	}
 }

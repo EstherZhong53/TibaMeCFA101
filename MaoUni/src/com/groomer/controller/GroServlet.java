@@ -96,14 +96,12 @@ public class GroServlet extends HttpServlet {
 
 				
 				req.setAttribute("photos", photos);
-//				RequestDispatcher successView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
-//				successView.forward(req, res);
-				res.sendRedirect("back-end/groomer/groomerList.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
+				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
-//				failureView.forward(req, res);
-				res.sendRedirect("back-end/groomer/groomerList.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
+				failureView.forward(req, res);
 			}
 		}
 
@@ -149,14 +147,12 @@ public class GroServlet extends HttpServlet {
 	
 				req.setAttribute("list", list);
 				req.setAttribute("search", "true");
-//				RequestDispatcher successView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
-//				successView.forward(req, res);
-				res.sendRedirect("back-end/groomer/groomerList.jsp");
+				RequestDispatcher successView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
+				successView.forward(req, res);
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
-//				failureView.forward(req, res);
-				res.sendRedirect("back-end/groomer/groomerList.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/groomer/groomerList.jsp");
+				failureView.forward(req, res);
 			}
 		}
 		

@@ -59,4 +59,7 @@ public class ShoppingCartService {
 		JedisHandleShoppingCart.deleteItem(sessionId, itemId);
 	}
 
+	public void deleteCart(String sessionId) {
+		JedisHandleShoppingCart.deleteCart(sessionId);
+	};
 }

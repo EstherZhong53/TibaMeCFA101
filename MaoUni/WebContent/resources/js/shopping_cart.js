@@ -1,5 +1,4 @@
 function init(){
-	
 	// ============== 測試用  ==============
 	$(".fa-envelope").click(function(e){
 		$.ajax({
@@ -18,7 +17,6 @@ function init(){
 	
 	
 	$(".addItem").click(function(e){
-		console.log(e.target.id);
 		$.ajax({
 			url: "/MaoUni//shoppingcart.do",
 			type: "POST",
@@ -33,7 +31,6 @@ function init(){
 				totalItems++;
 				
 				$(".totalItems").text(totalItems);
-				alert("sessionId: " + sessionId);
 			}
 		})
 	})
@@ -49,7 +46,6 @@ function init(){
 	$(".cartbody").click(function(e){
 		console.log(e.target);
 		if(e.target.classList.contains("deleteItem")){
-			console.log(e.target.parentElement.parentElement);
 			$.ajax({
 				url: "/MaoUni//shoppingcart.do",
 				type: "POST",
@@ -102,6 +98,7 @@ function getCart(){
 		}
 	})
 }
+
 
 
 
