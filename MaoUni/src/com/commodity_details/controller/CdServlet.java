@@ -146,7 +146,7 @@ public class CdServlet extends HttpServlet {
 					cSvc.insert2(cdItemId, cdItemId, cdAmount, cdMoney);
 
 
-					res.sendRedirect(req.getContextPath() + "/front-end/Obuy/ObuyAll.jsp");
+					res.sendRedirect(req.getContextPath() + "/front-end/Obuy/ObuyAll.jsp"); // 	沒看到有這支JSP ?
 							
 //					String url = req.getContextPath() + "/back-end/Obuy/ObuyAll.jsp";
 //					RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -154,7 +154,7 @@ public class CdServlet extends HttpServlet {
 
 				} catch (Exception e) {
 					errorMsgs.add(e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/Obuy/ObuyAll.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/Obuy/ObuyAll.jsp");	 // 為什麼導向後台 ?
 					failureView.forward(req, res);
 				}
 			}
@@ -177,7 +177,7 @@ public class CdServlet extends HttpServlet {
 
 				} catch (Exception e) {
 					errorMsgs.add("刪除資料失敗" + e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/emp/listAllEmp.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/emp/listAllEmp.jsp");	// 為什麼導向後台 ?
 					failureView.forward(req, res);
 				}
 			}

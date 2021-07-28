@@ -175,7 +175,7 @@ public class ObuyServlet extends HttpServlet {
 					
 				} catch (Exception e) {
 					errorMsgs.add(e.getMessage());
-					res.sendRedirect(req.getContextPath() + "/back-end/Obuy/ObuyAll.jsp");
+					res.sendRedirect(req.getContextPath() + "/back-end/shop/order_list.jsp");
 					
 //					String url = "/back-end/Obuy/ObuyAll.jsp";
 //					RequestDispatcher failureView = req.getRequestDispatcher(url);
