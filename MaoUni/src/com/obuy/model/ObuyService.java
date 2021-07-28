@@ -57,7 +57,7 @@ public class ObuyService {
 	}
 
 	public void insertWithco(Integer oMemId, Integer oMoney, Integer oPaying, Integer oSend, String obuyOther,List<CdVO> list) {
-		
+		System.out.println("========================= service");
 		ObuyVO obuyVO = new ObuyVO();
 
 		obuyVO.setoMemId(oMemId);

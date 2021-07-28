@@ -71,7 +71,7 @@
 		<servlet-name>SchServlet</servlet-name>
 		<url-pattern>/schedule.do</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ApmServlet</servlet-name>
 		<servlet-class>com.appointment_form.controller.ApmServlet</servlet-class>
@@ -81,8 +81,8 @@
 		<servlet-name>ApmServlet</servlet-name>
 		<url-pattern>/appointment.do</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<servlet>
 		<servlet-name>ApmdServlet</servlet-name>
 		<servlet-class>com.appointment_form_details.controller.ApmdServlet</servlet-class>
@@ -92,8 +92,8 @@
 		<servlet-name>ApmdServlet</servlet-name>
 		<url-pattern>/apmdetails.do</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<servlet>
 		<servlet-name>GrepServlet</servlet-name>
 		<servlet-class>com.report_grooming.controller.GrepServlet</servlet-class>
@@ -103,9 +103,9 @@
 		<servlet-name>GrepServlet</servlet-name>
 		<url-pattern>/groomingreport.do</url-pattern>
 	</servlet-mapping>
-	
-	
-	
+
+
+
 	<servlet>
 		<servlet-name>NameServlet</servlet-name>
 		<servlet-class>com.chatbox.controller.NameServlet</servlet-class>
@@ -124,8 +124,8 @@
 		<servlet-name>GeocodingServlet</servlet-name>
 		<url-pattern>/geocoding.do</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<servlet>
 		<servlet-name>ShoppingCartServlet</servlet-name>
 		<servlet-class>com.shopping_cart.controller.ShoppingCartServlet</servlet-class>
@@ -134,5 +134,20 @@
 		<servlet-name>ShoppingCartServlet</servlet-name>
 		<url-pattern>/shoppingcart.do</url-pattern>
 	</servlet-mapping>
+
+
+
+	<!-- ============================ 思瑤 ============================ -->
+	<servlet>
+		<servlet-name>ObuyServlet</servlet-name>
+		<servlet-class>com.obuy.controller.ObuyServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ObuyServlet</servlet-name>
+		<url-pattern>/buy/obuy.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- ============================================================== -->
 
 </web-app>

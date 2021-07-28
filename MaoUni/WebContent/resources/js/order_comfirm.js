@@ -43,21 +43,23 @@ function init(){
 let cart = [];
 
 
+// 送出訂單
 $("#orderForm").on("submit", function(e){
 	e.preventDefault();
-	getCart();			// 取得最終的購物車紀錄
-	$(".orderList").val(cart);
-	console.log($(".orderList").val());
+//	getCart();			// 取得最終的購物車紀錄
+//	$(".orderList").val(cart);	// 放入form表單內以一併傳送
+//	console.log($(".orderList").val());
 	
 	$.ajax({
 		url: "/MaoUni/buy/obuy.do",
 		type: "POST",
 		data: $(this).serialize(),
 		success: function(data){
-			deleteCart();
-			swal("成功！","","success").then((result) => {
-				window.location.replace("/MaoUni/front-end/shop/order_complete.jsp");
-			})
+			deleteCart();		// 清空redis內購物車value，但仍保存key
+			swal("成功！","","success");
+//			.then((result) => {
+//				window.location.replace("/MaoUni/front-end/shop/order_complete.jsp");
+//			});
 		}
 	})
 })
@@ -66,7 +68,7 @@ $("#orderForm").on("submit", function(e){
 
 function getCart(){
 	$.ajax({
-		url: "/MaoUni//shoppingcart.do",
+		url: "/MaoUni/shoppingcart.do",
 		type: "GET",
 		data: {
 			action: "getCart",
@@ -122,7 +124,7 @@ function deleteCart(){
 			// 檢查購物車是否清空
 			cart = [];
 			getCart();
-			console.log(cart);
+			console.log("cart: " + cart);
 		}
 	})
 }

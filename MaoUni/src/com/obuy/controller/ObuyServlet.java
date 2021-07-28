@@ -1,6 +1,7 @@
 package com.obuy.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,9 +13,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.commodity_details.model.CdVO;
+import com.google.gson.Gson;
 import com.obuy.model.ObuyService;
 import com.obuy.model.ObuyVO;
+import com.shopping_cart.model.ShoppingCartItemVO;
+import com.shopping_cart.model.ShoppingCartService;
 import com.commodity_details.model.CdVO;
 import com.commodity_details.model.CdService;
 
@@ -140,40 +146,54 @@ public class ObuyServlet extends HttpServlet {
 					Integer oPaying = new Integer(req.getParameter("oPaying").trim());
 					Integer oSend = new Integer(req.getParameter("oSend").trim());
 					String obuyOther = req.getParameter("obuyOther").trim();
-
-					ObuyVO obuyVO = new ObuyVO();
-					obuyVO.setoMemId(oMemId);
-					obuyVO.setoMoney(oMoney);
-					obuyVO.setoPaying(oPaying);
-					obuyVO.setoSend(oSend);
-					obuyVO.setObuyOther(obuyOther);
-
-
+System.out.println("oMemId: " + oMemId);						
+System.out.println("oMoney: " + oMoney);						
+System.out.println("oPaying: " + oPaying);						
+System.out.println("oSend: " + oSend);						
+System.out.println("obuyOther: " + obuyOther);						
+//					String orderList = req.getParameter("orderList");
+//					Gson gson = new Gson();
+//					List<CdVO> list = (List<CdVO>) gson.fromJson(orderList, CdVO.class);
+//					
+//					
+//					
+//					for(int i = 0; i < list.size(); i++) {
+//						
+//					}
+					
+//					取得購物車內訂單明細
+					HttpSession session = req.getSession();
+					String sessionId = (String) session.getAttribute("sessionId");
+					ShoppingCartService shoppingCartSvc = new ShoppingCartService();
+					List<ShoppingCartItemVO> cartItems = shoppingCartSvc.getCart(sessionId);
+					List<CdVO> list = new ArrayList<CdVO>();
+System.out.println("sessionId: " + sessionId);			
+System.out.println("===========================");	
+					// 打包訂單明細VO
+					for(int i = 0; i < cartItems.size(); i++) {
+System.out.println(cartItems.size());						
+						ShoppingCartItemVO cartVO = cartItems.get(i);
+						CdVO cdVO = new CdVO();
+						Integer cdMoney = cartVO.getCount() * cartVO.getItemPrice();
+				System.out.println(i);		
+						cdVO.setCdItemId(cartVO.getItemId());
+						cdVO.setCdAmount(cartVO.getCount());
+						cdVO.setCdMoney(cdMoney);				// 購物車取得為商品單價，存入訂單明細所需為該項商品總額
+System.out.println("CdItemId: " + cdVO.getCdItemId());						
+System.out.println("CdAmount: " + cdVO.getCdAmount());						
+System.out.println("CdMoney: " + cdVO.getCdMoney());						
+						list.add(cdVO);
+					}
 					
 					ObuyService oSvc = new ObuyService();
-					List<CdVO> list = new ArrayList<CdVO>();
-					CdVO cdVO1 = new CdVO();
-					cdVO1.setCdItemId(1);
-					cdVO1.setCdAmount(1);
-					cdVO1.setCdMoney(222);	
-					
-					list.add(cdVO1);
-					
-					CdVO cdVO2 = new CdVO();
-					
-					cdVO2.setCdItemId(2);
-					cdVO2.setCdAmount(1);
-					cdVO2.setCdMoney(666);
-					
-					list.add(cdVO2);
+
 					
 					oSvc.insertWithco(oMemId, oMoney, oPaying, oSend,obuyOther,list);
-					String url = req.getContextPath() + "/back-end/Obuy/ObuyAll.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url);
-					successView.forward(req, res);
+
 
 					
 				} catch (Exception e) {
+					e.printStackTrace();
 					errorMsgs.add(e.getMessage());
 					res.sendRedirect(req.getContextPath() + "/back-end/shop/order_list.jsp");
 					

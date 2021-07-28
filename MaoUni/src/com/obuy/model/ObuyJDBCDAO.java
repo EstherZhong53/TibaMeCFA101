@@ -277,7 +277,7 @@ public class ObuyJDBCDAO implements ObuyDAO_interface {
 @Override
 public void insertWithco(ObuyVO obuyVO , List<CdVO> list) {
 
-	System.out.println("新增啊啊啊");
+	System.out.println("========================= dao");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 

@@ -26,7 +26,7 @@ public class ShoppingCartService {
 	
 	// user cookie("cart", sessionId)
 	// Redis List (sessionId, {"itemId": "xxx", "count": "x"})
-	// 使用者進入首頁時，檢查是否有key為cart的cookie，有的話取得sessionId，沒有則用給予cookie  (可以做在filter，讓使用者不管進入哪個註冊到的頁面都先做此動作?)
+	// 使用者進入首頁時，檢查是否有key為shoppingCart的cookie，有的話取得sessionId，沒有則用給予cookie  (可以做在filter，讓使用者不管進入哪個註冊到的頁面都先做此動作?)
 	// 用sessionId自redis取得購物車內的資料：jedis.lrange(key, 0, -1)，用itemId比對mySQL取得商品價格、比對庫存
 	
 	public List<ShoppingCartItemVO> getCart(String sessionId){

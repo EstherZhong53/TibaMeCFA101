@@ -9,10 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, minimum-scale=0.5, user-scalable=no">
 <meta name = "viewport" content ="width=device-width,initial-scale-1.0">
     <!-- <script src="JavaScript 檔案位址.js"></script> -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-    <title>MaoUni 商城</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MaoUni 商城</title>
 	
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的CSS,有再調過細部效果 -->
@@ -64,12 +64,9 @@
                                     </tr>
                                 </thead>
                                 <tbody class="cartbody">
-                                
+                                	<!-------------- js 加入 -------------->
                                 </tbody>
-
                             </table>
-
-
                         </div>
                     </div>
 
@@ -78,7 +75,7 @@
                        		<input type="hidden" name="action" value="insertWithco">
                             <input type="hidden" name="oMemId" value="3">
                             <input type="hidden" class="oMoney" name="oMoney" value="">
-                            <input type="hidden" class="orderList" name = "orderList" value="">
+<!--                             <input type="hidden" class="orderList" name = "orderList" value=""> -->
                              <div class="form-row mb-2">
                                 <label for="oPaying">付款方式</label>
                                 <select name="oPaying" class="form-control">
@@ -96,7 +93,7 @@
                             </div>
                             <div class="form-row">
                                 <label for="address">備註</label>
-                                <input type="text" class="form-control" id="mail" placeholder="永遠開心一路123號" required>
+                                <input type="text" class="form-control" name="obuyOther" placeholder="" required>
                             </div>
                             <div class="mt-3 d-flex justify-content-end">
                                 <button class="btn btn-secondary mr-2">繼續選購</button>
