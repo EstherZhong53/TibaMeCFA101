@@ -87,7 +87,7 @@ System.out.println(cartItemId == itemVOtoAddId);  // got false ??????
 	public static void deleteCart(String sessionId) {
 		Jedis jedis = null;
 		jedis = pool.getResource();
-		jedis.ltrim(sessionId, 0, -1);	// 清空購物車
+		jedis.del(sessionId);	// 清空購物車刪除key
 		jedis.close();
 	}
 }
