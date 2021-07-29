@@ -205,8 +205,8 @@ box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
 	
 	    <div class="icontrue" style="margin: 10px 10px 0px 0px;">
 		
-		  <a href="#" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
-		  <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+		  <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
+		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
 		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
 <!-------------------------------------------- shopping cart ------------------------------------------------>
 	      <div class="dropdown ml-auto">
@@ -243,17 +243,16 @@ box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
 			</div>
 		</div>
 		
-		<div class="shopbody">
-		    <nav style="margin-bottom:-15px;margin-left:15px;">
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">首　頁</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來買</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來講</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來玩</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">到府美容</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">浪浪找家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">友善店家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">知識站</a></p>
-		 	</nav>
+			<div class="shopbody">
+				<nav style="margin-bottom:-15px;margin-left:15px;">
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			 	</nav>
 		</div>
 		<div class="Shopping-ul"></div>
 	    
@@ -280,7 +279,7 @@ pageContext.setAttribute("list", list);
 		                 <!-- 文章內容 -->       
 		                        <p class="animate-text">${groVO.center}</p>
 		        <div class="dots button">
-		        <a href=""# style="text-decoration:none;">More</a>
+		        <a href="<%= request.getContextPath() %>/front-end/member/grooming_groomerInfo.jsp?groomerId=${groVO.groomerId}" style="text-decoration:none;">More</a>
 <!-- 		          <FORM METHOD="post" ACTION="" style="margin-bottom: 0px;"> -->
 <!-- 		            <input type="submit" value="More" class="button"> -->
 		        

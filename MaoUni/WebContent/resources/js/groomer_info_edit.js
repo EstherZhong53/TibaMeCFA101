@@ -47,8 +47,8 @@
     				  <tr>
     				  	<td>${obj[j].svcPet}</td>
     	    	        <td>${obj[j].svcItem}</td>
-    	    	        <td>${obj[j].svcTime}</td>
-    	    	        <td>${obj[j].price}</td>
+    	    	        <td>${obj[j].svcTime * 30}  分鐘</td>
+    	    	        <td>${obj[j].price}  元</td>
     	    	        <td><i class="fas fa-trash deleteSvc" name="${obj[j].svcId}" style="color: #566270"></i></td>
     	    	      </tr>
     			  `;

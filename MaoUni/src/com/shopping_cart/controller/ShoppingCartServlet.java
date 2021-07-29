@@ -49,8 +49,11 @@ public class ShoppingCartServlet extends HttpServlet {
 				// 若未找到shoppingCart，新增cookie，並將session作為key存入Redis
 				Cookie shoppingCart = new Cookie("shoppingCart", session.getId());
 				shoppingCart.setMaxAge(3 * 24 * 60 * 60); // 存活3天，以秒為單位
+				shoppingCart.setHttpOnly(true);												////////////// ? application查看沒有打勾
+
 				session.setAttribute("sessionId", session.getId());
 				res.addCookie(shoppingCart);
+//				res.setHeader("Set-Cookie", "key=shoppingCart; SameSite=strict");			////////////// ? 會有覆蓋的問題嗎
 
 				PrintWriter out = res.getWriter();
 				out.write(session.getId());

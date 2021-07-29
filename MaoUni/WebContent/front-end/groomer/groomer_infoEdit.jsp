@@ -135,6 +135,7 @@ cursor: pointer;
 					<div class="form-group col-md-3">
 						<select class="form-control svcTime" name="svcTime">
 							<option selected>預估服務時間</option>
+							<option value="0">0</option>
 							<option value="1">30</option>
 							<option value="2">60</option>
 							<option value="3">90</option>

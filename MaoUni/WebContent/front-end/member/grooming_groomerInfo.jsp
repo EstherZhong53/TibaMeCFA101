@@ -90,15 +90,15 @@ margin: 10px 5px;
 	<header id="header">
 		<div class="icontrue">
 	
-			 <a href="#" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
-		  	 <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+			 <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
+		  	 <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
 		     <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
 <!-------------------------------------------- shopping cart ------------------------------------------------>
 	     <div class="dropdown ml-auto">
            
             	<button class="btn btn-cart mt-1 " type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" >
-                	<i class="fas fa-shopping-cart fa-2x shoppingCart" style="color:#fff;"></i>
+                	<i class="fas fa-shopping-cart fa-2x shoppingCart" style="color:#fff;font-size:25px;"></i>
                 	<span class="badge badge-pill badge-danger totalItems">0</span>
             	</button>
            
@@ -121,21 +121,20 @@ margin: 10px 5px;
 			</div>
 			<div class="Top-Flex">
 				<ul class="LOOP">
-					<li class="two"><img src="<%= request.getContextPath() %>/resources/images/MaoUni2.png" width="" alt=""></li>
+					<li class="two"><img src="<%=request.getContextPath()%>/resources/images/Logo/MaoUni2.png" width="" alt=""></li>
 				</ul>
 			</div>
 	
 			<div class="shopbody">
 				<nav style="margin-bottom:-15px;margin-left:15px;">
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">首　頁</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來買</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來講</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來玩</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">到府美容</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">浪浪找家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">友善店家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">知識站</a></p>
-		 	</nav>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			 	</nav>
 			</div>
 	</header>
 <main>
@@ -174,9 +173,11 @@ margin: 10px 5px;
                         <div class="row">
                             <div class="col-md-6 col-md-offset-1">
                                 <div class="left-content">
+                               
 <% 
 	Map<String, String[]> map = new LinkedHashMap<String, String[]>(); 
-	String[] list = {"1"};
+	String groomerId = request.getParameter("groomerId");
+	String[] list = {groomerId};
 	map.put("groomerId", list );
 	GroVO groVO = groomerSvc.getAll(map).get(0);
 	pageContext.setAttribute("groVO", groVO);
@@ -343,8 +344,8 @@ margin: 10px 5px;
 <jsp:useBean id="apmSvc" scope="page" class="com.appointment_form.model.ApmService"/>
 <%
 	Map<String, String[]> apmMap = new LinkedHashMap<String, String[]>(); 
-	String[] groomerId = {"1"};
-	apmMap.put("groomerId", groomerId );
+	String[] list2 = {groomerId};
+	apmMap.put("groomerId", list2 );
 	List<ApmVO> apmList = apmSvc.getAll(apmMap);
 	pageContext.setAttribute("apmList", apmList);	
 %>
@@ -454,6 +455,7 @@ margin: 10px 5px;
 			minDate: -0,
 			beforeShowDay: function(date){
 				  let string = jQuery.datepicker.formatDate("yy-mm-dd", date);
+				  console.log(disableDate);
 			  	  return [disableDate.indexOf(string) == -1]	
 			  },
 			  maxDate: "+29D",

@@ -743,7 +743,7 @@ background-color: #fff;
 		
 	
 		  <a href="<%= request.getContextPath() %>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;margin-right:3px"></i></a>
-		  <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:28px;padding:2px;margin-top:-4px;"></i></a>
+		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:28px;padding:2px;margin-top:-4px;"></i></a>
 		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
 	    
 	      <div class="dropdown ml-auto">
@@ -800,15 +800,14 @@ background-color: #fff;
 		
 		<div class="shopbody">
 		    <nav style="margin-bottom:-15px;margin-left:15px;">
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">首　頁</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來買</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來講</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來玩</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">到府美容</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">浪浪找家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">知識站</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">公告</a></p>
-		 	</nav>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			 	</nav>
 		</div>
 		<div class="Shopping-ul"></div>
 	    
