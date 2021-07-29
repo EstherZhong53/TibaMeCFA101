@@ -1,43 +1,41 @@
-package com.item.model;
+package com.itemphotos.model;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.List;
 
-import com.itemphotos.model.ItemPhotosDAO;
-import com.itemphotos.model.ItemPhotosVO;
 
-import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Item;
-
-public class ItemDAO implements ItemDAO_interface{
-	
-
-	
+public class ItemPhotosDAO implements ItemPhotosDAO_interface{
 	static String driver = "com.mysql.cj.jdbc.Driver";
 	static String url = "jdbc:mysql://localhost:3306/maouni?serverTimezone=Asia/Taipei";
 	static String userid = "David";
 	static String passwd = "123456";
 
 	private static final String INSERT_STMT = 
-		"INSERT INTO MAOUNI.ITEM (ITEM_TYPE_ID,ITEM_PET_TYPE,ITEM_NAME,ITEM_CONTENT,ITEM_PRICE,ITEM_AMOUNT,ITEM_STATUS,ITEM_UPDATE) VALUES (?, ?, ?, ?, ?, ?, 1, now())";
+		"INSERT INTO MAOUNI.ITEM_PHOTOS (IP_ITEM_ID,IP_ITEM,IP_UPDATE) VALUES (?,?,now())";
 	private static final String GET_ALL_STMT = 
-		"SELECT ITEM_ID,ITEM_TYPE_ID,ITEM_PET_TYPE,ITEM_NAME,ITEM_CONTENT,ITEM_PRICE,ITEM_AMOUNT,ITEM_STATUS,ITEM_UPDATE FROM MAOUNI.ITEM";
+		"SELECT IP_ID,IP_ITEM_ID,IP_ITEM,IP_UPDATE FROM MAOUNI.ITEM_PHOTOS";
 	private static final String GET_ONE_STMT = 
-		"SELECT ITEM_ID,ITEM_TYPE_ID,ITEM_PET_TYPE,ITEM_NAME,ITEM_CONTENT,ITEM_PRICE,ITEM_AMOUNT,ITEM_STATUS,ITEM_UPDATE FROM MAOUNI.ITEM WHERE ITEM_ID = ?";	
-	private static final String GET_NAME_STMT = 
-		"SELECT ITEM_ID,ITEM_TYPE_ID,ITEM_PET_TYPE,ITEM_NAME,ITEM_CONTENT,ITEM_PRICE,ITEM_AMOUNT,ITEM_STATUS,ITEM_UPDATE FROM MAOUNI.ITEM WHERE ITEM_NAME = ?";	//如果複合查詢ok就可以刪掉這行跟下面的方法
+		"SELECT IP_ID,IP_ITEM_ID,IP_ITEM,IP_UPDATE FROM MAOUNI.ITEM_PHOTOS where IP_ID = ?";	
+	private static final String DELETE = 
+		"DELETE FROM MAOUNI.ITEM_PHOTOS WHERE IP_ID = ?";
 	private static final String UPDATE = 
-		"UPDATE MAOUNI.ITEM SET ITEM_TYPE_ID=?, ITEM_PET_TYPE=?, ITEM_NAME=?, ITEM_CONTENT=?, ITEM_PRICE=?, ITEM_AMOUNT=?, ITEM_STATUS=?, ITEM_UPDATE=NOW() WHERE ITEM_ID = ?";
-	private static final String MULTIPLE =
-	"SELECT i.ITEM_ID,i.ITEM_TYPE_ID,t.ITEMT_NAME,i.ITEM_PET_TYPE,i.ITEM_NAME,i.ITEM_CONTENT,i.ITEM_PRICE,i.ITEM_AMOUNT,i.ITEM_STATUS,i.ITEM_UPDATE FROM item i join item_type t on (i.ITEM_TYPE_ID = t.ITEMT_ID)";
-	
+		"UPDATE MAOUNI.ITEM_PHOTOS SET IP_ITEM_ID=?, IP_ITEM=?, IP_UPDATE=now() WHERE IP_ID = ?";
+	private static final String GET_PIC_STMT = 
+		"SELECT IP_ID,IP_ITEM_ID,IP_ITEM,IP_UPDATE FROM MAOUNI.ITEM_PHOTOS WHERE IP_ITEM_ID = ?";
+	private static final String GET_ONE_FOR_IPID = 
+		"SELECT * FROM MAOUNI.ITEM_PHOTOS WHERE IP_ITEM_ID = ?";
+		
 	
 	//新增
 	@Override
-	public void insert(ItemVO itemVO) {
+	public void insert(ItemPhotosVO itemPhotosVO) {
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -48,17 +46,17 @@ public class ItemDAO implements ItemDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, itemVO.getItemTypeId());
-			pstmt.setString(2, itemVO.getItemPetType());
-			pstmt.setString(3, itemVO.getItemName());
-			pstmt.setString(4, itemVO.getItemContent());
-			pstmt.setInt(5, itemVO.getItemPrice());
-			pstmt.setDouble(6, itemVO.getItemAmount());
-//			pstmt.setInt(6, itemVO.getItemStatus());
-			//因為ItemUpdate欄位直接用NOW()寫死，所以不用寫，特別在這註明
-			
-			pstmt.executeUpdate();
+			pstmt.setInt(1, itemPhotosVO.getIpItemId());
+			pstmt.setBytes(2, itemPhotosVO.getIpItem());
+//			pstmt.setDate(3, itemPhotosVO.getIpUpdate());
 
+			pstmt.executeUpdate("set auto_increment_offset=1;");
+			pstmt.executeUpdate("set auto_increment_increment=1;");
+			
+			int insertCount = pstmt.executeUpdate();
+			System.out.println("�s�W" + insertCount + "�����");
+			
+			
 			// Handle any driver errors
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. "
@@ -89,7 +87,7 @@ public class ItemDAO implements ItemDAO_interface{
 
 	//修改
 	@Override
-	public void update(ItemVO itemVO) {
+	public void update(ItemPhotosVO itemPhotosVO) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -100,16 +98,10 @@ public class ItemDAO implements ItemDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
 
-			
-			pstmt.setInt(1, itemVO.getItemTypeId());
-			pstmt.setString(2, itemVO.getItemPetType());
-			pstmt.setString(3, itemVO.getItemName());
-			pstmt.setString(4, itemVO.getItemContent());
-			pstmt.setInt(5, itemVO.getItemPrice());
-			pstmt.setDouble(6, itemVO.getItemAmount());
-			pstmt.setInt(7, itemVO.getItemStatus());
-			pstmt.setInt(8, itemVO.getItemId());
-			//因為ItemUpdate欄位直接用NOW()寫死，所以不用寫，特別在這註明
+			pstmt.setInt(1, itemPhotosVO.getIpItemId());
+			pstmt.setBytes(2, itemPhotosVO.getIpItem());
+//			pstmt.setDate(3, itemPhotosVO.getIpUpdate());
+			pstmt.setInt(3, itemPhotosVO.getIpId());
 
 			pstmt.executeUpdate();
 
@@ -140,11 +132,55 @@ public class ItemDAO implements ItemDAO_interface{
 		}
 	}
 
-	//以itemId(商品ID)查詢
+	//刪除
 	@Override
-	public ItemVO findByPrimaryKey(Integer itemId) {
+	public void delete(Integer ipId) {
+
+			Connection con = null;
+			PreparedStatement pstmt = null;
+
+			try {
+
+				Class.forName(driver);
+				con = DriverManager.getConnection(url, userid, passwd);
+				pstmt = con.prepareStatement(DELETE);
+
+				pstmt.setInt(1, ipId);
+
+				pstmt.executeUpdate();
+
+				// Handle any driver errors
+			} catch (ClassNotFoundException e) {
+				throw new RuntimeException("Couldn't load database driver. "
+						+ e.getMessage());
+				// Handle any SQL errors
+			} catch (SQLException se) {
+				throw new RuntimeException("A database error occured. "
+						+ se.getMessage());
+				// Clean up JDBC resources
+			} finally {
+				if (pstmt != null) {
+					try {
+						pstmt.close();
+					} catch (SQLException se) {
+						se.printStackTrace(System.err);
+					}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (Exception e) {
+						e.printStackTrace(System.err);
+					}
+				}
+			}
+		}		
+
+	//單一查詢
+	@Override
+	public ItemPhotosVO findByPrimaryKey(Integer ipId) {
 		
-		ItemVO itemVO = null;
+		ItemPhotosVO itemPhotosVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -155,22 +191,16 @@ public class ItemDAO implements ItemDAO_interface{
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, itemId);
+			pstmt.setInt(1, ipId);
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				itemVO = new ItemVO();
-
-				itemVO.setItemId(rs.getInt(1));
-				itemVO.setItemTypeId(rs.getInt(2));
-				itemVO.setItemPetType(rs.getString(3));
-				itemVO.setItemName(rs.getString(4));
-				itemVO.setItemContent(rs.getString(5));
-				itemVO.setItemPrice(rs.getInt(6));
-				itemVO.setItemAmount(rs.getInt(7));
-				itemVO.setItemStatus(rs.getInt(8));
-				itemVO.setItemUpdate(rs.getDate(9));
+				itemPhotosVO = new ItemPhotosVO();
+				itemPhotosVO.setIpId(rs.getInt("ipId"));
+				itemPhotosVO.setIpItemId(rs.getInt("ipItemId"));
+				itemPhotosVO.setIpItem(rs.getBytes("ipItem"));
+				itemPhotosVO.setIpUpdate(rs.getDate("ipUpdate"));
 			}
 
 			// Handle any driver errors
@@ -205,86 +235,16 @@ public class ItemDAO implements ItemDAO_interface{
 				}
 			}
 		}
-		return itemVO;
+		return itemPhotosVO;
 	}
 
-	
-	@Override
-	public ItemVO findByPrimaryKey(String itemName) {
-		
-		ItemVO itemVO = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(GET_NAME_STMT);
-
-			pstmt.setString(1, itemName);
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				itemVO = new ItemVO();
-
-				itemVO.setItemId(rs.getInt(1));
-				itemVO.setItemTypeId(rs.getInt(2));
-				itemVO.setItemPetType(rs.getString(3));
-				itemVO.setItemName(rs.getString(4));
-				itemVO.setItemContent(rs.getString(5));
-				itemVO.setItemPrice(rs.getInt(6));
-				itemVO.setItemAmount(rs.getInt(7));
-				itemVO.setItemStatus(rs.getInt(8));
-				itemVO.setItemUpdate(rs.getDate(9));
-			}
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-		return itemVO;
-	}
-	
-	
-	
 	//全部列出
 	@Override
-	public List<ItemVO> getAll() {
+	public List<ItemPhotosVO> getAll() {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<ItemVO> list = new ArrayList<ItemVO>();
+		List<ItemPhotosVO> list = new ArrayList<ItemPhotosVO>();
 
 		try {
 
@@ -294,29 +254,12 @@ public class ItemDAO implements ItemDAO_interface{
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				ItemVO itemVO = new ItemVO();
-				itemVO.setItemId(rs.getInt(1));
-				itemVO.setItemTypeId(rs.getInt(2));
-				itemVO.setItemPetType(rs.getString(3));
-				itemVO.setItemName(rs.getString(4));
-				itemVO.setItemContent(rs.getString(5));
-				itemVO.setItemPrice(rs.getInt(6));
-				itemVO.setItemAmount(rs.getInt(7));
-				itemVO.setItemStatus(rs.getInt(8));
-				itemVO.setItemUpdate(rs.getDate(9));
-				
-				ItemPhotosDAO itemPhotosDAO = new ItemPhotosDAO();
-				ItemPhotosVO itemPhotosVO = itemPhotosDAO.getItemPhoto(rs.getInt(1)).get(0);
-				if(!(itemPhotosVO == null)) {
-					itemVO.setItemPhotoFirst(itemPhotosVO.getIpItemBase64());
-				} 
-//				System.out.println("xxx"+itemPhotosDAO.getItemPhoto(rs.getInt(1)).get(0).getIpItemBase64());
-////			    String photostr = Base64.getEncoder().encodeToString(itemPhotosVO.getIpItem());
-//			    itemVO.setItemPhotoFirst(itemPhotosVO.getIpItemBase64());
-//			   System.out.println(); 		
-				
-				
-				list.add(itemVO); // Store the row in the list
+				ItemPhotosVO itemPhotosVO = new ItemPhotosVO();
+				itemPhotosVO.setIpId(rs.getInt(1));
+				itemPhotosVO.setIpItemId(rs.getInt(2));
+				itemPhotosVO.setIpItem(rs.getBytes(3));
+				itemPhotosVO.setIpUpdate(rs.getDate(4));
+				list.add(itemPhotosVO); // Store the row in the list
 			}
 
 			// Handle any driver errors
@@ -354,47 +297,138 @@ public class ItemDAO implements ItemDAO_interface{
 		return list;
 	}
 
-	
-	//複合查詢
+	//取得照片
 	@Override
-	public List<ItemVO> getAll(Map<String, String[]> map) {
-
-	
+	public List<ItemPhotosVO> getItemPhoto(Integer ipItemId) {
+		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<ItemVO> list = new ArrayList<ItemVO>();
+		List<ItemPhotosVO> list = new ArrayList<ItemPhotosVO>();
 		
 		
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			String finalSQL = MULTIPLE + jdbcUtil_CompositeQuery_Item.get_WhereCondition(map) + "ORDER BY ITEM_ID";
-			pstmt = con.prepareStatement(finalSQL);
-			System.out.println(finalSQL);
+			pstmt = con.prepareStatement(GET_PIC_STMT);
+			
+			pstmt.setInt(1, ipItemId);
+			System.out.println(ipItemId);
 			rs = pstmt.executeQuery();
-	
+			
 			while (rs.next()) {
-
-				ItemVO itemVO = new ItemVO();
-				itemVO.setItemId(rs.getInt(1));
-				itemVO.setItemTypeId(rs.getInt(2));
-				itemVO.setItemTypeName(rs.getString(3));
-				itemVO.setItemPetType(rs.getString(4));
-				itemVO.setItemName(rs.getString(5));
-				itemVO.setItemContent(rs.getString(6));
-				itemVO.setItemPrice(rs.getInt(7));
-				itemVO.setItemAmount(rs.getInt(8));
-				itemVO.setItemStatus(rs.getInt(9));
-				itemVO.setItemUpdate(rs.getDate(10));
-				list.add(itemVO); 
+				ItemPhotosVO itemPhotosVO = new ItemPhotosVO();
+				itemPhotosVO.setIpId(rs.getInt(1));
+				itemPhotosVO.setIpItemId(rs.getInt(2));
+				if(rs.getBytes("IP_ITEM") != null) {
+					itemPhotosVO.setIpItemBase64(base64Change(rs.getBytes("IP_ITEM")));
+					System.out.println("zzz");
+				}
+				itemPhotosVO.setIpUpdate(rs.getDate(4));
+				list.add(itemPhotosVO); // Store the row in the list
 			}
-	
-	
+
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+		
+		}
+		
+		public String base64Change(byte[] b) {
+			String pic = Base64.getEncoder().encodeToString(b);
+			return pic;
+	}
+	
+	
+	
+	
+	//插入照片
+	@Override
+	public byte[] insertItemPhoto(String path) {
+		
+		byte[]iip = null;
+		
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			iip = new byte[fis.available()];
+			fis.read(iip);
+			fis.close();
+		} catch (Exception e) {
+
+		}
+		return iip;
+	}
+
+	@Override
+	public byte[] updateItemPhoto(String path) {
+		
+		byte[]iia = null;
+		
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			iia = new byte[fis.available()];
+			fis.read(iia);
+			fis.close();
+		} catch (Exception e) {
+
+		}
+		return iia;
+	}
+
+	@Override
+	public byte[] getOnePic(Integer ipId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		byte[] img =null;
+		System.out.println(ipId);
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_FOR_IPID);
+			pstmt.setInt(1, ipId);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				img = rs.getBytes("IP_ITEM");
+			}
+
+			
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+			// Handle any SQL errors
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+			// Clean up JDBC resources
 		} finally {
 			if (rs != null) {
 				try {
@@ -406,19 +440,38 @@ public class ItemDAO implements ItemDAO_interface{
 			if (pstmt != null) {
 				try {
 					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
+				} catch (SQLException e2) {
+					e2.printStackTrace(System.err);
 				}
 			}
 			if (con != null) {
 				try {
 					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
+				} catch (Exception e2) {
+					e2.printStackTrace(System.err);
 				}
 			}
 		}
-		return list;
-	};
-}
+		return img;
+		
+		}
+
+	
+
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
 

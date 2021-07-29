@@ -1,33 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.item.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<%
-    ItemService itemSvc = new ItemService();
-    List<ItemVO> list = itemSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
-    
-    
-    
-    
-    
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@900&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, minimum-scale=0.5, user-scalable=no">
 <meta name = "viewport" content ="width=device-width,initial-scale-1.0">
-
-<title>MaoUni商品清單</title>
-	
     <!-- <script src="JavaScript 檔案位址.js"></script> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
+  
+    <title>MaoUni 商城</title>
+	
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的CSS,有再調過細部效果 -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/fontawesome-all.min.css"> <!-- 左邊這個是右上角聊天室ICON的引入 -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
@@ -719,6 +706,7 @@ background-color: #fff;
 
 .fa-trash-alt:hover{
 	color: #b89063;
+	cursor: pointer;
 }
 
 .fa-instagram:hover{
@@ -850,8 +838,8 @@ line-height: 1.5;
 		
 		  <a href="#" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
 		  <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
-		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:29px;margin-right:-5px;margin-top:-2px;"></i></a>
-<!-------------------------------------------- shopping cart ------------------------------------------------>	    
+		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
+<!-------------------------------------------- shopping cart ------------------------------------------------>
 	      <div class="dropdown ml-auto">
            
             <button class="btn btn-cart btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -864,8 +852,7 @@ line-height: 1.5;
                 <div class="p-3">
                     <table class="table table-sm">
                         <h6>已選擇商品</h6>
-                        <tbody style="color:black;">
-
+                        <tbody class="cartbody" style="color:black;">
                         </tbody>
                     </table>
                     <a href="<%=request.getContextPath()%>/front-end/shop/order_confirm.jsp" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
@@ -876,7 +863,7 @@ line-height: 1.5;
 	        <a href="#" class="iconbth"><i class="fas fa-search fa-1x" style="color:white;font-size:25px;"></i></a>	        	        	
 	   
 	    </div>
-<!---------------------------------------------------------------------------------------------------------------------->	    	    
+<!---------------------------------------------------------------------------------------------------------------------->	    
 		<!--icon一定要在top-flex之上，不然會被移動條給蓋爆777777-->
 	
 		<div class="Top-Flex">
@@ -1020,10 +1007,10 @@ line-height: 1.5;
 				<div class="DDM" style="margin-top:80px;">
 					<div class="SearchSorting">
 					    
-					    <select class="form-select" name="itemPetType" style="color:#a0591f;border-color:#a0591f;">
-						    <option value="" style="display:none">請選擇毛孩類別</option> <!-- value做驗證 -->
-						    <option value="貓">貓咪</option>
-						    <option value="狗">狗勾</option>
+					    <select class="form-select" style="color:#a0591f;border-color:#a0591f;">
+						    <option value="volvo" style="display:none">請選擇毛孩類別</option>
+						    <option value="saab">貓咪</option>
+						    <option value="opel">狗勾</option>
 					    </select>
 					
 						<select style="color:#a0591f;border-color:#a0591f;">
@@ -1047,29 +1034,77 @@ line-height: 1.5;
 				</div>
 				
 				<!-- 以下為右方商品清單資訊 -->
-				<div class="row" style="margin-top:35px;margin-left:50px;margin-right:10px;" >
+				<div class="row" style="margin-top:55px;margin-left:50px;margin-right:10px;">
 				
-				<c:forEach var="itemVO" items="${list}">
-
-					<div class="col-md-3" style="margin-top:45px;">
-						    <div class="card" >
+					<div class="col-md-3">
+						    <div class="card">
 						    	<a class="ItemPhotos" href="#">
-						        <img src="data:image/jpeg; base64, ${itemVO.itemPhotoFirst}"/>
+						        <img src="<%=request.getContextPath()%>/resources/images/itemListPage/1.jpg"/>
 						        </a>
 						        <div class="focus-content">
-						        <a href="#" id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a>
+						        <a href="#" id="1" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem
+						        "></i>&nbsp加入購物車</a>
 						        </div>				  
 						    </div>
 						    <a class="ItemIntro" href="#" style="text-decoration:none;">	  
-							<div class="Product-title Label mix-primary-text">${itemVO.itemName}</div>
-							<div class="Label-price sl-price">NT${itemVO.itemPrice}</div>
+							<div class="Product-title Label mix-primary-text">貓咪坐墊</div>
+							<div class="Label-price sl-price">NT$1690</div>
 							</a>
 					</div>
 					
 				
-
+					<div class="col-md-3">
+						    <div class="card">
+						        <a class="ItemPhotos" href="#">
+						        <img src="<%=request.getContextPath()%>/resources/images/itemListPage/2.jpg"/>
+						        </a>
+						        <div class="focus-content">
+						        <a href="#"  id="2" class="btn1 btn-sm d-block addItem
+						" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem
+						"></i>&nbsp加入購物車</a>
+						        </div>
+						    </div>
+						    <a class="ItemIntro" href="#" style="text-decoration:none;">
+						    <div class="Product-title Label mix-primary-text">鳥窩造型立架</div>
+							<div class="Label-price sl-price">NT$890</div>
+							</a>
+					</div>
+					
 				
-				</c:forEach>
+					<div class="col-md-3">
+						    <div class="card">
+						    	<a class="ItemPhotos" href="#">
+						        <img src="<%=request.getContextPath()%>/resources/images/itemListPage/3.jpg"/>
+						        </a>
+						        <div class="focus-content">
+						        <a href="#"  id="3" class="btn1 btn-sm d-block addItem
+						" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem
+						"></i>&nbsp加入購物車</a>
+						        </div>
+						    </div>
+						    <a class="ItemIntro" href="#" style="text-decoration:none;">
+						    <div class="Product-title Label mix-primary-text">立式貓抓棒</div>
+							<div class="Label-price sl-price">NT$990</div>
+							</a>
+					</div>
+					
+				
+					<div class="col-md-3" style="width:100%;">
+						    <div class="card">
+						    	<a class="ItemPhotos" href="#">
+						        <img src="<%=request.getContextPath()%>/resources/images/itemListPage/4.jpg"/>
+						        </a>
+						        <div class="focus-content">
+						        <a href="#"  id="4" class="btn1 btn-sm d-block addItem
+						" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem
+						"></i>&nbsp加入購物車</a>
+						        </div>
+						    </div>
+						    <a class="ItemIntro" href="#" style="text-decoration:none;">
+							<div class="Product-title Label mix-primary-text">原木透視小窩</div>
+							<div class="Label-price sl-price">NT$1290</div>
+							</a>
+					</div>
 				
 				</div>
 			</div>
@@ -1133,7 +1168,8 @@ line-height: 1.5;
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 
 
- <script>
+
+    <script>
         const sessionId = "${sessionId}";
     </script>
     <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>

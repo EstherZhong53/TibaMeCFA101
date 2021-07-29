@@ -5,12 +5,15 @@ import java.sql.Date;
 public class ItemVO implements java.io.Serializable{
 	private Integer itemId; //商品ID
 	private Integer itemTypeId; //商品類別ID
+	private String itemPetType;
 	private String itemName; //商品名稱
 	private String itemContent; //商品內容
 	private Integer itemPrice; //商品價格
 	private Integer itemAmount; //商品數量
 	private Integer itemStatus; //商品狀態
 	private Date itemUpdate; //上次修改狀態時間
+	private String itemPhotoFirst;
+	private String itemTypeName;
 	
 	public Integer getItemId() {
 		return itemId;
@@ -23,6 +26,12 @@ public class ItemVO implements java.io.Serializable{
 	}
 	public void setItemTypeId(Integer itemTypeId) {
 		this.itemTypeId = itemTypeId;
+	}
+	public String getItemPetType() {
+		return itemPetType;
+	}
+	public void setItemPetType(String itemPetType) {
+		this.itemPetType = itemPetType;
 	}
 	public String getItemName() {
 		return itemName;
@@ -59,7 +68,24 @@ public class ItemVO implements java.io.Serializable{
 	}
 	public void setItemUpdate(Date itemUpdate) {
 		this.itemUpdate = itemUpdate;
-	}	
+	}
+	public String getItemPhotoFirst() {
+		return itemPhotoFirst;
+	}
+	public void setItemPhotoFirst(String itemPhotoFirst) {
+		this.itemPhotoFirst = itemPhotoFirst;
+	}
+	public String getItemTypeName() {
+		return itemTypeName;
+	}
+	public void setItemTypeName(String itemTypeName) {
+		this.itemTypeName = itemTypeName;
+	}
+	
+	
+	
+	
+	
 }
 
 
