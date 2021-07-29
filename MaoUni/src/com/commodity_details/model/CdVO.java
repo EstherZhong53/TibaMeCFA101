@@ -2,10 +2,10 @@ package com.commodity_details.model;
 
 public class CdVO implements java.io.Serializable{
 	
-	private Integer cdoId;//�q�����ID
-	private Integer cdItemId; //�ӫ~id
-	private Integer cdAmount; //�ӫ~�ƶq
-	private Integer cdMoney;//�ӫ~���B
+	private Integer cdoId;//商品訂單ID
+	private Integer cdItemId;//商品ID
+	private Integer cdAmount;//商品數量
+	private Integer cdMoney;//商品金額
 	
 	public Integer getCdoId() {
 		return cdoId;

@@ -19,7 +19,7 @@ public class CdService {
 		dao.insert(cdVO);
 	}
 	
-	//�ӫ~�q��P���ӦP�ɷs�W����
+	//商品訂單與明細同時新增↓↓
 	public void insert2(Integer cdoId,Integer cdItemId,Integer cdAmount, Integer cdMoney) {
 
 		CdVO cdVO = new CdVO();

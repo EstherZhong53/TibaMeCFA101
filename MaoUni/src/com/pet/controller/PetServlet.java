@@ -1,4 +1,4 @@
-package com.commodity_details.controller;
+package com.pet.controller;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -10,47 +10,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.commodity_details.model.CdService;
-import com.commodity_details.model.CdVO;
-import com.obuy.model.ObuyService;
-import com.obuy.model.ObuyVO;
+import com.pet.model.PetService;
+import com.pet.model.PetVO;
 
 
-@WebServlet("/CdServlet")
-public class CdServlet extends HttpServlet {
+public class PetServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
-    public CdServlet() {
-        super();
-        
-    }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		res.getWriter().append("Served at: ").append(req.getContextPath());
+
+		doPost(req, res);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		if ("GET_ALL_STMT".equals(action)) { // 來自select_page.jsp的請求
+		if ("GET_ALL_STMT".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
-				Integer cdoId = new Integer(req.getParameter("cdoId").trim());
+				Integer petId = new Integer(req.getParameter("petId").trim());
 				/*************************** 2.開始查詢資料 *****************************************/
-				CdService cSvc = new CdService();
-				List<CdVO> cdVO = cSvc.getAll(); //這邊再注意對不對
+				PetService petSvc = new PetService();
+				List<PetVO> petVO = petSvc.getAll(); //這邊再注意對不對
 				
-				if (cdVO == null) {
+				if (petVO == null) {
 					errorMsgs.add("查無資料");
 				}
-				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("");
 					failureView.forward(req, res);
@@ -58,9 +46,9 @@ public class CdServlet extends HttpServlet {
 				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("cdVO", cdVO); // 資料庫取出的VO物件,存入req
+				req.setAttribute("petVO", petVO);
 				String url = "";
-				RequestDispatcher successView = req.getRequestDispatcher(url); //
+				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 		}
@@ -72,60 +60,62 @@ public class CdServlet extends HttpServlet {
 
 			try {
 				/*************************** 1.接收請求參數 ****************************************/
-				Integer cdoId = new Integer(req.getParameter("cdoId").trim());
+				Integer petId = new Integer(req.getParameter("petId").trim());
 
 				/*************************** 2.開始查詢資料 ****************************************/
-				CdService cSvc = new CdService();
-				CdVO cdVO = cSvc.findByPrimaryKey(cdoId);
+				PetService petSvc = new PetService();
+				PetVO petVO = petSvc.findByPrimaryKey(petId);
 				//這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關	
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("cdVO", cdVO); // 資料庫取出的VO物件,存入req
-				String url = "/Pet/listonePet.jsp";
+				req.setAttribute("petVO", petVO); // 資料庫取出的VO物件,存入req
+				String url = "/back-end/pet/petUpdate.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Member/login.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/pet/petlistAll.jsp");
 				failureView.forward(req, res);
 			}
 		}
 
 		if ("update".equals(action)) { // 來自jsp的請求
 
+			System.out.println("11111111111111111111111111111111");
 			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
+
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			Integer cdoId = new Integer(req.getParameter("cdoId").trim());
-			Integer cdItemId = new Integer(req.getParameter("cdItemId").trim());
-			Integer cdAmount= new Integer(req.getParameter("cdAmount").trim());
-			Integer cdMoney = new Integer(req.getParameter("cdMoney").trim());
-
+			String petSort = req.getParameter("petSort").trim();
+			Integer petVarId = new Integer(req.getParameter("petVarId").trim());
+			String petGender = req.getParameter("petGender").trim();
+			Integer petAge = new Integer(req.getParameter("petAge").trim());
+			Integer petSurvive = new Integer(req.getParameter("petSurvive").trim());
 			
-			CdVO cdVO = new CdVO();
-			cdVO.setCdoId(cdoId);
-			cdVO.setCdItemId(cdItemId);//商品不會只有一個要怎麼全抓?
-			cdVO.setCdAmount(cdAmount);
-			cdVO.setCdMoney(cdMoney);
+			PetVO petVO = new PetVO();
+//			petVO.setPetName(petName);
+			petVO.setPetSort(petSort);
+			petVO.setPetVarId(petVarId);
+			petVO.setPetGender(petGender);
+			petVO.setPetAge(petAge);
+			petVO.setPetSurvive(petSurvive);
+//			petVO.setPetId(petId);
 
-			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("cdVO", cdVO); // 含有輸入格式錯誤的VO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/Member/login.jsp");
+				req.setAttribute("petVO", petVO); // 含有輸入格式錯誤的VO物件,也存入req
+				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/pet/petlistAll.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
 
 			/*************************** 2.開始修改資料 *****************************************/
-			CdService cSvc = new CdService();
-			cdVO = cSvc.update(cdoId, cdItemId, cdAmount, cdMoney);
+			PetService petSvc = new PetService();
+			petSvc.update(petVO);
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-			req.setAttribute("cdVO", cdVO); // 資料庫update成功後,正確的的VO物件,存入req
-			String url = "/Member/login.jsp";
+			req.setAttribute("petVO", petVO); 
+			String url = "/back-end/pet/petlistAll.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url); 
 			successView.forward(req, res);
 
@@ -133,57 +123,60 @@ public class CdServlet extends HttpServlet {
 			
 			if ("insert".equals(action)) { 
 
+				System.out.println("為什麼要這樣對我");
 				List<String> errorMsgs = new LinkedList<String>();
 				req.setAttribute("errorMsgs", errorMsgs);
-				
-				try { //商品訂單明細
-					/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-					Integer cdoId = new Integer(req.getParameter("cdoId").trim());
-					Integer cdItemId = new Integer(req.getParameter("cdItemId").trim());
-					Integer cdAmount = new Integer(req.getParameter("cdAmount").trim());
-					Integer cdMoney = new Integer(req.getParameter("cdMoney").trim());
 
-					CdVO cdVO = new CdVO();
-					cdVO.setCdItemId(cdItemId);
-					cdVO.setCdItemId(cdItemId);
-					cdVO.setCdAmount(cdAmount);
-					cdVO.setCdMoney(cdMoney);
+				try {
+					/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+					Integer petMemId = new Integer(req.getParameter("petMemId").trim());
+					String petName = req.getParameter("petName").trim();
+					String petSort = req.getParameter("petSort").trim();
+					Integer petVarId = new Integer(req.getParameter("petVarId").trim());
+					String petGender = req.getParameter("petGender").trim();
+					Integer petAge = new Integer(req.getParameter("petAge").trim());
+					Integer petSurvive = new Integer(req.getParameter("petSurvive").trim());
+
+					PetVO petVO = new PetVO();
+					petVO.setPetMemId(petMemId);
+					petVO.setPetName(petName);
+					petVO.setPetSort(petSort);
+					petVO.setPetVarId(petVarId);
+					petVO.setPetGender(petGender);
+					petVO.setPetAge(petAge);
+					petVO.setPetSurvive(petSurvive);
 
 
 					/*************************** 2.開始新增資料 ***************************************/
-					CdService cSvc = new CdService();
-					cSvc.insert2(cdItemId, cdItemId, cdAmount, cdMoney);
+					PetService petSvc = new PetService();
+					petSvc.insert(petMemId, petName, petSort, petVarId, petGender, petAge, petSurvive);
 
 					/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-
-					res.sendRedirect(req.getContextPath() + "/front-end/Obuy/ObuyAll.jsp");
-							
-//					String url = req.getContextPath() + "/back-end/Obuy/ObuyAll.jsp";
-//					RequestDispatcher successView = req.getRequestDispatcher(url);
-//					successView.forward(req, res);
+					String url = "/back-end/pet/petlistAll.jsp";
+					RequestDispatcher successView = req.getRequestDispatcher(url); 
+					successView.forward(req, res);
 
 					/*************************** 其他可能的錯誤處理 **********************************/
 				} catch (Exception e) {
 					errorMsgs.add(e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/Obuy/ObuyAll.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/back-end/pet/petadd.jsp");
 					failureView.forward(req, res);
 				}
 			}
 
-			if ("delete".equals(action)) { // 來自listAll.jsp
+			if ("delete".equals(action)) { 
 
 				List<String> errorMsgs = new LinkedList<String>();
-				// Store this set in the request scope, in case we need to
-				// send the ErrorPage view.
+
 				req.setAttribute("errorMsgs", errorMsgs);
 
 				try {
 					/*************************** 1.接收請求參數 ***************************************/
-					Integer cdoId = new Integer(req.getParameter("cdoId"));
+					Integer PetId = new Integer(req.getParameter("PetId"));
 
 					/*************************** 2.開始刪除資料 ***************************************/
-					CdService cSvc = new CdService();
-					cSvc.delete(cdoId);
+					PetService petSvc = new PetService();
+					petSvc.delete(PetId);
 
 					/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
 					String url = "/emp/listAllEmp.jsp";

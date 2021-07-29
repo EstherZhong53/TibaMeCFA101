@@ -13,7 +13,7 @@ import java.util.Set;
 
 public class CdJDBCDAO implements CdDAO_interface { 
 	static String driver = "com.mysql.cj.jdbc.Driver";
-	static String url = "jdbc:mysql://localhost:3306/maouni?serverTimezone=Asia/Taipei";
+	static String url = "jdbc:mysql://localhost:3306/MaoUni?serverTimezone=Asia/Taipei";
 	static String userid = "David";
 	static String passwd = "123456";
 

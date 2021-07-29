@@ -12,7 +12,7 @@ public interface CdDAO_interface {
     
     public List<CdVO> getAll();
     
-//�ӫ~�q��P���ӦP�ɷs�W����
+//商品訂單與明細同時新增↓↓
 	void insert2(CdVO CdVO, Connection con);
 		
 }
