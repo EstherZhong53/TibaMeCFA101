@@ -136,6 +136,56 @@
 	</servlet-mapping>
 
 
+	<!-- ============================ 國任 ============================ -->
+
+	<!-- 公告註冊******** -->
+	<servlet>
+		<servlet-name>AnnServlet</servlet-name>
+		<servlet-class>com.announcemet.controller.AnnServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AnnServlet</servlet-name>
+		<url-pattern>/announcemet/ann.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 公告圖片註冊****** -->
+	<servlet>
+		<servlet-name>AnnImgServlet</servlet-name>
+		<servlet-class>com.announcemet.controller.AnnImgServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AnnImgServlet</servlet-name>
+		<url-pattern>/AnnImgServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- 文章註冊88******** -->
+	<servlet>
+		<servlet-name>ArtServlet</servlet-name>
+		<servlet-class>com.article.controller.ArtServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ArtServlet</servlet-name>
+		<url-pattern>/article/art.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- 文章圖片註冊**8***** -->
+	<servlet>
+		<servlet-name>ArtImgServlet</servlet-name>
+		<servlet-class>com.article.controller.ArtImgServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ArtImgServlet</servlet-name>
+		<url-pattern>/ArtImgServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- ============================================================== -->
+
+
+
 
 	<!-- ============================ 思瑤 ============================ -->
 	<servlet>
@@ -149,5 +199,9 @@
 	</servlet-mapping>
 
 	<!-- ============================================================== -->
+
+
+
+
 
 </web-app>
