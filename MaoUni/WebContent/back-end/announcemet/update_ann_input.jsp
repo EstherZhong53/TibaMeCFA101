@@ -210,9 +210,9 @@ button.main_bt:hover{
 	   update = new java.sql.Date(System.currentTimeMillis());
    }
 %>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery.datetimepicker.css" />
+<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery.datetimepicker.full.js"></script>
 
   <script>
           $.datetimepicker.setLocale('zh');
