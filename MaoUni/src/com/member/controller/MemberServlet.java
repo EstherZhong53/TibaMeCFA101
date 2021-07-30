@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.catalina.tribes.util.Arrays;
+
+import com.groomer.model.GroDAO;
+import com.groomer.model.GroVO;
 import com.member.model.MemberJDBCDAO;
 import com.member.model.MemberService;
 import com.member.model.MemberVO;
@@ -248,7 +251,15 @@ public class MemberServlet extends HttpServlet {
 //				RequestDispatcher successView = req.getRequestDispatcher(url);
 
 				session.setAttribute("memEmail", memEmail); // 確認有這個帳號後存入session中，以備登出用
-				session.setAttribute("MemberVO", memberVO);
+				session.setAttribute("memberVO", memberVO);
+
+				
+				if(memberVO.getMemPosition() == 1) {
+					GroDAO groDAO = new GroDAO();
+					GroVO groVO = groDAO.findByMemId(memberVO.getMemId());
+					session.setAttribute("groVO", groVO);
+				}
+				
 				res.sendRedirect(url);
 				// session.setAttributec會在一個時間點保留存的值
 //				successView.forward(req, res);	

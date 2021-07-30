@@ -41,16 +41,16 @@
 				<h1 id="title">美容師申請表</h1>
 				<div class="col-md-12 row">
 					<div class="memId col-md-6">
-						<label id="memId-label" for="memId">會員編號</label> 
-						<input type="number" id="memId" class="form-control" name="memId" value="1" />
+						<label id="memId-label" for="memId">會員編號: ${memberVO.memId}</label> 
+						<input type="hidden" id="memId" class="form-control" name="memId" value="${memberVO.memId}" />
 					</div>
 					<div class="field-wrapper col-md-6">
-						<label id="name-label" for="name">姓名</label> 
-						<input type="text" id="name" class="form-control" name="gname" value="王小迷" />
+						<label id="name-label" for="name">姓名: ${memberVO.memName}</label> 
+						<input type="hidden" id="name" class="form-control" name="gname" value="${memberVO.memName}" />
 					</div>
 					<div class="field-wrapper col-md-8">
-						<label id="center-label" for="center">中心位址</label> 
-						<input type="text" min="1" placeholder="請輸入中心位址，以計算服務範圍" id="center" class="form-control" required name="center" required />
+						<label id="center-label" for="center">中心位址: ${memberVO.memAddres}</label> 
+						<input type="hidden" value="${memberVO.memAddres}" id="center" class="form-control" required name="center" />
 					</div>
 					<div class="field-wrapper col-md-4">
 						<label id="range-label" for="range">服務範圍<span style="font-size: 0.7em">(公里)</span></label> 
@@ -111,21 +111,17 @@
 	<footer></footer>
 	
 	<script>
-
 	function init() {
 	  let fnames = "";
-
 	  $(".upfile").change(function (e) {
 		  
 	    files = e.target.files;
-
 	    if (files !== null) {
 	      for (let i = 0; i < files.length; i++) {
 	        let file = files[i];
 	        if (file.type.indexOf('image') > -1) {
 	          fnames = `\${file.name}`
 	          let reader = new FileReader();
-
 	          reader.addEventListener('load', function (e) {
 	            let result = e.target.result;
 	            let show =  `
@@ -141,9 +137,7 @@
 	      $(e.target).next().text(fnames);
 	    }
 	  })
-
 	}
-
 	window.onload = init;
 	
 	

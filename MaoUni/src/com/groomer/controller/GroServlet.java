@@ -43,8 +43,6 @@ public class GroServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				// memId和name之後會自動帶入會員資料，並將input改為disable，因此無檢查格式之必要
-				// 由前端進行基本檢查如：數字、字串、是否輸入空白、上傳檔案類型
 				Integer memId = new Integer(req.getParameter("memId"));
 				String gname = req.getParameter("gname");
 				String center = req.getParameter("center");
@@ -54,7 +52,7 @@ public class GroServlet extends HttpServlet {
 				InputStream pcrcIn = req.getPart("pcrc").getInputStream();
 				InputStream fidIn = req.getPart("fid").getInputStream();
 				InputStream bidIn = req.getPart("bid").getInputStream();
-
+				
 				byte[] license = new byte[licenseIn.available()];
 				byte[] pcrc = new byte[pcrcIn.available()];
 				byte[] fid = new byte[fidIn.available()];
@@ -71,16 +69,20 @@ public class GroServlet extends HttpServlet {
 				}
 
 				GroService grosvc = new GroService();
+
 				grosvc.addGroomer(memId, gname, center, grange, license, pcrc, fid, bid);
-				req.setAttribute("success", "新增成功");
+				
+
+//				req.setAttribute("success", "新增成功");
+				res.sendRedirect(req.getContextPath() + "/front-end/home/HomePage.jsp");
 //				RequestDispatcher successView = req.getRequestDispatcher(url);	
 //				successView.forward(req, res);
-				res.sendRedirect("front-end/groomer/groomer_application.jsp");	// 需改成導向首頁
+//				res.sendRedirect("front-end/groomer/groomer_application.jsp");	// 需改成導向首頁
 			} catch (Exception e) {
 				errorMsgs.put("Exception", e.getMessage());
 //				RequestDispatcher failureView = req.getRequestDispatcher(url);	
 //				failureView.forward(req, res);
-				res.sendRedirect("front-end/groomer/groomer_application.jsp");	// 需改成導向首頁
+				res.sendRedirect("groomer_infoEdit.jsp");	// 需改成導向首頁
 			}
 
 		}

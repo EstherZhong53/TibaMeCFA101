@@ -41,7 +41,7 @@ public class loginFilter implements Filter {
 		//uri會抓到的當前位子（網址）關鍵字去對比，當前網址是否有「contains包含」，equals不知為何上次不成功
 
 		HttpSession session = req.getSession();
-		Object memberVO = session.getAttribute("MemberVO"); 
+		Object memberVO = session.getAttribute("memberVO"); 
 //		這邊要抓取上次登入的servlet存入的東西，不然沒有東西可驗
 
 		if(memberVO != null) {

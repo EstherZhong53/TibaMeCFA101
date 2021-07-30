@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.appointment_form.model.ApmVO;
+import com.member.model.MemberJDBCDAO;
 
 import jdbc.util.CompositeQuery.jdbcUtil_CompositeQuery_Groomer;
 import oracle.net.aso.e;
@@ -33,6 +34,7 @@ public class GroDAO implements GroDAO_interface {
 	private final String UPDATE_STATUS_STMT = "update GROOMER set GSTATUS = ? where GROOMERID = ?";
 	private final String UPDATE_INFO_STMT = "update GROOMER set GNAME = ?, SCHDATE = ?, SCHTIME = ?, AVATAR = ?, INTRO = ? where GROOMERID = ?";
 	private final String GET_ONT_STMT = "select * from GROOMER where GROOMERID = ?";
+	private final String GET_ONT_STMT_BYMEMID = "select * from GROOMER where MEMID = ?";
 
 //  以下為舊方法，已被上方取代	
 //	private final String UPDATE_REPED_STMT = "update GROOMER set REPED = REPED + 1 where GROOMERID = ?";
@@ -57,8 +59,7 @@ public class GroDAO implements GroDAO_interface {
 			pstmt.setBytes(6, groVO.getPcrc());
 			pstmt.setBytes(7, groVO.getFid());
 			pstmt.setBytes(8, groVO.getBid());
-
-			pstmt.executeUpdate();
+			pstmt.executeUpdate();			 
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't loa Database driver. " + e.getMessage());
@@ -92,11 +93,25 @@ public class GroDAO implements GroDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STATUS_STMT);
+			
+			con.setAutoCommit(false);
 
 			pstmt.setInt(1, gstatus);
 			pstmt.setInt(2, groomerId);
 			pstmt.executeUpdate();
-
+			
+			// 更改會員資料
+			if(gstatus == 1) {
+				System.out.println("sdasdawd");
+				Integer memId = findByPrimaryKey(groomerId).getMemId();
+				System.out.println("memId: " + memId);
+				MemberJDBCDAO memDAO = new MemberJDBCDAO();
+				memDAO.updatePosition(memId, con);
+			}
+			
+			con.commit();
+			con.setAutoCommit(true);
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());  
 		} catch (SQLException se) {
@@ -335,6 +350,13 @@ public class GroDAO implements GroDAO_interface {
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
+			if (con != null) {
+				try {
+					con.rollback(); 
+				} catch (SQLException e) {
+					throw new RuntimeException("rollback error occured. " + e.getMessage());
+				}
+			}
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
 			if (pstmt != null) {
@@ -513,5 +535,76 @@ public class GroDAO implements GroDAO_interface {
 		return groVO;
 	}
 
+	
+	
+	
+	@Override
+	public GroVO findByMemId(Integer memId) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		GroVO groVO = new GroVO();
+		
+		
+		try {
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONT_STMT_BYMEMID);
+			pstmt.setInt(1, memId);
+			
+			rs = pstmt.executeQuery();
+			rs.next();
+			groVO.setGroomerId(rs.getInt("GROOMERID"));
+			groVO.setMemId(rs.getInt("MEMID"));
+			groVO.setGname(rs.getString("GNAME"));
+			groVO.setCenter(rs.getString("CENTER"));
+			groVO.setGrange(rs.getInt("GRANGE"));
+			groVO.setSchDate(rs.getString("SCHDATE")); 
+			groVO.setSchTime(rs.getString("SCHTIME")); 
+			groVO.setGstatus(rs.getInt("GSTATUS"));
+			groVO.setReserve(rs.getInt("RESERVE"));
+			groVO.setCom(rs.getInt("COM"));
+			groVO.setComg(rs.getInt("COMG"));
+			groVO.setReped(rs.getInt("REPED"));
+			
+			byte[] b = rs.getBytes("AVATAR");
+			groVO.setAvatar(b);
+			if(b != null){
+				groVO.setAvatarBase64(Base64.getEncoder().encodeToString(b));
+			}
+			groVO.setIntro(rs.getString("INTRO"));
+			
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		}finally {
+			if(rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if(pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			if(con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return groVO;
+	}
+	
+	
 	
 }

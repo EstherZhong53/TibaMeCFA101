@@ -108,11 +108,11 @@ cursor: pointer;
 	<main>
 <!--------------------------------   groomer 表修正項目：名稱、大頭照、預設服務日、預設服務時間、簡介   ------------------------------------->	
 		<div class="container">
-<jsp:useBean id="groSvc" class="com.groomer.model.GroService"></jsp:useBean>
-<% 
-	GroVO groVO = groSvc.findByPrimaryKey(1);
-	pageContext.setAttribute("groVO", groVO);
-%>
+<%-- <jsp:useBean id="groSvc" class="com.groomer.model.GroService"></jsp:useBean> --%>
+<%-- <%  --%>
+<!-- // 	GroVO groVO = groSvc.findByPrimaryKey(1); -->
+<!-- // 	pageContext.setAttribute("groVO", groVO); -->
+<%-- %> --%>
 
 		<h2>服務項目</h2>
 <!-----------------------------------------------------     svcList start     ---------------------------------------------------------------->		

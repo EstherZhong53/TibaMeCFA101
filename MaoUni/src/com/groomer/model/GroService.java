@@ -27,6 +27,7 @@ public class GroService {
 		groVO.setPcrc(pcrc);
 		groVO.setFid(fid);
 		groVO.setBid(bid);
+		System.out.println("memId"+memId);
 		dao.insert(groVO);
 		return groVO;
 	}

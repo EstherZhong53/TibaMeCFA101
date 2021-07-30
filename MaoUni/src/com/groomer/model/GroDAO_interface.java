@@ -17,4 +17,5 @@ public interface GroDAO_interface {
 // 	       以下為舊方法，已被上方取代
 //     public void updateReped(Integer groomerId, Connection con);
      public GroVO findByPrimaryKey(Integer groomerId);
+     public GroVO findByMemId(Integer memId);
 }

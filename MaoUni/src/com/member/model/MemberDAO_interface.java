@@ -1,5 +1,6 @@
 package com.member.model;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.util.*;
 
@@ -15,6 +16,12 @@ public interface MemberDAO_interface {
     public void signup(MemberVO memberVo); 
     public MemberVO upemail(String memEmail);
     public String checkemail(String memEmail);//查詢資料是否有人註冊了
+    public void updatePosition(Integer memId, Connection con);		// Esther 新增
+    
+    
+    
+    
+    
 //  public String updatepassword(String memPassword); //會員前台更新密碼
 //	public Integer checkmemPosition(Integer memPosition); //尋找身分
 

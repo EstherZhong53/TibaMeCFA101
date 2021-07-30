@@ -5,6 +5,7 @@
 <%@ page import="com.appointment_form.model.*"%>
 <%@ page import="com.appointment_form_details.model.*"%>
 <%@ page import="com.groomer.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <jsp:useBean id="apmSvc" scope="page" class="com.appointment_form.model.ApmService"/>
 <jsp:useBean id="apmdSvc" scope="page" class="com.appointment_form_details.model.ApmdService"/>
@@ -142,7 +143,32 @@ body {
 	word-break:break-all; word-wrap:break-all; /* 自動換行 */
 }
 
-.shopbody{
+    .memberswitch{
+        display: flex;
+        flex-direction: column;	/* 讓文字變直的 */
+        width: 100px;
+        align-items: center;
+        margin-left: 5%;
+        border-right-style:double;
+        border-color: #c5945b;
+ 
+        }
+        
+a {
+            text-decoration:none;
+            margin: 5px;
+            color: #c29e74;
+            font-weight:bold;
+}
+
+a:hover{
+    color:#865d2e;
+    text-decoration:none;
+}
+
+.container{
+width: 100%;
+margin-top: -50px;
 
 }
 
@@ -205,7 +231,7 @@ body {
 <main>
 	<section>
 		<div class="container">
-	
+	<p>${memberVO.memId}</p>
 			<!------------------------ search appointment start --------------------->			
 				<div class="col-lg-12 col-12 text-center">
 		            <h2 class="text-secondary mt-5" data-aos="fade-up" data-aos-delay="200">美容預約紀錄</h2>
@@ -252,7 +278,29 @@ body {
 			<!------------------------ search appointment end --------------------->	
 	<!------------------------------------------------------ appointment list start ------------------------------------------------>			
 				<section class="showList row">
-					<div class="col-12">
+				
+				
+				
+				
+				
+<div class="memberswitch col-2">
+        <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
+        <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
+        <a href="#">訂單紀錄</a>
+        <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
+        <c:if test="${memberVO.memPosition == '1'}">
+        	<a href="<%=request.getContextPath()%>/front-end/groomer/groomer_infoEdit.jsp">美容專區</a>
+        </c:if>
+        <c:if test="${memberVO.memPosition == '0'}">
+        	<a href="<%=request.getContextPath()%>/front-end/groomer/groomer_application.jsp">加入美容</a>
+        </c:if>
+        
+        
+        <a href="/CFA101G6/member/member.do?action=OutUser">登出</a>
+</div>
+
+
+					<div class="col-9 ml-0">
 						<table class="table table-hover table-sm text-center">
 							<thead>
 								<tr>
@@ -270,7 +318,9 @@ body {
 			
 	<% 
 		Map<String, String[]> appointment = new LinkedHashMap();
-		String[] memId = {"8"};
+		String mId = ((MemberVO) session.getAttribute("memberVO")).getMemId().toString();
+		String[] memId = {mId};
+		
 		appointment.put("memId", memId);
 		List<ApmVO> list = apmSvc.getAll(appointment);
 		pageContext.setAttribute("list", list);
@@ -400,6 +450,7 @@ body {
 
 	</c:forEach>		
 							</tobdy>
+				</table>
 				
 		</div>
 	</section>
