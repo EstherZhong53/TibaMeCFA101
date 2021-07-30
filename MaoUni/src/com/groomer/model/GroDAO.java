@@ -104,7 +104,6 @@ public class GroDAO implements GroDAO_interface {
 			if(gstatus == 1) {
 				System.out.println("sdasdawd");
 				Integer memId = findByPrimaryKey(groomerId).getMemId();
-				System.out.println("memId: " + memId);
 				MemberJDBCDAO memDAO = new MemberJDBCDAO();
 				memDAO.updatePosition(memId, con);
 			}
