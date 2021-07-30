@@ -100,8 +100,8 @@
          <div class="menu-wrap">
              <div class="menu-sidebar" style="margin-top:20px;">
                  <ul class="menu">
-                     <li><a href="<%=request.getContextPath()%>/back-end/Member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Obuy/ObuyAll.jsp">商品訂單管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/obuy/obuyAll.jsp">商品訂單管理</a></li>
                      <li><a href="#">商城管理</a></li>
                      <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
@@ -122,7 +122,7 @@
             	 <!-- 以下範圍為最上方包著商城管理以及右方後台人員的區塊, -->
                 <nav class="navbar navbar-light navbar-expand bg-white mb-4 topbar static-top">
                     <div class="container-fluid" style="margin-top:23px;margin-left:-6px;">
-<!--請看這行最右邊-->  <a class="btsp" href="Item_select_page.jsp">毛孩管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
+<!--請看這行最右邊-->  <a class="btsp" href="item_select_page.jsp">毛孩管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
                        	 <ul class="nav navbar-nav flex-nowrap ml-auto" style="margin-top:-10px;">                         
                            
                             <li class="nav-item dropdown no-arrow" style="margin-top:10px">
@@ -186,7 +186,7 @@
 
 				<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" style="margin-bottom: 0px;">
-			     <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/Pet/Petadd.jsp'" value="立即新增" style="border:5px;border-radius:5px;">
+			     <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/pet/petadd.jsp'" value="立即新增" style="border:5px;border-radius:5px;">
 			</td>
 </form>
 <td>

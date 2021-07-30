@@ -3,7 +3,6 @@ import java.sql.Date;
 import java.util.*;
 
 import com.appointment_form_details.model.ApmdVO;
-import com.gschedule.model.SchMonthVO;
 
 public interface ApmDAO_interface {
 	 public void insert(ApmVO apmVO, List<ApmdVO> list);

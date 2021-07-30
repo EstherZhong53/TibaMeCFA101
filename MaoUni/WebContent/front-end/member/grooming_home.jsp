@@ -291,7 +291,50 @@ pageContext.setAttribute("list", list);
    
 
   </main> 
-   <hr>
+  
+   	<!-- 以下為FOOTER -->
+
+
+	<footer class="footer">
+        <ul class="r-footer">
+	        <li>
+	            <h2>About</h2>
+		        <ul class="box">
+			        <li><a class="ff1" href="#">品牌故事</a></li>
+			        <li><a class="ff2" href="#">最新文章</a></li>
+			        <li><a class="ff3" href="#">公告</a></li>
+			        <li><a class="ff4" href="#">FAQ</a></li>
+		        </ul>
+	        </li>
+	
+	        <li>
+	            <h2>Service</h2>
+	            <ul class="box">
+		            <li><a class="ff5" href="#">隱私權政策</a></li>
+		            <li><a class="ff6" href="#">退換貨政策</a></li>
+		            <li><a class="ff7" href="#">付款相關問題</a></li>
+		            <li><a class="ff8" href="#">運算相關問題</a></li>
+	            </ul>
+	        </li>
+	
+	        <li>
+		        <h2>Contact</h2>
+		        <ul class="box">
+			        <li><a class="ff9" href="#">客服信箱</a></li>
+			        <li><a class="ff10" href="#">LINE客服</a></li>
+			        <li><a class="ff11" href="#">聯絡電話</a></li>
+		        </ul>
+	        </li>
+
+	        <li>
+	            <h2>Follow</h2>
+		        <ul class="box">	        	
+		        	<li class="ig"><a class="btn btn-primary" style="color:white;font-size:14px;cursor: pointer;background:none;border:none;"><span class="fab fa-instagram"></span>&nbsp;毛孩有你</a></li>
+		        	<li class="fb"><a class="btn btn-primary" style="color:white;font-size:16px;margin-top:-2px;cursor: pointer;background:none;border:none;"><span class="fab fa-facebook-square"></span>&nbsp;MaoUni</a></li>
+		        </ul>
+	        </li>        
+        </ul>
+	</footer>
    
 
     <script>

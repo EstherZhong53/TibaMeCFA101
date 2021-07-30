@@ -1,6 +1,7 @@
 package com.tracking_adopt.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -141,7 +142,7 @@ public class TrackingController extends HttpServlet {
 							TrackingVO trackingVO=trackingSvc.addTracking(id, det);
 							
 							req.setAttribute("TrackingVO",  trackingVO);
-							String url ="/front-end/imf/allImf.jsp";
+							String url ="/front-end/adopt/adopt_home.jsp";
 							RequestDispatcher successView = req.getRequestDispatcher(url);
 							successView.forward(req,res);
 						}catch(Exception e){
@@ -159,12 +160,16 @@ public class TrackingController extends HttpServlet {
 							Integer det = new Integer(req.getParameter("det"));
 							System.out.print(id);
 							TrackingService trackingSvc=new TrackingService();
-							TrackingVO trackingVO=trackingSvc.addTracking(id, det);
+							Integer completeNum =trackingSvc.addTracking(id, det);
 							
-							req.setAttribute("TrackingVO", trackingVO);
-							String url ="/front-end/imf/allImf.jsp";
-							RequestDispatcher successView = req.getRequestDispatcher(url);
-							successView.forward(req,res);
+							PrintWriter out = res.getWriter();
+							out.write(completeNum);
+							out.flush();
+							out.close();
+							
+//							String url ="/front-end/adopt/adopt_home.jsp";
+//							RequestDispatcher successView = req.getRequestDispatcher(url);
+//							successView.forward(req,res);
 						}catch(Exception e){
 							errorMsgs.add("無法取得資料"+e.getMessage());
 							RequestDispatcher failureView=req.getRequestDispatcher("/back-end/staff/wrong.jsp");

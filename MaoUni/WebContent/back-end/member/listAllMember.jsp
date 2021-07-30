@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
@@ -98,8 +99,8 @@
          <div class="menu-wrap">
              <div class="menu-sidebar" style="margin-top:46px;">
                  <ul class="menu">
-                     <li><a href="<%=request.getContextPath()%>/back-end/Member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Obuy/ObuyAll.jsp">商品訂單管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/obuy/obuyAll.jsp">商品訂單管理</a></li>
                      <li><a href="#">商城管理</a></li>
                      <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
@@ -229,9 +230,9 @@
                 <div class="col-md-6 text-nowrap">
                     <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable" style="margin-left:4px;margin-top:5px;"><label>Show&nbsp;
                     <select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label>
-                     <input class=update type="submit" onclick="location.href='<%=request.getContextPath()%>/back-end/Member/addMember.jsp'" value="新增會員" style="border:5px;border-radius:5px;height:35px;width:100px;margin-left:21%">
+                     <input class=update type="submit" onclick="location.href='<%=request.getContextPath()%>/back-end/member/addMember.jsp'" value="新增會員" style="border:5px;border-radius:5px;height:35px;width:100px;margin-left:21%">
 
-                      <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/Pet/PetlistAll.jsp'" value="毛孩管理" style="border:5px;border-radius:5px;height:35px;width:100px;margin-left:5%;">
+                      <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/pet/petlistAll.jsp'" value="毛孩管理" style="border:5px;border-radius:5px;height:35px;width:100px;margin-left:5%;">
                     </div>
                 </div> 
                 <div class="col-md-6">
@@ -250,8 +251,7 @@
                             <th style="width: 91.5px;text-align: center;font-size:2;">電話</th>
                             <th style="width: 91.5px;text-align: center;font-size:2;">地址</th>
                             <th style="width: 91.5px;text-align: center;font-size:2;">生日</th>
-                            <th style="width: 91.5px;text-align: center;font-size:2;">身分</th>
-                            <th style="width: 70px;text-align: center;font-size:2;">美容數</th>
+<!--                             <th style="width: 91.5px;text-align: center;font-size:2;">身分</th> -->
                             <th style="width: 70px;text-align: center;font-size:2;">狀態</th>
                             <th style="width: 70px;text-align: center;font-size:2;">更新</th>
                         </tr>
@@ -273,20 +273,22 @@
 								<td style="width: 91.5px;text-align: center;font-size:1">${memberVO.memBirthday}</td>
 
 								
-								<td style="width: 91.5px;text-align: center;font-size:1">
+<!-- 								<td style="width: 91.5px;text-align: center;font-size:1"> -->
 								
-								<c:if test="${memberVO.memPosition == '0'}">會員</c:if>
-								<c:if test="${memberVO.memPosition == '1'}">美容師</c:if>												
-								</td>
+<%-- 								<c:if test="${memberVO.memPosition == '0'}">會員</c:if> --%>
+<%-- 								<c:if test="${memberVO.memPosition == '1'}">美容師</c:if>												 --%>
+<!-- 								</td> -->
 								
-								<td style="width: 91.5px;text-align: center;font-size:1">${memberVO.memReserve}</td>
 
 								<td style="width: 91.5px;text-align: center;font-size:1">
 								<c:if test="${memberVO.memSurvive == '0'}">審核中</c:if>
 								<c:if test="${memberVO.memSurvive == '1'}">正常</c:if>
 								<c:if test="${memberVO.memSurvive == '2'}">停權</c:if>
 								</td>
-								<td style="width: 90px;text-align: center;font-size:0.5;">${memberVO.memUpdate}</td>
+								<td style="width: 90px;text-align: center;font-size:0.5;">
+								<fmt:formatDate value="${memberVO.memUpdate}" pattern="yyyy/MM/dd"/>
+								
+								</td>
 								
 								<td>	
 								  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do" style="margin-bottom: 0px;">

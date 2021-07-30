@@ -359,15 +359,15 @@ body {
 			//form的id的submit
 			  e.preventDefault();
 			  if ($("#sp").text() === "可以註冊") {
-		//去對身分證欄位旁的顯示數字使否有顯示，才可以進行放行
+// 		去對身分證欄位旁的顯示數字使否有顯示，才可以進行放行
 			    $.ajax({
-			      url: "/CFA101G6/member/member.do",
+			      url: "/MaoUni/member/member.do",
 			      //要執行的方式的註冊url
 			      type: "post",
 			      data: $(this).serialize(),
 			      success: function (data) {
 			        alert("hello 成功啦");
-			        window.location.replace("/CFA101G6/front-end/Home/HomePage.jsp");
+			        window.location.replace("/MaoUni/front-end/home/HomePage.jsp");
 			        //轉跳到哪個網址，不然在跳出alert時會被卡在註冊頁面
 			      }
 			    })

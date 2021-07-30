@@ -11,13 +11,13 @@ public class TrackingService {
 		dao = new TrackingJDBCDAO();
 	}
 	
-	public TrackingVO addTracking(Integer id,Integer det) {
+	public Integer addTracking(Integer id,Integer det) {
 		TrackingVO trackingVO = new TrackingVO();
 		trackingVO.setId(id);
 		trackingVO.setDet(det);
-		dao.insert(trackingVO);
+		Integer completeNum = dao.insert(trackingVO);
 		
-		return trackingVO;
+		return completeNum;
 	}
 	public TrackingVO updateTracking(Integer id,Integer det) {
 		TrackingVO trackingVO = new TrackingVO();

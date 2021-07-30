@@ -425,21 +425,6 @@ margin: 10px 5px;
 
 
 
-	<!-- FOOTER -->
-	<footer class="site-footer">
-		<div class="footer">
-			<ul class="Bottom1">
-				<li class="About">About us</li>
-				<li class="Service">Service</li>
-				<li class="Contact">Contact us</li>
-				<li class="Follow">Follow us</li>
-			</ul>
-
-		</div>
-	</footer>
-
-
-
 
 
 	<script>

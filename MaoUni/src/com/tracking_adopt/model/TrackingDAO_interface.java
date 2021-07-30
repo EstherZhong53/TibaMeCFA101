@@ -9,7 +9,7 @@ import com.adopt_imf.model.ImfVO;
 
 
 public interface TrackingDAO_interface {
-	public void insert (TrackingVO trackingVO);
+	public Integer insert (TrackingVO trackingVO);
 	public void update(TrackingVO trackingVO); 
 	public void delete(Integer Id);
 	public TrackingVO findByPrimaryKey(Integer Id);

@@ -28,9 +28,10 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 	private static final String getImfVObyid = "SELECT AI_ID,AI_ADOPT,AI_MECH,AI_NAME,AI_YEAR,AI_SIT FROM ADOPT_IMF WHERE ATRA_MEMID = ? ORDER BY AI_ID";
 
 	@Override
-	public void insert(TrackingVO trackingVO) {
+	public Integer insert(TrackingVO trackingVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		Integer completeNum = null;
 
 		try {
 			Class.forName(driver);
@@ -40,7 +41,7 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 			pstmt.setInt(1, trackingVO.getId());
 			pstmt.setInt(2, trackingVO.getDet());
 
-			pstmt.executeUpdate();
+			completeNum = pstmt.executeUpdate();
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		} catch (SQLException se) {
@@ -61,6 +62,7 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 				}
 			}
 		}
+		return completeNum;
 	}
 
 	@Override

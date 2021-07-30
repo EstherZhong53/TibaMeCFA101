@@ -244,7 +244,7 @@ public class MemberServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 
 			if (memberVO != null) {// 先做簡單的對比找出有的資料
-				String url = req.getContextPath() + "/front-end/home/homePage.jsp";
+				String url = req.getContextPath() + "/front-end/home/HomePage.jsp";
 //				RequestDispatcher successView = req.getRequestDispatcher(url);
 
 				session.setAttribute("memEmail", memEmail); // 確認有這個帳號後存入session中，以備登出用
@@ -272,7 +272,7 @@ public class MemberServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			session.invalidate();
 			
-			res.sendRedirect(req.getContextPath() + "/front-end/home/homePage.jsp");
+			res.sendRedirect(req.getContextPath() + "/front-end/home/HomePage.jsp");
 			
 //			String url = req.getContextPath() + "/front-end/Home/HomePage.jsp";
 //			RequestDispatcher successView = req.getRequestDispatcher(url);
@@ -283,7 +283,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		System.out.println(action);
 		if ("signup".equals(action)) {
-
+System.out.println("ccccccccccccccccc");
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
@@ -302,7 +302,7 @@ public class MemberServlet extends HttpServlet {
 
 //		/***************************3.新增完成,準備轉交(Send the Success view)***********/
 //				String url = req.getContextPath() + "/front-end/Home/HomePage.jsp";
-				res.sendRedirect(req.getContextPath() + "/front-end/home/homePage.jsp");
+				res.sendRedirect(req.getContextPath() + "/front-end/home/HomePage.jsp");
 //				successView.forward(req, res);
 			} catch (Exception e) {
 				e.printStackTrace(System.err);

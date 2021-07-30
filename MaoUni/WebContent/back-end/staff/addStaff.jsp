@@ -116,7 +116,7 @@
             	 <!-- 以下範圍為最上方包著商城管理以及右方後台人員的區塊, -->
                 <nav class="navbar navbar-light navbar-expand bg-white mb-4 topbar static-top">
                     <div class="container-fluid" style="margin-top:23px;margin-left:-6px;">
-<!--請看這行最右邊-->  <a class="btsp" href="Item_select_page.jsp">後臺管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
+<!--請看這行最右邊-->  <a class="btsp" href="item_select_page.jsp">後台管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
                        	 <ul class="nav navbar-nav flex-nowrap ml-auto" style="margin-top:-10px;">                         
                            
                             <li class="nav-item dropdown no-arrow" style="margin-top:10px">
@@ -124,7 +124,7 @@
                                 	
                                 	<img class="border rounded-circle img-profile" style="widht:40px;height:40px;margin-top:-5px;" src="<%=request.getContextPath()%>/resources/images/items/MaoUniICON.png"></a>
                                     <div class="dropdown-menu dropdown-menu-right animated--grow-in">
-                                    	<a class="dropdown-item" href="<%=request.getContextPath()%>/back-end/Staff/Select.jsp" style="font-weight:700;color:#646464;">Logout</a>
+                                    	<a class="dropdown-item" href="<%=request.getContextPath()%>/back-end/staff/select.jsp" style="font-weight:700;color:#646464;">Logout</a>
                                     </div>
 	                   			</div>
 	                    	</li>

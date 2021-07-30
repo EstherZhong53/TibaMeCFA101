@@ -20,7 +20,6 @@ import com.appointment_form_details.model.ApmdVO;
 import com.groomer.model.GroDAO;
 import com.groomer.model.GroVO;
 import com.gschedule.model.SchDAO;
-import com.gschedule.model.SchMonthVO;
 import com.util.GroomerApm;
 
 public class ApmDAO implements ApmDAO_interface {

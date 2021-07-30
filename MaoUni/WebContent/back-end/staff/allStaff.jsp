@@ -136,7 +136,7 @@ body {
 					<li><a href="#">美容師管理</a></li>
 					<li><a href="#">美容預約檢舉管理</a></li>
 					<li><a
-						href="<%=request.getContextPath()%>/back-end/Staff/backImage.jsp">上一頁</a></li>
+						href="<%=request.getContextPath()%>/back-end/staff/backImage.jsp">上一頁</a></li>
 				</ul>
 			</div>
 		</div>
@@ -149,7 +149,7 @@ body {
 				<div class="container-fluid"
 					style="margin-top: 23px; margin-left: -6px;">
 					<a class="btsp"
-						href="<%=request.getContextPath()%>/back-end/Staff/backImage.jsp">後臺管理</a>
+						href="<%=request.getContextPath()%>/back-end/staff/backImage.jsp">後台管理</a>
 					<ul class="nav navbar-nav flex-nowrap ml-auto"
 						style="margin-top: -10px;">
 
@@ -162,7 +162,7 @@ body {
 									src="<%=request.getContextPath()%>/resources/images/items/MaoUniICON.png"></a>
 								<div class="dropdown-menu dropdown-menu-right animated--grow-in">
 									<a class="dropdown-item"
-										href="<%=request.getContextPath()%>/back-end/Staff/Select.jsp"
+										href="<%=request.getContextPath()%>/back-end/staff/select.jsp"
 										style="font-weight: 700; color: #646464;">Logout</a>
 								</div>
 							</div>
@@ -173,12 +173,12 @@ body {
 			</head>
 			<h5 align="center">
 				<input type="button" value="查詢權限"
-					onclick="window.location.href = '<%=request.getContextPath()%>/back-end/Authority/AllAuthority.jsp'">
+					onclick="window.location.href = '<%=request.getContextPath()%>/back-end/authority/allAuthority.jsp'">
 			</h5 align="center">
 
 			<h5 align="center">
 				<input type="button" value="新增"
-					onclick="window.location.href = '<%=request.getContextPath()%>/back-end/Staff/AddStaff.jsp'">
+					onclick="window.location.href = '<%=request.getContextPath()%>/back-end/staff/addStaff.jsp'">
 			</h5>
 			<table align="center" "border:3px #cccccc solid" cellpadding="10"
 				border='2'>

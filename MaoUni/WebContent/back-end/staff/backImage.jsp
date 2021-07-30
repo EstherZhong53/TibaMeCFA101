@@ -102,9 +102,9 @@
                      <li><a href="#">公告管理</a></li>
                      <li><a href="#">美容師管理</a></li>
                      <li><a href="#">美容預約檢舉管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Staff/AllStaff.jsp">後台管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/front-end/Message/AllMessage.jsp">客服中心</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Staff/Select.jsp">上一頁</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/staff/allStaff.jsp">後台管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/front-end/message/allMessage.jsp">客服中心</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/staff/select.jsp">上一頁</a></li>
                  </ul>
              </div>
          </div>
@@ -113,7 +113,7 @@
        			<div class="d-flex flex-column" id="content-wrapper" style="margin-right:5px;">
        			<nav class="navbar navbar-light navbar-expand bg-white mb-4 topbar static-top">
                     <div class="container-fluid" style="margin-top:23px;margin-left:-6px;">
-<!--請看這行最右邊-->  <a class="btsp" href="<%=request.getContextPath()%>/back-end/Staff/backImage.jsp">後臺管理</a>  
+<!--請看這行最右邊-->  <a class="btsp" href="<%=request.getContextPath()%>/back-end/staff/backImage.jsp">後台管理</a>  
                        	 <ul class="nav navbar-nav flex-nowrap ml-auto" style="margin-top:-10px;">                         
                            
                             <li class="nav-item dropdown no-arrow" style="margin-top:10px">

@@ -830,7 +830,9 @@ letter-spacing: 1px;
 line-height: 1.5;
 }
 
-
+a:hover{
+cursor: pointer;
+}
 
 </style>    
 </head>
@@ -889,15 +891,14 @@ line-height: 1.5;
 		
 		<div class="shopbody">
 		    <nav style="margin-bottom:-15px;margin-left:15px;">
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">首　頁</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來買</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來講</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">有你來玩</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">到府美容</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">浪浪找家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">友善店家</a></p>
-		       <p class="hover-underline-animation"><a href="#" style="font-size:15px;">知識站</a></p>
-		 	</nav>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			 	</nav>
 		</div>
 		<div class="Shopping-ul"></div>
 	    
@@ -1057,7 +1058,7 @@ line-height: 1.5;
 						        <img src="data:image/jpeg; base64, ${itemVO.itemPhotoFirst}"/>
 						        </a>
 						        <div class="focus-content">
-						        <a href="#" id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a>
+						        <a id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a>
 						        </div>				  
 						    </div>
 						    <a class="ItemIntro" href="#" style="text-decoration:none;">	  

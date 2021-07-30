@@ -8,7 +8,6 @@
 <%@ page import="com.variety.model.VarietyVO"%>
 
 
-
 <%
 	ImfService ImfSvc = new ImfService();
 	List<ImfVO> list = ImfSvc.getAll();
@@ -132,13 +131,13 @@ table {
 		
 		<div class="shopbody">
 		   <nav style="margin-bottom:-15px;margin-left:15px;">
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
-			       <p class="hover-underline-animation"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
 			 	</nav>
 		</div>
 		<div class="Shopping-ul"></div>
@@ -192,9 +191,13 @@ table {
 			<td>${ImfVO.year}</td>
 			<td>${ImfVO.sit}</td>
 
-			<td>	
-			<a href="<%=request.getContextPath()%>/front-end/Detail/addTracking.jsp" onclick="track()">認養追蹤</a>
-			
+			<td>
+			<form class="addTrack">
+				<input type="hidden" name="memeId" value="2">
+				<input type="hidden" name="petId" value="${ImfVO.id}">
+				<input type="hidden" name="action" value="insert">
+				<button type="submit">加入追蹤</button>
+			</form>	
 			</input>
 				</FORM>
 
@@ -260,11 +263,28 @@ table {
 		obj.style.backgroundColor = "white";
 	}
 
-	function track() {
-		alert("傳送中~");
-	}
+	
+	$(".addTrack").click(function(e){
+		e.preventDefault();
+		$.ajax({
+			url:"/MaoUni/TrackingController",
+			type:"post",
+			data: $(this).serialize(),
+			success: function(data){
+				if(data === 0){
+					swal("新增失敗！","這個毛孩已經在追蹤名單囉!","warning");
+				}else{
+					swal("新增成功！","這個毛孩加入追蹤名單囉!","success");
+				}
+			}
+		})
+	})
+	
+	
+	
+	
 </script>
-	    <script>
+	<script>
         const sessionId = "${sessionId}";
     </script>
     <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>

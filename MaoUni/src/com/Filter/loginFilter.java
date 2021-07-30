@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.member.model.MemberVO;
 
-@WebFilter("/loginFilter")
+//@WebFilter("/loginFilter")
 public class loginFilter implements Filter {
 
 	public loginFilter() {

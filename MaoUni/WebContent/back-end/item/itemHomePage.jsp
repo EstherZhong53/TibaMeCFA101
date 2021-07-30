@@ -198,7 +198,7 @@
 					
 					<div class="bdleft">
 					<p class="bdlefttext">商品查詢</p>
-					<a href="Item_select_page.jsp">
+					<a href="item_select_page.jsp">
 					<img class="bdleftimg" src="<%=request.getContextPath()%>/resources/images/pic/dog1.jpg"></img>
 					</a>
 					</div>
