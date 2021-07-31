@@ -231,7 +231,6 @@ margin-top: -50px;
 <main>
 	<section>
 		<div class="container">
-	<p>${memberVO.memId}</p>
 			<!------------------------ search appointment start --------------------->			
 				<div class="col-lg-12 col-12 text-center">
 		            <h2 class="text-secondary mt-5" data-aos="fade-up" data-aos-delay="200">美容預約紀錄</h2>

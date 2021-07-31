@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.member.model.*"%>
 
 <%
@@ -974,6 +974,12 @@ background-color: #fff;
         <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
         <a href="#">訂單紀錄</a>
         <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
+        <c:if test="${memberVO.memPosition == '1'}">
+        	<a href="<%=request.getContextPath()%>/front-end/groomer/groomer_infoEdit.jsp">美容專區</a>
+        </c:if>
+        <c:if test="${memberVO.memPosition == '0'}">
+        	<a href="<%=request.getContextPath()%>/front-end/groomer/groomer_application.jsp">加入美容</a>
+        </c:if>
         <a href="/MaoUni/member/member.do?action=OutUser">登出</a>
 </div>
 
@@ -987,7 +993,7 @@ background-color: #fff;
                 <table>
              
                 <tr>
-                <td>快樂肥宅水</td>
+                <td>${memberVO.memName}</td>
                 </tr>
             
                 <tr>
