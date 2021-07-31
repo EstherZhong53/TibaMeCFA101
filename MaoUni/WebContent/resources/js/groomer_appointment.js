@@ -24,7 +24,7 @@ function getDisableDate(){
 		type: "GET",
 		data:{
 			action: "getByGroomerId",
-			groomerId: "1"
+			groomerId: groomerId
 		},
 		success: function(data){
 			let obj = JSON.parse(data);
@@ -83,12 +83,13 @@ window.onunload = function(){
 // 選擇寵物後，依據寵物類別載入可選的服務項目
 	
 	$(".pid").change(function(e){
+		console.log("groomerId: " + groomerId)
 		$.ajax({
 			url: "/MaoUni/svcList.do",
 			type: "GET",
 			dataType: "text",
 			data: {
-				groomerId: "1",
+				groomerId: groomerId,
 				action: "getSvcList"
 			},
 			success: function(data){
@@ -188,7 +189,7 @@ window.onunload = function(){
 			type: "GET",
 			data: {
 				apmDate: e.target.value,
-				groomerId: "1",
+				groomerId: groomerId,
 				action: "getSchStatusByDate"
 			},
 			success: function(data){

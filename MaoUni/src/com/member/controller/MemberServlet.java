@@ -278,10 +278,10 @@ public class MemberServlet extends HttpServlet {
 //			req.getSession().invalidate();
 //			HttpSession session = req.getSession();
 //			String mem = (String)session.getAttribute("memberVO"); 
-////			HttpSession session = req.getSession();
+////		HttpSession session = req.getSession();
 //			session.removeAttribute(mem);
 			HttpSession session = req.getSession();
-			session.invalidate();
+			session.removeAttribute("memberVO");
 			
 			res.sendRedirect(req.getContextPath() + "/front-end/home/HomePage.jsp");
 			

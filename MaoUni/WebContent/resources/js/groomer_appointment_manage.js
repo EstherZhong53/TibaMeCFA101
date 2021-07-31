@@ -1,14 +1,14 @@
 
 //WebSocket
 
-let MyPoint = "/ApmWS/1";
+let MyPoint = `/ApmWS/${groomerId}`;
 let host = window.location.host;
 let path = window.location.pathname;
 let webCtx = path.substring(0, path.indexOf('/', 1));
 let endPointURL = "ws://" + window.location.host + webCtx + MyPoint;
 console.log(endPointURL)
 
-let self = "1";
+let self = groomerId;
 let webSocket;
 
 	window.onload = function(){
@@ -150,21 +150,19 @@ let memId = "";
 let stime = 0;
 let etime = 0;
 let apmDate = "";
-let groomerId = "";
-		
+
 	$(document).on("click", ".showList", function(e){
 		if(e.target.classList.contains("detail")){
 			memId = "";
 			stime = 0;
 			etime = 0;
 			apmDate = "";
-			groomerId = "";
 			
 			memId = parseInt(e.target.dataset.memid);
 			stime = parseInt(e.target.dataset.stime);
 			etime = parseInt(e.target.dataset.etime);
 			apmDate += e.target.dataset.apmdate;
-			groomerId += e.target.dataset.groomerid;
+
 			$(".svcList").show();
 			$(".targetId").text(`# ${e.target.id}`)
 			$.ajax({
@@ -431,7 +429,7 @@ function init() {
 				url: "/MaoUni/appointment.do",
 				type: "GET",
 				data:{			
-					groomerId: "1",
+					groomerId: groomerId,
 					action: "getAll"
 				},
 				success: function(data){

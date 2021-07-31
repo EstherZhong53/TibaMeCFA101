@@ -208,15 +208,15 @@
     <url-pattern>/pet/pet.do</url-pattern>
   </servlet-mapping>
  
-<!-- 	<filter> -->
-<!-- 		<filter-name>loginFilter</filter-name> -->
-<!-- 		<filter-class>com.Filter.loginFilter</filter-class> -->
-<!-- 	</filter>  -->
-<!--  	<filter-mapping> -->
-<!--  	<filter-name>loginFilter</filter-name> -->
-<!--  	<url-pattern>/front-end/member/memberpage.jsp</url-pattern> -->
+	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.Filter.loginFilter</filter-class>
+	</filter> 
+ 	<filter-mapping>
+ 	<filter-name>loginFilter</filter-name>
+ 	<url-pattern>/front-end/member/memberpage.jsp</url-pattern>
  	
-<!--  	</filter-mapping> -->
+ 	</filter-mapping>
 
   
      <servlet>

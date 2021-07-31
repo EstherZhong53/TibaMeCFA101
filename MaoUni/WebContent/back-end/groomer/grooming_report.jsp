@@ -136,17 +136,16 @@ input.update:hover {
 <body style="height: auto;">
 	<!-- 以下為隱藏式菜單_內容<國任提供> -->
 	<header>
-		<span class="toggle-button">
+		<span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
 			<div class="menu-bar menu-bar-top"></div>
 			<div class="menu-bar menu-bar-middle"></div>
 			<div class="menu-bar menu-bar-bottom"></div>
 		</span>
 		<div class="menu-wrap">
-			<div class="menu-sidebar" style="margin-top: 46px;">
+			<div class="menu-sidebar" style="margin-top: 30px;">
 				<!--上次說改的地方在這，把標題往上移-->
 				<ul class="menu">
 					<li><a href="#">會員資料管理</a></li>
-                     <li><a href="#">商品訂單管理</a></li>
                      <li><a href="#">商城管理</a></li>
                      <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
@@ -154,7 +153,7 @@ input.update:hover {
                      <li><a href="#">知識站管理</a></li>
                      <li><a href="#">公告管理</a></li>
                      <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
-                     <li><a href="#">美容預約檢舉管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
 				</ul>
 			</div>
 		</div>

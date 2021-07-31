@@ -296,7 +296,7 @@ margin-top: -50px;
         </c:if>
         
         
-        <a href="/CFA101G6/member/member.do?action=OutUser">登出</a>
+        <a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
 </div>
 
 

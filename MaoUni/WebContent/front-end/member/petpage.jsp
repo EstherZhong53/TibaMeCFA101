@@ -976,7 +976,7 @@ background-color: #fff;
         <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
         <a href="#">訂單紀錄</a>
         <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
-       	<a href="/CFA101G6/member/member.do?action=OutUser">登出</a>
+       	<a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
      
 </div>
 

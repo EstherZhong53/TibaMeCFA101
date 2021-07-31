@@ -146,12 +146,12 @@ margin: 10px 5px;
             <div class="row">
                 <div class="col-md-12">
                     <div class="section-heading">
-                        <h2>Tiere堤柇 寵物SPA</h2>
+                        <h2>${groVO.gname}</h2>
                     </div>
                 </div>
             </div>
             <div class="owl-carousel owl-theme">
- <c:forEach var="workVO" items="${worksSvc.getOneList(1)}">          
+ <c:forEach var="workVO" items="${worksSvc.getOneList(param.groomerId)}">          
                 <div class="item popular-item">
                     <div class="thumb">
                         <img src="data:image/jpeg; base64, ${workVO.itemBase64}" alt="作品">
@@ -202,7 +202,7 @@ margin: 10px 5px;
                                     <ul class="accordion">
                                         <li>
                                             <a style="color: gray;">給汪汪的服務</a>
-<c:forEach var="svcListVO" items="${svcListSvc.getAll(1)}">                                    
+<c:forEach var="svcListVO" items="${svcListSvc.getAll(param.groomerId)}">                                    
                                             <c:if test="${svcListVO.svcPet == '狗'}">
                                             	<p>${svcListVO.svcItem}</p>
                                             </c:if>
@@ -210,7 +210,7 @@ margin: 10px 5px;
                                         </li>
                                         <li>
                                             <a style="color: gray;">給貓貓的服務</a>
-<c:forEach var="svcListVO" items="${svcListSvc.getAll(1)}">                                               
+<c:forEach var="svcListVO" items="${svcListSvc.getAll(param.groomerId)}">                                               
                                             <c:if test="${svcListVO.svcPet == '貓'}">
                                             	<p>${svcListVO.svcItem}</p>
                                             </c:if>
@@ -243,9 +243,10 @@ margin: 10px 5px;
                                                             <div class="col-md-6">
                                                                 <fieldset>
 <!--                                                                 自動代入會員姓名 -->
-        <input name="name" type="text" class="form-control apminput" id="name" placeholder="Your name..."required="">
-        <input type="hidden" name="memId" value="8"> 
-		<input type="hidden" name="groomerId" value="1">
+		<h3 class="apminput">會員姓名：  ${memberVO.memName}</h3>
+<%--         <input name="name" type="text" class="form-control apminput" id="name" value="${memberVO.memName}"> --%>
+        <input type="hidden" name="memId" value="${memberVO.memId}"> 
+		<input type="hidden" name="groomerId" value="${param.groomerId}">
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-6">
@@ -289,7 +290,7 @@ margin: 10px 5px;
 <input type="hidden" class="needtime v" value="0">
 <input type="hidden" class="etime apminput" name="etime" value="0">
 <input type="text" class="total apminput" name="total" value="0">
-<input type="text" class="address apminput mb-2" name="address" value="220新北市板橋區萬板路55號" disable>
+<input type="text" class="address apminput mb-2" name="address" value="${memberVO.memAddres}" disable>
 <input type="hidden" name="action" value="addAppointment">	
 
 																</fieldset> 
@@ -452,6 +453,9 @@ margin: 10px 5px;
 	let receiverId = ${groVO.memId};
 	const sessionId = "${sessionId}";
 		
+	
+	let groomerId = "${param.groomerId}";
+
 	</script>
 	
     <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>

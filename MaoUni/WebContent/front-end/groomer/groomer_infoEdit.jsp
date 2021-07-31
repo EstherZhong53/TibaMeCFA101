@@ -4,6 +4,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%@ page import="com.groomer.model.*" %>
+<%@ page import="com.works.model.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +89,7 @@ cursor: pointer;
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-lg-auto">
                     <li class="nav-item">
-                        <a href="<%= request.getContextPath() %>/front-end/member/grooming_groomerInfo.jsp" class="nav-link smoothScroll">個人主頁</a>
+                        <a href="<%= request.getContextPath() %>/front-end/member/grooming_groomerInfo.jsp?groomerId=${groVO.groomerId}" class="nav-link smoothScroll">個人主頁</a>
                     </li>
                     <li class="nav-item">
                         <a href="<%= request.getContextPath() %>/front-end/groomer/groomer_infoEdit.jsp" class="nav-link smoothScroll">服務資訊管理</a>
@@ -224,7 +225,12 @@ cursor: pointer;
 		<!-- -----------------------------------------   show works   -----------------------------------         -->
 		<div class="showWork row">
 			<jsp:useBean id="workSvc" class="com.works.model.WorkService"></jsp:useBean>
-			<c:forEach var="workVO" items="${workSvc.getOneList(groVO.groomerId)}">
+<%
+Integer groomerId = ((GroVO) session.getAttribute("groVO")).getGroomerId();
+List<WorkVO> list = workSvc.getOneList(groomerId);
+pageContext.setAttribute("list", list);
+%>
+			<c:forEach var="workVO" items="${list}">
 				<div class="col-3">
 <!-- 					<button type="button" class="btn card mb-3 mx-2 show-item" style="width: 10rem;"> -->
 <%-- 						<img class="card-img-top show-item" data-id="${workVO.wid}" src="data:image/jpeg; base64, ${workVO.itemBase64 }" alt="Card image cap"> --%>

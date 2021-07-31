@@ -118,7 +118,7 @@ margin-top: 30px;
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-lg-auto">
                     <li class="nav-item">
-                        <a href="<%= request.getContextPath() %>/front-end/member/grooming_groomerInfo.jsp" class="nav-link smoothScroll">個人主頁</a>
+                        <a href="<%= request.getContextPath() %>/front-end/member/grooming_groomerInfo.jsp?groomerId=${groVO.groomerId}" class="nav-link smoothScroll">個人主頁</a>
                     </li>
 					<li class="nav-item">
                         <a href="<%= request.getContextPath() %>/front-end/groomer/groomer_infoEdit.jsp" class="nav-link smoothScroll">服務資訊管理</a>
@@ -189,7 +189,7 @@ margin-top: 30px;
 							<option value="4">取消</option>
 						</select>
 					</div>
-					<input class="action" type="hidden" name="groomerId" value="1">
+					<input class="action" type="hidden" name="groomerId" value="${groVO.groomerId}">
 					<input class="action" type="hidden" name="action" value="getAll">
 					<div class="col-md-1 my-1">
 						<i class=" fas fa-search search mt-4 fa-2x"></i>
@@ -248,7 +248,9 @@ margin-top: 30px;
 	</main>
 	<footer></footer>
 	
-	
+<script>
+let groomerId = "${groVO.groomerId}";
+</script>	
 	
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALjOdTPZMiMWQVlR01yYwLZWHAVuhk6_w&libraries=places&callback=initMap" async defer></script>

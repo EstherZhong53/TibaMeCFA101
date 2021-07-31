@@ -176,6 +176,11 @@ public class GroServlet extends HttpServlet {
 				GroService groSvc = new GroService();
 				groSvc.updateInfo(groomerId, gname, schDate, schStartTime, schEndTime, avatar, intro);
 				
+				// 將修改後的資訊再存到session
+				GroVO groVO = groSvc.findByPrimaryKey(groomerId);
+				HttpSession session = req.getSession();
+				session.setAttribute("groVO", groVO);
+				
 				res.sendRedirect("front-end/groomer/groomer_infoEdit.jsp");
 				
 				
