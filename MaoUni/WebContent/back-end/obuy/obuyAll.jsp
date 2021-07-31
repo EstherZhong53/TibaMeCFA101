@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.item.model.*"%>
 <%@ page import="com.obuy.model.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
@@ -20,7 +21,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>hidden_menu</title>
+    <title>MaoUni商品訂單管理</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap/fonts/fontawesome-all.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu.css"> 
@@ -116,7 +117,6 @@
 	input.update:hover{
 		background-color: #e8c497;
 	}
-
 </style>
 </head>
 
@@ -132,8 +132,8 @@
              <div class="menu-sidebar" style="margin-top:46px;">
                  <ul class="menu">
                      <li><a href="https://tw.yahoo.com/">MaoUni_後台首頁</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Obuy/ObuyAll.jsp">商品訂單管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/obuy/ObuyAll.jsp">商品訂單管理</a></li>
                      <li><a href="#">商城管理</a></li>
                      <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
@@ -262,12 +262,15 @@
                 <div class="col-md-6 text-nowrap">
                     <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable" style="margin-left:4px;margin-top:5px;"><label>Show&nbsp;
                     <select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label>
-                    <button onclick="exportTableToExcel('dataTable')" class="btn" type="button" style="margin-left: 75px;">匯出EXCEL</button>
+                    <button onclick="exportTableToExcel('dataTable')" class="btn" type="button" style="margin-left:60px;">匯出EXCEL</button>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="margin-top:5px;maring-left:-22px;width:200px;"></label></div>
+                  <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="margin-top:5px;maring-left:-15px;width:200px;"></label></div>
                 </div>
+                <input class="action" type="hidden" name="action" value="getonemember">
+				<button type="submit" class="btn btn-primary getList ml-4 my-1">
+				查詢</button>
             </div>
             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                 <table class="table my-0" id="dataTable">
@@ -294,8 +297,10 @@
 								<td style="width: 90px;text-align: center;font-size:3px;">${obuyVO.obuyId}</td>
 								<td style="width: 90px;text-align: center;font-size:3px;">${obuyVO.oMemId}</td>
 								<td style="width: 100.5px;text-align: center;font-size:3px;">${obuyVO.oMoney}</td>
-								<td style="width: 91.5px;text-align: center;font-size:3px;">${obuyVO.oDate}</td>
-								
+
+								<td style="width: 91.5px;text-align: center;font-size:3px;">
+								<fmt:formatDate value="${obuyVO.oDate}" pattern="yyyy/MM/dd"/></td>
+							
 								<td style="width: 91.5px;text-align: center;font-size:3px;">
 								<c:if test="${obuyVO.oPaying == '0'}">貨到付款</c:if>
 								<c:if test="${obuyVO.oPaying == '1'}">ATM轉帳</c:if>
@@ -354,7 +359,6 @@
             </div>
         </div>
 	</div>
-
 </div>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/jquery/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>

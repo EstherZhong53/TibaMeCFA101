@@ -8,19 +8,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="sgu.css" rel="stylesheet" type="text/css" />
-<title>Document</title>
+<title>MaoUNi-歡迎毛爸媽的加入!</title>
 
 <style>
 @import
 	url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap")
 	;
-
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
-
 body {
 	align-items: center;
 	background: #dabfa0;
@@ -33,14 +31,12 @@ body {
 	justify-items: center;
 	weight: 100vw;
 }
-
 .signup-container {
 	/* 讓兩個板塊(狗狗跟註冊的,重疊) */
 	display: grid;
 	grid-template-areas: "left right";
 	max-width: 900px;
 }
-
 .left-container {
 	/* 縮放狗狗的圖片 */
 	background: #f0e7dc;
@@ -50,14 +46,12 @@ body {
 	text-align: center;
 	width: 300px;
 }
-
 .left-container h1 {
 	/* 字體 */
 	color: rgba(0, 0, 0, 0.8);
 	display: inline-block;
 	font-size: 24px;
 }
-
 .left-container h1 i {
 	background: #F7B1AB;
 	border-radius: 50%;
@@ -67,14 +61,12 @@ body {
 	padding: 10px;
 	transform: rotate(-45deg);
 }
-
 .left-container .puppy {
 	/* 狗狗的位子 */
 	bottom: -5px;
 	position: absolute;
 	text-align: center;
 }
-
 .left-container .puppy:before {
 	/* 狗狗調色 */
 	background: #f0e7dc;
@@ -86,13 +78,11 @@ body {
 	width: 100%;
 	z-index: 1;
 }
-
 .left-container img {
 	/* 狗狗大小縮放 */
 	filter: sepia(100%);
 	width: 70%;
 }
-
 .right-container {
 	/* 註冊粉紅底的大小 */
 	background: #FFF7E8;
@@ -100,20 +90,17 @@ body {
 	grid-template-areas: "." ".";
 	width: 500px;
 }
-
 .right-container h1:nth-of-type(1) {
 	/* 沒動靜 */
 	color: rgba(0, 0, 0, 0.8);
 	font-size: 28px;
 	font-weight: 600;
 }
-
 .right-container.set {
 	/* display: flex;
   justify-content: space-between; */
 	margin: 10px 0;
 }
-
 .right-container input {
 	/* 整個輸入框的css */
 	border: 1px solid rgba(0, 0, 0, 0.1);
@@ -122,26 +109,21 @@ body {
 	line-height: 38px;
 	padding-left: 5px;
 }
-
 .right-container input, .right-container label {
 	color: rgba(0, 0, 0, 0.8);
 }
-
 .right-container header {
 	/* 離狗狗有距離 */
 	padding: 40px;
 }
-
 .right-container label, .right-container input, .right-container .pets-photo
 	{
 	width: 176px;
 }
-
 .right-container .pets-photo button i {
 	color: rgba(0, 0, 0, 0.8);
 	font-size: 16px;
 }
-
 .right-container footer {
 	/* next下的白底 */
 	align-items: center;
@@ -149,7 +131,6 @@ body {
 	display: grid;
 	padding: 5px 40px;
 }
-
 .right-container footer button {
 	/* next的設定 */
 	border: 1px solid rgba(0, 0, 0, 0.2);
@@ -159,41 +140,34 @@ body {
 	border-radius: 19px;
 	font-family: "Montserrat", sans-serif;
 }
-
 .right-container footer #back {
 	background: #fff;
 	transition: 0.2s all ease-in-out;
 }
-
 .right-container footer #back:hover {
 	background: #171A2B;
 	color: white;
 }
-
 .right-container footer #next {
 	/* 按鈕按顏色的設計 */
 	background: #dabfa0;
 	border: 1px solid transparent;
 	color: #fff;
 }
-
 .right-container footer #next:hover {
 	background: #171A2B;
 }
-
 .pets-name label, .pets-memPassword label, .pets-Idenity label,
 	.pets-memAddres label {
 	display: block;
 	align-items: center;
 	margin-bottom: 5px;
 }
-
 .pets-birthday label, .pets-gender label, .pets-memEmail label,
 	.pets-memPh label {
 	display: block;
 	margin-bottom: 5px;
 }
-
 .radio-container {
 	/* 性別欄的設計控制 */
 	background: #fff;
@@ -202,7 +176,6 @@ body {
 	display: inline-block;
 	padding: 5px;
 }
-
 .radio-container label {
 	/* 性別欄未 */
 	background: transparent;
@@ -217,17 +190,14 @@ body {
 	transition: 0.2s all ease-in-out;
 	width: 80px;
 }
-
 .radio-container input[type=radio] {
 	/* 把按鈕隱藏 */
 	display: none;
 }
-
 .radio-container input[type=radio]:checked+label {
 	background: #dabfa0;
 	border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
 #next {
 	margin-left: 75%;
 }
@@ -330,52 +300,37 @@ body {
 			xhr.onreadystatechange = function(ev) {//發送到伺服器後，去負責響應變化，抓取是否200，就是下面if的兩個方法
 				console.log("yyyyyyyyyyyyy")
 				if (xhr.status == 200 && xhr.readyState == 4){ //伺服器正常且可執行，響應是否就緒
-
 					var s = xhr.responseText; //在請求被發送後，從伺服器返回。
 					console.log(s)
-
 					if (s == "0") {
-
 						document.getElementById("sp").innerText = "可以註冊";
 						document.getElementById("sp").style.color = "green";
-
 					} else {
-
 						document.getElementById("sp").innerText = "用戶已存在";
 						document.getElementById("sp").style.color = "red";
 					}
-
 				}
-
 			}
 			xhr.open("get","${pageContext.request.contextPath}/check/check.do?memEmail="
 							+ v, true);
-
 			xhr.send();
-
 		}
-
 		$("#form").submit(function (e) {
-			//form的id的submit
 			  e.preventDefault();
 			  if ($("#sp").text() === "可以註冊") {
-// 		去對身分證欄位旁的顯示數字使否有顯示，才可以進行放行
 			    $.ajax({
 			      url: "/MaoUni/member/member.do",
-			      //要執行的方式的註冊url
 			      type: "post",
 			      data: $(this).serialize(),
 			      success: function (data) {
 			        alert("hello 成功啦");
 			        window.location.replace("/MaoUni/front-end/home/HomePage.jsp");
-			        //轉跳到哪個網址，不然在跳出alert時會被卡在註冊頁面
 			      }
 			    })
 			  } else {
 			    alert("請更改信箱啦都說信箱重複了！");
 			  }
 			})
-
 	</script>
 
 </body>

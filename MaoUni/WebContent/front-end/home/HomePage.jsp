@@ -13,9 +13,10 @@
 <meta charset="UTF-8">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@900&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, minimum-scale=0.5, user-scalable=no">
-<meta name = "viewport" content ="width=device-width,initial-scale-1.0">
+
     <!-- <script src="JavaScript 檔案位址.js"></script> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的CSS,有再調過細部效果 -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/fontawesome-all.min.css"> <!-- 左邊這個是右上角聊天室ICON的引入 -->
@@ -29,11 +30,9 @@
 
 
 <style>
-
 List-style-type ：none/* http://meyerweb.com/eric/tools/css/reset/
 v2.0 | 20110126
 License: none (public domain)
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -55,12 +54,9 @@ time, mark, audio, video {
     vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-
 article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
     display: block;
 }
-
-
 body {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -68,36 +64,27 @@ body {
     margin:0;
     display: grid;
 }
-
 ol, ul {
     list-style: none;
 }
-
 blockquote, q {
     quotes: none;
 }
-
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
     content: none;
 }
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
 *{
-
 box-sizing: border-box;
 margin: 0px;
 padding: 0px;
 }
-
-
 .Top-Flex{ /*這就是上面那條跑來跑去的最開始的底*/
-
 position: fixed;
 background-color:#c19e74;
 font-weight: bold;
@@ -108,11 +95,8 @@ display: flex;
 align-items: top;
 border-radius: 0px 0px 30px 30px;
 z-index:2;
-
 }
-
 header{
-
     position: fixed;
     top:0px;
     left:0px;
@@ -123,84 +107,55 @@ header{
     transition: 1s;
     z-index:1;
 }
-
 header.sticky .Top-Flex{ /* 這是下拉後的Top-Flex寬度跟顯示 */
-
     height: 100px;
     transition: 2.5s;
     }
-
 .LOOP{
-
     display: flex;
     margin-left: 440px;
     margin-top: 3px;
  /*大logo因為看起來沒置中所以是用這個去調到置中的 */
-
 	
 }
-
 header.sticky .two img{
-
     width: 120px;
     margin-left: 100px; /*小logo用這個移動*/
-
 }
-
 .two img{ /*縮小上頭logo時用*/
-
     width:300px;
     transition: 1s;
 }
-
 /* ------icon區的css------- */
-
 .icontrue{
-
 display: flex;
 z-index:5;
 margin-right:5px;
-
 }
-
 .iconbth{ /*給icon間距*/
-
 margin: 7px;
 z-index:5;
 }
-
 .icontrue img{ /*icontrue下的img全縮小*/
-
     width: 20px;
     border-radius: 4px solid #fff;
     color:#c19e74;
     z-index:5; /*這個一定要加不然會把上下滑動蓋掉，且無法hover差點氣死*/
 }
-
 .iconbth:hover{ /*移到icon上時會有半透明的效果*/
-
     opacity: 0.5;
     z-index:5;
 }
-
-
 .iconbth1{ /*給icon間距*/
-
 	margin: 7px;
 	z-index:0;
 }
-
 .iconbth1:hover{ /*移到icon上時會有半透明的效果*/
-
     opacity: 0.5;
     z-index:0;
 }
-
-
 /* ------icon區的css結束------- */
-
 .shopbody{ /*有你來玩那排的導覽列*/
-
     position: fixed;
     display: flex;
     font-weight:bold;
@@ -211,22 +166,15 @@ z-index:5;
     min-height: 50vh; /* 這一導覽列的高度 */
     z-index:2;
 }
-
-
 header.sticky .shopbody{
-
     min-height: 25vh; 
     transition: 2s;
 }
-
 nav{
-
     position: relative;
     display: flex;
 }
-
 nav a{
-
     margin: 0 20px; 
     /* 字跟字之間的寬度 */
     color:white ;
@@ -236,13 +184,9 @@ nav a{
     /* padding-top: 0px; */
     
 }
-
 /*有你來玩那排的導覽列結束*/
 /*只要top的話只需複製上面這些區域*/
-
-
 .SearchSorting{
-
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -256,57 +200,30 @@ nav a{
     border-radius: 10px;
     
 }
-
 .SearchSorting select{
-
-
     margin: -20px 18px;
     padding: auto 5px;
     font-size: 14px;
-
 }
-
-
-
-
 .textttt{  /*這欄位只是為了把版面撐大一點，他在搜尋列表下面 */
-
     width: 100%;
     height: 2000px;
-
 }
-
-
 .sliderbody{
-
     overflow:hidden;
-
 }
-
-
-
 .rs{
-
 /* 圓點點的移動設定 */
 width: 500%;
 height:500px;
 display: flex;
-
 }
-
-
-
 .rs{ 
-
 /* 隱藏最原本的"圓點點"，讓它不會出現及影響版面，不然會推動整個版面*/
     display: none;
     
 }
-
-
-
 .navigation-manual{
-
     /* 讓真正有實際功效的圓點點上移 */
     position: absolute;
     width: 800px;
@@ -315,9 +232,7 @@ display: flex;
     justify-content: center; 
     
 }
-
 .manual-btn{
-
     border:2px solid #FFF3DE;
     padding: 5px;
     border-radius: 10px;
@@ -325,110 +240,70 @@ display: flex;
     transition: 1s;
     
 }
-
 .manual-btn:not(:last-child){
-
     margin-right: 40px; /*圓點點的間距*/
     
 }
-
 .manual-btn:hover{
     background:#FFF3DE;
 }
-
 #radio1:checked~ .first{
-
     margin-left: 0%;
-
 }
-
 #radio2:checked~ .first{
-
     margin-left: -20%;
-
 }
-
 #radio3:checked~ .first{
-
     margin-left: -40%;
-
 }
-
 #radio4:checked~ .first{
-
     margin-left: -60%;
-
 }
-
 /* css for auyomatic navigation css的導航（導航圖片） */
-
 .navigation-auto{
-
     position: absolute;
     display: flex;
     width: 800px;
     justify-content: center;
     margin-top: 460px;
 }
-
 .navigation-auto div{
-
     /* navigation-auto下的全部div */
     border: 2px solid #FFF3DE;
     padding: 5px;
     border-radius: 10px;
     transition: 1s;
 }
-
 .navigation-auto div:not(:last-child){
-
     margin-right:40px; 
     
 }
-
 #radio1:checked~ .navigation-auto .auto-btn1{
-
     background: #FFF3DE;
-
 }
-
 #radio2:checked~ .navigation-auto .auto-btn2{
-
     background: #FFF3DE;
-
 }
-
 #radio3:checked~ .navigation-auto .auto-btn3{
-
     background: #FFF3DE;
-
 }
-
 #radio4:checked~ .navigation-auto .auto-btn4{
-
     background: #FFF3DE;
-
 }
-
 <!-- 上方為思瑤版本CSS -->
 <!-- 下方為為輪播圖片相關CSS -->
-
 /*貼心提醒: 旋轉木馬只要改圖片路徑就好,動到其他的有極高機率會跑版!!!! */
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-
   .container {
     margin: 0 auto;
     width: 60%;
     height: 400px;
     position: relative;
   }
-
   .slides {
     display: flex;
     height: 100%;
@@ -438,7 +313,6 @@ display: flex;
     min-width: 100%;
     position: relative;
   }
-
   .slide img {
     width: 100%;
     height: 100%;
@@ -489,7 +363,6 @@ display: flex;
   display: inline-block;
   position: relative;
 }
-
 .hover-underline-animation:after {
   content: '';
   position: absolute;
@@ -502,18 +375,12 @@ display: flex;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
   margin: 0px 0px -5px 19px;
-
 }
-
 .hover-underline-animation:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
-
 /* 以下為FOOTER CSS */
-
-
 .footer {
 margin: 0;
 display: flex;
@@ -526,65 +393,47 @@ font-size: 14px;
 position: relative;
 margin-bottom: 10px;
 }
-
 .footer > * {
 flex:  1 100%;
 }
-
-
 h2 {
 font-weight: 1000;
 font-size: 35px;
-
 }
-
 .footer ul {
 list-style: none;
 padding-left: 0;
 }
-
 .footer li {
 line-height: 2em;
 }
-
 .footer a {
 text-decoration: none;
 }
-
 .footer a:hover{
-
 }
-
 .r-footer {
 display: flex;
 text-align: center;
 margin-left: -15px;
 }
-
 .box{
 	margin-top:10px;
 }
-
 .box a {
 color: #fff;
 }
-
 .h-box {
 column-count: 2;
 column-gap: 1.25em;
 }
-
 .b-footer {
 text-align: center;
 color: #a0591f;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 width: 100%;
 background-color: #fff;
-
 }
-
-
-
 @media screen and (min-width: 600px) {
 	.r-footer > * {
 	flex: 1;
@@ -599,12 +448,9 @@ background-color: #fff;
 	flex: 1;
 	}
 }
-
-
 ::placeholder{
 	color: #a0591f;
 }
-
 :placeholder-shown{
 	text-decoration: none;
 	border: 1px solid #b89063;
@@ -618,112 +464,90 @@ background-color: #fff;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff2:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff3:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff4:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff5:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff6:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff7:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff8:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff9:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff10:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff11:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
  
-
-
 .btn-primary {
     color: #fff;
     background-color: #b89063;
     border-color: #b89063;
 }
-
 .btn-primary:hover{
     background-color: #d4af81;
     border-color: #d4af81;
 }
-
 #igbtn:hover{
 	color:#f8e682;
-
 	font-size: 15px;
 }
-
 #fbbtn:hover{
 	color:#f8e682;
-
 	font-size: 15px;
 }
-
 .fa-trash-alt{
 	color: #a0591f;
 }
-
 .fa-trash-alt:hover{
 	color: #b89063;
 }
-
 .fa-instagram:hover{
 	color:#f8e682;
 	font-weight: 1000;
 	font-size: 20px;
 }
-
 .fa-facebook-square:hover{
 	color:#f8e682;
 	font-weight: 1000;
 	font-size: 20px;
 }
-
 </style>    
 </head>
 
@@ -819,7 +643,6 @@ background-color: #fff;
     // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
     //滑鼠滾動(scroll)就開始觸發
     window.addEventListener("scroll",function(){
-
     const header = document.querySelector('header');
     header.classList.toggle('sticky',window.scrollY > 0);
     });
@@ -1003,12 +826,10 @@ background-color: #fff;
                 modal.find('.modal-title').text('確認刪除 ' + title);
                 modal.find('.modal-body').text('您要刪除 ' + title + ' $ ' + price + '元 嗎?');
             });
-
         });
     </script>
 
 <script>
-
 	const sessionId = "${sessionId}";
 </script>
 <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
