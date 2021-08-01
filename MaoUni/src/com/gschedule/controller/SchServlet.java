@@ -34,10 +34,14 @@ public class SchServlet extends HttpServlet {
 		
 		String action = req.getParameter("action");
 		
+		
 		if("autoInsertData".equals(action)) {
 			SchService schSvc = new SchService();
+			Integer groomerId = new Integer(req.getParameter("groomerId"));
 			try {
-				schSvc.autoInsertData();
+//				schSvc.autoInsertData();
+				schSvc.autoInsertData(groomerId);
+				
 			} catch (Exception e) {
 				e.printStackTrace(System.err);
 			}

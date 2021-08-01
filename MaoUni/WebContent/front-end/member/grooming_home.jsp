@@ -346,6 +346,10 @@ pageContext.setAttribute("list", list);
             header.classList.toggle('sticky',window.scrollY > 0);
             });
             
+    
+    
+    
+    
     </script>
     <script>
         const sessionId = "${sessionId}";

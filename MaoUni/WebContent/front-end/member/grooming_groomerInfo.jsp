@@ -34,17 +34,16 @@
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/hero-slider.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/owl-carousel.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/templatemo-style.css">
-<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
 <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/jquery-ui.css"> 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/header.css">
-<%-- <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/newheader.css"> --%>
+<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
 
 <script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-<script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery-ui.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 
 
 
@@ -457,11 +456,7 @@ height: 350px;
 		
 
 	
-	let receiverId = ${groVO.memId};
-	const sessionId = "${sessionId}";
-		
-	
-	let groomerId = "${param.groomerId}";
+
 	
 	
 	// ========================== googleMap ===========================	
@@ -472,7 +467,6 @@ height: 350px;
 	 function initMap() {
      	map = new google.maps.Map(document.getElementById('map'), {
               center: { lat: ${groVO.lat}, lng: ${groVO.lng} },
-//               center: { lat: 24.978391, lng: 121.268641 },
               zoom: 13,
           });
 
@@ -489,32 +483,9 @@ height: 350px;
      }
 
 
-
-
-	       
-	       
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		let receiverId = ${groVO.memId};
+		const sessionId = "${sessionId}";
+		let groomerId = "${param.groomerId}";
 
 	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyALjOdTPZMiMWQVlR01yYwLZWHAVuhk6_w&libraries=places&callback=initMap" async defer></script>

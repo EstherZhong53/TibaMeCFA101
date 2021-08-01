@@ -12,15 +12,20 @@ public class SchService {
 		this.dao = new SchDAO();
 	}
 	
-	public void autoInsertData() {
-		// 自動新增時是依據GROOMER表的SCHTIME新增
-		dao.insert();
-		// 需依據GROOMER表的SCHDATE(預設休假日)修正schstatus = repeat('0', 48)
-		GroDAO groDao = new GroDAO();
-		List<GroVO> list = groDao.getAll();
-		for(GroVO groVO: list) {
-			dao.updateByPresetVacation(groVO.getGroomerId(), groVO.getSchDate());
-		}
+//	public void autoInsertData() {
+//		// 自動新增時是依據GROOMER表的SCHTIME新增
+//		dao.insert();
+//		// 需依據GROOMER表的SCHDATE(預設休假日)修正schstatus = repeat('0', 48)
+//		GroDAO groDao = new GroDAO();
+//		List<GroVO> list = groDao.getAll();
+//		for(GroVO groVO: list) {
+//			dao.updateByPresetVacation(groVO.getGroomerId(), groVO.getSchDate());
+//		}
+//	}
+	
+//	取代 autoInsertData()
+	public void autoInsertData(Integer groomerId) {
+		dao.autoInsert(groomerId);
 	}
 	
 	public List<SchVO> getByGroomerId(Integer groomerId){

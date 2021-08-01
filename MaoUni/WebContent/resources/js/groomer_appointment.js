@@ -14,8 +14,7 @@ let self = "3";
 let disableDate = [];
 
 function init(){
-	connect();
-	getDisableDate();
+	connect();	
 }
 
 function getDisableDate(){
@@ -74,11 +73,14 @@ window.onunload = function(){
 			url: "/MaoUni/schedule.do",
 			type: "GET",
 			data:{
+			groomerId: groomerId,
 			action: "autoInsertData"
 		  },
+		  success: function(data){
+			  getDisableDate();
+		  }
 		})
-	})
-
+	})	
 	
 // 選擇寵物後，依據寵物類別載入可選的服務項目
 	
@@ -250,7 +252,12 @@ window.onunload = function(){
 	
 	// 送出預約
 	
-	$(".submit").click(function(){
+	$(".submit").click(function(e){
+		if($(".total").val() == '0' || $(".apmDate").val() == '' || $(".stime").val() == ''){
+			swal("預約單未填寫完整","","warning").then((result) => {
+				return;
+			});		
+		}
 		$.ajax({
 			url: "/MaoUni/appointment.do",
 			type: "GET",
@@ -268,7 +275,7 @@ window.onunload = function(){
 				});
 			}
 		})
-
+		e.preventDefault();
 	})	
 
 	

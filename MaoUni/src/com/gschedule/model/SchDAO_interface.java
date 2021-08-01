@@ -5,8 +5,10 @@ import java.util.*;
 
 
 public interface SchDAO_interface {
-    public void insert();  													// 前端事件觸發時啟動遞迴指令自動新增當天至未來30日內資料
-    public void updateByPresetVacation(Integer groomerId, String schDate);  // 啟動insert()後緊接著呼叫，修正預設休假日;只有在新增後才能呼叫，避免重置既有的日期行程
+//    public void insert();  													// 前端事件觸發時啟動遞迴指令自動新增當天至未來30日內資料
+//    public void updateByPresetVacation(Integer groomerId, String schDate);  // 啟動insert()後緊接著呼叫，修正預設休假日;只有在新增後才能呼叫，避免重置既有的日期行程
+    public void autoInsert(Integer groomerId);  // 取代insert()、updateByPresetVacation(Integer groomerId, String schDate)
+    
     public List<SchVO>  getByGroomerId(Integer groomerId);					// 取得某位美容師所有行程
     public List<SchVO>  getByGroomerId(Integer groomerId,Integer month);	// 取得某位美容師某月所有行程
     public void update(Integer groomerId,  Date date, Integer status, Integer stime, Integer etime);  				   // 美容師修正班表(尚未完成)

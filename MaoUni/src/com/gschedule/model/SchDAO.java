@@ -16,21 +16,150 @@ public class SchDAO implements SchDAO_interface {
 	private String userid = "David";
 	private String passwd = "123456";
 
-	private final String INSERT_STMT = "insert into GSCHEDULE(GROOMERID, SCHDATE, SCHSTATUS) "
-			+ "with recursive DATES(V_DATE) as( select curdate() union all select V_DATE + interval 1 day from DATES "
-			+ "where V_DATE + interval 1 day <= adddate(curdate(), interval 30 day)) "
-			+ "select g.GROOMERID, d.V_DATE, g.SCHTIME from DATES d join GROOMER g "
-			+ "left join GSCHEDULE s on (d.V_DATE = s.SCHDATE and g.GROOMERID = s.GROOMERID) where s.SCHDATE is null";
+//	private final String INSERT_STMT = "insert into GSCHEDULE(GROOMERID, SCHDATE, SCHSTATUS) "
+//			+ "with recursive DATES(V_DATE) as( select curdate() union all select V_DATE + interval 1 day from DATES "
+//			+ "where V_DATE + interval 1 day <= adddate(curdate(), interval 30 day)) "
+//			+ "select g.GROOMERID, d.V_DATE, g.SCHTIME from DATES d join GROOMER g "
+//			+ "left join GSCHEDULE s on (d.V_DATE = s.SCHDATE and g.GROOMERID = s.GROOMERID) where s.SCHDATE is null";
+//
+//	private final String UPDATE_BYPRESETVACATION_STMT = "update GSCHEDULE set schstatus = repeat('0', 48) where GROOMERID = ? and SCHDATE > CURDATE() ";
+//	
+	
+	// 取代上方兩句	SQL指令功能
+	private final String INSERT_BYSERVICEDATE_STMT = " insert into GSCHEDULE(GROOMERID, SCHDATE, SCHSTATUS) "
+			+ "with recursive DATES(V_DATE) as "
+			+ "( select curdate() union all select V_DATE + interval 1 day from DATES where V_DATE + interval 1 day <= adddate(curdate(), interval 30 day)) "
+			+ "select g.GROOMERID, d.V_DATE, if(substr(g.SCHDATE, weekday(d.V_DATE) + 1, 1) = '1', g.SCHTIME, repeat('0','48')) "
+			+ "from DATES d join GROOMER g on(g.GROOMERID = ?) "
+			+ "left join GSCHEDULE s on (d.V_DATE = s.SCHDATE and g.GROOMERID = s.GROOMERID) "
+			+ "where s.SCHDATE is null";
 
-	private final String UPDATE_BYPRESETVACATION_STMT = "update GSCHEDULE set schstatus = repeat('0', 48) where GROOMERID = ? and SCHDATE > CURDATE() ";
+	
 	private final String GET_ONELIST_STMT = "select * from GSCHEDULE where GROOMERID = ?";
 	private final String UPDATE_STMT = "update GSCHEDULE set SCHSTATUS = insert(SCHSTATUS, ?,?,repeat(?,?)) where GROOMERID = ? AND SCHDATE = ?";
 	private final String GET_SCHSTATUS_STMT = "select * from GSCHEDULE where SCHID = ?";
 	private final String GET_ONELISTBYMONTH_STMT = "select * from GSCHEDULE where GROOMERID = ? and month(SCHDATE) = ? order by SCHDATE";
 	private final String GET_SCHSTATUSBYDATE_STMT = "select * from GSCHEDULE where GROOMERID = ? and SCHDATE = ?";
 
+//	@Override
+//	public void insert() {
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//
+//			// 執行遞迴指令，自動新增當日~30天內的班表資料，新增的SCHSTATUS依GROOMER的SCHTIME
+//			pstmt = con.prepareStatement(INSERT_STMT);
+//			pstmt.executeUpdate();
+//
+//		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. " + se.getMessage());
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//
+//		}
+//
+//	}
+//
+//	@Override
+//	public void updateByPresetVacation(Integer groomerId, String schDate) {
+//
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//			String finalUpdateSql = UPDATE_BYPRESETVACATION_STMT;
+//
+//			int count = 0;
+//			for (int i = 0; i < schDate.length(); i++) {
+//				if (schDate.substring(i, (i + 1)).equals("0")) {
+//					if (count == 0) {
+//						finalUpdateSql += " and ";
+//					} else {
+//						finalUpdateSql += " or ";
+//					}
+//					switch (i) {
+//					case 0:
+//						finalUpdateSql += " dayname(schdate) = 'Monday' ";
+//						count++;
+//						break;
+//					case 1:
+//						finalUpdateSql += " dayname(schdate) = 'Tuesday' ";
+//						count++;
+//						break;
+//					case 2:
+//						finalUpdateSql += " dayname(schdate) = 'Wednesday' ";
+//						count++;
+//						break;
+//					case 3:
+//						finalUpdateSql += " dayname(schdate) = 'Thursday' ";
+//						count++;
+//						break;
+//					case 4:
+//						finalUpdateSql += " dayname(schdate) = 'Friday' ";
+//						count++;
+//						break;
+//					case 5:
+//						finalUpdateSql += " dayname(schdate) = 'Saturday' ";
+//						count++;
+//						break;
+//					case 6:
+//						finalUpdateSql += " dayname(schdate) = 'Sunday' ";
+//						count++;
+//						break;
+//					}
+//				}
+//			}
+//			pstmt = con.prepareStatement(finalUpdateSql);
+//			pstmt.setInt(1, groomerId);
+//
+//			pstmt.executeUpdate();
+//
+//		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. " + se.getMessage());
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//	}
+
+	
 	@Override
-	public void insert() {
+	public void autoInsert(Integer groomerId) {
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -39,87 +168,8 @@ public class SchDAO implements SchDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 
 			// 執行遞迴指令，自動新增當日~30天內的班表資料，新增的SCHSTATUS依GROOMER的SCHTIME
-			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.executeUpdate();
-
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. " + se.getMessage());
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					e.printStackTrace(System.err);
-				}
-			}
-
-		}
-
-	}
-
-	@Override
-	public void updateByPresetVacation(Integer groomerId, String schDate) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			String finalUpdateSql = UPDATE_BYPRESETVACATION_STMT;
-
-			int count = 0;
-			for (int i = 0; i < schDate.length(); i++) {
-				if (schDate.substring(i, (i + 1)).equals("0")) {
-					if (count == 0) {
-						finalUpdateSql += " and ";
-					} else {
-						finalUpdateSql += " or ";
-					}
-					switch (i) {
-					case 0:
-						finalUpdateSql += " dayname(schdate) = 'Monday' ";
-						count++;
-						break;
-					case 1:
-						finalUpdateSql += " dayname(schdate) = 'Tuesday' ";
-						count++;
-						break;
-					case 2:
-						finalUpdateSql += " dayname(schdate) = 'Wednesday' ";
-						count++;
-						break;
-					case 3:
-						finalUpdateSql += " dayname(schdate) = 'Thursday' ";
-						count++;
-						break;
-					case 4:
-						finalUpdateSql += " dayname(schdate) = 'Friday' ";
-						count++;
-						break;
-					case 5:
-						finalUpdateSql += " dayname(schdate) = 'Saturday' ";
-						count++;
-						break;
-					case 6:
-						finalUpdateSql += " dayname(schdate) = 'Sunday' ";
-						count++;
-						break;
-					}
-				}
-			}
-			pstmt = con.prepareStatement(finalUpdateSql);
+			pstmt = con.prepareStatement(INSERT_BYSERVICEDATE_STMT);
 			pstmt.setInt(1, groomerId);
-
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
@@ -141,9 +191,11 @@ public class SchDAO implements SchDAO_interface {
 					e.printStackTrace(System.err);
 				}
 			}
+
 		}
 	}
-
+	
+	
 	@Override
 	public List<SchVO> getByGroomerId(Integer groomerId) {
 		Connection con = null;
