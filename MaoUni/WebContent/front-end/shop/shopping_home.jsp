@@ -38,11 +38,9 @@
      <script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
 
 <style>
-
 List-style-type ：none/* http://meyerweb.com/eric/tools/css/reset/
 v2.0 | 20110126
 License: none (public domain)
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -64,12 +62,9 @@ time, mark, audio, video {
     vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-
 article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
     display: block;
 }
-
-
 body {
     font-size: 18px;
     color: rgb(255, 255, 255);
@@ -77,36 +72,27 @@ body {
     margin:0;
     display: grid;
 }
-
 ol, ul {
     list-style: none;
 }
-
 blockquote, q {
     quotes: none;
 }
-
 blockquote:before, blockquote:after,
 q:before, q:after {
     content: '';
     content: none;
 }
-
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
-
 *{
-
 box-sizing: border-box;
 margin: 0px;
 padding: 0px;
 }
-
-
 .Top-Flex{ /*這就是上面那條跑來跑去的最開始的底*/
-
 position: fixed;
 background-color:#c19e74;
 font-weight: bold;
@@ -117,11 +103,8 @@ display: flex;
 align-items: top;
 border-radius: 0px 0px 30px 30px;
 z-index:2;
-
 }
-
 header{
-
     position: fixed;
     top:0px;
     left:0px;
@@ -132,85 +115,56 @@ header{
     transition: 1s;
     z-index:1;
 }
-
 header.sticky .Top-Flex{ /* 這是下拉後的Top-Flex寬度跟顯示 */
-
     height: 100px;
     transition: 2.5s;
     }
-
 .LOOP{
-
     display: flex;
     margin-left: 440px;
     margin-top: 3px;
  /*大logo因為看起來沒置中所以是用這個去調到置中的 */
-
 	
 }
-
 header.sticky .two img{
-
     width: 120px;
     margin-left: 100px; /*小logo用這個移動*/
-
 }
-
 .two img{ /*縮小上頭logo時用*/
-
     width:300px;
     transition: 1s;
 }
-
 /* ------icon區的css------- */
-
 .icontrue{
-
 display: flex;
 z-index:5;
 margin-right:5px;
 height: 20%;
-
 }
-
 .iconbth{ /*給icon間距*/
-
 margin: 7px;
 z-index:5;
 }
-
 .icontrue img{ /*icontrue下的img全縮小*/
-
     width: 20px;
     border-radius: 4px solid #fff;
     color:#c19e74;
     z-index:5; /*這個一定要加不然會把上下滑動蓋掉，且無法hover差點氣死*/
 }
-
 .iconbth:hover{ /*移到icon上時會有半透明的效果*/
-
     opacity: 0.5;
     z-index:5;
 }
-
-
 .iconbth1{ /*給icon間距*/
-
 	margin: 7px;
 	z-index:0;
 }
-
 .iconbth1:hover{ /*移到icon上時會有半透明的效果*/
-
     opacity: 0.5;
     z-index:0;
 }
-
-
 /* ------icon區的css結束------- */
-
 .shopbody{ /*有你來玩那排的導覽列*/
-
     position: fixed;
     display: flex;
     font-weight:bold;
@@ -221,22 +175,15 @@ z-index:5;
     min-height: 50vh; /* 這一導覽列的高度 */
     z-index:2;
 }
-
-
 header.sticky .shopbody{
-
     min-height: 25vh; 
     transition: 2s;
 }
-
 nav{
-
     position: relative;
     display: flex;
 }
-
 nav a{
-
     margin: 0 20px; 
     /* 字跟字之間的寬度 */
     color:white ;
@@ -246,13 +193,9 @@ nav a{
     /* padding-top: 0px; */
     
 }
-
 /*有你來玩那排的導覽列結束*/
 /*只要top的話只需複製上面這些區域*/
-
-
 .SearchSorting{
-
     align-items: center;
     justify-content: center;
     margin: auto;
@@ -267,56 +210,32 @@ nav a{
     border-radius: 10px;
     
 }
-
 .SearchSorting select{
-
     margin: -20px 20px;
     padding: auto 0px;
     font-size: 14px;
 	width: 180px;
 	
 }
-
-
-
 .container{  /*這欄位只是為了把版面撐大一點，他在搜尋列表下面 */
-
     width: 100%;
     height: 2000px;
-
 }
-
-
 .sliderbody{
-
     overflow:hidden;
-
 }
-
-
-
 .rs{
-
 /* 圓點點的移動設定 */
 width: 500%;
 height:500px;
 display: flex;
-
 }
-
-
-
 .rs{ 
-
 /* 隱藏最原本的"圓點點"，讓它不會出現及影響版面，不然會推動整個版面*/
     display: none;
     
 }
-
-
-
 .navigation-manual{
-
     /* 讓真正有實際功效的圓點點上移 */
     position: absolute;
     width: 800px;
@@ -325,9 +244,7 @@ display: flex;
     justify-content: center; 
     
 }
-
 .manual-btn{
-
     border:2px solid #FFF3DE;
     padding: 5px;
     border-radius: 10px;
@@ -335,110 +252,70 @@ display: flex;
     transition: 1s;
     
 }
-
 .manual-btn:not(:last-child){
-
     margin-right: 40px; /*圓點點的間距*/
     
 }
-
 .manual-btn:hover{
     background:#FFF3DE;
 }
-
 #radio1:checked~ .first{
-
     margin-left: 0%;
-
 }
-
 #radio2:checked~ .first{
-
     margin-left: -20%;
-
 }
-
 #radio3:checked~ .first{
-
     margin-left: -40%;
-
 }
-
 #radio4:checked~ .first{
-
     margin-left: -60%;
-
 }
-
 /* css for auyomatic navigation css的導航（導航圖片） */
-
 .navigation-auto{
-
     position: absolute;
     display: flex;
     width: 800px;
     justify-content: center;
     margin-top: 460px;
 }
-
 .navigation-auto div{
-
     /* navigation-auto下的全部div */
     border: 2px solid #FFF3DE;
     padding: 5px;
     border-radius: 10px;
     transition: 1s;
 }
-
 .navigation-auto div:not(:last-child){
-
     margin-right:40px; 
     
 }
-
 #radio1:checked~ .navigation-auto .auto-btn1{
-
     background: #FFF3DE;
-
 }
-
 #radio2:checked~ .navigation-auto .auto-btn2{
-
     background: #FFF3DE;
-
 }
-
 #radio3:checked~ .navigation-auto .auto-btn3{
-
     background: #FFF3DE;
-
 }
-
 #radio4:checked~ .navigation-auto .auto-btn4{
-
     background: #FFF3DE;
-
 }
-
 <!-- 上方為思瑤版本CSS -->
 <!-- 下方為為輪播圖片相關CSS -->
-
 /*貼心提醒: 旋轉木馬只要改圖片路徑就好,動到其他的有極高機率會跑版!!!! */
-
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-
   .container {
     margin: 0 auto;
     width: 60%;
     height: 400px;
     position: relative;
   }
-
   .slides {
     display: flex;
     height: 100%;
@@ -448,7 +325,6 @@ display: flex;
     min-width: 100%;
     position: relative;
   }
-
   .slide img {
     width: 100%;
     height: 100%;
@@ -500,7 +376,6 @@ display: flex;
   display: inline-block;
   position: relative;
 }
-
 .hover-underline-animation:after {
   content: '';
   position: absolute;
@@ -513,18 +388,12 @@ display: flex;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
   margin: 0px 0px -5px 19px;
-
 }
-
 .hover-underline-animation:hover:after {
   transform: scaleX(1);
   transform-origin: bottom left;
 }
-
-
 /* 以下為FOOTER CSS */
-
-
 .footer {
 margin: 0;
 display: flex;
@@ -537,63 +406,45 @@ font-size: 14px;
 position: relative;
 margin-bottom: 10px;
 }
-
 .footer > * {
 flex:  1 100%;
 }
-
-
 h2 {
 font-weight: 1000;
 font-size: 35px;
-
 }
-
 .footer ul {
 list-style: none;
 padding-left: 0;
 }
-
 .footer li {
 line-height: 2em;
 }
-
 .footer a {
 text-decoration: none;
 }
-
-
-
 .r-footer {
 display: flex;
 text-align: center;
 margin-left: -15px;
 }
-
 .box{
 	margin-top:10px;
 }
-
 .box a {
 color: #fff;
 }
-
 .h-box {
 column-count: 2;
 column-gap: 1.25em;
 }
-
 .b-footer {
 text-align: center;
 color: #a0591f;
 font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 width: 100%;
 background-color: #fff;
-
 }
-
-
-
 @media screen and (min-width: 600px) {
 	.r-footer > * {
 	flex: 1;
@@ -608,12 +459,9 @@ background-color: #fff;
 	flex: 1;
 	}
 }
-
-
 ::placeholder{
 	color: #a0591f;
 }
-
 :placeholder-shown{
 	text-decoration: none;
 	border: 1px solid #b89063;
@@ -627,135 +475,105 @@ background-color: #fff;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff2:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff3:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff4:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff5:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff6:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff7:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff8:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff9:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff10:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
-
 .ff11:hover{
 	color:#f8e682;
 	font-weight: 500;
 	font-size: 15px;
 }
  
-
-
 .btn-primary {
     color: #fff;
     background-color: #d4af81;
     border-color: #d4af81;
 }
-
 .btn-primary:hover{
     background-color: #b89063;
     border-color: #b89063;
 }
-
 #igbtn:hover{
 	color:#f8e682;
-
 	font-size: 15px;
 }
-
 #fbbtn:hover{
 	color:#f8e682;
-
 	font-size: 15px;
 }
-
 .fa-trash-alt{
 	color: #a0591f;
 }
-
 .fa-trash-alt:hover{
 	color: #b89063;
 }
-
 .fa-instagram:hover{
 	color:#f8e682;
 	font-weight: 1000;
 	font-size: 20px;
 }
-
 .fa-facebook-square:hover{
 	color:#f8e682;
 	font-weight: 1000;
 	font-size: 20px;
 }
-
 .middleplace{
 	height: 2000px;
 	witdh: 100%;
 	z-index:0;
 	margin-top:30px;
 }
-
-
 .list-group-item[aria-expanded="true"]{
   background-color: red !important;
   border-color: red;
 }
-
-
 .list-group-item.active {
   background-color: #d4af81;
   border-color: #d4af81;
 }
-
-
 /* 以下為商品清單 CSS */
-
-
 .card {
   width: 200px;
   height: 160px;
@@ -763,33 +581,21 @@ background-color: #fff;
   box-sizing: border-box;
   overflow: hidden;
 }
-
 .card * {
   transition: 0.3s ease all;
 }
-
 .card img {
-
   width: 200px;
   height: 175px;
   object-fit: cover;
   display: block;
-
 }
-
-
 .card .focus-content {
   display: block;
 }
-
-
-
 .card:hover img, .card:focus-within img {
   margin-top: -40px;
 }
-
-
-
 a.btn1{
   color: white;
   background: #d4af81;
@@ -797,14 +603,11 @@ a.btn1{
   height: 40px;
   padding: 8px 0px 0px 0px;
 }
-
 a.btn1:hover{
   background-color: #75543e;
   color: #fff;
   text-decoration: none;
 }
-
-
 .Product-title{
 margin-top: 15px;
 margin-left: -3px;
@@ -817,8 +620,6 @@ letter-spacing: 1px;
 line-height: 1.5;
 max-height: none;
 }
-
-
 .Label-price{
 margin-top: 5px;
 margin-left: -3px;
@@ -829,11 +630,9 @@ font-size: 15px;
 letter-spacing: 1px;
 line-height: 1.5;
 }
-
 a:hover{
 cursor: pointer;
 }
-
 </style>    
 </head>
 
@@ -850,8 +649,8 @@ cursor: pointer;
 	
 	    <div class="icontrue" style="margin: 10px 10px 0px 0px;">
 		
-		  <a href="#" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
-		  <a href="#" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+		  <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
+		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
 		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:29px;margin-right:-5px;margin-top:-2px;"></i></a>
 <!-------------------------------------------- shopping cart ------------------------------------------------>	    
 	      <div class="dropdown ml-auto">
@@ -889,17 +688,18 @@ cursor: pointer;
 			</div>
 		</div>
 		
-		<div class="shopbody">
-		    <nav style="margin-bottom:-15px;margin-left:15px;">
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
-			 	</nav>
-		</div>
+	   <div class="shopbody">
+	      <nav style="margin-bottom:-15px;margin-left:15px;">
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+	      </nav>
+	   </div>
+	   
 		<div class="Shopping-ul"></div>
 	    
 	</header>
@@ -911,7 +711,6 @@ cursor: pointer;
     // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
     //滑鼠滾動(scroll)就開始觸發
     window.addEventListener("scroll",function(){
-
     const header = document.querySelector('header');
     header.classList.toggle('sticky',window.scrollY > 0);
     });
@@ -1036,7 +835,7 @@ cursor: pointer;
 					    
 					    <select style="color:#a0591f;border-color:#a0591f;">
 						    <option value="volvo" style="display:none">請選擇排序方式</option>
-						    <option value="saab">熱門商品</option>
+						    <option value="saab">上架時間</option>
 						    <option value="opel">價格由高至低</option>
 						    <option value="audi">價格由低至高</option>
 					    </select>
