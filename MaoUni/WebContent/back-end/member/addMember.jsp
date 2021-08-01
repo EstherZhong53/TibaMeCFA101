@@ -29,7 +29,6 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
   padding: 350px;
  
 }
-
  .get_taital{
 	text-align: center;
   position: absolute;
@@ -39,7 +38,6 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
   left: 50%;
   transform: translate(-50%, -50%);
  }
-
    .email_box{
     margin-top: 150px;
     max-width:900px;
@@ -51,9 +49,7 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
       padding: 50px 20px;
       opacity: 0.80;
       text-align:center;
-
   }
-
    .form-group {
         margin-bottom: 2rem;
    }
@@ -61,7 +57,6 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
     margin-left: 200px;
     font-size: 22px;
    }
-
    .email-bt {
     max-width:900px;
      margin-left: 200px;
@@ -72,9 +67,7 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
     font-size: 22px;  
     padding: 20px;
     margin-top: 20px;
-
    }
-
    .massage-bt {
     max-width:900px;
      margin-left: 200px;
@@ -85,13 +78,9 @@ MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
     font-size: 22px;
     padding: 70px 20px 10px 20px;
   }
-
  .input{
-
   margin-left: 200px;
-
  }
-
 button.main_bt {
   background-color: white; 
     color: black; 
@@ -104,11 +93,9 @@ button.main_bt {
    border-radius: 25px;
     
 }
-
 button.main_bt:hover{
   background-color: #D2AD86; /* Green */
     color: white;
-
 }
 .erroeMasgs{
 margin-left: 200px;
@@ -121,27 +108,27 @@ margin-left: 200px;
 
    <!-- 以下 >>隱藏式菜單_內容 -->
      <header>
-         <span class="toggle-button">
+         <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
              <div class="menu-bar menu-bar-top"></div>
              <div class="menu-bar menu-bar-middle"></div>
              <div class="menu-bar menu-bar-bottom"></div>
          </span>
          <div class="menu-wrap">
-             <div class="menu-sidebar" style="margin-top:46px;">
+             <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
-                     <li><a href="https://tw.yahoo.com/">MaoUni_後台首頁</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="#">到府美容管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Obuy/NewObuyAll.jsp">商城管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="#">商城管理</a></li>
+                     <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
                      <li><a href="#">浪浪找家管理</a></li>
-                     <li><a href="#">友善店家管理</a></li>
                      <li><a href="#">知識站管理</a></li>
                      <li><a href="#">公告管理</a></li>
+                     <li><a href="#">美容師管理</a></li>
+                     <li><a href="#">美容預約檢舉管理</a></li>
                  </ul>
              </div>
          </div>
-     </header> 
+     </header>
  <!-- 以上 >>隱藏式菜單_內容 --> 
  
  

@@ -265,9 +265,9 @@ body {
 					</div>
 
 					<div class='set'>
+					
 						<div class='pets-gender'>
 							<label for='pet-gender-female'>性別</label>
-
 								<select size="1" name="memGender" required>
 									<option value="">請選擇性別</option>
 									<option value="女">女</option>

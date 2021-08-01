@@ -83,8 +83,6 @@
 	body{
 	overflow-x:hidden; <!-- 此處做整個BODY橫向的隱藏多出的寬度 -->
 	}
-
-
 </style>
 </head>
 
@@ -98,10 +96,9 @@
              <div class="menu-bar menu-bar-bottom"></div>
          </span>
          <div class="menu-wrap">
-             <div class="menu-sidebar" style="margin-top:20px;">
+             <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
                      <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/obuy/obuyAll.jsp">商品訂單管理</a></li>
                      <li><a href="#">商城管理</a></li>
                      <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
@@ -113,7 +110,7 @@
                  </ul>
              </div>
          </div>
-     </header> 
+     </header>
      <!-- 以上為隱藏式菜單內容 --> 
 
     <div id="wrapper" style="margin-left: 120px;height: auto;">
@@ -149,29 +146,45 @@
 			    
  <table class="table my-0" id="dataTable">
 	<tr>
-		<th style="width: 77px;text-align: center;font-size:8px;">毛孩編號</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">毛主人編號</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">毛孩名字</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">毛孩種類</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">品種</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">性別</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">年齡</th>
-		<th style="width: 77px;text-align: center;font-size:8px;">狀態</th>
+		<th style="width: 90px;text-align: center;font-size:12px;">毛孩編號</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">毛主人編號</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">毛孩名字</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">毛孩種類</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">品種</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">性別</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">年齡</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">狀態</th>
 
 	</tr>
 
 		<c:forEach var="petVO" items="${list}" >
 
 			<tr>
-				<td style="width: 90px;text-align: center;font-size:3px;">${petVO.petId}</td>
-				<td style="width: 90px;text-align: center;font-size:3px;">${petVO.petMemId}</td>
-				<td style="width: 90px;text-align: center;font-size:3px;">${petVO.petName}</td>
-				<td style="width: 90px;text-align: center;font-size:3px;">${petVO.petSort}</td>
-				<td style="width: 90px;text-align: center;font-size:3px;">
+				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petId}</td>
+				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petMemId}</td>
+				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petName}</td>
+				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petSort}</td>
+				<td style="width: 90px;text-align: center;font-size:8px;">
 				
-				<c:if test="${petVO.petVarId == '1'}">英國短毛貓</c:if>
-				<c:if test="${petVO.petVarId == '2'}">馬爾濟斯</c:if>
-				<c:if test="${petVO.petVarId == '4'}">紅貴賓</c:if>
+				<c:if test="${petVO.petVarId == '1'}">馬爾濟斯</c:if>
+				<c:if test="${petVO.petVarId == '2'}">哈士奇</c:if>
+				<c:if test="${petVO.petVarId == '3'}">黃金獵犬</c:if>
+				<c:if test="${petVO.petVarId == '4'}">拉不拉多</c:if>
+				<c:if test="${petVO.petVarId == '5'}">吉娃娃</c:if>
+				<c:if test="${petVO.petVarId == '6'}">米克斯</c:if>
+				<c:if test="${petVO.petVarId == '7'}">博美</c:if>
+				<c:if test="${petVO.petVarId == '8'}">約克夏</c:if>
+				<c:if test="${petVO.petVarId == '9'}">臘腸</c:if>
+				<c:if test="${petVO.petVarId == '10'}">柴犬</c:if>
+				<c:if test="${petVO.petVarId == '11'}">豹貓</c:if>
+				<c:if test="${petVO.petVarId == '12'}">英國短毛貓</c:if>
+				<c:if test="${petVO.petVarId == '13'}">熱帶草原貓</c:if>
+				<c:if test="${petVO.petVarId == '14'}">蘇格蘭折耳貓</c:if>
+				<c:if test="${petVO.petVarId == '15'}">緬因貓</c:if>
+				<c:if test="${petVO.petVarId == '16'}">挪威森林貓</c:if>
+				<c:if test="${petVO.petVarId == '17'}">波斯貓</c:if>
+				<c:if test="${petVO.petVarId == '18'}">塞爾凱克捲毛貓</c:if>
+				<c:if test="${petVO.petVarId == '19'}">加拿大無毛貓</c:if>
 				</td>
 				
 				<td style="width: 90px;text-align: center;font-size:3px;">${petVO.petGender}</td>
@@ -183,23 +196,19 @@
 				<c:if test="${petVO.petSurvive == '1'}">懷念</c:if>
 				</td>
 
-
-				<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" style="margin-bottom: 0px;">
-			     <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/pet/petadd.jsp'" value="立即新增" style="border:5px;border-radius:5px;">
-			</td>
-</form>
 <td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" style="margin-bottom: 0px;">
 			     <input class=update type="submit" value="立即修改" style="border:5px;border-radius:5px;">
 			     <input type="hidden" name="petId"  value="${petVO.petId}">
 			     <input type="hidden" name="action"	value="GET_ONE_STMT">
+			     </FORM>
 			</td>
-			</FORM>
+			
 			</tr>
 		</c:forEach>
 </table>
-</table>
+
+
 		    	
 		    	</div> 
 				<!-- 以上為商城管理下面那個長方形,包含駝色表頭(所有商品資料) + 下面空白區域 -->

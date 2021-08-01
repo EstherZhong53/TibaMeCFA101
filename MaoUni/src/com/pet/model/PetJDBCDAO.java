@@ -85,7 +85,8 @@ public class PetJDBCDAO implements PetDAO_interface {
 			pstmt.setString(3, petVO.getPetGender());
 			pstmt.setInt(4, petVO.getPetAge());
 			pstmt.setInt(5, petVO.getPetSurvive());
-
+			pstmt.setInt(6, petVO.getPetId());
+			
 			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {

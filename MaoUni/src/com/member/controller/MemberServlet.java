@@ -254,11 +254,11 @@ public class MemberServlet extends HttpServlet {
 				session.setAttribute("memberVO", memberVO);
 
 				
-				if(memberVO.getMemPosition() == 1) {
-					GroDAO groDAO = new GroDAO();
-					GroVO groVO = groDAO.findByMemId(memberVO.getMemId());
-					session.setAttribute("groVO", groVO);
-				}
+//				if(memberVO.getMemPosition() == 1) {
+//					GroDAO groDAO = new GroDAO();
+//					GroVO groVO = groDAO.findByMemId(memberVO.getMemId());
+//					session.setAttribute("groVO", groVO);
+//				}
 				
 				res.sendRedirect(url);
 				// session.setAttributec會在一個時間點保留存的值
@@ -266,9 +266,7 @@ public class MemberServlet extends HttpServlet {
 
 			} else {
 				errorMsgs.add("帳號密碼有誤，請重新輸入");
-				String url = "/back-end/member/addMember.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);
-				successView.forward(req, res);
+				res.sendRedirect(req.getContextPath() + "/front-end/home/login.jsp");
 
 			}
 		}
@@ -278,11 +276,10 @@ public class MemberServlet extends HttpServlet {
 //			req.getSession().invalidate();
 //			HttpSession session = req.getSession();
 //			String mem = (String)session.getAttribute("memberVO"); 
-////		HttpSession session = req.getSession();
+////			HttpSession session = req.getSession();
 //			session.removeAttribute(mem);
 			HttpSession session = req.getSession();
-			session.removeAttribute("memberVO");
-			
+			session.removeAttribute("memberVO");			
 			res.sendRedirect(req.getContextPath() + "/front-end/home/HomePage.jsp");
 			
 //			String url = req.getContextPath() + "/front-end/Home/HomePage.jsp";

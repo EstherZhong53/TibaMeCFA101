@@ -78,23 +78,21 @@
 	input.update:hover{
 		background-color: #e8c497;
 	}
-
 </style>
 </head>
 
 <body style="height: auto;"><!-- 步驟二 -->
    <!-- 以下 >>隱藏式菜單_內容 -->
      <header>
-         <span class="toggle-button">
+         <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
              <div class="menu-bar menu-bar-top"></div>
              <div class="menu-bar menu-bar-middle"></div>
              <div class="menu-bar menu-bar-bottom"></div>
          </span>
          <div class="menu-wrap">
-             <div class="menu-sidebar" style="margin-top:46px;">
+             <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
-                     <li><a href="<%=request.getContextPath()%>/back-end/Member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="<%=request.getContextPath()%>/back-end/Obuy/NewObuyAll.jsp">商品訂單管理</a></li>
+                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
                      <li><a href="#">商城管理</a></li>
                      <li><a href="#">商城客服管理</a></li>
                      <li><a href="#">討論區管理</a></li>
@@ -106,7 +104,7 @@
                  </ul>
              </div>
          </div>
-     </header> 
+     </header>
  <!-- 以上 >>隱藏式菜單_內容 --> 
  
  
@@ -296,7 +294,6 @@
             </div>
         </div>
 	</div>
-
 </div>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/jquery/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>

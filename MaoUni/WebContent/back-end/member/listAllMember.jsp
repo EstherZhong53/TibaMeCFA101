@@ -40,64 +40,51 @@
 	background: #e8c497;
 	color: #fff;
 }
-
 .btn:hover {
 	background: #ffe6c7;
 	color: #fff;
 }
-
 .pagination>li.active>a {
 	background: #d6b286;
 	color: #fff;
 }
-
 .pagination>li>a {
 	color: #d6b286;
 }
-
 .pagination>li>a:hover {
 	background: #fff;
 	color: #5c3316;
 }
-
 .col-md-6 .pagination>li>a, .col-md-6 .pagination>li>span {
 	border: 1px solid #d6b286;
 }
-
 .pagination>.active>a:hover {
 	background-color: #e6c195;
 	border: solid 1px #e6c195;
 }
-
 a.btsp {
 	font-size: 35px;
 	color: #e8c497;
 }
-
 a.btsp:hover, a.btsp:active {
 	color: #ffe6c7;
 	text-decoration: none;
 }
-
 p.allitemtitle {
 	color: #fff;
 	font-weight: bold;
 }
-
 input.details {
 	background-color: #bfbfbf;
 	color: #fff;
 }
-
 input.details:hover {
 	background-color: #e8c497;
 }
-
 input.update {
 	background-color: #bfbfbf;
 	color: #fff;
 }
-
 input.update:hover {
 	background-color: #e8c497;
 }
@@ -107,31 +94,28 @@ input.update:hover {
 <body style="height: auto;">
 	<!-- 步驟二 -->
 	<!-- 以下 >>隱藏式菜單_內容 -->
-	<header>
-		<span class="toggle-button">
-			<div class="menu-bar menu-bar-top"></div>
-			<div class="menu-bar menu-bar-middle"></div>
-			<div class="menu-bar menu-bar-bottom"></div>
-		</span>
-		<div class="menu-wrap">
-			<div class="menu-sidebar" style="margin-top: 46px;">
-				<ul class="menu">
-					<li><a
-						href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
-					<li><a
-						href="<%=request.getContextPath()%>/back-end/obuy/obuyAll.jsp">商品訂單管理</a></li>
-					<li><a href="#">商城管理</a></li>
-					<li><a href="#">商城客服管理</a></li>
-					<li><a href="#">討論區管理</a></li>
-					<li><a href="#">浪浪找家管理</a></li>
-					<li><a href="#">知識站管理</a></li>
-					<li><a href="#">公告管理</a></li>
-					<li><a href="#">美容師管理</a></li>
-					<li><a href="#">美容預約檢舉管理</a></li>
-				</ul>
-			</div>
-		</div>
-	</header>
+     <header>
+         <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
+             <div class="menu-bar menu-bar-top"></div>
+             <div class="menu-bar menu-bar-middle"></div>
+             <div class="menu-bar menu-bar-bottom"></div>
+         </span>
+         <div class="menu-wrap">
+             <div class="menu-sidebar" style="margin-top:30px;">
+                 <ul class="menu">
+                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="#">商城管理</a></li>
+                     <li><a href="#">商城客服管理</a></li>
+                     <li><a href="#">討論區管理</a></li>
+                     <li><a href="#">浪浪找家管理</a></li>
+                     <li><a href="#">知識站管理</a></li>
+                     <li><a href="#">公告管理</a></li>
+                     <li><a href="#">美容師管理</a></li>
+                     <li><a href="#">美容預約檢舉管理</a></li>
+                 </ul>
+             </div>
+         </div>
+     </header>
 	<!-- 以上 >>隱藏式菜單_內容 -->
 
 
@@ -338,10 +322,9 @@ input.update:hover {
 											class="form-control form-control-sm"
 											aria-controls="dataTable" placeholder="Search"
 											style="margin-top: 5px; maring-left: -22px; width: 200px;"></label>
-										<input class="action" type="hidden" name="action"
-											value="getonemember">
-										<button type="submit"
-											class="btn btn-primary getList ml-4 my-1">查詢</button>
+								<input class="action" type="hidden" name="action" value="getonemember">
+								<button type="submit" class="btn btn-primary getList ml-4 my-1">
+								查詢</button>
 									</div>
 								</div>
 							</div>
@@ -350,68 +333,52 @@ input.update:hover {
 								<table class="table my-0" id="dataTable">
 									<thead>
 										<tr>
-											<th
-												style="width: 77px; text-align: center; font-size: 1.5px;">會員編號</th>
-											<th
-												style="width: 77px; text-align: center; font-size: 1.5px;">姓名</th>
-											<th
-												style="width: 112.5px; text-align: center; font-size: 1.5px;">信箱</th>
-											<th
-												style="width: 91.5px; text-align: center; font-size: 1.5px;">身分證</th>
-											<th
-												style="width: 91.5px; text-align: center; font-size: 1.5px;">性別</th>
-											<th
-												style="width: 91.5px; text-align: center; font-size: 1.5px;">電話</th>
-											<th
-												style="width: 91.5px; text-align: center; font-size: 1.5px;">地址</th>
-											<th
-												style="width: 98.5px; text-align: center; font-size: 1.5px;">生日</th>
-											<th
-												style="width: 91.5px; text-align: center; font-size: 1.5px;">身分</th>
-											<th
-												style="width: 70px; text-align: center; font-size: 1.5px;">狀態</th>
-											<th
-												style="width: 70px; text-align: center; font-size: 1.5px;">更新時間</th>
+											<th style="width: 77px; text-align: center; font-size:1.5px;">會員編號</th>
+											<th style="width: 77px; text-align: center; font-size:1.5px;">姓名</th>
+											<th style="width: 112.5px; text-align: center; font-size:1.5px;">信箱</th>
+											<th style="width: 91.5px; text-align: center; font-size:1.5px;">身分證</th>
+											<th style="width: 91.5px; text-align: center; font-size:1.5px;">性別</th>
+											<th style="width: 91.5px; text-align: center; font-size:1.5px;">電話</th>
+											<th style="width: 91.5px; text-align: center; font-size:1.5px;">地址</th>
+											<th style="width: 98.5px; text-align: center; font-size:1.5px;">生日</th>
+											<th style="width: 91.5px; text-align: center; font-size:1.5px;">身分</th>
+											<th style="width: 70px; text-align: center; font-size:1.5px;">狀態</th>
+											<th style="width: 70px; text-align: center; font-size:1.5px;">更新時間</th>
 										</tr>
 									</thead>
 
 									<tbody>
 										<c:forEach var="memberVO" items="${list}">
 											<tr style="width: 70px; text-align: center;">
-												<td style="width: 90px; text-align: center; font-size: 2px;">${memberVO.memId}</td>
-												<td style="width: 90px; text-align: center; font-size: 2px;">${memberVO.memName}</td>
-												<td
-													style="width: 100.5px; text-align: center; font-size: 2px;">${memberVO.memEmail}</td>
+												<td style="width: 90px; text-align: center; font-size:2px;">${memberVO.memId}</td>
+												<td style="width: 90px; text-align: center; font-size:2px;">${memberVO.memName}</td>
+												<td style="width: 100.5px; text-align: center; font-size:2px;">${memberVO.memEmail}</td>
 												<td class="memIdenity"
-													style="width: 91.5px; text-align: center; font-size: 2px;">${memberVO.memIdenity}</td>
-												<td
-													style="width: 91.5px; text-align: center; font-size: 2px;">${memberVO.memGender}</td>
+													style="width: 91.5px; text-align: center; font-size:2px;">${memberVO.memIdenity}</td>
+												<td style="width: 91.5px; text-align: center; font-size:2px;">${memberVO.memGender}</td>
 												<td class="memPh"
-													style="width: 91.5px; text-align: center; font-size: 2px;">${memberVO.memPh}</td>
-
+													style="width: 91.5px; text-align: center; font-size:2px;">${memberVO.memPh}</td>
+												
 												<td><i class="far fa-address-card btn-primary"
 													data-toggle="modal"
 													data-target="#speModal${memberVO.memId}"></td>
 
-												<td
-													style="width: 91.5px; text-align: center; font-size: 0.5px;">${memberVO.memBirthday}</td>
+												<td style="width: 91.5px; text-align: center; font-size:0.5px;">${memberVO.memBirthday}</td>
 
 
-												<td
-													style="width: 91.5px; text-align: center; font-size: 2px;">
+												<td style="width: 91.5px; text-align: center; font-size:2px;">
 
 													<c:if test="${memberVO.memPosition == '0'}">會員</c:if> <c:if
 														test="${memberVO.memPosition == '1'}">美容師</c:if>
 												</td>
 
 
-												<td
-													style="width: 91.5px; text-align: center; font-size: 2px;">
+												<td style="width: 91.5px; text-align: center; font-size:2px;">
 													<c:if test="${memberVO.memSurvive == '0'}">審核中</c:if> <c:if
 														test="${memberVO.memSurvive == '1'}">正常</c:if> <c:if
 														test="${memberVO.memSurvive == '2'}">停權</c:if>
 												</td>
-												<td style="width: 90px; text-align: center; font-size: 2px;">
+												<td style="width: 90px; text-align: center; font-size:2px;">
 													<fmt:formatDate value="${memberVO.memUpdate}"
 														pattern="yyyy/MM/dd" />
 
@@ -429,40 +396,39 @@ input.update:hover {
 													</FORM>
 												</td>
 											</tr>
-											</div>
-											</div>
-											</div>
-											</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-											<!-- ---------------------跳出視窗嘗試 -->
+				<!-- ---------------------跳出視窗嘗試 -->
 
-											<div class="modal fade" id="speModal${memberVO.memId}"
-												tabindex="-1" role="dialog"
-												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-												<div class="modal-dialog modal-dialog-centered"
-													role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalCenterTitle">會員地址</h5>
-															<button type="button" class="close" data-dismiss="modal"
-																aria-label="Close">
-																<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body">
-															<div class="container-fluid">
-																<div class="row my-3">
-																	<div class="col-md-3" style="font-weight: bold">地址</div>
-																	<div class="col-md-9 ml-auto">${memberVO.memAddres}</div>
+				<div class="modal fade" id="speModal${memberVO.memId}" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalCenterTitle"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalCenterTitle">會員地址</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<div class="container-fluid">
+									<div class="row my-3">
+										<div class="col-md-3" style="font-weight: bold">地址</div>
+										<div class="col-md-9 ml-auto">${memberVO.memAddres}</div>
 
-																	<div class="modal-footer">
-																		<button type="button" class="btn btn-secondary"
-																			data-dismiss="modal">Close</button>
-																	</div>
-																</div>
-															</div>
-										</c:forEach>
-									</tbody>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+										</div>
+									</div>
+								</div>
+								</c:forEach>
+								</tbody>
 								</table>
 
 

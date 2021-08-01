@@ -92,6 +92,7 @@ public class PetServlet extends HttpServlet {
 			String petGender = req.getParameter("petGender").trim();
 			Integer petAge = new Integer(req.getParameter("petAge").trim());
 			Integer petSurvive = new Integer(req.getParameter("petSurvive").trim());
+			Integer petId = new Integer(req.getParameter("petId").trim());
 			
 			PetVO petVO = new PetVO();
 //			petVO.setPetName(petName);
@@ -100,7 +101,7 @@ public class PetServlet extends HttpServlet {
 			petVO.setPetGender(petGender);
 			petVO.setPetAge(petAge);
 			petVO.setPetSurvive(petSurvive);
-//			petVO.setPetId(petId);
+			petVO.setPetId(petId);
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("petVO", petVO); // 含有輸入格式錯誤的VO物件,也存入req
@@ -192,4 +193,3 @@ public class PetServlet extends HttpServlet {
 			}
 		}
 	}
-

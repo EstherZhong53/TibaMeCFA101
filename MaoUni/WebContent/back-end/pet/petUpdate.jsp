@@ -27,7 +27,6 @@
   padding: 350px;
  
 }
-
  .get_taital{
 	text-align: center;
   position: absolute;
@@ -37,7 +36,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
  }
-
    .email_box{
     margin-top: 150px;
     max-width:900px;
@@ -49,9 +47,7 @@
       padding: 50px 20px;
       opacity: 0.80;
       text-align:center;
-
   }
-
    .form-group {
         margin-bottom: 2rem;
    }
@@ -59,7 +55,6 @@
     margin-left: 200px;
     font-size: 22px;
    }
-
    .email-bt {
     max-width:900px;
      margin-left: 200px;
@@ -70,9 +65,7 @@
     font-size: 22px;  
     padding: 20px;
     margin-top: 20px;
-
    }
-
    .massage-bt {
     max-width:900px;
      margin-left: 200px;
@@ -83,13 +76,9 @@
     font-size: 22px;
     padding: 70px 20px 10px 20px;
   }
-
  .input{
-
   margin-left: 200px;
-
  }
-
 button.main_bt {
   background-color: white; 
     color: black; 
@@ -102,11 +91,9 @@ button.main_bt {
    border-radius: 25px;
     
 }
-
 button.main_bt:hover{
   background-color: #D2AD86; /* Green */
     color: white;
-
 }
 .erroeMasgs{
 margin-left: 200px;
@@ -157,26 +144,59 @@ margin-left: 200px;
  
             <h3>毛孩名字 <%=petVO.getPetName()%></h3>
             
-	<tr>
-		<td>毛孩種類</td>
-		<td><input type="TEXT" name="petSort" size="45" value="${param.petSort}"/></td>
+		<tr>
+		<td>毛孩類別:</td>
+		<select size="" name="petSort">
+		<option value="狗">狗</option>
+		<option value="貓">貓</option>
+		</select>
 	</tr>
-	<tr>
-		<td>毛孩品種</td>
-		<td><input type="TEXT" name="petVarId" size="45"	value="${param.petVarId}"/></td>
+	
+		<tr>
+		<td>毛孩品種:</td>
+		<select size="" name="petVarId">
+		<option value="1">馬爾濟斯</option>
+		<option value="2">哈士奇</option>
+		<option value="3">黃金獵犬</option>
+		<option value="4">拉布拉多</option>
+		<option value="5">吉娃娃</option>
+		<option value="6">米克斯</option>
+		<option value="7">博美</option>
+		<option value="8">約克夏</option>
+		<option value="9">臘腸</option>
+		<option value="10">柴犬</option>
+		<option value="11">豹貓</option>
+		<option value="12">英國短毛貓</option>
+		<option value="13">熱帶草原貓</option>
+		<option value="14">蘇格蘭折耳貓</option>
+		<option value="15">緬因貓</option>
+		<option value="16">挪威森林貓</option>
+		<option value="17">波斯貓 </option>
+		<option value="18">塞爾凱克捲毛貓</option>
+		<option value="19">加拿大無毛貓</option>
+		</select>
 	</tr>
-	<tr>
-	<tr>
-		<td>性別</td>
-		<td><input type="TEXT" name="petGender" size="45"	value="${param.petGender}"/></td>
+	
+		<tr>
+		<td>性別:</td>
+		<select size="1" name="petGender">
+		<option value="公">公</option>
+		<option value="母">母</option>
+		</select>
 	</tr>
+	
+	
 	<tr>
 		<td>年齡</td>
-		<td><input type="TEXT" name="petGender" size=""	value="${param.petGender}"/></td>
+		<td><input type="TEXT" name="petAge" size=""value="<%=petVO.getPetAge()%>"/></td>
 	</tr>
-	<tr>
-		<td>狀態</td>
-		<td><input type="TEXT" name="petAge" size="" value="${param.petAge}"/></td>
+	
+		<tr>
+		<td>狀態:</td>
+		<select size="" name="petSurvive">
+		<option value="0">健康</option>
+		<option value="1">懷念</option>
+		</select>
 	</tr>
 	
 
