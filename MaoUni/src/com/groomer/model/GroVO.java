@@ -23,6 +23,9 @@ public class GroVO implements java.io.Serializable{
 	private String avatarBase64;
 	private String intro;
 	
+	private String lng;
+	private String lat;
+	
 	
 	public Integer getGroomerId() {
 		return groomerId;
@@ -138,8 +141,20 @@ public class GroVO implements java.io.Serializable{
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
 	
-	
+
 	
 	
 }

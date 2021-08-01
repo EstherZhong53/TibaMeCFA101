@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.addressGeo.model.GeocodingService;
 import com.appointment_form.model.ApmVO;
 import com.member.model.MemberJDBCDAO;
 
@@ -39,8 +40,7 @@ public class GroDAO implements GroDAO_interface {
 //  以下為舊方法，已被上方取代	
 //	private final String UPDATE_REPED_STMT = "update GROOMER set REPED = REPED + 1 where GROOMERID = ?";
 //	private final String GET_LISTBYSTATUS_STMT = "select * from GROOMER where GSTATUS = ?";
-	
-	
+
 	@Override
 	public void insert(GroVO groVO) {
 		Connection con = null;
@@ -59,7 +59,7 @@ public class GroDAO implements GroDAO_interface {
 			pstmt.setBytes(6, groVO.getPcrc());
 			pstmt.setBytes(7, groVO.getFid());
 			pstmt.setBytes(8, groVO.getBid());
-			pstmt.executeUpdate();			 
+			pstmt.executeUpdate();
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't loa Database driver. " + e.getMessage());
@@ -93,26 +93,26 @@ public class GroDAO implements GroDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE_STATUS_STMT);
-			
+
 			con.setAutoCommit(false);
 
 			pstmt.setInt(1, gstatus);
 			pstmt.setInt(2, groomerId);
 			pstmt.executeUpdate();
-			
+
 			// 更改會員資料
-			if(gstatus == 1) {
+			if (gstatus == 1) {
 				System.out.println("sdasdawd");
 				Integer memId = findByPrimaryKey(groomerId).getMemId();
 				MemberJDBCDAO memDAO = new MemberJDBCDAO();
 				memDAO.updatePosition(memId, con);
 			}
-			
+
 			con.commit();
 			con.setAutoCommit(true);
-			
+
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());  
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured." + se.getMessage());
 		} finally {
@@ -219,21 +219,21 @@ public class GroDAO implements GroDAO_interface {
 				groVO.setGname(rs.getString(3));
 				groVO.setCenter(rs.getString(4));
 				groVO.setGrange(rs.getInt(5));
-				groVO.setSchDate(rs.getString(6)); 
-				groVO.setSchTime(rs.getString(7)); 
+				groVO.setSchDate(rs.getString(6));
+				groVO.setSchTime(rs.getString(7));
 				groVO.setGstatus(rs.getInt(8));
 				groVO.setReserve(rs.getInt(9));
 				groVO.setCom(rs.getInt(10));
 				groVO.setComg(rs.getInt(11));
 				groVO.setReped(rs.getInt(12));
-				
-				if(rs.getBytes(13) != null) {
+
+				if (rs.getBytes(13) != null) {
 					groVO.setAvatarBase64(Base64.getEncoder().encodeToString(rs.getBytes(13)).toString());
 				}
 				list.add(groVO);
 			}
 		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't loa database driver. " + e.getMessage());	// getMessage 得到字串，可以顯示在網頁上
+			throw new RuntimeException("Couldn't loa database driver. " + e.getMessage()); // getMessage 得到字串，可以顯示在網頁上
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 		} finally {
@@ -241,7 +241,7 @@ public class GroDAO implements GroDAO_interface {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					e.printStackTrace(System.err);	// printStackTrace 顯示在console上
+					e.printStackTrace(System.err); // printStackTrace 顯示在console上
 				}
 			}
 			if (pstmt != null) {
@@ -262,7 +262,6 @@ public class GroDAO implements GroDAO_interface {
 		return list;
 	}
 
-	
 	@Override
 	public List<GroVO> getAll(Map<String, String[]> map) {
 		Connection con = null;
@@ -272,7 +271,8 @@ public class GroDAO implements GroDAO_interface {
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
-			String finalSql = GET_ALL_STMT + jdbcUtil_CompositeQuery_Groomer.get_WhereCondition(map) + " order by groomerId";
+			String finalSql = GET_ALL_STMT + jdbcUtil_CompositeQuery_Groomer.get_WhereCondition(map)
+					+ " order by groomerId";
 			pstmt = con.prepareStatement(finalSql);
 			rs = pstmt.executeQuery();
 
@@ -283,8 +283,8 @@ public class GroDAO implements GroDAO_interface {
 				groVO.setGname(rs.getString(3));
 				groVO.setCenter(rs.getString(4));
 				groVO.setGrange(rs.getInt(5));
-				groVO.setSchDate(rs.getString(6)); 
-				groVO.setSchTime(rs.getString(7)); 
+				groVO.setSchDate(rs.getString(6));
+				groVO.setSchTime(rs.getString(7));
 				groVO.setGstatus(rs.getInt(8));
 				groVO.setReserve(rs.getInt(9));
 				groVO.setCom(rs.getInt(10));
@@ -292,7 +292,25 @@ public class GroDAO implements GroDAO_interface {
 				groVO.setReped(rs.getInt(12));
 				groVO.setAvatar(rs.getBytes(13));
 				groVO.setIntro(rs.getString(14));
+
 				
+				// getGeo from Redis
+				Integer groomerId = rs.getInt("GROOMERID");
+
+				GeocodingService geoSvc = new GeocodingService();
+				if (geoSvc.getGeocode(groomerId).get(0) == null) {
+					geoSvc.addGeo(groomerId, rs.getString("CENTER"));
+				}
+
+				String geocode = geoSvc.getGeocode(groomerId).get(0).toString();
+//				retrun fromat(121.234134,23.23514)
+				String lng = geocode.substring(1, geocode.indexOf(","));
+				String lat = geocode.substring(geocode.indexOf(",") + 1, geocode.length() - 1);
+
+				groVO.setLng(lng);
+				groVO.setLat(lat);
+				System.out.println(groomerId + ": " + geocode);
+
 				list.add(groVO);
 			}
 
@@ -326,7 +344,6 @@ public class GroDAO implements GroDAO_interface {
 		return list;
 	};
 
-
 	public Integer updateInfo(GroVO groVO) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -351,7 +368,7 @@ public class GroDAO implements GroDAO_interface {
 		} catch (SQLException se) {
 			if (con != null) {
 				try {
-					con.rollback(); 
+					con.rollback();
 				} catch (SQLException e) {
 					throw new RuntimeException("rollback error occured. " + e.getMessage());
 				}
@@ -376,44 +393,43 @@ public class GroDAO implements GroDAO_interface {
 		return completeNum;
 	}
 
-
 	@Override
 	public void update(GroVO groVO, Connection con) {
-		
+
 		PreparedStatement pstmt = null;
 		StringBuffer finalsql = new StringBuffer("update GROOMER set ");
 		int count = 0;
 		StringBuffer condition = new StringBuffer();
-		
+
 		try {
 			Class clazz = groVO.getClass();
-			Field[] fields = clazz.getDeclaredFields(); 
-			
-			for(int i = 0; i < fields.length; i++) {
-				
+			Field[] fields = clazz.getDeclaredFields();
+
+			for (int i = 0; i < fields.length; i++) {
+
 				fields[i].setAccessible(true);
 				String colName = fields[i].getName();
-				
-				if(fields[i].get(groVO) != null) {
-					if(count != 0) {
+
+				if (fields[i].get(groVO) != null) {
+					if (count != 0) {
 						condition.append(", ");
 					}
-					
-					if("reped".equals(colName) || "reserve".equals(colName) || "com".equals(colName)) {
+
+					if ("reped".equals(colName) || "reserve".equals(colName) || "com".equals(colName)) {
 						condition.append(colName + " = " + colName + " + 1 ");
 						count++;
 					}
-					if("comg".equals(colName)) {
+					if ("comg".equals(colName)) {
 						condition.append(colName + " = " + colName + " + " + groVO.getComg());
 						count++;
 					}
 				}
 			}
-			
+
 			finalsql.append(condition + " where GROOMERID = " + groVO.getGroomerId());
 			pstmt = con.prepareStatement(finalsql.toString());
 			pstmt.executeUpdate();
-			
+
 		} catch (SecurityException e) {
 			throw new RuntimeException(e.getMessage());
 		} catch (SQLException e) {
@@ -422,8 +438,8 @@ public class GroDAO implements GroDAO_interface {
 			e.printStackTrace(System.err);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace(System.err);
-		}finally {
-			if(pstmt != null) {
+		} finally {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
@@ -431,18 +447,15 @@ public class GroDAO implements GroDAO_interface {
 				}
 			}
 		}
-		
+
 	}
-	
-	
+
 	// 將圖片轉成base64字串
 	public String base64Change(byte[] b) {
 		String pic = Base64.getEncoder().encodeToString(b);
 		return pic;
 	}
-	
-	
-	
+
 //	@Override
 //	public void updateReped(Integer groomerId, Connection con) {
 //		PreparedStatement pstmt = null;
@@ -463,24 +476,20 @@ public class GroDAO implements GroDAO_interface {
 //			} // 由GrepDAO.update 綁定交易、共用連線，因此不用con.close()
 //		}
 //	}	
-	
-	
 
-	
 	@Override
 	public GroVO findByPrimaryKey(Integer groomerId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		GroVO groVO = new GroVO();
-		
-		
+
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONT_STMT);
 			pstmt.setInt(1, groomerId);
-			
+
 			rs = pstmt.executeQuery();
 			rs.next();
 			groVO.setGroomerId(rs.getInt("GROOMERID"));
@@ -488,42 +497,41 @@ public class GroDAO implements GroDAO_interface {
 			groVO.setGname(rs.getString("GNAME"));
 			groVO.setCenter(rs.getString("CENTER"));
 			groVO.setGrange(rs.getInt("GRANGE"));
-			groVO.setSchDate(rs.getString("SCHDATE")); 
-			groVO.setSchTime(rs.getString("SCHTIME")); 
+			groVO.setSchDate(rs.getString("SCHDATE"));
+			groVO.setSchTime(rs.getString("SCHTIME"));
 			groVO.setGstatus(rs.getInt("GSTATUS"));
 			groVO.setReserve(rs.getInt("RESERVE"));
 			groVO.setCom(rs.getInt("COM"));
 			groVO.setComg(rs.getInt("COMG"));
 			groVO.setReped(rs.getInt("REPED"));
-			
+
 			byte[] b = rs.getBytes("AVATAR");
 			groVO.setAvatar(b);
-			if(b != null){
+			if (b != null) {
 				groVO.setAvatarBase64(Base64.getEncoder().encodeToString(b));
 			}
 			groVO.setIntro(rs.getString("INTRO"));
-			
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-		}finally {
-			if(rs != null) {
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
 					e.printStackTrace(System.err);
 				}
 			}
-			if(pstmt != null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
 					e.printStackTrace(System.err);
 				}
 			}
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
@@ -534,23 +542,19 @@ public class GroDAO implements GroDAO_interface {
 		return groVO;
 	}
 
-	
-	
-	
 	@Override
 	public GroVO findByMemId(Integer memId) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		GroVO groVO = new GroVO();
-		
-		
+
 		try {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONT_STMT_BYMEMID);
 			pstmt.setInt(1, memId);
-			
+
 			rs = pstmt.executeQuery();
 			rs.next();
 			groVO.setGroomerId(rs.getInt("GROOMERID"));
@@ -558,42 +562,41 @@ public class GroDAO implements GroDAO_interface {
 			groVO.setGname(rs.getString("GNAME"));
 			groVO.setCenter(rs.getString("CENTER"));
 			groVO.setGrange(rs.getInt("GRANGE"));
-			groVO.setSchDate(rs.getString("SCHDATE")); 
-			groVO.setSchTime(rs.getString("SCHTIME")); 
+			groVO.setSchDate(rs.getString("SCHDATE"));
+			groVO.setSchTime(rs.getString("SCHTIME"));
 			groVO.setGstatus(rs.getInt("GSTATUS"));
 			groVO.setReserve(rs.getInt("RESERVE"));
 			groVO.setCom(rs.getInt("COM"));
 			groVO.setComg(rs.getInt("COMG"));
 			groVO.setReped(rs.getInt("REPED"));
-			
+
 			byte[] b = rs.getBytes("AVATAR");
 			groVO.setAvatar(b);
-			if(b != null){
+			if (b != null) {
 				groVO.setAvatarBase64(Base64.getEncoder().encodeToString(b));
 			}
 			groVO.setIntro(rs.getString("INTRO"));
-			
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
-		}finally {
-			if(rs != null) {
+		} finally {
+			if (rs != null) {
 				try {
 					rs.close();
 				} catch (SQLException e) {
 					e.printStackTrace(System.err);
 				}
 			}
-			if(pstmt != null) {
+			if (pstmt != null) {
 				try {
 					pstmt.close();
 				} catch (SQLException e) {
 					e.printStackTrace(System.err);
 				}
 			}
-			if(con != null) {
+			if (con != null) {
 				try {
 					con.close();
 				} catch (SQLException e) {
@@ -603,7 +606,5 @@ public class GroDAO implements GroDAO_interface {
 		}
 		return groVO;
 	}
-	
-	
-	
+
 }

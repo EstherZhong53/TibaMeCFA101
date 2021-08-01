@@ -253,6 +253,7 @@ margin-top: 30px;
 	
 <script>
 let groomerId = "${groVO.groomerId}";
+let grange = "${groVO.grange}";
 </script>	
 	
 

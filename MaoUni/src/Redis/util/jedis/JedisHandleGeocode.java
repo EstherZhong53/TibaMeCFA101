@@ -24,11 +24,9 @@ public class JedisHandleGeocode {
 	
 	public static void geoAdd(String key, String memId, String address) {
 		Jedis jedis = null;
-		System.out.println("wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
 		GeoApiContext context = new GeoApiContext.Builder()
 			    .apiKey("AIzaSyALjOdTPZMiMWQVlR01yYwLZWHAVuhk6_w")
 			    .build();
-//		System.out.println("sssssssssssssssssss: " + context);
 		jedis = pool.getResource();
 		
 		// 將地址轉為geocode

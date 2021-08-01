@@ -46,13 +46,13 @@ public class GeocodingService {
 		return jedisHandleGeocode.getGeo(key, memId.toString());
 	}
 
-	public static void main(String[] args) {
-		GeocodingService g = new GeocodingService();
-		g.addGeo(1, "新北市板橋區三民路一段一巷23號");
-		g.addGeo(6, "台北市大安區敦化南路二段105號");
-		List d = g.getGeocode(3);
-		System.out.println(d.get(0));
-		
-	}
+//	public static void main(String[] args) {
+//		GeocodingService g = new GeocodingService();
+//		g.addGeo(1, "新北市板橋區三民路一段一巷23號");
+//		g.addGeo(6, "台北市大安區敦化南路二段105號");
+//		List d = g.getGeocode(3);
+//		System.out.println(d.get(0));
+//		
+//	}
 
 }

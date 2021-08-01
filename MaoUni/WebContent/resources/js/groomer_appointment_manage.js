@@ -412,7 +412,7 @@ function init() {
                         fillOpacity: 0.35, // 圓形裡，填滿顏色的透明度
                         map: map,
                         center: pos, // 中心點
-                        radius: 3000 // 半徑
+                        radius: grange * 1000 // 半徑
                     });
                 })
             } else {
@@ -450,7 +450,6 @@ function init() {
 				console.log(i);
 			}
 			markersArray.length = 0;
-			console.log(markersArray + "222222")
 		}
 		
         function generateMarkers() {
