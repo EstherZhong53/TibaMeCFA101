@@ -24,9 +24,11 @@
 
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/tooplate-gymso-style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/sweetalert2.css">
 
 <script src="<%= request.getContextPath() %>/resources/js/fontawesome.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 <style>
 
 th, td{
@@ -49,6 +51,10 @@ background-color: #8CD790;
 
 .schduleTable {
   overflow-x:auto;
+}
+
+.fa-power-off:hover{
+cursor: pointer;
 }
 
 </style>
@@ -85,12 +91,6 @@ background-color: #8CD790;
                         <a href="<%= request.getContextPath() %>/front-end/member/memberpage.jsp" class="nav-link smoothScroll">會員中心</a>
                     </li>
                 </ul>
-
-<!--                 <ul class="social-icon ml-lg-3"> -->
-<!--                     <li><a href="https://fb.com/tooplate" class="fa fa-facebook"></a></li> -->
-<!--                     <li><a href="#" class="fa fa-twitter"></a></li> -->
-<!--                     <li><a href="#" class="fa fa-instagram"></a></li> -->
-<!--                 </ul> -->
             </div>
 
         </div>
@@ -147,6 +147,7 @@ background-color: #8CD790;
                         	<th>20:00</th>
                         	<th>20:30</th>
                         	<th>21:00</th>
+                        	<th style="background-color: green">休</th>
                         </thead>
 
                         <tbody>
@@ -158,7 +159,8 @@ background-color: #8CD790;
            				<c:if test="${schVO.schStatus.charAt(i) == '1'.charAt(0)}"><td class="booked"></td></c:if>           
            				<c:if test="${schVO.schStatus.charAt(i) == '2'.charAt(0)}"><td class="booked"><i class="fas fa-paw"></i></td></c:if>          				
           				<c:if test="${schVO.schStatus.charAt(i) == '3'.charAt(0)}"><td class="done"><i class="fas fa-check"></i></td></c:if>             				
-           				<c:if test="${schVO.schStatus.charAt(i) == '4'.charAt(0)}"><td class=""></td></c:if>               
+           				<c:if test="${schVO.schStatus.charAt(i) == '4'.charAt(0)}"><td class=""></td></c:if>
+           				<c:if test="${i == 41}"><td class=""><i class="fas fa-power-off" data-groomerid="${schVO.groomerId}" data-schdate="${schVO.schDate}"></i></td></c:if>                 
             </c:forEach>
                             </tr>
                             
@@ -176,6 +178,40 @@ background-color: #8CD790;
 
 	</main>
 	<footer></footer>
+	
+	<script>
+	$(".fa-power-off").click(function(e){		
+		$.ajax({
+			url: "/MaoUni/schedule.do",
+			type: "POST",
+			data:{
+				schdate: e.target.dataset.schdate,
+				groomerId: e.target.dataset.groomerid,
+				status: "0",
+				stime: "0",
+				etime: "47",
+				action: "update"
+			},
+			success: function(data){
+				console.log(data)
+				if(data === "更新失敗"){
+					swal("更新失敗！", "這天已有行程，不可劃休哦!", "warning").then((result) => {
+						window.location.reload();
+					})
+				}else{
+					swal("班表更新！", "", "success").then((result) => {
+						window.location.reload();
+					})
+				}
+			}
+		})
+	})
+	
+	
+	
+	</script>
+	
+	
 
 <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 </body>

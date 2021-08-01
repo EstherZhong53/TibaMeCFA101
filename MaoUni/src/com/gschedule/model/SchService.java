@@ -37,8 +37,18 @@ public class SchService {
 	}
 	
 //	Integer groomerId, Date date, Integer status, String schStatus
-	public void update(Integer groomerId, Date date, Integer status, Integer stime, Integer etime) {
+	public String update(Integer groomerId, Date date, Integer status, Integer stime, Integer etime) {
+		SchVO schVO = dao.getOneDaySchdule(date.toString(), groomerId);
+		String schStatus = schVO.getSchStatus();
+		String result = "";
+		if(schStatus.indexOf("2") != -1 || schStatus.indexOf("3") != -1) {
+			result += "更新失敗";
+			return result;
+		}
+		
 		dao.update(groomerId, date, status, stime, etime);
+		result += "更新成功";
+		return result;
 	}
 	
 //	public SchVO getOneDaySchdule(Integer schId) {

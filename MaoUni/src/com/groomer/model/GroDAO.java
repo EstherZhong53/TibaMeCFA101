@@ -102,7 +102,6 @@ public class GroDAO implements GroDAO_interface {
 
 			// 更改會員資料
 			if (gstatus == 1) {
-				System.out.println("sdasdawd");
 				Integer memId = findByPrimaryKey(groomerId).getMemId();
 				MemberJDBCDAO memDAO = new MemberJDBCDAO();
 				memDAO.updatePosition(memId, con);
