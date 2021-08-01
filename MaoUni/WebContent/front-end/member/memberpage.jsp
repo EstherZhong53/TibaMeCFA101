@@ -786,7 +786,7 @@ background-color: #fff;
                 <table>
              
                 <tr>
-                <td>快樂肥宅水</td>
+                <td>${memberVO.memName}</td>
                 </tr>
             
                 <tr>

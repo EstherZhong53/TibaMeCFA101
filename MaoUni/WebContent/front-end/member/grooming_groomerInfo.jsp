@@ -6,10 +6,12 @@
 <%@ page import="com.service_list.model.*"%>
 <%@ page import="com.groomer.model.*"%>
 <%@ page import="com.appointment_form.model.*"%>
+<%@ page import="com.pet.model.*"%>
 
 <jsp:useBean id="worksSvc" scope="page" class="com.works.model.WorkService"/>
 <jsp:useBean id="svcListSvc" scope="page" class="com.service_list.model.SvcListService"/>
 <jsp:useBean id="groomerSvc" scope="page" class="com.groomer.model.GroService"/>
+<jsp:useBean id="petSvc" scope="page" class="com.pet.model.PetService"/>
 
 <!DOCTYPE html>
 <html>
@@ -251,7 +253,7 @@ margin: 10px 5px;
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <fieldset>
-        <select class="form-control pid apminput" name="pid">
+        <select class="form-control pid apminput" name="pid">   
 			<option value="1">Cookie</option>
 			<option value="2">NueNue</option>
 		</select>
@@ -380,7 +382,7 @@ margin: 10px 5px;
                             </div>
                         </div>
                         <div class="down-content">
-                            <h4>${apmVO.pid}</h4>
+                            <h4>${petSvc.findByPrimaryKey(apmVO.pid).petName}</h4>
                             <span>${apmVO.apmDate}</span>
                             <p>${apmVO.apmComment}</p>
 

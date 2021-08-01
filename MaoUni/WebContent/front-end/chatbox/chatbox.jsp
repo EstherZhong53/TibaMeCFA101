@@ -130,7 +130,7 @@
 		 https://stackoverflow.com/questions/8228281/what-is-the-function-construct-in-javascript 
 
 		 */
-		let self = "${userName}"; // EL
+		let self = "${memberVO.memName}"; // EL
 
 		(function() {
 			let chat = {
@@ -159,7 +159,7 @@
 					$(window).on('unload', this.webSocketDisconnect.bind(this));
 				},
 				webSocketConnect : function() {
-					let MyPoint = "/FriendWS/${userName}"; // EL
+					let MyPoint = "/FriendWS/${memberVO.memName}"; // EL
 					let host = window.location.host;
 					let path = window.location.pathname;
 					let webCtx = path.substring(0, path.indexOf('/', 1));

@@ -254,11 +254,11 @@ public class MemberServlet extends HttpServlet {
 				session.setAttribute("memberVO", memberVO);
 
 				
-//				if(memberVO.getMemPosition() == 1) {
-//					GroDAO groDAO = new GroDAO();
-//					GroVO groVO = groDAO.findByMemId(memberVO.getMemId());
-//					session.setAttribute("groVO", groVO);
-//				}
+				if(memberVO.getMemPosition() == 1) {
+					GroDAO groDAO = new GroDAO();
+					GroVO groVO = groDAO.findByMemId(memberVO.getMemId());
+					session.setAttribute("groVO", groVO);
+				}
 				
 				res.sendRedirect(url);
 				// session.setAttributec會在一個時間點保留存的值
