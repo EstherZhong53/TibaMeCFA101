@@ -284,7 +284,7 @@ margin-top: -50px;
 				
 <div class="memberswitch col-2">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
-        <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
+        <a href="<%=request.getContextPath()%>/pet/pet.do?action=findByMemId">毛孩資料</a>
         <a href="#">訂單紀錄</a>
         <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
         <c:if test="${memberVO.memPosition == '1'}">

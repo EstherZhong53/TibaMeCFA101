@@ -1,11 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF8"%>
 <%@ page import="com.member.model.*"%>
+<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
   MemberVO memberVO = (MemberVO) request.getAttribute("memberVO"); 
 %>    
+
+<%
+	MemberService memSvc = new MemberService();
+	List<MemberVO> list = memSvc.getAll();
+	pageContext.setAttribute("list", list);
+%>
+
  
 <!DOCTYPE html>
 <html>
@@ -16,7 +25,6 @@
 <meta name = "viewport" content ="width=device-width,initial-scale-1.0">
     <!-- <script src="JavaScript 檔案位址.js"></script> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/memberpage.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的CSS,有再調過細部效果 -->
@@ -55,7 +63,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
-    display: block;
+display: block;
 }
 body {
     font-size: 18px;
@@ -455,7 +463,6 @@ margin-left: 5%;
     
     div.image img{
     
-    z-index: 1;
     width: 290px;
     border-radius: 5px;
     margin-left: 53%;
@@ -665,48 +672,32 @@ background-color: #fff;
 
 <body>
 
-	<header>
+<!-- 以下為header ******************************************************************************************* -->
+
+<header>
 	
 	    <div class="icontrue" style="margin: 10px 10px 0px 0px;">
 		
-<a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
-      <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
-		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;margin-right:-4px;"></i></a>
-	    
+		  <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
+		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
+<!-------------------------------------------- shopping cart ------------------------------------------------>
 	      <div class="dropdown ml-auto">
            
             <button class="btn btn-cart btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" >
                 <i class="fas fa-shopping-cart fa-2x shoppingCart" style="color:#fff;"></i>
-                <span class="badge badge-pill badge-danger">9</span>
+                <span class="badge badge-pill badge-danger totalItems">0</span>
             </button>
            
             <div class="dropdown-menu dropdown-menu-right" style="min-width: 300px" aria-labelledby="dropdownMenuButton">
                 <div class="p-3">
                     <table class="table table-sm">
                         <h6>已選擇商品</h6>
-                        <tbody style="color:black;">
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <a href="#removeModal" data-price="1999" data-title="不求人" data-toggle="modal"
-                                        data-target="#removeModal"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                                <td class="align-middle">不求人</td>
-                                <td class="align-middle">1件</td>
-                                <td class="align-middle text-right">$1999</td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <a href="#removeModal" data-price="999" data-title="一級偽裝帽" data-toggle="modal"
-                                        data-target="#removeModal"><i class="far fa-trash-alt "></i></a>
-                                </td>
-                                <td class="align-middle">一級偽裝帽</td>
-                                <td class="align-middle">1件</td>
-                                <td class="align-middle text-right">$999</td>
-                            </tr>
+                        <tbody class="cartbody" style="color:black;">
                         </tbody>
                     </table>
-                    <a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
+                    <a href="<%=request.getContextPath()%>/front-end/shop/order_confirm.jsp" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
                 </div>
             </div>
         </div>
@@ -714,7 +705,7 @@ background-color: #fff;
 	        <a href="#" class="iconbth"><i class="fas fa-search fa-1x" style="color:white;font-size:25px;"></i></a>	        	        	
 	   
 	    </div>
-	    
+<!---------------------------------------------------------------------------------------------------------------------->	    
 		<!--icon一定要在top-flex之上，不然會被移動條給蓋爆777777-->
 	
 		<div class="Top-Flex">
@@ -725,33 +716,26 @@ background-color: #fff;
 			</div>
 		</div>
 		
-<div class="shopbody">
-    <nav style="margin-bottom:-15px;margin-left:15px;">
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
-     </nav>
-   </div>
+			<div class="shopbody">
+				<nav style="margin-bottom:-15px;margin-left:15px;">
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			 	</nav>
+		</div>
 		<div class="Shopping-ul"></div>
 	    
 	</header>
+
+<!--以上為header ***********************************************************************-->
+<main>
     
 
-    <!--以上為頭部的html設定位子-->
 
-	<script>
-    // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
-    //滑鼠滾動(scroll)就開始觸發
-    window.addEventListener("scroll",function(){
-    const header = document.querySelector('header');
-    header.classList.toggle('sticky',window.scrollY > 0);
-    });
-    
-	</script>
 
 
 
@@ -760,7 +744,7 @@ background-color: #fff;
 		
  <div class="memberswitch">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
-        <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
+        <a href="<%=request.getContextPath()%>/pet/pet.do?action=findByMemId">毛孩資料</a>
         <a href="#">訂單紀錄</a>
         <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
 
@@ -773,11 +757,10 @@ background-color: #fff;
         </c:if>
         
         
-        <a href="/MaoUni/member/member.do?action=OutUser">登出</a>
+        <a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
 </div>
-
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do" name="memberpage">
     <div class="membercontainer">
-    <form class="form" id="form">
     <div class="switchform">
 
             <h2>會員資料</h2>
@@ -787,38 +770,53 @@ background-color: #fff;
              
                 <tr>
                 <td>${memberVO.memName}</td>
-                </tr>
+               </tr>
             
                 <tr>
-                <td>hk1345@hotmail.com</td>   
+                <td>${memberVO.memEmail}</td>   
                 </tr>
-            
-                <tr>
-                <td>女性</td>
-            </tr>
-                <td>1999-01-02</td>   
-            </tr>
-            <tr>
-                <td>A1113982337</td>   
+	
+				 <tr>
+                <td>${memberVO.memGender}</td>   
+                </tr>
+	
+ 				 <tr>    
+                <td>${memberVO.memBirthday}</td>   
+            	</tr>
+            	
+            	
+            	<tr>
+                <td>${memberVO.memIdenity}</td>   
                 </tr>
              
                 <tr>
-                <td>0912907998</td>     
+                <td>${memberVO.memPh}</td>     
                 </tr>
+                
                 <tr>
-                <td>桃園市平鎮區忠孝路106號</td>    
+                <td>${memberVO.memAddres}</td>    
                 </tr>
-            </div>
             </table>
         </div>
+             
 </div>
-            <button class="bt" type="submit">Update</button>
-            <button class="bt" type="submit">Password</button>
-</div>
+</FORM>
 
-<!-- <div class="image"> -->
-<%--   <img src="${pageContext.request.contextPath}/resources/images/valeriia.jpg" width="300" height="399.8"/>  --%>
-<!-- </div> -->
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
+<input class=bt type="submit"  value="更改密">
+<input type="hidden" name="memId" value="${memberVO.memId}"> 
+<input type="hidden" name="action" value="updatePassword">
+</FORM>            
+   
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
+<input class=bt type="submit" value="編輯資料">
+<input type="hidden" name="memId" value="${memberVO.memId}"> 
+<input type="hidden" name="action" value="getOne_For_Update">
+</FORM>     
+</div>
+<div class="image">
+  <img src="${pageContext.request.contextPath}/resources/images/valeriia.jpg" width="300" height="399.8"/> 
+</div>
 
 
 	
@@ -885,8 +883,18 @@ background-color: #fff;
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
 	
 	
-	<!-- 以下為購物車script程式碼,不可刪除!!! 功能會跑掉!!!! -->
+	
     <script>
+    
+    	<!--以上為頭部的html設定位子-->
+	    // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
+	    //滑鼠滾動(scroll)就開始觸發
+	    window.addEventListener("scroll",function(){
+	    const header = document.querySelector('header');
+	    header.classList.toggle('sticky',window.scrollY > 0);
+	    });
+    
+    <!-- 以下為購物車script程式碼,不可刪除!!! 功能會跑掉!!!! -->
         $(document).ready(function () {
             $('#removeModal').on('show.bs.modal', function (event) {
                 var btn = $(event.relatedTarget);
@@ -902,6 +910,7 @@ background-color: #fff;
 <script>
 	const sessionId = "${sessionId}";
 </script>
+<script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
 <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
     
 </body>

@@ -103,15 +103,15 @@ input.update:hover {
          <div class="menu-wrap">
              <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
-                     <li><a href="<%=request.getContextPath()%>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
-                     <li><a href="#">商城管理</a></li>
-                     <li><a href="#">商城客服管理</a></li>
-                     <li><a href="#">討論區管理</a></li>
-                     <li><a href="#">浪浪找家管理</a></li>
-                     <li><a href="#">知識站管理</a></li>
-                     <li><a href="#">公告管理</a></li>
-                     <li><a href="#">美容師管理</a></li>
-                     <li><a href="#">美容預約檢舉管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/forumpost/forumPostHomePage.jsp">討論區管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
                  </ul>
              </div>
          </div>
@@ -473,24 +473,17 @@ $$(".memPh").each(function(){
 })
 	
 </script>
-				<script
-					src="<%=request.getContextPath()%>/resources/bootstrap/jquery/jquery.min.js"></script>
-				<script
-					src="<%=request.getContextPath()%>/resources/js/jquery_1.12.4.min.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/bootstrap/jquery/jquery.min.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/js/jquery_1.12.4.min.js"></script>
 
-				<script
-					src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>
 
-				<script
-					src="<%=request.getContextPath()%>/resources/js/fontawesome.js"></script>
-				<script
-					src="<%=request.getContextPath()%>/resources/js/fontawesome.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/js/fontawesome.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/js/fontawesome.js"></script>
 				<!-- 步驟三 -->
 				<!-- 隱藏式菜單_連結-->
 				<!--底下是jsp 裡面所連結打法可以參考一下-->
-				<script
-					src="<%=request.getContextPath()%>/resources/js/hidden_menu3.js"></script>
-				<script
-					src="<%=request.getContextPath()%>/resources/js/hidden_menu4.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/js/hidden_menu3.js"></script>
+				<script src="<%=request.getContextPath()%>/resources/js/hidden_menu4.js"></script>
 </body>
 </html>

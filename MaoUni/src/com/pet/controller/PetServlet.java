@@ -79,6 +79,36 @@ public class PetServlet extends HttpServlet {
 				failureView.forward(req, res);
 			}
 		}
+		
+		//會員一對多(寵物)
+		if ("findByMemId".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				Integer petMemId = new Integer(req.getParameter("petMemId").trim());
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				PetService petSvc = new PetService();
+				List<PetVO> petVO = petSvc.findByMemId(petMemId);
+				
+				//這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關	
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("petVO", petVO); // 資料庫取出的VO物件,存入req
+				String url = "/front-end/member/petpage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/petpage.jsp");
+				failureView.forward(req, res);
+			}
+		}		
+		
 
 		if ("update".equals(action)) { // 來自jsp的請求
 

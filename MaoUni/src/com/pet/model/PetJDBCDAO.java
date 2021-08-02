@@ -14,9 +14,10 @@ public class PetJDBCDAO implements PetDAO_interface {
 
 	private static final String INSERT_STMT = "insert into PET(PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE) values (?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "select *from PET";
-	private static final String GET_ONE_STMT = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET where PET_ID= ?;";
+	private static final String GET_ONE_STMT = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET where PET_ID= ?";
 	private static final String DELETE = "DELETE FROM PET where PET_ID = ?";
 	private static final String UPDATE = "UPDATE PET set PET_SORT =?, PET_VAR_ID =?, PET_GENDER =?, PET_AGE =?, PET_SURVIVE =? where PET_ID = ?";
+	private static final String GET_ONE_MEMBERANDPET = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET where PET_MEM_ID= ?";
 	
 	@Override
 	public void insert(PetVO petVO) {
@@ -212,6 +213,65 @@ public class PetJDBCDAO implements PetDAO_interface {
 		}
 		
 		return petVO;
+	}
+
+	@Override
+	public List<PetVO> findByMemId(Integer petMemId) {
+
+		List<PetVO> list = new ArrayList<PetVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_MEMBERANDPET);
+
+			pstmt.setInt(1, petMemId);
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+
+			PetVO petVO = new PetVO();
+			
+			petVO.setPetId(rs.getInt("PET_ID"));
+			petVO.setPetMemId(rs.getInt("PET_MEM_ID"));
+			petVO.setPetName(rs.getString("PET_NAME"));
+			petVO.setPetSort(rs.getString("PET_SORT"));
+			petVO.setPetVarId(rs.getInt("PET_VAR_ID"));
+			petVO.setPetGender(rs.getString("PET_GENDER"));
+			petVO.setPetAge(rs.getInt("PET_AGE"));
+			petVO.setPetSurvive(rs.getInt("PET_SURVIVE"));
+
+			}
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
 	}
 
 	@Override

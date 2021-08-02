@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="sgu.css" rel="stylesheet" type="text/css" />
-<title>MaoUNi-歡迎毛爸媽的加入!</title>
+<title>MaoUni-歡迎毛爸媽的加入!</title>
 
 <style>
 @import

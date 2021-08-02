@@ -25,6 +25,48 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	private static final String UPDATE = "UPDATE MEMBER set MEM_NAME =?, MEM_EMAIL=?, MEM_PASSWORD=?, MEM_IDENTITY=? , MEM_GENDER=?, MEM_PH=?, MEM_ADDRES=?, MEM_BIRTHDAY=?, MEM_POSITION=? ,MEM_RESERVE=?, MEM_SURVIVE=? ,MEM_UPDATE=now() where MEM_ID = ?";
 	private static final String CHECK = "SELECT * FROM MEMBER where MEM_EMAIL = ?";
 	private static final String UPDATE_POSITION = "UPDATE MEMBER set MEM_POSITION=?  where MEM_ID = ?";
+	private static final String UPDATE_PASSWORD = "UPDATE MEMBER SET MEM_PASSWORD = ? WHERE MEM_EMAIL = ?";
+
+	@Override
+	public void updatePassword(MemberVO memberVO) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(UPDATE_PASSWORD);
+
+			pstmt.setString(1, memberVO.getMemPassword());
+			pstmt.setString(2, memberVO.getMemEmail());
+			pstmt.executeUpdate();
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+		} finally {
+
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+	}
 
 	@Override
 	public String checkemail(String memEmail) {
@@ -163,6 +205,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			throw new RuntimeException("A database error occured. " + se.getMessage());
 
 		} finally {
+
 			if (pstmt != null) {
 				try {
 					pstmt.close();
@@ -337,7 +380,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 //			List<MemberVO> list = new ArrayList<MemberVO>();
-		
+
 		MemberVO memberVO = null; //// 要給null才可以判斷使用者是否為空，也等於把vo串聯過來
 
 		try {
@@ -356,14 +399,19 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				memberVO = new MemberVO();
 				memberVO.setMemId(rs.getInt("MEM_ID"));
 				memberVO.setMemName(rs.getString("MEM_NAME"));
-				memberVO.setMemAddres(rs.getString("MEM_ADDRES"));
-				memberVO.setMemPosition(rs.getInt("MEM_POSITION"));
-				memberVO.setMemId(rs.getInt("MEM_ID"));
 				memberVO.setMemEmail(rs.getString("MEM_EMAIL"));
 				memberVO.setMemPassword(rs.getString("MEM_PASSWORD"));
+				memberVO.setMemIdenity(rs.getString("MEM_IDENTITY"));
+				memberVO.setMemGender(rs.getString("MEM_GENDER"));
+				memberVO.setMemPh(rs.getInt("MEM_PH"));
+				memberVO.setMemAddres(rs.getString("MEM_ADDRES"));
+				memberVO.setMemBirthday(rs.getDate("MEM_BIRTHDAY"));
+				memberVO.setMemPosition(rs.getInt("MEM_POSITION"));
+				memberVO.setMemReserve(rs.getInt("MEM_RESERVE"));
+				memberVO.setMemSurvive(rs.getInt("MEM_SURVIVE"));
+				memberVO.setMemUpdate(rs.getTimestamp("MEM_UPDATE"));
 
 			}
-			
 
 		} catch (ClassNotFoundException e) {
 
@@ -410,8 +458,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 			rs = pstmt.executeQuery();
 
-			
-
 			while (rs.next()) {
 
 				memberVO = new MemberVO();
@@ -420,7 +466,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 				memberVO.setMemPassword(rs.getString("MEM_PASSWORD"));
 
 			}
-			
 
 		} catch (ClassNotFoundException e) {
 
