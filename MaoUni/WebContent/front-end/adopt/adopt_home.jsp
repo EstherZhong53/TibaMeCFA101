@@ -2,10 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.adopt_imf.model.*"%>
+<%@ page import="com.tracking_adopt.model.*"%>
 <%@ page import="com.adopt_mechanism.model.*"%>
-
 <%@ page import="com.variety.model.*"%>
 <%@ page import="com.variety.model.VarietyVO"%>
+<%@ page import="com.member.model.*"%>
 
 
 <%
@@ -16,6 +17,14 @@
 	VarietyService varSvc = new VarietyService();
 	List<VarietyVO> varlist = varSvc.getAll();
 	pageContext.setAttribute("varlist", varlist);
+	
+	
+	
+	MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+	//int memId = memberVO.getMemId();
+	pageContext.setAttribute("memberVO",memberVO);
+	//String[] memId ={memId};
+
 %>
 <!DOCTYPE html>
 <html>
@@ -27,10 +36,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@900&display=swap" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, minimum-scale=0.5, user-scalable=no">
-<meta name = "viewport" content ="width=device-width,initial-scale-1.0">
     <!-- <script src="JavaScript 檔案位址.js"></script> -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<%= request.getContextPath() %>/resources/css/newheader.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的BootStrap CSS -->  
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/styleD.css"> <!-- 左邊這個是右上角購物車下拉式選單使用的CSS,有再調過細部效果 -->
@@ -44,6 +50,14 @@
     <title>MaoUni前端公版</title>
     
 <style>
+.confirm{
+	font-family: DFKai-sb;
+	width:80px;
+	height:80px;
+	margin-left: 1060px;
+	margin-top: 10px;
+}
+
 table {
 	border: 2px;
 	width: 1000px;
@@ -63,54 +77,36 @@ table {
 	width: 280px;
 }
 
-
-
 </style>
 </head>
+<body>	
 
-<body>
+<!-- 以下為header ******************************************************************************************* -->
 
+<header>
 	
 	    <div class="icontrue" style="margin: 10px 10px 0px 0px;">
 		
 		  <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
-		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:28px;padding:2px;margin-top:-4px;"></i></a>
-		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;margin-right:-4px;"></i></a>
-	    
+		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
+		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
+<!-------------------------------------------- shopping cart ------------------------------------------------>
 	      <div class="dropdown ml-auto">
            
             <button class="btn btn-cart btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false" >
-                <i class="fas fa-shopping-cart fa-2x" style="color:#fff;"></i>
-                <span class="badge badge-pill badge-danger">9</span>
+                <i class="fas fa-shopping-cart fa-2x shoppingCart" style="color:#fff;"></i>
+                <span class="badge badge-pill badge-danger totalItems">0</span>
             </button>
            
             <div class="dropdown-menu dropdown-menu-right" style="min-width: 300px" aria-labelledby="dropdownMenuButton">
                 <div class="p-3">
                     <table class="table table-sm">
                         <h6>已選擇商品</h6>
-                        <tbody style="color:black;">
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <a href="#removeModal" data-price="1999" data-title="不求人" data-toggle="modal"
-                                        data-target="#removeModal"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                                <td class="align-middle">不求人</td>
-                                <td class="align-middle">1件</td>
-                                <td class="align-middle text-right">$1999</td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle text-center">
-                                    <a href="#removeModal" data-price="999" data-title="一級偽裝帽" data-toggle="modal"
-                                        data-target="#removeModal"><i class="far fa-trash-alt "></i></a>
-                                </td>
-                                <td class="align-middle">一級偽裝帽</td>
-                                <td class="align-middle">1件</td>
-                                <td class="align-middle text-right">$999</td>
-                            </tr>
+                        <tbody class="cartbody" style="color:black;">
                         </tbody>
                     </table>
-                    <a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
+                    <a href="<%=request.getContextPath()%>/front-end/shop/order_confirm.jsp" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
                 </div>
             </div>
         </div>
@@ -118,22 +114,21 @@ table {
 	        <a href="#" class="iconbth"><i class="fas fa-search fa-1x" style="color:white;font-size:25px;"></i></a>	        	        	
 	   
 	    </div>
-	    
+<!---------------------------------------------------------------------------------------------------------------------->	    
 		<!--icon一定要在top-flex之上，不然會被移動條給蓋爆777777-->
 	
 		<div class="Top-Flex">
 			<div class="LOOP">
 			    	<a class="two" href="<%=request.getContextPath()%>/back-end/listAllItem">
-			    	
+			    	<img class="img-responsive" src="<%=request.getContextPath()%>/resources/images/Logo/MaoUni2.png" width="" alt="">
 			    	</a>
 			</div>
 		</div>
 		
-		<div class="shopbody">
-		   <nav style="margin-bottom:-15px;margin-left:15px;">
+			<div class="shopbody">
+				<nav style="margin-bottom:-15px;margin-left:15px;">
 			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
 			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
-			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
 			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
 			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
 			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
@@ -143,19 +138,8 @@ table {
 		<div class="Shopping-ul"></div>
 	    
 	</header>
-    
 
-    <!--以上為頭部的html設定位子-->
-
-	<script>
-    // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
-    //滑鼠滾動(scroll)就開始觸發
-    window.addEventListener("scroll",function(){
-
-    const header = document.querySelector('header');
-    header.classList.toggle('sticky',window.scrollY > 0);
-    });
-    </script>
+<!--以上為header ***********************************************************************-->
     
     <div class="textttt" style=" width: 100%;height: 2000px;">	
 
@@ -170,10 +154,7 @@ table {
 		<th>身體狀態</th>
 		<th>追蹤</th>
 
-
-
 	</tr>
-
 
 	<c:forEach var="ImfVO" items="${list}">
 		<tr>
@@ -192,19 +173,31 @@ table {
 			<td>${ImfVO.sit}</td>
 
 			<td>
-			<form class="addTrack">
+			<form METHOD="post" ACTION="<%=request.getContextPath()%>/TrackingController" class="addTrack">
 				<input type="hidden" name="memeId" value="2">
-				<input type="hidden" name="petId" value="${ImfVO.id}">
-				<input type="hidden" name="action" value="insert">
+				<input type="hidden" name="id" value="${ImfVO.id}">
+				<input type="hidden" name="action" value="insertall">
 				<button type="submit">加入追蹤</button>
 			</form>	
-			</input>
-				</FORM>
-
+			
 			</td>
+			
 	</c:forEach>
-
+				
+				
 </table>
+ 
+	<form METHOD="post" ACTION="<%=request.getContextPath()%>/TrackingController" class="confirm">
+		<input type="hidden" name="id" value="${memberVO.id}">
+		<input type="hidden" name="action" value="getOne_For_Display">
+		<button type="submit">加入追蹤</button>
+	</form>	
+	
+		
+	
+<%-- 	<a href="<%=request.getContextPath()%>/front-end/adopt/getonetracking.jsp" class="confirm" >查詢清單</a> --%>
+			
+	
 <footer class="footer">
         <ul class="r-footer">
 	        <li>
@@ -249,8 +242,25 @@ table {
     <div class="b-footer">
     <p style="margin-bottom: 10px;">All rights reserved by ©MaoUni 2021 </p>
     </div>	
-</body>
+
+    <script>
+    //             此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
+    //             滑鼠滾動(scroll)就開始觸發
+            window.addEventListener("scroll",function(){
+    
+            const header = document.querySelector('header');
+            header.classList.toggle('sticky',window.scrollY > 0);
+            });
+    
+    </script>
+
+
 <script>
+
+	function sumbmitcheck(){
+		console.log('hi')
+	}
+	
 	function highLight() {
 		obj = event.srcElement;
 		obj.style.color = "#FFFF99";
@@ -278,27 +288,38 @@ table {
 				}
 			}
 		})
-	})
+	});
 	
-	
-	
-	
+// 	$(".confirm").click(function(e){
+// 		e.preventDefault();
+// 		$.ajax({
+// 			url:"/MaoUni/TrackingController",
+// 			type:"post",
+// 			data: $(this).serialize(),
+// 			success: function(data){
+// 				if(data === 0){
+// 					swal("新增失敗！","這個毛孩已經在追蹤名單囉!","warning");
+// 				}else{
+// 					swal("新增成功！","這個毛孩加入追蹤名單囉!","success");
+// 				}
+// 			}
+// 		})
+// 	});
+
 </script>
 	<script>
         const sessionId = "${sessionId}";
     </script>
-    <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/cmain.js"></script>
+ 
 	
 	
 	<!-- 以下為CDN引入 -->
-	<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
-    <script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
-	
+	   <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/js/cmain.js"></script>
 	
 </body>
 </html>
 
-</container>
+
 

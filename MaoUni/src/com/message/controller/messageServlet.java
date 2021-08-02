@@ -31,7 +31,7 @@ import com.backstage_staff.model.StaffVO;
 
 import com.message.model.MessageService;
 import com.message.model.MessageVO;
-import com.message.model.messageEmail;
+
 import com.sun.mail.util.MailConnectException;
 import com.util.MailService;
 

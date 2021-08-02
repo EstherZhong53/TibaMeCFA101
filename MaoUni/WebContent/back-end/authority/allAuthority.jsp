@@ -18,14 +18,14 @@
 %>
 
 <html style="height: auto;">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>hidden_menu</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu.css"> 
   	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu2.css"> 
+
 
 
 
@@ -127,16 +127,16 @@
 </head>
 
 <body style="height: auto;">
-   <header>
+       <header>
          <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
              <div class="menu-bar menu-bar-top"></div>
              <div class="menu-bar menu-bar-middle"></div>
              <div class="menu-bar menu-bar-bottom"></div>
          </span>
          <div class="menu-wrap">
-             <div class="menu-sidebar" style="margin-top:20px;">
+             <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
-                  <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/message/message_home.jsp">商城客服管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
@@ -148,8 +148,8 @@
                  </ul>
              </div>
          </div>
-     </header> 
-      <div id="wrapper" style="margin-left: 120px;height: auto;">
+     </header>
+       <div id="wrapper" style="margin-left: 120px;height: auto;">
         <div class="d-flex flex-column" id="content-wrapper" style="margin-right:5px;">
             
             	 <!-- 以下範圍為最上方包著商城管理以及右方後台人員的區塊, -->
@@ -160,10 +160,10 @@
                            
                             <li class="nav-item dropdown no-arrow" style="margin-top:10px">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">
-                                	
+                                	<span class="backperson" style="font-size:15px;font-weight:700;margin-right:5px;">後台人員</span>
                                 	<img class="border rounded-circle img-profile" style="widht:40px;height:40px;margin-top:-5px;" src="<%=request.getContextPath()%>/resources/images/items/MaoUniICON.png"></a>
                                     <div class="dropdown-menu dropdown-menu-right animated--grow-in">
-                                    	<a class="dropdown-item" href="<%=request.getContextPath()%>/back-end/Staff/Select.jsp" style="font-weight:700;color:#646464;">Logout</a>
+                                    	<a class="dropdown-item" href="#" style="font-weight:700;color:#646464;">Logout</a>
                                     </div>
 	                   			</div>
 	                    	</li>
@@ -191,7 +191,7 @@
 <!-- 	</ul> -->
 <%-- </c:if> --%>
 
- <h5> <input type ="button" value = "新增" onclick = "window.location.href = '<%=request.getContextPath()%>/back-end/Authority/addAuthority.jsp'"></h5>			
+ <h5> <input type ="button" value = "新增"  weight="10px" height="20px" onclick = "window.location.href = '<%=request.getContextPath()%>/back-end/authority/addAuthority.jsp'"></h5>			
 
 <table>
 	<tr>

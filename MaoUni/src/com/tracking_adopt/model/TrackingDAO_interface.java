@@ -4,6 +4,7 @@ package com.tracking_adopt.model;
 import java.util.*;
 
 import com.adopt_imf.model.ImfVO;
+import com.member.model.MemberVO;
 
 
 

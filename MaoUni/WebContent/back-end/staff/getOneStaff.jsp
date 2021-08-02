@@ -97,17 +97,16 @@ body {
 </style>
 </head>
 <body style="height: auto;">
-	<header>
-		<span class="toggle-button"
-			style="margin-left: -5px; margin-top: -7px;">
-			<div class="menu-bar menu-bar-top"></div>
-			<div class="menu-bar menu-bar-middle"></div>
-			<div class="menu-bar menu-bar-bottom"></div>
-		</span>
-		<div class="menu-wrap">
-			<div class="menu-sidebar" style="margin-top: 20px;">
-				<ul class="menu">
-					<li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+	     <header>
+         <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
+             <div class="menu-bar menu-bar-top"></div>
+             <div class="menu-bar menu-bar-middle"></div>
+             <div class="menu-bar menu-bar-bottom"></div>
+         </span>
+         <div class="menu-wrap">
+             <div class="menu-sidebar" style="margin-top:30px;">
+                 <ul class="menu">
+                     <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/message/message_home.jsp">商城客服管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
@@ -116,10 +115,10 @@ body {
                 <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/staff/allStaff.jsp">後台管理</a></li>
-				</ul>
-			</div>
-		</div>
-	</header>
+                 </ul>
+             </div>
+         </div>
+     </header>
 	<div id="wrapper" style="margin-left: 120px; height: auto;">
 		<div class="d-flex flex-column" id="content-wrapper"
 			style="margin-right: 5px;">
@@ -130,7 +129,7 @@ body {
 				<div class="container-fluid"
 					style="margin-top: 23px; margin-left: -6px;">
 					<!--請看這行最右邊-->
-					<a class="btsp" href="Item_select_page.jsp">商城管理</a>
+					<a class="btsp" href="Item_select_page.jsp">單一查詢</a>
 					<!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
 					<ul class="nav navbar-nav flex-nowrap ml-auto"
 						style="margin-top: -10px;">

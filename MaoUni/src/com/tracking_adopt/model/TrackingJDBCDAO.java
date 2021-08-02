@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.adopt_imf.model.ImfVO;
+import com.member.model.MemberVO;
 
 public class TrackingJDBCDAO implements TrackingDAO_interface {
 	static String driver = "com.mysql.cj.jdbc.Driver";

@@ -79,6 +79,9 @@
 	body{
 	overflow-x:hidden; <!-- 此處做整個BODY橫向的隱藏多出的寬度 -->
 	}
+	add{
+	margin-right:1000px;
+	}
 
 
 </style>
@@ -87,14 +90,14 @@
 <body style="height: auto;">
 
      <!-- 以下為隱藏式菜單內容 -->
-     <header>
+         <header>
          <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
              <div class="menu-bar menu-bar-top"></div>
              <div class="menu-bar menu-bar-middle"></div>
              <div class="menu-bar menu-bar-bottom"></div>
          </span>
          <div class="menu-wrap">
-             <div class="menu-sidebar" style="margin-top:20px;">
+             <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
                      <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
@@ -108,7 +111,7 @@
                  </ul>
              </div>
          </div>
-     </header> 
+     </header>
 	 <div id="wrapper" style="margin-left: 120px;height: auto;">
         <div class="d-flex flex-column" id="content-wrapper" style="margin-right:5px;">
             
@@ -197,7 +200,7 @@
 <br>
 <FORM>
 <input type="hidden" name="action" value="insert">
-<input type="submit" style="text-align:right" value="送出新增" ></FORM>
+<input type="submit" class="add" value="送出新增" ></FORM>
 </body>
 
 <script>

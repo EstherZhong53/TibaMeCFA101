@@ -14,7 +14,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.adopt_mechanism.model.model.MechanismVO;
+import com.adopt_mechanism.model.MechanismVO;
 import com.variety.model.VarietyVO;
 
 public class ImfJDBCDAO implements ImfDAO_interface {
@@ -24,7 +24,7 @@ public class ImfJDBCDAO implements ImfDAO_interface {
 	static String userid = "David";
 	static String passwd = "123456";
 
-	private static final String INSERT_STMT = "INSERT INTO adopt_imf(AI_ID,AI_ADOPT,AI_MECH,AI_NAME,AI_YEAR,AI_SIT,AI_PHOTO) VALUES (?,?,?,?,?,?,?)";
+	private static final String INSERT_STMT = "INSERT INTO adopt_imf(AI_ADOPT,AI_MECH,AI_NAME,AI_YEAR,AI_SIT,AI_PHOTO) VALUES (?,?,?,?,?,?)";
 	private static final String GET_ALL_STMT = "select i.AI_ID, i.AI_ADOPT, i.AI_MECH, m.ADOPT_NAME, i.AI_NAME, i.AI_YEAR, i.AI_SIT, i.AI_PHOTO   \r\n" + 
 			"			from ADOPT_MECHANISM m  join ADOPT_IMF i  on  m.ADOPT_ID = i.AI_MECH";
 	private static final String GET_ONE_STMT = "SELECT AI_ID,AI_ADOPT,AI_MECH,AI_NAME,AI_YEAR,AI_SIT,AI_PHOTO FROM adopt_imf where AI_ID = ?";
@@ -48,13 +48,13 @@ public class ImfJDBCDAO implements ImfDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, imfVO.getId());
-			pstmt.setInt(2, imfVO.getAdopt());
-			pstmt.setInt(3, imfVO.getMech());
-			pstmt.setString(4, imfVO.getName());
-			pstmt.setInt(5, imfVO.getYear());
-			pstmt.setString(6, imfVO.getSit());
-			pstmt.setBytes(7, imfVO.getPhoto());
+			
+			pstmt.setInt(1, imfVO.getAdopt());
+			pstmt.setInt(2, imfVO.getMech());
+			pstmt.setString(3, imfVO.getName());
+			pstmt.setInt(4, imfVO.getYear());
+			pstmt.setString(5, imfVO.getSit());
+			pstmt.setBytes(6, imfVO.getPhoto());
 	
 			pstmt.executeUpdate();
 

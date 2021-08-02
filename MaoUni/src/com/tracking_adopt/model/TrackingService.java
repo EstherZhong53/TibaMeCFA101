@@ -11,7 +11,7 @@ public class TrackingService {
 		dao = new TrackingJDBCDAO();
 	}
 	
-	public Integer addTracking(Integer id,Integer det) {
+	public  Integer addTracking(Integer id,Integer det) {
 		TrackingVO trackingVO = new TrackingVO();
 		trackingVO.setId(id);
 		trackingVO.setDet(det);
