@@ -197,7 +197,7 @@ margin-top: -50px;
                         <tbody class="cartbody" style="color:black;">
                         </tbody>
                     </table>
-                    <a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
+                    <a href="<%=request.getContextPath()%>/front-end/shop/order_confirm.jsp" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
                 </div>
             </div>
         </div>

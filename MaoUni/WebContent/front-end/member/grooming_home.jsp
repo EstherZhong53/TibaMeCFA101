@@ -224,7 +224,7 @@ box-shadow: 0px 35px 77px -17px rgba(0,0,0,0.64);
                         <tbody class="cartbody" style="color:black;">
                         </tbody>
                     </table>
-                    <a href="#" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
+                    <a href="<%=request.getContextPath()%>/front-end/shop/order_confirm.jsp" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
                 </div>
             </div>
         </div>
@@ -354,6 +354,7 @@ pageContext.setAttribute("list", list);
     <script>
         const sessionId = "${sessionId}";
     </script>
+    <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
 </body>
 </html>
