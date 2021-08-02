@@ -888,17 +888,6 @@ background-color: #fff;
 	    header.classList.toggle('sticky',window.scrollY > 0);
 	    });
 
-    <!-- 以下為購物車script程式碼,不可刪除!!! 功能會跑掉!!!! -->
-        $(document).ready(function () {
-            $('#removeModal').on('show.bs.modal', function (event) {
-                var btn = $(event.relatedTarget);
-                var title = btn.data('title');
-                var price = btn.data('price');
-                var modal = $(this);
-                modal.find('.modal-title').text('確認刪除 ' + title);
-                modal.find('.modal-body').text('您要刪除 ' + title + ' $ ' + price + '元 嗎?');
-            });
-        });
     </script>
 <script>
 	const sessionId = "${sessionId}";

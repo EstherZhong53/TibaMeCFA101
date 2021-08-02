@@ -36,6 +36,7 @@
      <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
      <script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
      <script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
+     
 
 <style>
 List-style-type ：none/* http://meyerweb.com/eric/tools/css/reset/
@@ -644,15 +645,16 @@ cursor: pointer;
 
 
 <body>
+<!-- 以下為header ******************************************************************************************* -->
 
-	<header>
+<header>
 	
 	    <div class="icontrue" style="margin: 10px 10px 0px 0px;">
 		
 		  <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp" class="iconbth"><i class="fas fa-user fa-1x" style="color:white;font-size:25px;"></i></a>
 		  <a href="<%=request.getContextPath()%>/front-end/chatbox/chatbox.jsp" class="iconbth"><i class="fa fa-comments fa-1x" style="color:white;font-size:30px;margin-top:-4px;"></i></a>
-		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:29px;margin-right:-5px;margin-top:-2px;"></i></a>
-<!-------------------------------------------- shopping cart ------------------------------------------------>	    
+		  <a href="#" class="iconbth"><i class="fas fa-envelope fa-1x" style="color:white;font-size:25px;"></i></a>
+<!-------------------------------------------- shopping cart ------------------------------------------------>
 	      <div class="dropdown ml-auto">
            
             <button class="btn btn-cart btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -665,8 +667,7 @@ cursor: pointer;
                 <div class="p-3">
                     <table class="table table-sm">
                         <h6>已選擇商品</h6>
-                        <tbody style="color:black;">
-
+                        <tbody class="cartbody" style="color:black;">
                         </tbody>
                     </table>
                     <a href="<%=request.getContextPath()%>/front-end/shop/order_confirm.jsp" class="btn btn-block btn-primary btn-sm text-white">確認結帳</a>
@@ -677,7 +678,7 @@ cursor: pointer;
 	        <a href="#" class="iconbth"><i class="fas fa-search fa-1x" style="color:white;font-size:25px;"></i></a>	        	        	
 	   
 	    </div>
-<!---------------------------------------------------------------------------------------------------------------------->	    	    
+<!---------------------------------------------------------------------------------------------------------------------->	    
 		<!--icon一定要在top-flex之上，不然會被移動條給蓋爆777777-->
 	
 		<div class="Top-Flex">
@@ -688,40 +689,23 @@ cursor: pointer;
 			</div>
 		</div>
 		
-	   <div class="shopbody">
-	      <nav style="margin-bottom:-15px;margin-left:15px;">
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
-	          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
-	      </nav>
-	   </div>
-	   
+			<div class="shopbody">
+				<nav style="margin-bottom:-15px;margin-left:15px;">
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/home/HomePage.jsp" style="font-size:15px;">首　頁</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="font-size:15px;">有你來買</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" style="font-size:15px;">有你來講</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" style="font-size:15px;">到府美容</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp" style="font-size:15px;">浪浪找家</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/article/listAllArt_f.jsp" style="font-size:15px;">知識站</a></p>
+			       <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/announcemet/listAllAnnf.jsp" style="font-size:15px;">公告</a></p>
+			 	</nav>
+		</div>
 		<div class="Shopping-ul"></div>
 	    
 	</header>
-    
 
-    <!--以上為頭部的html設定位子-->
+<!--以上為header ***********************************************************************-->
 
-	<script>
-    // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
-    //滑鼠滾動(scroll)就開始觸發
-    window.addEventListener("scroll",function(){
-    const header = document.querySelector('header');
-    header.classList.toggle('sticky',window.scrollY > 0);
-    });
-    
-	</script>
-
-
-
-	<!--滑動top請抓以上為止-->
-	
-	
 	<!--以下為輪播圖片slider處的html設定位子-->
 	
 	<div class="sliderbody">
@@ -925,17 +909,30 @@ cursor: pointer;
     <p style="margin-bottom: 10px;">All rights reserved by ©MaoUni 2021 </p>
     </div>
 	
-	<script src="<%=request.getContextPath()%>/resources/js/cmain.js"></script>
 	
-	<!-- 以下為CDN引入 -->
-	<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
-    <script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
-    <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
+	
+	
 
 
  <script>
         const sessionId = "${sessionId}";
     </script>
+  
+
+	<script>
+	<!--以上為頭部的html設定位子-->
+	    // 此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
+	    //滑鼠滾動(scroll)就開始觸發
+	    window.addEventListener("scroll",function(){
+	    const header = document.querySelector('header');
+	    header.classList.toggle('sticky',window.scrollY > 0);
+	    });
+    
+	</script>
+	
+	<!-- 以下為CDN引入 -->
+	<script src="<%=request.getContextPath()%>/resources/js/cmain.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/bootstrap.min.js"></script>
     <script src="<%= request.getContextPath() %>/resources/js/shopping_cart.js"></script>
 </body>
 </html>
