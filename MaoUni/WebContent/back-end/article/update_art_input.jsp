@@ -1,155 +1,244 @@
-x<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.article.model.*"%>
-<%@ page import="com.article_type.model.*"%>
 
-<%ArtVO artVO = (ArtVO) request.getAttribute("artVO");%>
 
 <%
-    ArttService arttSvc = new ArttService();
-    ArttVO arttVO = arttSvc.getOneByID(artVO.getArtt_id());
-%> 
+  ArtVO artVO = (ArtVO) request.getAttribute("artVO"); 
+%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>後台_單一查詢資料</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>後台_文章資料修改</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/header.css"  type="text/css"/>
+<!-- 隱藏式菜單_連結 -->
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu.css">
+ <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu2.css">
 
-  <style>
-  h3 {
-    text-align:center;
-    
+   <style>
+.touch_section{
+ 
+ background-image: url("<%=request.getContextPath()%>/resources/images/dog1.jpg");
+  background-size: cover;
+  height: 300px;
+  position: relative;
+  padding: 350px;
+ 
+}
+ .get_taital{
+	text-align: center;
+  position: absolute;
+	color: #f7941d;
+	font-size: 50pt;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ }
+   .email_box{
+    margin-top: 150px;
+    max-width:900px;
+	    width: 50%;
+	    float: left;
+	    background-color: #ffffff;
+	     border-radius: 20px;
+	    height: auto;
+      padding: 50px 20px;
+      opacity: 0.80;
+      text-align:center;
+  }
+   .form-group {
+        margin-bottom: 2rem;
    }
-
-   .table1 {
-  margin-top: 180px;
-  border-collapse: collapse;
-  width: 100%;
-  font-family:"Lucida Console", "Courier New", monospace;
-  max-width:auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 0;
-  color: black;
-}
- .table1 th {
-  padding-top: 20px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #D2AD86;   /* 藍色  #008CBA; */
-  text-align:center; 
-  margin-left: auto; 
-  margin-right: auto ;
-  font-size:20px;
-  color: white;
-}
-
-tr:hover {
-  background-color:LightGray;
-}
-
-th, td {
-  padding: 8px;
-  text-align:center;
-/*   text-align: left; */
-  border-bottom: 1px solid #ddd;
-}
-.button {
-    background-color: white; 
+   h4{
+    margin-left: 200px;
+    font-size: 22px;
+   }
+   .email-bt {
+    max-width:900px;
+     margin-left: 200px;
+    border: 1px solid #000;
+    color: #000000;
+    width: 100%;
+    height: 55px;
+    font-size: 22px;  
+    padding: 20px;
+    margin-top: 20px;
+   }
+   .massage-bt {
+    max-width:900px;
+     margin-left: 200px;
+    border: 1px solid #000;
+    color: #000000;
+    width: 100%;
+    height: 200px;
+    font-size: 22px;
+    padding: 70px 20px 10px 20px;
+  }
+ .input{
+  margin-left: 200px;
+ }
+button.main_bt {
+  background-color: white; 
     color: black; 
     border: 2px solid #D2AD86;
    border-radius: 12px;
     width: 80px;
-    height: 50px;
+    height: 40px;
     font-size:15px;
+   margin-left: 200px;
+   border-radius: 25px;
+    
 }
-
-  .button:hover {
-    background-color: #D2AD86; /* Green */
+button.main_bt:hover{
+  background-color: #D2AD86; /* Green */
     color: white;
 }
-</style>
-
-
+.erroeMasgs{
+margin-left: 200px;
+}
+  
+ </style>
 </head>
-<body>
+<body >
 
-<!-- 以下為header ******************************************************************************************* -->
-
-<header>
-  <div class="icontrue">
-
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/dodge.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/user.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/shopping_cart.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/paper_plane.png" border="0"></a>
-       <a href="#" class="iconbth"><img src="<%=request.getContextPath()%>/resources/images/public_access.png" border="0"></a>
-      <!--iconu一定要在top-flex之上，不然會被移動條給蓋爆777777-->
-  </div>
-
-<div class="Top-Flex">
-
-<ul class="LOOP">
-  <li class="two">
-  <img src="<%=request.getContextPath()%>/resources/images/MaoUni2.png" 
-        width="" alt=""></li>
-</ul>
-
-</div>
-
-  <div class="shopbody">
-      <nav>
-          <!-- <a href="https://tw.yahoo.com/">首　頁</a> -->
-          <a href="#">有你來買</a>
-          <a href="#">有你來講</a>
-          <a href="#">有你來玩</a>
-          <a href="#">到府美容</a>
-          <a href="#">浪浪找家</a>
-          <a href="#">友善店家</a>
-          <a href="<%=request.getContextPath()%>/back-end/article/select_page_art.jsp">知識站</a>
-          <a href="<%=request.getContextPath()%>/back-end/announcemet/select_page.jsp">公告管理</a>
-      </div>
-      <div class="Shopping-ul"></div>
-   </nav>
+   <!-- 以下 >>隱藏式菜單_內容 -->
+  <header>
+    <span class="toggle-button" style="margin-left:-5px;margin-top:-7px;">
+        <div class="menu-bar menu-bar-top"></div>
+        <div class="menu-bar menu-bar-middle"></div>
+        <div class="menu-bar menu-bar-bottom"></div>
+    </span>
+    <div class="menu-wrap">
+        <div class="menu-sidebar" style="margin-top:30px;">
+            <ul class="menu">
+                <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/forumpost/forumPostHomePage.jsp">討論區管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
+            </ul>
+        </div>
+    </div>
 </header>
+   <!-- 以上 >>隱藏式菜單_內容 --> 
 
-<!--以上為header ***********************************************************************-->
-
-  <table class="table1">
-     <tr>
-		<th>文章圖片</th>
-        <th>文章編號</th>
-        <th>文章分類</th>
-        <th>文章名稱</th>
-        <th>文章內容</th>
-        <th>發布時間</th>
-	</tr>
-	<tr>
-	    <td>
-	       <img src="<%=request.getContextPath()%>/ArtImgServlet?id=${artVO.getId()}" 
-			         width="180" height="150"></td>
-        <td><%=artVO.getId()%></td>
-        <td><%=artVO.getArtt_id()%>【<%=arttVO.getName()%>】</td>
-        <td><%=artVO.getName()%></td>
-        <td><%=artVO.getContnt()%></td>
-        <td><%=artVO.getUpdate()%></td>
-	</tr>
-  </table>
-  
-    <script>
-    //             此處是縮放導覽列的動態效果，這段請一定要抓到，不然它不會動
-    //             滑鼠滾動(scroll)就開始觸發
-            window.addEventListener("scroll",function(){
-    
-            const header = document.querySelector('header');
-            header.classList.toggle('sticky',window.scrollY > 0);
-            });
-            
-    </script>
-  
+   <div class="touch_section">
+        <h1 class="get_taital"><strong>
+             <span style="color: #ffffff;">編輯文章</span> Update Article</strong></h1>
+    </div>
+   
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/article/art.do" enctype='multipart/form-data' 
+        name="form1">
+   
+    <div class="form-group">
+            <h4>文章編號: <%=artVO.getId()%></h4>
+   </div>
+   
+    <div class="form-group">
+         <h4>文章名稱:</h4>
+            <input type="text" class="email-bt" placeholder="文章名稱"  
+                   name="name"value="<%=artVO.getName()%>"/>
+   </div> 
+   
+   <div class="form-group">
+         <h4>發布時間:</h4>
+           <input name="update" id="f_date1" type="text" class="email-bt"
+                    placeholder="輸入日期EX:2021-01-01">
+   </div> 
+   
+   <jsp:useBean id="arttSvc" scope="page" class="com.article_type.model.ArttService" /> 
+   
+      <div class="form-group">
+          <h4>分類id:</h4>
+         <select size="1" name="artt_id" class="email-bt" style="height:70px;">
+			<c:forEach var="arttVO" items="${arttSvc.all}">
+				<option value="${arttVO.id}" ${(artVO.artt_id==arttVO.id)? 'selected':'' } >${arttVO.name}
+			</c:forEach>
+	    </select>
+     </div>
+     
+      <div class="form-group">
+            <h4>文章內容:</h4>
+            <textarea class="massage-bt" placeholder=" 文章內容 Massage" 
+                type="TEXT" name="contnt" value="<%=artVO.getContnt()%>"></textarea>
+      </div>
+         
+      <div class="input"> 
+          <p> 請上傳圖片<font color=red><b>*</b></font>
+                <input type="file" id="pic" name="pic" ></p>
+      </div>
+      
+         <input type="hidden" name="action" value="update">
+         <input type="hidden" name="id" value="<%=artVO.getId()%>">
+         <button type="submit" class="main_bt">送出修改</button>
+         
+      <hr>
+      
+      <!--     錯誤訊息  -->
+      <div class="erroeMasgs">
+    <c:if test="${not empty errorMsgs}">
+	<font style="color:red">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+    </c:if>
+    </div>
+   
+   </FORM>
+   
+<!-- 隱藏式菜單_連結 -->
+<script src="<%=request.getContextPath()%>/resources/js/hidden_menu3.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/hidden_menu4.js"></script> 
 </body>
+
+<!--     datetimepicker 之相關設定   -->
+
+<% 
+  java.sql.Date update= null;
+  try {
+	   update = artVO.getUpdate();
+   } catch (Exception e) {
+	   update = new java.sql.Date(System.currentTimeMillis());
+   }
+%>
+
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/resources/css/jquery.datetimepicker.css" /> 
+ <script src="<%=request.getContextPath()%>/resources/js/jquery.js"></script> 
+ <script src="<%=request.getContextPath()%>/resources/js/jquery.datetimepicker.full.js"></script>
+
+  <script>
+          $.datetimepicker.setLocale('zh');
+        $('#f_date1').datetimepicker({
+	       theme: '',              //theme: 'dark',
+	       timepicker:false,       //timepicker:true,
+	       step: 1,                //step: 60 (這是timepicker的預設間隔60分鐘)
+	       format:'Y-m-d',         //format:'Y-m-d H:i:s',
+		   value: '<%=update%>', // value:   new Date(),
+           //disabledDates:        ['2017/06/08','2017/06/09','2017/06/10'], // 去除特定不含
+           //startDate:	            '2017/07/10',  // 起始日
+           //minDate:               '-1970-01-01', // 去除今日(不含)之前
+           //maxDate:               '+1970-01-01'  // 去除今日(不含)之後
+        });
+   </script>
+   
+<style>
+  .xdsoft_datetimepicker .xdsoft_datepicker {
+           width:  300px;   /* width:  300px; */
+  }
+  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+           height: 151px;   /* height:  151px; */
+  }
+  
+ </style>
+ 
 </html>
