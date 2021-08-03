@@ -297,7 +297,7 @@ public class GroDAO implements GroDAO_interface {
 				Integer groomerId = rs.getInt("GROOMERID");
 
 				GeocodingService geoSvc = new GeocodingService();
-				if (geoSvc.getGeocode(groomerId).get(0) == null) {
+				if (geoSvc.getGeocode(groomerId).size() == 0 || geoSvc.getGeocode(groomerId).get(0) == null) {
 					geoSvc.addGeo(groomerId, rs.getString("CENTER"));
 				}
 
