@@ -114,15 +114,15 @@ margin-left: 200px;
     <div class="menu-wrap">
         <div class="menu-sidebar" style="margin-top:30px;">
             <ul class="menu">
-               <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/message/message_home.jsp">商城客服管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/forumpost/forumPostHomePage.jsp">討論區管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/staff/allStaff.jsp">後台管理</a></li>
             </ul>
         </div>
     </div>
@@ -143,7 +143,7 @@ margin-left: 200px;
    
     <div class="form-group">
          <h4>文章名稱:</h4>
-            <input type="text" class="email-bt" placeholder="文章名稱"  
+            <input type="text" class="email-bt" placeholder="文章名稱"  required
                    name="name"value="<%=artVO.getName()%>"/>
    </div> 
    
@@ -167,12 +167,12 @@ margin-left: 200px;
       <div class="form-group">
             <h4>文章內容:</h4>
             <textarea class="massage-bt" placeholder=" 文章內容 Massage" 
-                type="TEXT" name="contnt" value="<%=artVO.getContnt()%>"></textarea>
+                type="TEXT" name="contnt" required value="<%=artVO.getContnt()%>"></textarea>
       </div>
          
       <div class="input"> 
           <p> 請上傳圖片<font color=red><b>*</b></font>
-                <input type="file" id="pic" name="pic" ></p>
+                <input type="file" id="pic" name="pic" required></p>
       </div>
       
          <input type="hidden" name="action" value="update">

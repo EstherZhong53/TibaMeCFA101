@@ -172,13 +172,13 @@ public class ArtServlet extends HttpServlet {
 
 				// 文章名稱
 				String name = req.getParameter("name");
-				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,50000}$";
-
-				if (name == null || name.trim().length() == 0) {
-					errorMsgs.add("文章名稱: 請勿空白");
-				} else if (!name.trim().matches(enameReg)) {
-					errorMsgs.add("文章名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
-				}
+//				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,50000}$";
+//
+//				if (name == null || name.trim().length() == 0) {
+//					errorMsgs.add("文章名稱: 請勿空白");
+//				} else if (!name.trim().matches(enameReg)) {
+//					errorMsgs.add("文章名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
+//				}
 
 				// 文章圖片
 				InputStream inP = req.getPart("pic").getInputStream();
@@ -189,13 +189,13 @@ public class ArtServlet extends HttpServlet {
 
 				// 文章內容
 				String contnt = req.getParameter("contnt");
-			    String contntReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
-
-				if (contnt == null || contnt.trim().length() == 0) {
-					errorMsgs.add("文章內容: 請勿空白");
-				} else if (!contnt.trim().matches(contntReg)) {
-					errorMsgs.add("文章內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
-				}
+//			    String contntReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
+//
+//				if (contnt == null || contnt.trim().length() == 0) {
+//					errorMsgs.add("文章內容: 請勿空白");
+//				} else if (!contnt.trim().matches(contntReg)) {
+//					errorMsgs.add("文章內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
+//				}
 
 				// 發布時間
 				java.sql.Date update = null;
@@ -254,13 +254,13 @@ public class ArtServlet extends HttpServlet {
 
 				// 文章名稱
 				String name = req.getParameter("name");
-				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,500}$";
-
-				if (name == null || name.trim().length() == 0) {
-					errorMsgs.add("文章名稱: 請勿空白");
-				} else if (!name.trim().matches(enameReg)) {
-					errorMsgs.add("文章名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
-				}
+//				String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,500}$";
+//
+//				if (name == null || name.trim().length() == 0) {
+//					errorMsgs.add("文章名稱: 請勿空白");
+//				} else if (!name.trim().matches(enameReg)) {
+//					errorMsgs.add("文章名稱: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
+//				}
 
 				// 文章圖片
 				InputStream inP = req.getPart("pic").getInputStream();
@@ -272,13 +272,13 @@ public class ArtServlet extends HttpServlet {
 
 				// 文章內容
 				String contnt = req.getParameter("contnt");
-				String contntReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
-
-				if (contnt == null || contnt.trim().length() == 0) {
-					errorMsgs.add("文章內容: 請勿空白");
-				} else if (!contnt.trim().matches(contntReg)) {
-					errorMsgs.add("文章內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
-				}
+//				String contntReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
+//
+//				if (contnt == null || contnt.trim().length() == 0) {
+//					errorMsgs.add("文章內容: 請勿空白");
+//				} else if (!contnt.trim().matches(contntReg)) {
+//					errorMsgs.add("文章內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
+//				}
 
 				// 發布時間
 				java.sql.Date update = null;

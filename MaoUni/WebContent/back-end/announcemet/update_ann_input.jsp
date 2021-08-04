@@ -114,13 +114,13 @@ button.main_bt:hover{
             <ul class="menu">
                 <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/message/message_home.jsp">商城客服管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/back-end/forumpost/forumPostHomePage.jsp">討論區管理</a></li>
+                <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
                 <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/staff/allStaff.jsp">後台管理</a></li>
             </ul>
         </div>
     </div>
@@ -157,8 +157,8 @@ button.main_bt:hover{
     
   <!-- 編輯公告內容   -->
   <div class="form-group">
-    <textarea class="massage-bt" placeholder=" 編輯公告內容 Massage" rows="5" id="comment"  type="TEXT" name="content" size="45" 
-    value="<%=annVO.getContent()%>"></textarea>
+    <textarea class="massage-bt" placeholder=" 編輯公告內容 Massage" rows="5" id="comment" required
+     type="TEXT" name="content" size="45" value="<%=annVO.getContent()%>"></textarea>
   </div>
   
   <!-- 編輯公告時間   -->
@@ -168,7 +168,7 @@ button.main_bt:hover{
   
    <!-- 編輯公告圖片   -->
   <div class="input"> 
-    <p> 請上傳圖片 <input type="file" id="pic" name="pic" ></p>
+    <p> 請上傳圖片 <input type="file" id="pic" name="pic" required ></p>
   </div>
   
 

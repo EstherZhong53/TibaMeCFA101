@@ -186,13 +186,13 @@ public class AnnServlet extends HttpServlet {
 				Integer id = new Integer(req.getParameter("id").trim());
 
 				String content = req.getParameter("content");
-				String contentReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
-
-				if (content == null || content.trim().length() == 0) {
-					errorMsgs.add("公告內容: 請勿空白");
-				} else if (!content.trim().matches(contentReg)) {
-					errorMsgs.add("公告內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
-				}
+//				String contentReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
+//
+//				if (content == null || content.trim().length() == 0) {
+//					errorMsgs.add("公告內容: 請勿空白");
+//				} else if (!content.trim().matches(contentReg)) {
+//					errorMsgs.add("公告內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
+//				}
 
 				java.sql.Date update = null;
 
@@ -251,13 +251,13 @@ public class AnnServlet extends HttpServlet {
 			try {
 				// 1.接收請求參數 - 輸入格式的錯誤處理
 				String content = req.getParameter("content");
-				String contentReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,8500}$";
-
-				if (content == null || content.trim().length() == 0) {
-					errorMsgs.add("公告內容: 請勿空白");
-				} else if (!content.trim().matches(contentReg)) {
-					errorMsgs.add("公告內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
-				}
+//				String contentReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)(\\pP)]{2,8500}$";
+//
+//				if (content == null || content.trim().length() == 0) {
+//					errorMsgs.add("公告內容: 請勿空白");
+//				} else if (!content.trim().matches(contentReg)) {
+//					errorMsgs.add("公告內容: 只能是中、英文字母、數字和_ , 且長度必需在2到500之間");
+//				}
 
 				java.sql.Date update = null;
 

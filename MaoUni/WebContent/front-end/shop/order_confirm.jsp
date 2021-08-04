@@ -73,7 +73,7 @@
                     <div class="card text-center my-5 border-0">
 
                        		<input type="hidden" name="action" value="insertWithco">
-                            <input type="hidden" name="oMemId" value="3">
+                            <input type="hidden" name="oMemId" value="${memberVO.memId}">
                             <input type="hidden" class="oMoney" name="oMoney" value="">
 <!--                             <input type="hidden" class="orderList" name = "orderList" value=""> -->
                              <div class="form-row mb-2">
