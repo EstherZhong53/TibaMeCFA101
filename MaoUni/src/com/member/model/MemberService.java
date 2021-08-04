@@ -2,6 +2,8 @@ package com.member.model;
 
 import java.util.List;
 
+import com.util.MailService;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -70,6 +72,22 @@ public class MemberService {
 		memberVO.setMemBirthday(memBirthday);
 
 		dao.signup(memberVO);
+		
+		// ========================註冊成功後寄信給註冊的人========================
+		MailService mailSvc = new MailService();
+		mailSvc.setTo("healwriter@gmail.com");
+		mailSvc.setSubject("MaoUni毛孩有你  註冊成功通知");
+		StringBuffer messageText = new StringBuffer();
+
+		messageText.append("嗨，親愛的毛爸媽，歡迎您加入MaoUni！請點選網址登入：") ;
+//		message.setContent("<h1>嗨，親愛的毛爸媽，歡迎您加入MaoUni</h1><br><a href=\"http://localhost:8081/MaoUni/front-end/home/login.jsp">請點擊連結進行登入</a>",\"text/html;charset=UTF-8\");
+		
+		mailSvc.setMessageText(messageText.toString());
+		mailSvc.start();
+
+// =====================使用執行續處理信件寄送曼導致畫面卡卡問題====================
+		
+		
 	}
 
 	public MemberVO findByUseremailAndpassword(String memEmail, String memPassword) { // 會員登入

@@ -33,6 +33,7 @@
 	<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
 	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
 	<script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
+	<script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
 	
 <title>會員中心</title>
 
@@ -302,12 +303,6 @@ display: flex;
     font-family:"poppins";
     
     }
-    /* 
-    body{
-    
-    
-    
-    } */
 .testtest{
     display: flex;
     justify-content: space-between;
@@ -397,10 +392,10 @@ margin-left: 5%;
     
     div.membercontainer div.switchform{
     
-        width: 600px;
-        height: 400px;
+        width: 400px;
+        height:250px;
         border-radius: 3px;
-        margin-right: 30px;
+         margin-right: 30px;
     }
     
     div.membercontainer div.switchform h2{
@@ -416,43 +411,33 @@ margin-left: 5%;
     color:#c29e74;
     font-family: monospace;
     text-align:center;
-    margin-left: 50px;
+    /* margin-left: 50px; */
 }
-    div.membercontainer div.switchform input{
-    
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    background-color: #FFF7E8;
-    width: 100%;
-    border-bottom:2px solid #563F2E;
-    margin-bottom: 25px;
-    padding: 7px 0;
-    border-radius: 3px;
-    font-size: 14px;
-    transition-duration:1s;
-    }
-    
  .bt{
     
     color: white;
     background-color: #c29e74;
     border:none;
     outline: none;
-    border-radius: 3px;
+    border-radius:3px;
     font-size: 14px;
     padding: 7px 20px;
-    font-weight: 500px;
     font-family: monospace;
     transition-duration:1s;
-    align-items: flex-end;
     }
     
+#btpassword{
+    display: flex;
+    justify-items: flex-start;
+    align-items: flex-end;
+    margin-top: 170px;
+}
    .bt:hover{
     
         font-weight:bold;
         color:#563F2E;
         font-weight:bold;
+        cursor: pointer;
     
     }
     
@@ -460,12 +445,14 @@ margin-left: 5%;
         opacity: 0.8;
         background-color:#FFF7E8;
     }
+    .memberpageimage{
+        margin-left: 26%;
+        margin-top: 20%;
+    }
+   div.memberpageimage img{
     
-    div.image img{
-    
-    width: 290px;
+    width: 350px;
     border-radius: 5px;
-    margin-left: 53%;
     margin-bottom:200px;
     }
     
@@ -743,8 +730,8 @@ background-color: #fff;
 		
  <div class="memberswitch">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
-        <a href="<%=request.getContextPath()%>/pet/pet.do?action=findByMemId">毛孩資料</a>
-        <a href="#">訂單紀錄</a>
+        <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
+        <a href="<%=request.getContextPath()%>/front-end/member/obuypage.jsp">訂單紀錄</a>
         <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
 
 		<c:if test="${memberVO.memPosition == '1'}">
@@ -798,11 +785,11 @@ background-color: #fff;
             </table>
         </div>
              
-</div>
+
 </FORM>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
-<input class=bt type="submit"  value="更改密">
+<FORM id="btpassword" METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
+<input class=bt type="submit"  value="更改密碼">
 <input type="hidden" name="memId" value="${memberVO.memId}"> 
 <input type="hidden" name="action" value="updatePassword">
 </FORM>            
@@ -813,13 +800,10 @@ background-color: #fff;
 <input type="hidden" name="action" value="getOne_For_Update">
 </FORM>     
 </div>
-<div class="image">
+<div class="memberpageimage">
   <img src="${pageContext.request.contextPath}/resources/images/valeriia.jpg" width="300" height="399.8"/> 
 </div>
-
-
-	
-<%-- <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/front-end/Home/HomePage.jsp'" value="回首頁" style="border:5px;border-radius:5px;">		 --%>
+</div>
 		<div class="textttt" style=" width: 100%;height: 2000px;">	
 		</div>
 	

@@ -4,14 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="com.item.model.*"%>
 <%@ page import="com.obuy.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.commodity_details.model.*"%>
 
 <%
     ObuyService obuySvc = new ObuyService();
     List<ObuyVO> list = obuySvc.getAll();
     pageContext.setAttribute("list",list);
 %>
+
+
+
 <jsp:useBean id="obuy" scope="page" class="com.obuy.model.ObuyService" />
+<jsp:useBean id="cd" scope="page" class="com.commodity_details.model.CdService" />
+<jsp:useBean id="item" scope="page" class="com.item.model.ItemService" />
 
 <html style="height: auto;">
 
@@ -203,23 +208,24 @@
                         <tr>
                             <th style="width: 77px;text-align: center;font-size:4px;">商品訂單編號</th>
                             <th style="width: 77px;text-align: center;font-size:4px;">消費者編號</th>
-                            <th style="width: 112.5px;text-align: center;font-size:4px;">總金額</th>
+                            <th style="width: 77.5px;text-align: center;font-size:4px;">總金額</th>
                             <th style="width: 91.5px;text-align: center;font-size:4px;">購買時間</th>
                             <th style="width: 91.5px;text-align: center;font-size:4px;">購買方式</th>
                             <th style="width: 91.5px;text-align: center;font-size:4px;">送貨方式</th>
                             <th style="width: 91.5px;text-align: center;font-size:4px;">訂單狀態</th>
                             <th style="width: 91.5px;text-align: center;font-size:4px;">備註</th>
+                            <th style="width: 91.5px;text-align: center;font-size:4px;">訂單明細</th>
                             <th style="width: 70px;text-align: center;font-size:4px;">修改資料</th>
                         </tr>
                     </thead>
                                 
 					<tbody>	
-<%-- 					<%@ include file="page1.file" %>  --%>
-<%-- 						<c:forEach var="obuyVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 
-							<c:forEach var="obuyVO" items="${list}" >
+							<c:forEach var="obuyVO" items="${list}" varStatus="varst">
+												
 							<tr style="width: 70px;text-align: center;">
 								<td style="width: 90px;text-align: center;font-size:3px;">${obuyVO.obuyId}</td>
+
 								<td style="width: 90px;text-align: center;font-size:3px;">${obuyVO.oMemId}</td>
 								<td style="width: 100.5px;text-align: center;font-size:3px;">${obuyVO.oMoney}</td>
 
@@ -239,33 +245,84 @@
 								</td>
 								
 								<td style="width: 91.5px;text-align: center;font-size:3px;">
-								
+<%-- 								<c:out value="${varst.index}"></c:out> --%>
 								<c:if test="${obuyVO.oSurvive == '0'}">等待處理</c:if>
-								<c:if test="${obuyVO.oSurvive == '1'}">取消訂單</c:if>
-								<c:if test="${obuyVO.oSurvive == '2'}">訂單成功</c:if>
-								<c:if test="${obuyVO.oSurvive == '3'}">訂單出貨</c:if>
-								<c:if test="${obuyVO.oSurvive == '4'}">買家收到</c:if>
-								<c:if test="${obuyVO.oSurvive == '5'}">退款/退貨</c:if>
-								<c:if test="${obuyVO.oSurvive == '6'}">訂單完成</c:if>
+								<c:if test="${obuyVO.oSurvive == '1'}">訂單完成</c:if>
+
 								
 								</td>
 								<td style="width: 91.5px;text-align: center;font-size:3px;">${obuyVO.obuyOther}</td>
-								<td>	
-								  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Obuy/ObuyServlet" style="margin-bottom: 0px;">
-								      <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/Member/Update_member.jsp'" value="立即修改" style="border:5px;border-radius:5px;">
-<%-- 								     <input type="hidden" name="itemId"  value="${obuyVO.obuyId}"> --%>
-<!-- 								     <input type="hidden" name="action"	value="getOne_For_Update"> -->
+
+								<td><i class="far fa-address-card btn-primary" data-toggle="modal" data-target="#e${obuyVO.obuyId}"></i></td>
+									
+<%-- 								<td><a href="<%=request.getContextPath()%>/cd/cd.do?action=findByPrimaryKey"><i class="far fa-address-card btn-primary" data-toggle="modal" data-target="#speModal${cdVO.cdId}"></i></a></td> --%>
+								
+								
+								<td>
+								
+								  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/buy/obuy.do" style="margin-bottom: 0px;">
+								     <input type="hidden" name="obuyId"  value="${obuyVO.obuyId}">
+								     <input type="hidden" name="oSurvive" value="1">
+								     <input type="hidden" name="action"	value="update">
+								     <button class=update type="submit" style="border:5px;border-radius:5px;">完成</button>
+								     
+
 								  </FORM>
 								</td>
 							</tr>
-						</c:forEach>			
-					</tbody>
-				</table>
+			
+							<!-- ---------------------跳出視窗-->
+
+					<div class="modal fade" id="e${obuyVO.obuyId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content">
+					      <div class="modal-header">	
+					        <h5 class="modal-title" id="exampleModalCenterTitle">訂單明細</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					     	 <div class="container-fluid">
+					     	 	<div class="row">
+					     	 			<div class="col-md-3" style="font-weight: bold">訂單編號</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">商品編號</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">商品數量</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">金額</div>
+					     	 	</div>		  
+<!-- 					     	 	花括弧內是外面大圈的id，cd.cdpush是cd的方法去帶全部的集合去串 -->
+										<c:forEach var="cda" items="${cd.cdpush(obuyVO.obuyId)}" >
+					     	 			<div class="row">
+					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdoId}</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdItemId}</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdAmount}</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdMoney}</div>
+					     	 			</div>
+										</c:forEach>									     						     	 			      
+					      	  </div>
+					      </div>
+					      
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div> 
+					
+					
+					
+					     
+					</c:forEach>		
+ 		
+						
+						</tbody>
+					</table>
 			</div>
 		</div>
 	</div>
 </div>
 
+		          
 <!-- 步驟三 --> 
 <div class="row">
 	<div class="col-md-6"></div>

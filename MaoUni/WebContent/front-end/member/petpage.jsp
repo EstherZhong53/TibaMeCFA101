@@ -1,14 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF8"%>
+<%@ page import="java.util.*"%>
 <%@ page import="com.member.model.*"%>
 <%@ page import="com.pet.model.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <%
-  MemberVO memberVO = (MemberVO) request.getAttribute("memberVO");
-	PetVO petVO = (PetVO) request.getAttribute("petVO"); 
-%>    
- 
+	PetService petSvc = new PetService();
+	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
+	List<PetVO> list = petSvc.findByMemId(memId);
+	pageContext.setAttribute("list", list);
+%>
+
  
 <!DOCTYPE html>
 <html>
@@ -28,6 +31,7 @@
 	<script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
 	<link rel="stylesheet" href="<%= request.getContextPath()%>/resources/css/sweetalert2.css"> 
 	<script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
+	<script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
 
 <title>毛孩資料</title>
 
@@ -450,6 +454,7 @@ margin-left: 5%;
         font-weight:bold;
         color:#563F2E;
         font-weight:bold;
+        cursor: pointer;
     
     }
     
@@ -740,8 +745,8 @@ background-color: #fff;
 
  <div class="memberswitch">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
-        <a href="<%=request.getContextPath()%>/pet/pet.do?action=findByMemId">毛孩資料</a>
-        <a href="#">訂單紀錄</a>
+        <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
+        <a href="<%=request.getContextPath()%>/front-end/member/obuypage.jsp">訂單紀錄</a>
         <a href="<%=request.getContextPath()%>/front-end/member/grooming_appointment_manage.jsp">預約紀錄</a>
 
 		<c:if test="${memberVO.memPosition == '1'}">
@@ -757,6 +762,7 @@ background-color: #fff;
 </div>
 </div>
 
+ <c:forEach var="petVO" items="${list}">
     <div class="membercontainer">
     <form class="form" id="form">
     <div class="switchform">
@@ -771,7 +777,7 @@ background-color: #fff;
                 </tr>
             
                 <tr>
-                <td>${petVO.petSort}</td>   
+                <td>${petVO.petVarId}</td>   
                 </tr>
             
                 <tr>
@@ -782,7 +788,7 @@ background-color: #fff;
             </tr>
 
             <tr>
-                <td>${petVO.petAge}</td>   
+                <td>${petVO.petAge}歲</td>   
                 </tr>
              
                 <tr>
@@ -791,7 +797,9 @@ background-color: #fff;
 
 
             </div>
-            </table>
+</c:forEach>
+      </table>
+            
         </div>
 </div>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" name="form1">
@@ -886,7 +894,6 @@ background-color: #fff;
 	    const header = document.querySelector('header');
 	    header.classList.toggle('sticky',window.scrollY > 0);
 	    });
-
     </script>
 <script>
 	const sessionId = "${sessionId}";

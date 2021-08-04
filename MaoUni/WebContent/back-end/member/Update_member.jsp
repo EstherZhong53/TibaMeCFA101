@@ -147,21 +147,21 @@ margin-left: 200px;
             
 	<tr>
 		<td>信箱:</td>
-		<td><input type="TEXT" name="memEmail" size="45" value="<%=memberVO.getMemEmail()%>"/></td>
+		<td><input type="TEXT" name="memEmail" size="45" value="<%=memberVO.getMemEmail()%>" required/></td>
 	</tr>
 
 	<tr>
 		<td>密碼:</td>
-		<td><input type="TEXT" name="memPassword" size="45"	value="<%=memberVO.getMemPassword()%>"/></td>
+		<td><input type="TEXT" name="memPassword" size="45"	value="<%=memberVO.getMemPassword()%>" required/></td>
 	</tr>
 	<tr>
 	<tr>
 		<td>身分證:</td>
-		<td><input type="TEXT" name="memIdenity" size="10"	value="<%=memberVO.getMemIdenity()%>"/></td>
+		<td><input type="TEXT" name="memIdenity" size="10"	value="<%=memberVO.getMemIdenity()%>" required/></td>
 	</tr>
 	<tr>
 		<td>性別:</td>
-		<select size="1" name="memGender">
+		<select size="1" name="memGender" required>
 		<option value="女">女</option>
 		<option value="男">男</option>
 		</select>
@@ -169,17 +169,17 @@ margin-left: 200px;
 
 	<tr>
 		<td>電話</td>
-		<td><input type="TEXT" name="memPh" size="10" value="<%=memberVO.getMemPh()%>"/></td>
+		<td><input type="TEXT" name="memPh" size="10" value="<%=memberVO.getMemPh()%>" required/></td>
 	</tr>
 	
 		<tr>
 		<td>地址</td>
-		<td><input type="TEXT" name="memAddres" size="" value="<%=memberVO.getMemAddres()%>"/></td>
+		<td><input type="TEXT" name="memAddres" size="" value="<%=memberVO.getMemAddres()%>" required/></td>
 	</tr>
 	
 		<tr>
 		<td>生日</td>
-		<td><input type="TEXT" name="memBirthday" size="" value="<%=memberVO.getMemBirthday()%>"/></td>
+		<td><input type="TEXT" name="memBirthday" size="" value="<%=memberVO.getMemBirthday()%>" required/></td>
 	</tr>
 	
 		<tr>

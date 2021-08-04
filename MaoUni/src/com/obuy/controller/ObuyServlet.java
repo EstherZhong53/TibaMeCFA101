@@ -96,42 +96,17 @@ public class ObuyServlet extends HttpServlet {
 
 		if ("update".equals(action)) {
 
-			System.out.println("11111111111111111111111111111111");
 			List<String> errorMsgs = new LinkedList<String>();
 
 			req.setAttribute("errorMsgs", errorMsgs);
 
-			Integer oMemId = new Integer(req.getParameter("oMemId").trim());
-			Integer oMoney = new Integer(req.getParameter("oMoney").trim());
-			Integer oPaying = new Integer(req.getParameter("oPaying").trim());
-			Integer oSend = new Integer(req.getParameter("oSend").trim());
+			Integer obuyId = new Integer(req.getParameter("obuyId").trim());
 			Integer oSurvive = new Integer(req.getParameter("oSurvive").trim());
-			String obuyOther = req.getParameter("obuyOther").trim();
-
-			ObuyVO obuyVO = new ObuyVO();
-			obuyVO.setoMemId(oMemId);
-			obuyVO.setoMoney(oMoney);
-			obuyVO.setoPaying(oPaying);
-			obuyVO.setoSend(oSend);
-			obuyVO.setoSurvive(oSurvive);
-			obuyVO.setObuyOther(obuyOther);
-
-
-			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("obuyVO", obuyVO); 
-				RequestDispatcher failureView = req.getRequestDispatcher("/Member/login.jsp");
-				failureView.forward(req, res);
-				return; 
-			}
 
 			ObuyService oSvc = new ObuyService();
-			oSvc.update(oMemId, oMoney, oPaying, oSend, oSurvive, obuyOther);
+			oSvc.update(obuyId,oSurvive);
 
-
-			req.setAttribute("obuyVO", obuyVO); 
-			String url = "/Member/login.jsp";
-			RequestDispatcher successView = req.getRequestDispatcher(url); 
-			successView.forward(req, res);
+			res.sendRedirect(req.getContextPath() + "/back-end/obuy/obuyAll.jsp");
 
 		}			
 			
@@ -146,36 +121,21 @@ public class ObuyServlet extends HttpServlet {
 					Integer oPaying = new Integer(req.getParameter("oPaying").trim());
 					Integer oSend = new Integer(req.getParameter("oSend").trim());
 					String obuyOther = req.getParameter("obuyOther").trim();
-System.out.println("oMemId: " + oMemId);						
-System.out.println("oMoney: " + oMoney);						
-System.out.println("oPaying: " + oPaying);						
-System.out.println("oSend: " + oSend);						
-System.out.println("obuyOther: " + obuyOther);						
-//					String orderList = req.getParameter("orderList");
-//					Gson gson = new Gson();
-//					List<CdVO> list = (List<CdVO>) gson.fromJson(orderList, CdVO.class);
-//					
-//					
-//					
-//					for(int i = 0; i < list.size(); i++) {
-//						
-//					}
-					
+				
+
 //					取得購物車內訂單明細
 					HttpSession session = req.getSession();
 					String sessionId = (String) session.getAttribute("sessionId");
 					ShoppingCartService shoppingCartSvc = new ShoppingCartService();
 					List<ShoppingCartItemVO> cartItems = shoppingCartSvc.getCart(sessionId);
 					List<CdVO> list = new ArrayList<CdVO>();
-System.out.println("sessionId: " + sessionId);			
-System.out.println("===========================");	
+
 					// 打包訂單明細VO
-					for(int i = 0; i < cartItems.size(); i++) {
-System.out.println(cartItems.size());						
+					for(int i = 0; i < cartItems.size(); i++) {					
 						ShoppingCartItemVO cartVO = cartItems.get(i);
 						CdVO cdVO = new CdVO();
 						Integer cdMoney = cartVO.getCount() * cartVO.getItemPrice();
-				System.out.println(i);		
+		
 						cdVO.setCdItemId(cartVO.getItemId());
 						cdVO.setCdAmount(cartVO.getCount());
 						cdVO.setCdMoney(cdMoney);				// 購物車取得為商品單價，存入訂單明細所需為該項商品總額
@@ -195,7 +155,6 @@ System.out.println("CdMoney: " + cdVO.getCdMoney());
 				} catch (Exception e) {
 					e.printStackTrace();
 					errorMsgs.add(e.getMessage());
-					res.sendRedirect(req.getContextPath() + "/back-end/shop/order_list.jsp");
 					
 //					String url = "/back-end/Obuy/ObuyAll.jsp";
 //					RequestDispatcher failureView = req.getRequestDispatcher(url);
@@ -203,31 +162,5 @@ System.out.println("CdMoney: " + cdVO.getCdMoney());
 				}
 			}
 
-			if ("delete".equals(action)) { 
-
-				List<String> errorMsgs = new LinkedList<String>();
-				req.setAttribute("errorMsgs", errorMsgs);
-
-				try {
-					
-					Integer obuyId = new Integer(req.getParameter("obuyId"));
-
-					
-					ObuyService oSvc = new ObuyService();
-					oSvc.delete(obuyId);
-
-					
-					String url = "/emp/listAllEmp.jsp";
-					RequestDispatcher successView = req.getRequestDispatcher(url);
-					successView.forward(req, res);
-
-					
-				} catch (Exception e) {
-					errorMsgs.add("錯誤" + e.getMessage());
-					RequestDispatcher failureView = req.getRequestDispatcher("/emp/listAllEmp.jsp");
-					failureView.forward(req, res);
-				}
-			}
 		}
 	}
-

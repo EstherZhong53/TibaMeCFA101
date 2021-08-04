@@ -47,9 +47,18 @@ public class CdService {
 	public CdVO findByPrimaryKey(Integer CdOId) {
 		return dao.findByPrimaryKey(CdOId);
 	}
+	
+	public List<CdVO> cdpush(Integer CdOId){
+		
+		
+		return dao.cdpush(CdOId);
+		
+	}
+	
 	public List<CdVO> getAll() {
 		return dao.getAll();
 	}
+	
 	
 
 	

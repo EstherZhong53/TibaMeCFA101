@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import com.pet.model.PetService;
 import com.pet.model.PetVO;
 
@@ -65,6 +67,7 @@ public class PetServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 ****************************************/
 				PetService petSvc = new PetService();
 				PetVO petVO = petSvc.findByPrimaryKey(petId);
+				
 				//這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關	
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("petVO", petVO); // 資料庫取出的VO物件,存入req
@@ -93,6 +96,9 @@ public class PetServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 ****************************************/
 				PetService petSvc = new PetService();
 				List<PetVO> petVO = petSvc.findByMemId(petMemId);
+				HttpSession session = req.getSession();
+				session.setAttribute("petVO", petVO);
+				
 				
 				//這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關	
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/

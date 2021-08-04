@@ -37,7 +37,7 @@ public class CdServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		if ("GET_ALL_STMT".equals(action)) { // 來自select_page.jsp的請求
+		if ("GET_ALL_STMT".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -45,20 +45,19 @@ public class CdServlet extends HttpServlet {
 				Integer cdoId = new Integer(req.getParameter("cdoId").trim());
 				/*************************** 2.開始查詢資料 *****************************************/
 				CdService cSvc = new CdService();
-				List<CdVO> cdVO = cSvc.getAll(); //這邊再注意對不對
+				List<CdVO> cdVO = cSvc.getAll(); 
 				
 				if (cdVO == null) {
 					errorMsgs.add("查無資料");
 				}
-				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req.getRequestDispatcher("");
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
 
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				req.setAttribute("cdVO", cdVO); // 資料庫取出的VO物件,存入req
+
+				req.setAttribute("cdVO", cdVO);
 				String url = "";
 				RequestDispatcher successView = req.getRequestDispatcher(url); //
 				successView.forward(req, res);
@@ -71,26 +70,43 @@ public class CdServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.接收請求參數 ****************************************/
 				Integer cdoId = new Integer(req.getParameter("cdoId").trim());
 
-				/*************************** 2.開始查詢資料 ****************************************/
+
 				CdService cSvc = new CdService();
 				CdVO cdVO = cSvc.findByPrimaryKey(cdoId);
-				//這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關	
-				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				req.setAttribute("cdVO", cdVO); // 資料庫取出的VO物件,存入req
-				String url = "/Pet/listonePet.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url);// 
-				successView.forward(req, res);
+
+				req.setAttribute("cdVO", cdVO); 
+
+				res.sendRedirect(req.getContextPath() + "/back-end/obuy/obuyAll.jsp");
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
-				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/Member/login.jsp");
-				failureView.forward(req, res);
+				res.sendRedirect(req.getContextPath() + "/back-end/obuy/obuyAll.jsp");
 			}
 		}
+		
+		if ("cdpush".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				Integer cdoId = new Integer(req.getParameter("cdoId").trim());
+				System.out.println(cdoId);
+
+				CdService cSvc = new CdService();
+				List<CdVO> cdVO = cSvc.cdpush(cdoId);
+				System.out.println(cdVO);	
+				req.setAttribute("cdVO", cdVO); 
+
+				res.sendRedirect(req.getContextPath() + "/back-end/obuy/obuyAll.jsp");
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				res.sendRedirect(req.getContextPath() + "/back-end/obuy/obuyAll.jsp");
+			}
+		}		
 
 		if ("update".equals(action)) { // 來自jsp的請求
 
@@ -199,4 +215,3 @@ public class CdServlet extends HttpServlet {
 			}
 		}
 	}
-

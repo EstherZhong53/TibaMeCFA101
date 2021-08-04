@@ -15,6 +15,7 @@ public class PetJDBCDAO implements PetDAO_interface {
 	private static final String INSERT_STMT = "insert into PET(PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE) values (?, ?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "select *from PET";
 	private static final String GET_ONE_STMT = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET where PET_ID= ?";
+//	private static final String GET_ONE_STMT = "Select PET_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE, e1.PET_MEM_ID as PET_MEM_ID, e2.MEM_ID FROM PET e1 left join MEMBER e2 on e1.PET_MEM_ID = e2.MEM_ID WHERE MEM_ID=?";
 	private static final String DELETE = "DELETE FROM PET where PET_ID = ?";
 	private static final String UPDATE = "UPDATE PET set PET_SORT =?, PET_VAR_ID =?, PET_GENDER =?, PET_AGE =?, PET_SURVIVE =? where PET_ID = ?";
 	private static final String GET_ONE_MEMBERANDPET = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET where PET_MEM_ID= ?";
@@ -232,7 +233,6 @@ public class PetJDBCDAO implements PetDAO_interface {
 			pstmt.setInt(1, petMemId);
 
 			rs = pstmt.executeQuery();
-
 			while (rs.next()) {
 
 			PetVO petVO = new PetVO();
@@ -246,6 +246,7 @@ public class PetJDBCDAO implements PetDAO_interface {
 			petVO.setPetAge(rs.getInt("PET_AGE"));
 			petVO.setPetSurvive(rs.getInt("PET_SURVIVE"));
 
+			list.add(petVO);
 			}
 
 		} catch (ClassNotFoundException e) {

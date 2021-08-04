@@ -19,7 +19,7 @@ public class CdJDBCDAO implements CdDAO_interface {
 
 	private static final String INSERT_STMT = "insert into COMMODITY_DETAILS (CD_O_ID, CD_ITEM_ID, CD_AMOUNT, CD_MONEY) values (?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM COMMODITY_DETAILS";
-	private static final String GET_ONE_STMT = "SELECT CD_ITEM_ID, CD_AMOUNT, CD_MONEY FROM COMMODITY_DETAILS where CD_O_ID = ?";
+	private static final String GET_ONE_STMT = "SELECT * FROM COMMODITY_DETAILS where CD_O_ID =?";
 	private static final String DELETE = "DELETE FROM COMMODITY_DETAILS where CD_O_ID = ?";
 	private static final String UPDATE = "UPDATE COMMODITY_DETAILS set CD_ITEM_ID=?, CD_AMOUNT=?, CD_MONEY=? WHERE CD_O_ID =?";
  
@@ -169,7 +169,6 @@ public class CdJDBCDAO implements CdDAO_interface {
 			while (rs.next()) {
 
 				cdVO = new CdVO();
-				cdVO.setCdoId(rs.getInt("CD_O_ID"));
 				cdVO.setCdItemId(rs.getInt("CD_ITEM_ID"));
 				cdVO.setCdAmount(rs.getInt("CD_AMOUNT"));
 				cdVO.setCdMoney(rs.getInt("CD_MONEY"));
@@ -208,6 +207,67 @@ public class CdJDBCDAO implements CdDAO_interface {
 
 	}
 
+	@Override
+	public List<CdVO> cdpush(Integer cdoId) {
+		List<CdVO> list = new ArrayList<CdVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_STMT);
+			
+			pstmt.setInt(1, cdoId);
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+
+				CdVO cdVO = new CdVO();
+				cdVO.setCdoId(rs.getInt("CD_O_ID"));
+				cdVO.setCdItemId(rs.getInt("CD_ITEM_ID"));
+				cdVO.setCdAmount(rs.getInt("CD_AMOUNT"));
+				cdVO.setCdMoney(rs.getInt("CD_MONEY"));
+				System.out.println(rs.getInt("CD_O_ID"));
+				list.add(cdVO);
+			}
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+
+		return list;
+	}	
+	
+	
 	@Override
 	public List<CdVO> getAll() {
 		List<CdVO> list = new ArrayList<CdVO>();

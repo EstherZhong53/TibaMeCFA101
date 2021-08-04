@@ -111,7 +111,8 @@ visibility: hidden;
     margin-left: 90%;
     vertical-align: bottom;
     visibility: hidden;
-    }
+    }  
+    
 </style>
 
 
@@ -122,7 +123,7 @@ visibility: hidden;
             <h2>LOGIN</h2>
             <input type="text" class="memEmail" placeholder="Email" name="memEmail" id="memEmail" required>
             <input type="password" placeholder="Password" name="memPassword" id="memPassword" required>
-            <button type="submit" name="action" value="findByUseremailAndpassword">LOGIN</button>
+            <button  class="bt" type="submit" name="action" value="findByUseremailAndpassword">LOGIN</button>
             <button class="bt" type="button" onclick="location.href='<%=request.getContextPath()%>/front-end/member/signup.jsp'">SIGNUP</button>
         </form>
         </div>

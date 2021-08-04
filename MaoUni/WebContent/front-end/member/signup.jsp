@@ -201,6 +201,9 @@ body {
 #next {
 	margin-left: 75%;
 }
+.set #setsignup:hover{
+cursor: pointer;
+}
 </style>
 
 </head>
@@ -282,8 +285,8 @@ body {
 			<footer>
 
 				<div class='set'>
-					<input type="hidden" name="action" value="signup"> 
-					<input type="submit" value="Signup">
+					<input  type="hidden" name="action" value="signup"> 
+					<input id="setsignup" type="submit" value="Signup">
 				</div>
 				</form>
 		</div>
@@ -323,7 +326,7 @@ body {
 			      type: "post",
 			      data: $(this).serialize(),
 			      success: function (data) {
-			        alert("hello 成功啦");
+			        alert("歡迎加入MaoUNI！請至信箱收取驗證信喔");
 			        window.location.replace("/MaoUni/front-end/home/HomePage.jsp");
 			      }
 			    })

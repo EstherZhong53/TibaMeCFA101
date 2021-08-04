@@ -34,9 +34,9 @@ public class PetService {
 		return dao.findByPrimaryKey(PetId);
 	}
 	
-	public List<PetVO> findByMemId(Integer memId) {
+	public List<PetVO> findByMemId(Integer petMemId) {
 		
-		return dao.findByMemId(memId);
+		return dao.findByMemId(petMemId);
 	}
 	
 	public List<PetVO> getAll() {

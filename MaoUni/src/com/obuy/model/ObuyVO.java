@@ -13,12 +13,7 @@ public class ObuyVO implements java.io.Serializable {
 	private Integer oSend; //送貨方式：0:宅配  1:便利商店
 	private Integer oSurvive; //訂單狀態請看下面六個數字
 //	0:等待處理
-//	1:買家取消訂單
-//	2:訂單成功
-//	3:訂單已出貨
-//	4:買家收到貨物
-//	5:買家申請退貨/退款
-//	6:訂單完成
+//	1:完成訂單
 	private String obuyOther; //備註
 	
 	
