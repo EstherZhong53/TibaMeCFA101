@@ -3,9 +3,21 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*"%>
 <%@ page import="com.item.model.*"%>
+<%@ page import="com.itemphotos.model.*"%>
+
 
 <%
-  ItemVO itemVO = (ItemVO) request.getAttribute("itemVO"); //ItemServlet.java(Controller), 存入req的itemVO物件
+    ItemService itemSvc = new ItemService();
+    List<ItemVO> list = itemSvc.getAll();
+    pageContext.setAttribute("list",list);
+%>
+
+<%
+  ItemVO itemVO = (ItemVO) request.getAttribute("itemVO");
+%>
+
+<%
+  ItemPhotosVO itemphotosVO = (ItemPhotosVO) request.getAttribute("itemphotosVO");
 %>
 
 <html style="height: auto;">
@@ -18,40 +30,6 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu.css"> 
   	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu2.css"> 
 
-<%--以下為匯出至excel表單的功能 --%>
-<script>
-    function exportTableToExcel(tableID, filename = ''){
-    var downloadLink;
-    var dataType = 'application/vnd.ms-excel';
-    var tableSelect = document.getElementById(tableID);
-    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
-    
-    // Specify file name
-    filename = filename?filename+'.xls':'excel_data.xls';
-    
-    // Create download link element
-    downloadLink = document.createElement("a");
-    
-    document.body.appendChild(downloadLink);
-    
-    if(navigator.msSaveOrOpenBlob){
-        var blob = new Blob(['\ufeff', tableHTML], {
-            type: dataType
-        });
-        navigator.msSaveOrOpenBlob( blob, filename);
-    }else{
-        // Create a link to the file
-        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
-    
-        // Setting the file name
-        downloadLink.download = filename;
-        
-        //triggering the function
-        downloadLink.click();
-    }
-}
-</script>
-<%--以上為匯出至excel表單的功能 --%>
 
 
 <style>
@@ -106,12 +84,20 @@
 	input.update{
 		background-color: #bfbfbf;
 		color: #fff;
+		border:5px;
+		border-radius:5px;
+		margin-left: 213px;
 	}	
 	input.update:hover{
 		background-color: #e8c497;
 	}
+	
+	body{
+		overflow-x:hidden;
+	}
 </style>
 </head>
+
 
 <body style="height: auto;"><!-- 步驟二 -->
    <!-- 以下 >>隱藏式菜單_內容 -->
@@ -124,15 +110,14 @@
          <div class="menu-wrap">
              <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
-                    <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/message/message_home.jsp">商城客服管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
-	                <li><a href="<%= request.getContextPath() %>/back-end/staff/allStaff.jsp">後台管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
                  </ul>
              </div>
          </div>
@@ -141,13 +126,14 @@
  
  
  
+ 	<!-- id="wrapper"這段是包住整個頁面的大外框，因為有用margin-left，所以目前位置剛好卡在漢堡(隱藏式菜單)的右邊，此行刪掉會跑版 --> 
     <div id="wrapper" style="margin-left: 120px;height: auto;">
         <div class="d-flex flex-column" id="content-wrapper" style="margin-right:5px;">
             
             	 <!-- 以下範圍為最上方包著商城管理以及右方後台人員的區塊, -->
                 <nav class="navbar navbar-light navbar-expand bg-white mb-4 topbar static-top">
                     <div class="container-fluid" style="margin-top:23px;margin-left:-6px;">
-<!--請看這行最右邊-->  <a class="btsp" href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
+<!--請看這行最右邊-->  <a class="btsp" href="<%= request.getContextPath() %>/back-end/item/listAllItem.jsp">商城管理</a>  <!-- 這行是商城管理的標題，可以自行設定，還有href可以自行設定跳轉的頁面 -->
                        	 <ul class="nav navbar-nav flex-nowrap ml-auto" style="margin-top:-10px;">                         
                            
                             <li class="nav-item dropdown no-arrow" style="margin-top:10px">
@@ -163,158 +149,100 @@
 	            	</div>
 	            </nav>
 
-			<%-- 錯誤表列 --%>
-			<c:if test="${not empty errorMsgs}">
-				<font style="color:red">請修正以下錯誤:</font>
-				<ul>
-					<c:forEach var="message" items="${errorMsgs}">
-						<li style="color:red">${message}</li>
-					</c:forEach>
-				</ul>
-			</c:if>
+<%-- 錯誤表列 --%>
+<c:if test="${not empty errorMsgs}">
+	<font style="color:red;margin-top:50px;">請修正以下錯誤:</font>
+	<ul>
+		<c:forEach var="message" items="${errorMsgs}">
+			<li style="color:red">${message}</li>
+		</c:forEach>
+	</ul>
+</c:if>
 
-		  	<div class="card" style="margin-left:-8px; margin-right: 25px;">
-	    
-		        <div class="card-header py-3" style="background-color:#e8c497;margin-top:-20px">
-		            <p class="allitemtitle" style="margin: 1px;font-size: 20px;">所有商品資料</p>
-		        </div>
-			        <div class="card-body" style="height: auto;">
-		            <div class="row">
-		                <div class="col-md-6 text-nowrap">
-		                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable" style="margin-left:10px;margin-top:5px;"><label>Show&nbsp;
-		                    <select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label>	                    
-		                    </div>
-		                </div>
-		                <div class="col-md-6" style="display:flex;">
-		                	<div class="excelbutton">
-		                	<button onclick="exportTableToExcel('dataTable')" class="btn" type="button" style="margin-left: 290px;">匯出EXCEL</button>
-		                    </div>
-		                    
-		                    <div class="itemquerybutton" style="margin-left:20px;">
-		                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
-		                    <button type="button" class="btn" id="btnstyleforitemquery"data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">商品查詢</button>
-							
-							<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							  <div class="modal-dialog">
-							    <div class="modal-content">
-							      <div class="modal-header">
-							        <h5 class="modal-title" id="exampleModalLabel">查詢</h5>
-							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-							      </div>
-							      <div class="modal-body">
-							        
-							          <div class="mb-3">
-							            <label for="message-text" class="col-form-label">以商品編號查詢</label>
-							            <input type="text" class="form-control" id="message-text" name="ITEM_ID" placeholder="請輸入商品編號">
-							          </div>
-							          <div class="mb-3">
-							            <label for="message-text" class="col-form-label">以商品名稱查詢</label>
-							            <input type="text" class="form-control" id="message-text" name="ITEM_NAME" placeholder="請輸入商品名稱">
-							          </div>
-							          <div class="mb-3">
-							            <label for="droptext" class="col-form-label">以商品類別查詢</label>
-							            <select size="1" name="ITEMT_ID" class="form-control" id="droptext"> 
-									          <option value="" selected>請選擇商品類別</option> 
-									         <c:forEach var="itemTypeVO" items="${itemTypeSvc.all}" >  
-									          <option value="${itemTypeVO.itemtId}">${itemTypeVO.itemtName}</option> 
-								         	 </c:forEach>    
-										</select> 
-									  </div>
-									  <div class="mb-3">
-							            <label for="droptext" class="col-form-label">以寵物類別查詢</label>
-										<select size="1" name="ITEM_PET_TYPE" class="form-control" id="droptext">
-											<option value="" selected>請選擇寵物類別</option>
-											<option value="<%= (itemVO==null)? "貓" : itemVO.getItemPetType()%>">貓
-											<option value="<%= (itemVO==null)? "狗" : itemVO.getItemPetType()%>">狗					
-										</select>
-							          </div>
-							        
-							      </div>
-							      <div class="modal-footer">
-							        <input class="sontrue" type="submit" value="送出" style="margin-left:275px;margin-top:20px;">
-							        <input type="hidden" name="action" value="listItem_ByCompositeQuery">
-							      </div>
-							    </div>
-							  </div>
-							</div>
-		                    </FORM>	
-		                    </div>
-		                </div>
-		            </div>
-			            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
+  <div class="card" style="margin-left:-8px; margin-right: 25px;">
+ 
+      <div class="card-header py-3" style="background-color:#e8c497;margin-top:-20px">
+          <p class="allitemtitle" style="margin: 1px;font-size: 20px;">商品詳細資料</p>
+      </div>
+      
+        <div class="card-body" style="height: auto;display:flex;">
+            <div class="row">
 
-							<table class="table my-0" id="dataTable">
-							  <thead>
+            </div>
+            <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info" style="width:600px;">
+					<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet" name="form1">
+						<div class="lefttcardbody" style="width:500px;margin-left:30px;">
+						
+						<table>
+							<tr>
+								<td style="width:120px;">商品編號：</td>
+								<td name="itemId" style="width:290px;"><%= (itemVO==null)? "" : itemVO.getItemId()%> </td>
+							</tr>
+							<tr>
+								<td style="width:120px;">商品名稱：</td>
+								<td name="itemName" style="width:290px;"><%= (itemVO==null)? "" : itemVO.getItemName()%></td>
+							</tr>
+							<tr>
+								<td style="width:120px;">商品價格：</td>
+								<td name="itemPrice" style="width:290px;"><%= (itemVO==null)? "" : itemVO.getItemPrice()%></td>
+							</tr>
+							<tr>
+								<td style="width:120px;">商品數量：</td> 
+								<td name="itemAmount" style="width:290px;"><%= (itemVO==null)? "" : itemVO.getItemAmount()%></td>
+							</tr>
 								<tr>
-		                            <th style="width: 75px;text-align: center;">商品編號</th>
-		                            <th style="width: 75px;text-align: center;">商品類別</th>
-		                            <th style="width: 77px;text-align: center;">寵物類別</th>
-		                            <th style="width: 109px;text-align: center;">商品名稱</th>
-		                            <th style="width: 80px;text-align: center;">商品內容</th>
-		                            <th style="width: 80px;text-align: center;">商品價格</th>
-		                            <th style="width: 80px;text-align: center;">商品數量</th>
-		                            <th style="width: 80px;text-align: center;">商品狀態</th>
-		                            <th style="width: 88px;text-align: center;">更新時間</th>
-		                            <th style="width: 80px;text-align: center;">修改資料</th>
-								</tr>
-							  </thead>
-				                                
-								<tbody>
-									
-								
-									<tr style="width: 70px;text-align: center;">
-										<td style="width: 75px;text-align: center;">${itemVO.itemId}</td>
-										<c:if test="${itemVO.itemTypeId == '1'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩食品</td></c:if>
-										<c:if test="${itemVO.itemTypeId == '2'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩玩具</td></c:if>
-										<c:if test="${itemVO.itemTypeId == '3'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩傢俱</td></c:if>
-										<c:if test="${itemVO.itemTypeId == '4'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩衣物</td></c:if>
-										<c:if test="${itemVO.itemTypeId == '5'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩清潔</td></c:if>
-										<c:if test="${itemVO.itemTypeId == '6'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩保養</td></c:if>
-										<td style="width: 77px;text-align: center;">${itemVO.itemPetType}</td>
-										<td style="width: 109px;text-align: center;">${itemVO.itemName}</td>
-										<td style="width: 80px;text-align: center;"><input class=details style="border:5px;border-radius:5px;" type="button" value="詳細內容" onclick="location.href='ItemDetails.jsp'"></td>    <!--${itemVO.itemContent}-->
-										<td style="width: 80px;text-align: center;">${itemVO.itemPrice}</td>
-										<td style="width: 80px;text-align: center;">${itemVO.itemAmount}</td> 
-										<c:if test="${itemVO.itemStatus == '0'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">待上架</td></c:if>
-										<c:if test="${itemVO.itemStatus == '1'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">上架中</td></c:if>
-										<c:if test="${itemVO.itemStatus == '2'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">已下架</td></c:if>
-										<td style="width: 88px;text-align: center;"><fmt:formatDate value="${itemVO.itemUpdate}" pattern="yyyy-MM-dd"/></td>
-										<td>	
-										  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet" style="margin-bottom: 0px;">
-										     <input class=update type="submit" value="立即修改" style="border:5px;border-radius:5px;">
-										     <input type="hidden" name="itemId"  value="${itemVO.itemId}">
-										     <input type="hidden" name="action"	value="getOne_For_Update">
-										  </FORM>
-										</td>
-									</tr>
-																		
-								</tbody>
-							</table>
+								<td style="width:120px;">商品狀態：</td>
+								<c:if test="${itemVO.itemStatus == '0'}"><td scope="col" class="itemStatus" style="width: 75px;">待上架</td></c:if>
+								<c:if test="${itemVO.itemStatus == '1'}"><td scope="col" class="itemStatus" style="width: 75px;">上架中</td></c:if>
+								<c:if test="${itemVO.itemStatus == '2'}"><td scope="col" class="itemStatus" style="width: 75px;">已下架</td></c:if>									
+							</tr>
+							<tr>
+								<td style="width:120px;">商品內容：</td>
+								<td><p name="itemContent"  style="width:290px;"><%= (itemVO==null)? "" : itemVO.getItemContent()%></p></td>
+							</tr>
+							<tr>
+								<td style="width:120px;">寵物類別：</td>
+								<td name="itemPetType"  style="width:290px;"><%= (itemVO==null)? "" : itemVO.getItemPetType()%></td>
+							</tr>
+							<jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService" />
+							<tr>
+								<td style="width:120px;">商品類別：</td>
+								<td><select size="1" name="itemTypeId">
+									<c:forEach var="itemTypeVO" items="${itemTypeSvc.all}">
+										<option value="${itemTypeVO.itemtId}" ${(itemVO.itemTypeId==itemTypeVO.itemtId)? 'selected':'' } >${itemTypeVO.itemtName}
+									</c:forEach>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>新增圖片：</td>
+								<td>
+									<FORM method="post" ACTION="<%=request.getContextPath()%>/ItemPhotosServlet" enctype="multipart/form-data">
+										<input type="file" style="width:230px;" name="ipItem" multiple required/>
+										<input type="hidden" name="itemId" value="${itemVO.itemId}" />
+										<input type="hidden" name="action" value="uploadItems">
+										<button type="submit" style="">送出</button>
+									</FORM>
+								</td>
+							</tr>
+						</table>
+
+						</div>
+
+						</FORM>
 					</div> <!-- class="table-responsive" 結尾標籤 -->
+					<div style="width:550px;border: 1px solid red;">
+							<c:forEach var="itemVO" items="${list}">
+							<div class="ItemPhotos">
+						        <img src="data:image/jpeg; base64, ${itemVO.itemPhotoFirst}"/>
+						    </div>
+							</c:forEach>
+					</div>
 				</div> <!-- class="card-body" 結尾標籤 -->			
 			</div> <!-- class="card" 結尾標籤 -->	
-		</div> <!-- class="d-flex" 結尾標籤 -->	
+		</div> <!-- class="d-flex" 結尾標籤 -->
+     </div> <!-- Class="Wrapper"的結尾標籤 -->
 
-
-			<div class="row">
-				<div class="col-md-6"></div>
-				<div class="col-md-6"">
-				   <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-				       <ul class="pagination">
-				           <li><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-				           <li class="active"><a class="page-link" href="#">1</a></li>
-				           <li><a class="page-link" href="#">2</a></li>
-				           <li><a class="page-link" href="#">3</a></li>
-				           <li style="margin-right:25px;"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-				       </ul>
-				   </nav>
-				</div>
-        </div> <!-- class="row"的結尾標籤-->
-	</div> <!-- Class="Wrapper"的結尾標籤 -->
-	<!-- 以下為modal用--> 
-	<script src="<%=request.getContextPath()%>/resources/js/itemquery.js"></script>
-	<script src="<%=request.getContextPath()%>/resources/js/bootstrap.bundle.min.js"></script>
-	<!-- 以上為modal用--> 
 
 
     <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script>
@@ -324,6 +252,6 @@
 <!--底下是jsp 裡面所連結打法可以參考一下-->
     <script src="<%=request.getContextPath()%>/resources/js/hidden_menu3.js"></script> 
     <script src="<%=request.getContextPath()%>/resources/js/hidden_menu4.js"></script>
-    
+
 </body>
 </html>
