@@ -511,6 +511,21 @@ public class GroDAO implements GroDAO_interface {
 			}
 			groVO.setIntro(rs.getString("INTRO"));
 
+			
+			// getGeo from Redis
+			GeocodingService geoSvc = new GeocodingService();
+			if (geoSvc.getGeocode(groomerId).size() == 0 || geoSvc.getGeocode(groomerId).get(0) == null) {
+				geoSvc.addGeo(groomerId, rs.getString("CENTER"));
+			}
+
+			String geocode = geoSvc.getGeocode(groomerId).get(0).toString();
+//			retrun fromat(121.234134,23.23514)
+			String lng = geocode.substring(1, geocode.indexOf(","));
+			String lat = geocode.substring(geocode.indexOf(",") + 1, geocode.length() - 1);
+
+			groVO.setLng(lng);
+			groVO.setLat(lat);
+
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 		} catch (SQLException se) {
@@ -575,6 +590,27 @@ public class GroDAO implements GroDAO_interface {
 				groVO.setAvatarBase64(Base64.getEncoder().encodeToString(b));
 			}
 			groVO.setIntro(rs.getString("INTRO"));
+			
+			
+			// getGeo from Redis
+			Integer groomerId = rs.getInt("GROOMERID");
+			GeocodingService geoSvc = new GeocodingService();
+			if (geoSvc.getGeocode(groomerId).size() == 0 || geoSvc.getGeocode(groomerId).get(0) == null) {
+				geoSvc.addGeo(groomerId, rs.getString("CENTER"));
+			}
+
+			String geocode = geoSvc.getGeocode(groomerId).get(0).toString();
+//			retrun fromat(121.234134,23.23514)
+			String lng = geocode.substring(1, geocode.indexOf(","));
+			String lat = geocode.substring(geocode.indexOf(",") + 1, geocode.length() - 1);
+
+			groVO.setLng(lng);
+			groVO.setLat(lat);
+			
+			
+			
+			
+			
 
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());

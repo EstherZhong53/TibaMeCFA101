@@ -390,36 +390,62 @@ function init() {
             // 呼叫JS的Geolocation API取得經緯度(前提是使用者允許被存取位置)
             // 回傳一個 Geolocation 物件，透過這個物件可以存取Device的位置資訊
 
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
+//            if (navigator.geolocation) {
+//                navigator.geolocation.getCurrentPosition(function (position) {
+//                    pos = {
+//                        lat: position.coords.latitude,
+//                        lng: position.coords.longitude
+//                    };
+//
+//                    let marker = new google.maps.Marker({
+//                        position: pos,
+//                        icon: svgMarker,
+//                        map: map
+//                    });
+//
+//                    map.setZoom(13);
+//                    map.setCenter(pos);
+//
+//                    let cityCircle = new google.maps.Circle({
+//                        strokeColor: '#f1c40f', // 線條顏色
+//                        strokeOpacity: 1, // 線條透明度
+//                        strokeWeight: 1, // 線條粗度
+//                        fillColor: '#f1c40f', // 圓形裡填滿的顏色
+//                        fillOpacity: 0.35, // 圓形裡，填滿顏色的透明度
+//                        map: map,
+//                        center: pos, // 中心點
+//                        radius: grange * 1000 // 半徑
+//                    });
+//                })
+//            } else {
+//                alert("請先允許存取位置！");
+//            }
+            
+           
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: parseFloat(lat), lng: parseFloat(lng) },
+                zoom: 13,
+            });
+            
+            let marker = new google.maps.Marker({
+              position: { lat: parseFloat(lat), lng: parseFloat(lng) },
+              icon: svgMarker,
+              map: map
+            });
 
-                    let marker = new google.maps.Marker({
-                        position: pos,
-                        icon: svgMarker,
-                        map: map
-                    });
-
-                    map.setZoom(13);
-                    map.setCenter(pos);
-
-                    let cityCircle = new google.maps.Circle({
-                        strokeColor: '#f1c40f', // 線條顏色
-                        strokeOpacity: 1, // 線條透明度
-                        strokeWeight: 1, // 線條粗度
-                        fillColor: '#f1c40f', // 圓形裡填滿的顏色
-                        fillOpacity: 0.35, // 圓形裡，填滿顏色的透明度
-                        map: map,
-                        center: pos, // 中心點
-                        radius: grange * 1000 // 半徑
-                    });
-                })
-            } else {
-                alert("請先允許存取位置！");
-            }
+            var cityCircle = new google.maps.Circle({
+                strokeColor: '#f1c40f', // 線條顏色
+                strokeOpacity: 1, // 線條透明度
+                strokeWeight: 1, // 線條粗度
+                fillColor: '#f1c40f', // 圓形裡填滿的顏色
+                fillOpacity: 0.35, // 圓形裡，填滿顏色的透明度
+                map: map,
+                center: { lat: parseFloat(lat), lng: parseFloat(lng)  }, // 中心點
+                radius: parseInt(grange) * 1000 // 半徑
+            });
+            
+            
+            
             
 //            geocoder = new google.maps.Geocoder();
             // Get FIRST DATA

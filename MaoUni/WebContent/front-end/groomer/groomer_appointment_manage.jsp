@@ -253,7 +253,11 @@ margin-top: 30px;
 	
 <script>
 let groomerId = "${groVO.groomerId}";
+let lat = "${groVO.lat}";
+let lng = "${groVO.lng}";
 let grange = "${groVO.grange}";
+console.log(lat)
+console.log(lng)
 </script>	
 	
 
