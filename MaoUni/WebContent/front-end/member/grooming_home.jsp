@@ -268,6 +268,7 @@ pageContext.setAttribute("list", list);
 
    <div class="wrap">
 		 <c:forEach var="groVO" items="${list}">
+			<c:if test="${groVO.gstatus == 1}">
 		      <div class="tile"> 
 		          <img src="data:image/jpeg; base64, ${groVO.avatarBase64}" />
 		            <div class="text">
@@ -285,6 +286,7 @@ pageContext.setAttribute("list", list);
 		           </div>
 		           </div>
 		         </div>
+		     </c:if>
 		</c:forEach>
     </div>
    
