@@ -24,7 +24,7 @@ public class ItemServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
-		if ("getOne_For_Display".equals(action)) { // 來自Item_select_page.jsp的請求
+		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
 			// Store this set in the request scope, in case we need to
@@ -68,7 +68,7 @@ public class ItemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/item/item_select_page.jsp");
+							.getRequestDispatcher("/back-end/item/listAllItem.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -83,79 +83,12 @@ public class ItemServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add("無法取得資料:" + e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/item/listOneItem.jsp");
+						.getRequestDispatcher("/back-end/item/listAllItem.jsp");
 				failureView.forward(req, res);
 				e.printStackTrace();
 			}
 		}
 		
-		
-		
-		
-		if ("getName_For_Display".equals(action)) { // 來自Item_select_page.jsp的請求
-
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
-			try {
-				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
-				String str = req.getParameter("itemName");
-				if (str == null || (str.trim()).length() == 0) {
-					errorMsgs.add("請輸入商品名稱");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/item/item_select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
-				String itemName = null;
-				try {
-					itemName = new String(str);
-				} catch (Exception e) {
-					errorMsgs.add("商品名稱格式不正確");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/item/item_select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
-				/***************************2.開始查詢資料*****************************************/
-				ItemService itemSvc = new ItemService();
-				ItemVO itemVO = itemSvc.getOneItem(itemName);
-				if (itemVO == null) {
-					errorMsgs.add("查無資料");
-				}
-				// Send the use back to the form, if there were errors
-				if (!errorMsgs.isEmpty()) {
-					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/item/item_select_page.jsp");
-					failureView.forward(req, res);
-					return;//程式中斷
-				}
-				
-				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
-				req.setAttribute("itemVO", itemVO); // 資料庫取出的itemVO物件,存入req
-				String url = "/back-end/Item/listOneItem.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneItem.jsp
-				successView.forward(req, res);
-
-				/***************************其他可能的錯誤處理*************************************/
-			} catch (Exception e) {
-				errorMsgs.add("無法取得資料:" + e.getMessage());
-				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/item/listOneItem.jsp");
-				failureView.forward(req, res);
-				e.printStackTrace();
-			}
-		}
 		
 		
 		
@@ -483,11 +416,14 @@ public class ItemServlet extends HttpServlet {
 				
 				/***************************2.開始新增資料***************************************/
 				ItemService itemSvc = new ItemService();
-				itemVO = itemSvc.addItem(itemTypeId, itemPetType, itemName, itemContent, itemPrice, itemAmount);
 				
+				itemVO = itemSvc.addItem(itemTypeId, itemPetType, itemName, itemContent, itemPrice, itemAmount);
+				System.out.println("xxx"+itemVO.getItemId());
+				req.setAttribute("itemVO", itemVO);
 				/***************************3.新增完成,準備轉交(Send the Success view)***********/
-				String url = "/back-end/item/listAllItem.jsp";
-				RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+				String url = req.getContextPath()+"/back-end/item/listOneItem.jsp";
+//				res.sendRedirect(url);
+				RequestDispatcher successView = req.getRequestDispatcher("/back-end/item/listOneItem.jsp"); // 新增成功後轉交listAllEmp.jsp
 				successView.forward(req, res);				
 				
 				/***************************其他可能的錯誤處理**********************************/
@@ -530,10 +466,86 @@ public class ItemServlet extends HttpServlet {
 			} catch (Exception e) {
 				errorMsgs.add(e.getMessage());
 				RequestDispatcher failureView = req
-						.getRequestDispatcher("/back-end/item/item_select_page.jsp");
+						.getRequestDispatcher("/back-end/item/addItem.jsp");
 				failureView.forward(req, res);
 			}
 		}	    
         
+		
+		
+		
+		if ("update".equals(action)) { // 來自update_item_input.jsp的請求
+			
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.print("OK");
+			
+			
+			try {
+				/***********************1.接收請求參數 - 輸入格式的錯誤處理*************************/
+				Integer itemId = new Integer(req.getParameter("itemId"));
+									
+				Integer itemStatus = null;
+				try {
+					itemStatus = new Integer(req.getParameter("itemStatus").trim());
+					System.out.print(itemStatus);
+				} catch (NumberFormatException e) {
+					itemStatus = 0;
+					errorMsgs.add("修改狀態請填1個數字即可, 狀態代號參考  0:草稿, 1:公開, 2:隱藏");
+				} if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/item/update_item_input.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				
+				
+
+				ItemVO itemVO = new ItemVO();
+				
+				itemVO.setItemId(itemId);
+				itemVO.setItemStatus(itemStatus);
+	
+
+
+		//		 Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					req.setAttribute("itemVO", itemVO); // 含有輸入格式錯誤的empVO物件,也存入req
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/back-end/item/update_item_input.jsp");
+					failureView.forward(req, res);
+					return; //程式中斷
+				}
+			
+				
+				
+				
+				/***************************2.開始修改資料*****************************************/
+				ItemService itemSvc = new ItemService();
+//				itemVO = itemSvc.updateItem(itemId, itemTypeId, itemPetType,itemName, itemContent, itemPrice, itemAmount, itemStatus);
+				itemSvc.updateItemStatus(itemId, itemStatus);
+				itemVO = itemSvc.getOneItem(itemId);
+				
+				/***************************3.修改完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("itemVO", itemVO); // 資料庫update成功後,正確的的empVO物件,存入req
+				String url = "/back-end/item/listOneItem.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交listOneItem.jsp
+				successView.forward(req, res);
+				
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				e.printStackTrace();
+				errorMsgs.add("修改資料失敗:"+e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/back-end/item/update_item_input.jsp");
+				failureView.forward(req, res);
+			}
+				
+
+		}
 	}
 }

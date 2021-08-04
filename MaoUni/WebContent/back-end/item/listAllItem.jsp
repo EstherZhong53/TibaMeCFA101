@@ -221,10 +221,10 @@
 		                </div>
 		                <div class="col-md-6" style="display:flex;">
 		                	<div class="excelbutton">
-		                	<button onclick="exportTableToExcel('dataTable')" class="btn" type="button" style="margin-left: 290px;">匯出EXCEL</button>
+		                	<button onclick="exportTableToExcel('dataTable')" class="btn" type="button" style="margin-left: 302px;">匯出EXCEL</button>
 		                    </div>
 		                    
-		                    <div class="itemquerybutton" style="margin-left:20px;">
+		                    <div class="itemquerybutton" style="margin-left:17px;">
 		                    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
 		                    <button type="button" class="btn" id="btnstyleforitemquery"data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="">商品查詢</button>
 							
@@ -279,16 +279,16 @@
 		                <table class="table my-0" id="dataTable">
 		                    <thead>
 		                        <tr>
-		                            <th style="width: 75px;text-align: center;">商品編號</th>
-		                            <th style="width: 77px;text-align: center;">商品類別</th>
-		                            <th style="width: 80px;text-align: center;">寵物類別</th>
-		                            <th style="width: 110px;text-align: center;">商品名稱</th>
-		                            <th style="width: 80px;text-align: center;">商品內容</th>
-		                            <th style="width: 80px;text-align: center;">商品價格</th>
-		                            <th style="width: 80px;text-align: center;">商品數量</th>
-		                            <th style="width: 75px;text-align: center;">商品狀態</th>
-		                            <th style="width: 88px;text-align: center;">更新時間</th>
-		                            <th style="width: 80px;text-align: center;">修改資料</th>
+		                            <th style="width: 93px;text-align: center;">商品編號</th>
+		                            <th style="width: 96px;text-align: center;">商品類別</th>
+		                            <th style="width: 93px;text-align: center;margin-left:3px;">寵物類別</th>
+		                            <th style="width: 136px;text-align: center;">商品名稱</th>		                            
+		                            <th style="width: 96px;text-align: center;">商品價格</th>
+		                            <th style="width: 96px;text-align: center;">商品數量</th>
+		                            <th style="width: 96px;text-align: center;">商品狀態</th>
+		                            <th style="width: 120px;text-align: center;">更新時間</th>
+		                            <th style="width: 110px;text-align: center;">商品總覽</th>
+		                            <th style="width: 110px;text-align: center;">修改資料</th>
 		                        </tr>
 		                    </thead>
 		                                
@@ -298,24 +298,30 @@
 				
 								
 									<tr style="width: 70px;text-align: center;">
-										<td style="width: 75px;text-align: center;">${itemVO.itemId}</td>
+										<td style="width: 93px;text-align: center;">${itemVO.itemId}</td>
 										<c:if test="${itemVO.itemTypeId == '1'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩食品</td></c:if>
 										<c:if test="${itemVO.itemTypeId == '2'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩玩具</td></c:if>
 										<c:if test="${itemVO.itemTypeId == '3'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩傢俱</td></c:if>
 										<c:if test="${itemVO.itemTypeId == '4'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩衣物</td></c:if>
 										<c:if test="${itemVO.itemTypeId == '5'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩清潔</td></c:if>
-										<c:if test="${itemVO.itemTypeId == '6'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩保養</td></c:if>
-										<td style="width: 80px;text-align: center;">${itemVO.itemPetType}</td>
-										<td style="width: 110px;text-align: center;">${itemVO.itemName}</td>
-										<td style="width: 80px;text-align: center;"><input class=details style="border:5px;border-radius:5px;" type="button" value="詳細內容" onclick="location.href='ItemDetails.jsp'"></td>    <!--${itemVO.itemContent}-->
-										<td style="width: 80px;text-align: center;">${itemVO.itemPrice}</td>
-										<td style="width: 80px;text-align: center;">${itemVO.itemAmount}</td> 									
+										<c:if test="${itemVO.itemTypeId == '6'}"><td scope="col" class="itemTypeId" style="width: 75px;text-align: center;">毛孩保養</td></c:if>								
+										<td style="width: 93px;text-align: center;">${itemVO.itemPetType}</td>
+										<td style="width: 136px;text-align: center;">${itemVO.itemName}</td>										
+										<td style="width: 96px;text-align: center;">${itemVO.itemPrice}</td>
+										<td style="width: 96px;text-align: center;">${itemVO.itemAmount}</td> 									
 										<c:if test="${itemVO.itemStatus == '0'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">待上架</td></c:if>
 										<c:if test="${itemVO.itemStatus == '1'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">上架中</td></c:if>
-										<c:if test="${itemVO.itemStatus == '2'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">已下架</td></c:if>
+										<c:if test="${itemVO.itemStatus == '2'}"><td scope="col" class="itemStatus" style="width: 75px;text-align: center;">已下架</td></c:if>									
+										<td style="width: 120px;text-align: center;"><fmt:formatDate value="${itemVO.itemUpdate}" pattern="yyyy-MM-dd"/></td>
+										<td style="width: 110px;text-align: center;">
+											<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
+											     <input class=details type="submit" value="詳細內容"  style="border:5px;border-radius:5px;">
+											     <input type="hidden" name="itemId"  value="${itemVO.itemId}">
+											     <input type="hidden" name="action"	value="getOne_For_Display">
+											</FORM>
+										</td>    <!--${itemVO.itemContent}-->
 										
-										<td style="width: 88px;text-align: center;"><fmt:formatDate value="${itemVO.itemUpdate}" pattern="yyyy-MM-dd"/></td>
-										<td>	
+										<td style="width: 110px;text-align: center;">	
 										  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet" style="margin-bottom: 0px;">
 										     <input class=update type="submit" value="立即修改">
 										     <input type="hidden" name="itemId"  value="${itemVO.itemId}">

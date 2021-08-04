@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
+import com.works.model.WorkVO;
+
 public class ItemPhotosService {
 
 	private ItemPhotosDAO_interface dao;
@@ -24,30 +26,7 @@ public class ItemPhotosService {
 		return itemPhotosVO;
 	}
 
-	public ItemPhotosVO updateItemPhotos(Integer ipId, Integer ipItemId, String ipItem, java.sql.Date ipUpdate) throws IOException {
 
-		ItemPhotosVO itemPhotosVO = new ItemPhotosVO();
-		byte[]pic = dao.updateItemPhoto(ipItem);
-		itemPhotosVO.setIpItemId(ipItemId);
-		itemPhotosVO.setIpItem(pic);	
-		itemPhotosVO.setIpUpdate(ipUpdate);	
-		itemPhotosVO.setIpId(ipId);
-		dao.update(itemPhotosVO);
-
-		return itemPhotosVO;
-	}
-
-	public void deleteItemType(Integer ipId) {
-		dao.delete(ipId);
-	}
-
-	public ItemPhotosVO getOneItemPhotos(Integer ipId) {
-		return dao.findByPrimaryKey(ipId);
-	}
-
-	public List<ItemPhotosVO> getAll() {
-		return dao.getAll();
-	}
 	
 	
 	public String getOneItemPic(Integer ipId) {
@@ -58,10 +37,22 @@ public class ItemPhotosService {
 		
 	}
 	
+	public void addIpItem(Integer ipItemId, byte[] ipItem) {
+		ItemPhotosVO itemPhotosVO = new ItemPhotosVO();
+		itemPhotosVO.setIpItemId(ipItemId);
+		itemPhotosVO.setIpItem(ipItem);
+		dao.insert(itemPhotosVO);
+	}
 	
 	
+	public void delete(Integer ipId) {
+		dao.delete(ipId);
+	}
 	
 	
+	public List<ItemPhotosVO> getOneList(Integer ipItemId){
+		return dao.getOneList(ipItemId);
+	}
 	
 
 	public static void main(String [] args) {

@@ -3,6 +3,8 @@ package com.item.model;
 import java.util.List;
 import java.util.Map;
 
+
+
 public class ItemService {
 
 	private ItemDAO_interface dao;
@@ -13,7 +15,7 @@ public class ItemService {
 
 	public ItemVO addItem(Integer itemTypeId, String itemPetType, String itemName, String itemContent,
 			Integer itemPrice, Integer itemAmount) {
-
+		
 		ItemVO itemVO = new ItemVO();
 
 		itemVO.setItemTypeId(itemTypeId);
@@ -22,8 +24,9 @@ public class ItemService {
 		itemVO.setItemContent(itemContent);
 		itemVO.setItemPrice(itemPrice);
 		itemVO.setItemAmount(itemAmount);
-		dao.insert(itemVO);
-
+		Integer itemId = dao.insert(itemVO);
+		itemVO.setItemStatus(1);
+		itemVO.setItemId(itemId);
 		return itemVO;
 	}
 
@@ -45,12 +48,23 @@ public class ItemService {
 
 		return itemVO;
 	}
+	
+	public ItemVO updateItemStatus(Integer itemId, Integer itemStatus) {
+
+		ItemVO itemVO = new ItemVO();
+		
+		itemVO.setItemStatus(itemStatus);
+		itemVO.setItemId(itemId);
+		dao.update(itemVO);
+
+		return itemVO;
+	}
 
 	public ItemVO getOneItem(Integer itemId) {
 		return dao.findByPrimaryKey(itemId);
 	}
 
-	public ItemVO getOneItem(String itemName) {
+	public ItemVO getOneItem2(String itemName) {
 		return dao.findByPrimaryKey(itemName);
 	}
 	

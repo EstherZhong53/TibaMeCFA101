@@ -781,76 +781,24 @@ cursor: pointer;
 	
 	
 	<!-- 以下為內容的區塊 -->
-	<div class="middleplace" style="display:flex;">
+	<div class="middleplace" style="display:flex;height:auto;margin-top:5px;">
 
-			<!-- 以下為左方分類區塊(全部商品/精選專區...等) -->
-			<div class="col-md-2">
-			     <div class="list-group mt-3" style="position:absolute;width:85%;text-align:center;padding: 0px 10px;margin-left:20px;font-weight:600">
-                    <a style="margin-top:70px;" href="#" class="list-group-item list-group-item-action active" data-toggle="list">全部商品</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">貓咪專區</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">狗狗專區</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">毛孩食品</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">毛孩玩具</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">毛孩傢俱</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">毛孩清潔</a>
-                    <a href="#" class="list-group-item list-group-item-action" data-toggle="list">毛孩保養</a>
-                </div>
+			
+			<div class="col-md-1" style="border: 2px solid yellow;height:1500px;">
+
 			</div>
 			
-			<!-- 以下為右方搜尋下拉式選單 -->
-			<div class="col-md-10" style="height:auto;">				
-				
-				<div class="DDM" style="margin-top:80px;">
-					<div class="SearchSorting">				    
-					    <div>
-					    	<p style="color:#424242;font-size:25px;font-weight:600;margin-top:10px;margin-right:498px;">全部商品</p>
-					    </div>
-					    <select style="color:#a0591f;border:none;width:130px;font-weight:600;cursor:pointer;">
-						    <option value="volvo" style="display:none;">請選擇排序方式</option>
-						    <option value="saab">上架時間由新到舊</option>
-						    <option value="saab">上架時間由舊到新</option>
-						    <option value="opel">價格由高至低</option>
-						    <option value="audi">價格由低至高</option>
-					    </select>
-						<div style="margin-right:30px;margin-top:-6px;">
-					    <input class="searchplaceholder" type="text" placeholder="請輸入搜尋關鍵字" style="font-size:14px;width:130px;"/>
-					    <a href="#" class="iconbth1"><i class="fas fa-search fa-1x" style="color:#a36735;margin-left:-5px;"></i></a>
-						</div>
-					</div>
+			
+			<div class="col-md-10" style="border: 2px solid red;display:flex;height:1500px;">				
+				<div class="col-md-6" style="border: 2px solid blue;">
 				</div>
-				
-				<!-- 以下為右方商品清單資訊 -->
-				<div class="row" style="margin-top:20px;margin-left:50px;margin-right:10px;" >
-				
-				<c:forEach var="itemVO" items="${list}">
-
-					<div class="col-md-3" style="margin-top:45px;">
-						    <div class="card" >
-						    	<a class="ItemPhotos" href="#">
-						        <img src="data:image/jpeg; base64, ${itemVO.itemPhotoFirst}"/>
-						        </a>
-						        <div class="focus-content">
-						        <a id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a>
-						        </div>				  
-						    </div>
-						    <a class="ItemIntro" href="#" style="text-decoration:none;">	  
-							<div class="Product-title Label mix-primary-text">${itemVO.itemName}</div>
-							<div class="Label-price sl-price">NT${itemVO.itemPrice}</div>
-							</a>
-					</div>
-					
-				
-
-				
-				</c:forEach>
-
-				</div>
-				<div class="Wspace" style="width:100%;height:200px;">
-					
+				<div class="col-md-6" style="border: 2px solid orange;">
 				</div>
 			</div>
 		
+            <div class="col-md-1" style="border: 2px solid green;height:1500px;">				
 
+			</div>
 	</div>
 	
 	<!-- 以下為FOOTER -->
