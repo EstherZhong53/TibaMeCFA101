@@ -32,34 +32,28 @@ public class TrackingController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 
-		// 從主鍵做查詢的寫法
+		// 這邊是從會員找追蹤不是追蹤的單一查詢
 
 		if ("getOne_For_Display".equals(action)) {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
+			System.out.println(action);
 			try {
 				
 				// 這邊接收請求參數-輸入格式錯誤處理
-				Integer id = new Integer(req.getParameter("id"));
-				//Integer det = new Integer(req.getParameter("det"));
+				Integer id = new Integer(req.getParameter("id").trim());
 				System.out.println(id);
+				
 				
 				// 2.這邊開始查詢認養追蹤資料
 				
 				TrackingService trackingSvc = new TrackingService();
-				TrackingVO trackingVO = trackingSvc.getOneTracking(id);
-				List<TrackingVO> listVO = trackingSvc.getAll();
-				List<TrackingVO> list = new ArrayList<TrackingVO>();
-				
-				for (TrackingVO trackVO : listVO){
-					if(trackVO.getId() == id) {
-						list.add(trackVO);
-					}
-				}
+				List<TrackingVO> listVO = trackingSvc.getMemberByid(id);
+				System.out.println(listVO);
 
 				// 3.認養追蹤的ID查詢送出，這邊放Tracking的東西是因為跑了list將list的元素set進來，所以利用key，value的特性寫。
 				req.setAttribute("TrackinglistVO", listVO);
-				String url = "/front-endadopt/getonetracking.jsp";
+				String url = "/back-end/adopt/getonetracking.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {

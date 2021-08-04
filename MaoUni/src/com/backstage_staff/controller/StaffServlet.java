@@ -377,46 +377,36 @@ public class StaffServlet extends HttpServlet {
 		if("login".equals(action)) {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);			
-			String username = req.getParameter("username");
-					String password = req.getParameter("password");
-					String usernameReg = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
-					String passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			String username = req.getParameter("username");			
+			String password = req.getParameter("password");
+			String usernameReg = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+			String passwordReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
 					
-					if(username == null || username.trim().isEmpty()) {
-						
+					if(username == null || username.trim().isEmpty()) {						
 						errorMsgs.put("username", "帳號請勿空白");
 						req.setAttribute(username, "帳號錯誤");
-						String url = "/back-end/staff/select.jsp";
-						RequestDispatcher failureView = req.getRequestDispatcher(url);
-						failureView.forward(req, res);						
+											
 					}else if(!username.trim().matches(usernameReg)) {
 						errorMsgs.put("username", "請輸入有效的帳號");
-						String url = "/back-end/staff/select.jsp";
+						String url = "/back-end/staff/login.jsp";
 						RequestDispatcher failureView = req.getRequestDispatcher(url);
 						failureView.forward(req, res);
-					}
-					
+					}				
 					if(password == null || password.trim().isEmpty()) {
 						errorMsgs.put("password", "密碼請勿空白");
-						String url = "/back-end/staff/select.jsp";
-						RequestDispatcher failureView = req.getRequestDispatcher(url);
-						failureView.forward(req, res);
+						
 					}else if(!password.trim().matches(passwordReg)) {
 						errorMsgs.put("password", "密碼長度限制6-20");
-						String url = "/back-end/staff/select.jsp";
-						RequestDispatcher failureView = req.getRequestDispatcher(url);
-						failureView.forward(req, res);
+						
 					}
 					if(!errorMsgs.isEmpty()) {
 						req.getSession().setAttribute(username, password);
-						req.getRequestDispatcher("/back-end/staff/select.jsp").forward(req, res);
-						HttpSession session =req.getSession();
-						session.setAttribute(username, password);
+						req.getRequestDispatcher("/back-end/staff/login.jsp").forward(req, res);
 									
 					}
 					StaffService staffSvc = new StaffService();
 					StaffVO staffVO = staffSvc.findByMGnameAndPassword(username, password);
-					String url = "/back-end/staff/backImage.jsp";
+					String url = "/back-end/staff/allStaff.jsp";
 					RequestDispatcher successView = req.getRequestDispatcher(url);
 					successView.forward(req, res);
 					HttpSession session =req.getSession();

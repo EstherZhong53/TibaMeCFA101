@@ -21,11 +21,11 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 
 	private static final String INSERT_STMT = "INSERT INTO TRACKING_ADOPT(ATRA_MEMID,ATRA_AI_ID) VALUES (?,?)";
 	private static final String GET_ALL_STMT = "SELECT ATRA_MEMID,ATRA_AI_ID FROM TRACKING_ADOPT order by ATRA_MEMID";
-	private static final String GET_ONE_STMT = "SELECT ATRA_MEMID,ATRA_AI_ID FROM TRACKING_ADOPT where ATRA_MEMID = ?";
+	private static final String GET_ONE_STMT = "SELECT ATRA_MEMID,ATRA_AI_ID FROM TRACKING_ADOPT where ATRA_AI_ID = ?";
 	private static final String DELETE = "DELETE FROM TRACKING_ADOPT where ATRA_MEMID = ?";
 	private static final String UPDATE = "UPDATE TRACKING_ADOPT set ATRA_AI_ID=?  where ATRA_MEMID";
 
-	private static final String getMemberByid = "select `MEM_ID`,`MEM_NAME`,`MEM_EMAIL`,`MEM_PASSWORD`,`MEM_IDENTITY`,`MEM_GENDER`,`MEM_PH`,`MEM_ADDRES`,`MEM_BIRTHDAT`,`MEM_POSITION`,`MEM_BLACKLIST`,`MEM_RESERVE`,`MEM_SURVIVE`,`MEM_UPDATE` from `MEMBER` where ATRA_AI_ID=?order by `MEM_ID`";
+	private static final String getMemberByid = " SELECT ATRA_MEMID,ATRA_AI_ID FROM TRACKING_ADOPT where ATRA_MEMID = ?";
 	private static final String getImfVObyid = "SELECT AI_ID,AI_ADOPT,AI_MECH,AI_NAME,AI_YEAR,AI_SIT FROM ADOPT_IMF WHERE ATRA_MEMID = ? ORDER BY AI_ID";
 
 	@Override
@@ -139,7 +139,7 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 	}
 
 	@Override
-	public TrackingVO findByPrimaryKey(Integer Id) {
+	public TrackingVO findByPrimaryKey(Integer id) {
 		TrackingVO trackingVO = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -149,7 +149,7 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(GET_ONE_STMT);
 
-			pstmt.setInt(1, Id);
+			pstmt.setInt(1, id);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -198,9 +198,7 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 				trackingVO = new TrackingVO();
 				trackingVO.setId(rs.getInt("ATRA_MEMID"));
 				trackingVO.setDet(rs.getInt("ATRA_AI_ID"));
-
 				list.add(trackingVO);
-
 			}
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
@@ -242,7 +240,16 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 		pstmt = con.prepareStatement(UPDATE);
 		pstmt = con.prepareStatement(GET_ONE_STMT);
 		pstmt = con.prepareStatement(GET_ALL_STMT);
+		pstmt = con.prepareStatement(getMemberByid);
 //		
+//		List<MemberVO> list = dao.getImfVObyid(3);
+//		for(TrackingVO trackingVO:list) {
+//			System.out.println(trackingVO.getId());
+//			System.out.println(trackingVO.getDet());
+//		}
+		
+		
+		
 		// �s�W
 //		DetailVO d1=new DetailVO();
 //		d1.setDet(1);
@@ -276,9 +283,9 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 	}
 
 	@Override
-	public Set<MemberVO> getMemberByid(Integer id) {
-		Set<MemberVO> set = new LinkedHashSet<MemberVO>();
-		MemberVO memberVO = null;
+	public List<TrackingVO> getMemberByid(Integer id) {
+		
+		List<TrackingVO> list = new ArrayList<TrackingVO>();
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -291,22 +298,13 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				memberVO = new MemberVO();
-				memberVO.setMemId(rs.getInt("`MEM_ID`"));
-				memberVO.setMemName(rs.getString(" `MEM_NAME`"));
-				memberVO.setMemEmail(rs.getString(" `MEM_NAME`"));
-				memberVO.setMemPassword(rs.getString("`MEM_PASSWORD`"));
-				memberVO.setMemIdenity(rs.getString("`MEM_IDENTITY`"));
-				memberVO.setMemGender(rs.getString("`MEM_GENDER`"));
-				memberVO.setMemPh(rs.getInt(" `MEM_PH` "));
-				memberVO.setMemAddres(rs.getString("`MEM_ADDRES`"));
-				memberVO.setMemBirthday(rs.getTimestamp("`MEM_BIRTHDAT`"));
-				memberVO.setMemPosition(rs.getInt("`MEM_POSITION`"));
-				memberVO.setMemReserve(rs.getInt("`MEM_RESERVE`"));
-				memberVO.setMemSurvive(rs.getInt("`MEM_SURVIVE`"));
-				memberVO.setMemUpdate(rs.getTimestamp("`MEM_UPDATE`"));
-				set.add(memberVO);
+			
+			TrackingVO trackingVO = new TrackingVO();					
+			trackingVO.setId(rs.getInt("ATRA_MEMID"));
+			trackingVO.setDet(rs.getInt("ATRA_AI_ID"));	
+			list.add(trackingVO);
 			}
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver." + e.getMessage());
 		} catch (SQLException se) {
@@ -335,7 +333,7 @@ public class TrackingJDBCDAO implements TrackingDAO_interface {
 			}
 		}
 
-		return set;
+		return list;
 	}
 
 	@Override

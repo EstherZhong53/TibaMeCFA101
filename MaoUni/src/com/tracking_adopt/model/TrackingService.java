@@ -36,5 +36,8 @@ public class TrackingService {
 	public List<TrackingVO>getAll(){
 		return dao.getAll();
 	}
+	public List<TrackingVO> getMemberByid(Integer id){
+		return dao.getMemberByid(id);
+	}
 	
 }

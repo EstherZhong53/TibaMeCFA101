@@ -742,6 +742,7 @@ background-color: #fff;
         <a href="<%=request.getContextPath()%>/front-end/groomer/groomer_application.jsp">加入美容</a>
         </c:if>
         
+        <a href="">追蹤清單</a>
         
         <a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
 </div>

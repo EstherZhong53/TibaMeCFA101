@@ -3,20 +3,17 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.backstage_staff.model.*"%>
 
-<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="chrome">
 	<link rel="stylesheet" type="text/css">
 	<title>後臺登入</title>
 	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 	
-<!-- 	換成靜態檔 by Esther -->
-<!-- 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-<!-- 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> -->
 	
 	
 <style>
@@ -44,12 +41,10 @@
 	border-radius: 15px;
 	width: 25%;
 }
-
 .log i{
 	font-size:100px;
 	margin:20px auto;
 }
-
 input [type="text"], input [type="password"]{
 	font-size: 16px;
 	font-family: "微軟正黑體", sans-serif;
@@ -67,7 +62,6 @@ button{
 	font-family: "微軟正黑體", sans-serif;
 	color: #3C3C3C	; 
 }
-
 @media (max-width: 450px) {
 	.login{
 		width: 70%;
@@ -110,7 +104,7 @@ button{
  <script>
  
  $.ajax({
-	    url: "../Select.jsp",
+	    url: "../login.jsp",
 	    cache: false,
 	    async: false,
 	    dataType: 'text',

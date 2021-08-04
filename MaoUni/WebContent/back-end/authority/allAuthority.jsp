@@ -121,8 +121,6 @@
 	body{
 	overflow-x:hidden; <!-- 此處做整個BODY橫向的隱藏多出的寬度 -->
 	}
-
-
 </style>
 </head>
 
@@ -137,14 +135,14 @@
              <div class="menu-sidebar" style="margin-top:30px;">
                  <ul class="menu">
                      <li><a href="<%= request.getContextPath() %>/back-end/member/listAllMember.jsp">會員資料管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/message/message_home.jsp">商城客服管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
-                <li><a href="<%= request.getContextPath() %>/back-end/staff/allStaff.jsp">後台管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/item/itemHomePage.jsp">商城管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/message/addMessage.jsp">商城客服管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/forumpost/forumPostHomePage.jsp">討論區管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/front-end/adopt/adopt_home.jsp">浪浪找家管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/article/select_page_art.jsp">知識站管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/announcemet/select_page.jsp">公告管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/groomerList.jsp">美容師管理</a></li>
+                     <li><a href="<%= request.getContextPath() %>/back-end/groomer/grooming_report.jsp">美容預約檢舉管理</a></li>
                  </ul>
              </div>
          </div>
@@ -199,7 +197,6 @@
 		<th>員工權限</th>
 		<th>功能名稱</th>
 		<th>修改</th>
-		<th>單一查詢</th>
 		
 	</tr>
 		<c:forEach var="AuthorityVO" items="${list}"> 
@@ -218,21 +215,13 @@
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="id" value="${AuthorityVO.id}">
 			     <input type="hidden" name="action"	value="getOne_For_Updat"></FORM>
-			</td>
-			
-			<td>
-			   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/backstage_authority/AuthorityServlet" style="margin-bottom: 0px;">
-			     <input type="submit" value="單一查詢">
-			     <input type="hidden" name="id" value="${AuthorityVO.id}">
-			     <input type="hidden" name="action" value="get_One_Display"></FORM>
-			</td>
-			
-			
-			
-			
+			</td>		
 		</tr>
-	</c:forEach>
+	</c:forEach>	
 </table>
+
+<a href="<%=request.getContextPath()%>/back-end/function/allFunction.jsp" type="button">功能列表</a>
+
  <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script> 
     <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
     

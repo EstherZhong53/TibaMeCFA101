@@ -506,8 +506,7 @@ h2 {
 					</tr>
 					<tr>
 						<td class="td2">輸入內容</td>
-						<td><textarea class="message-bt" placeholder="請勿輸入不雅字眼" rows="5" id="comment" type="TEXT" name="contain"
-								value="${param.contain}" ></textarea></td>
+						<td><textarea class="message-bt" placeholder="請勿輸入不雅字眼" rows="5" id="comment" type="TEXT" name="contain" value="${param.contain}" ></textarea></td>
 					</tr>
 					<tr>
 						<td class="td2">客服是否曾聯繫過您？</td>

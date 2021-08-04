@@ -56,37 +56,37 @@ public class SignIn_Controller extends HttpServlet {
 						
 						errorMsgs.put("username", "帳號請勿空白");
 						request.setAttribute(username, "帳號錯誤");
-						String url = "/back-end/staff/select.jsp";
+						String url = "//back-end/staff/login.jsp";
 						RequestDispatcher failureView = request.getRequestDispatcher(url);
 						failureView.forward(request, response);						
 					}else if(!username.trim().matches(usernameReg)) {
 						errorMsgs.put("username", "請輸入有效的帳號");
-						String url = "/back-end/staff/select.jsp";
+						String url = "/back-end/staff/login.jsp";
 						RequestDispatcher failureView = request.getRequestDispatcher(url);
 						failureView.forward(request, response);
 					}
 					
 					if(password == null || password.trim().isEmpty()) {
 						errorMsgs.put("password", "密碼請勿空白");
-						String url = "/back-end/staff/select.jsp";
+						String url = "/back-end/staff/login.jsp";
 						RequestDispatcher failureView = request.getRequestDispatcher(url);
 						failureView.forward(request, response);
 					}else if(!password.trim().matches(passwordReg)) {
 						errorMsgs.put("password", "密碼長度限制6-20");
-						String url = "/back-end/staff/select.jsp";
+						String url = "/back-end/staff/login.jsp";
 						RequestDispatcher failureView = request.getRequestDispatcher(url);
 						failureView.forward(request, response);
 					}
 					if(!errorMsgs.isEmpty()) {
 						request.getSession().setAttribute(username, password);
-						request.getRequestDispatcher("/back-end/staff/select.jsp").forward(request, response);
+						request.getRequestDispatcher("/back-end/staff/login.jsp").forward(request, response);
 						HttpSession session =request.getSession();
 						session.setAttribute(username, password);
 									
 					}
 					signInService signInSvc = new signInService();
 					signInVO signInVO = signInSvc.findByUsernameAndPassword(username, password);
-					String url = "/back-end/staff/backImage.jsp";
+					String url = "/back-end/staff/allStaff.jsp";
 					RequestDispatcher successView = request.getRequestDispatcher(url);
 					successView.forward(request, response);
 					HttpSession session =request.getSession();

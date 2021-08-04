@@ -76,7 +76,7 @@ public class ImfServlet extends HttpServlet {
 				Integer trackingVO = trackingSvc.addTracking(id, det);
 
 				req.setAttribute("TrackingVO", trackingVO);
-				String url = "/front-end/imf/allImf.jsp";
+				String url = "/back-end/imf/allImf.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 			} catch (Exception e) {
