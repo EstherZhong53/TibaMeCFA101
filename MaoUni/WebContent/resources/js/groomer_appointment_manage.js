@@ -214,6 +214,7 @@ $(".appointmentList").click(function(e){
 		return;
 	}
 	
+
 	
 	$.ajax({
 			url: "/MaoUni/appointment.do",
@@ -224,10 +225,11 @@ $(".appointmentList").click(function(e){
 				apmStatus: status
 			},
 			success: function(data){
-				swal("班表已更新!","","success");
-				memId = e.target.dataset.memid;
-				sendmessage();
-				window.location.reload();
+				swal("班表已更新!","","success").then((result)=>{
+//					memId = e.target.dataset.memid;
+//					sendmessage();
+					window.location.reload();
+				});
 			}
 		})
 	})
