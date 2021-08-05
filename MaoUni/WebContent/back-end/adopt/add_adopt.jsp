@@ -3,9 +3,26 @@
 
 <%@ page import="java.util.*"%>
 <%@ page import="com.adopt_imf.model.*"%>
+<%@ page import="com.tracking_adopt.model.*"%>
+<%@ page import="com.adopt_mechanism.model.*"%>
+<%@ page import="com.variety.model.*"%>
+<%@ page import="com.variety.model.VarietyVO"%>
+<%@ page import="com.member.model.*"%>
+<%@ page import="com.tracking_adopt.model.TrackingVO"%>
+
 
 <%
 	ImfVO imfVO = (ImfVO) request.getAttribute("ImfVO");
+	
+MechanismService mechanismService = new MechanismService();
+List<MechanismVO> mechanismlist = mechanismService.getAll();
+	pageContext.setAttribute("mechanismlist", mechanismlist);
+	
+VarietyService varietyService = new VarietyService();
+List<VarietyVO> varietylist = varietyService.getAll();
+pageContext.setAttribute("varietylist",varietylist);
+	
+
 %>
 
 <!DOCTYPE html>
@@ -35,6 +52,7 @@ table#table-1 {
 	margin-top: 280px;
 	margin-bottom: 1px;
 }
+
 table#table-1 h4 {
 	color: red;
 	display: block;
@@ -43,6 +61,7 @@ table#table-1 h4 {
 	margin-top: 2px;
 	margin-bottom: 10px;
 }
+
 .
 h4 {
 	color: blue;
@@ -63,6 +82,7 @@ add {
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+
 table, th, td {
 	border: 0px solid #CCCCFF;
 	color: black;
@@ -70,6 +90,7 @@ table, th, td {
 	margin-bottom: 10px;
 	margin-top: 40px;
 }
+
 th, td {
 	padding: 1px;
 	margin: auto;
@@ -78,67 +99,81 @@ th, td {
 	margin-top: 10px;
 	margin-bottom: 5px;
 }
+
 .btn {
 	background: #e8c497;
 	color: #fff;
 }
+
 .btn:hover {
 	background: #ffe6c7;
 	color: #fff;
 }
+
 .pagination>li.active>a {
 	background: #d6b286;
 	color: #fff;
 }
+
 .pagination>li>a {
 	color: #d6b286;
 }
+
 .pagination>li>a:hover {
 	background: #fff;
 	color: #5c3316;
 }
+
 .col-md-6 .pagination>li>a, .col-md-6 .pagination>li>span {
 	border: 1px solid #d6b286;
 }
+
 .pagination>.active>a:hover {
 	background-color: #e6c195;
 	border: solid 1px #e6c195;
 }
+
 a.btsp {
 	font-size: 35px;
 	color: #e8c497;
 	font-weight: bold;
 	margin-left: -5px;
 }
+
 a.btsp:hover, a.btsp:active {
 	color: #ffe6c7;
 	text-decoration: none;
 }
+
 p.allitemtitle {
 	color: #fff;
 	font-weight: bold;
 }
+
 input.details {
 	background-color: #bfbfbf;
 	color: #fff;
 }
+
 input.details:hover {
 	background-color: #e8c497;
 }
+
 input.update {
 	background-color: #bfbfbf;
 	color: #fff;
 }
+
 input.update:hover {
 	background-color: #e8c497;
 }
+
 body {
 	overflow-x: hidden;
 	<!--
 	此處做整個BODY橫向的隱藏多出的寬度
 	-->
 }
-
 </style>
 </head>
 <!-- 以下為隱藏式菜單內容 -->
@@ -183,7 +218,7 @@ body {
 				style="margin-top: 23px; margin-left: -6px;">
 				<!--請看這行最右邊-->
 				<a class="btsp"
-					href="<%=request.getContextPath()%>/back-end/staff/allStaff.jsp">後台管理</a>
+					href="<%=request.getContextPath()%>/back-end/staff/allStaff.jsp">寵物新增</a>
 				<ul class="nav navbar-nav flex-nowrap ml-auto"
 					style="margin-top: -10px;">
 					<li class="nav-item dropdown no-arrow" style="margin-top: 10px">
@@ -204,46 +239,51 @@ body {
 			</div>
 		</nav>
 		<div align="center">
-			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/MaoUni/ImfServlet"
-				enctype="multipart/form-data" name="form1">
-				<table align="center" cellpadding="10" border='2'>
+			<table align="center" cellpadding="10" border='2'>
+				<tr>
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/MaoUni/ImfServlet" enctype="multipart/form-data" name="form1">
 					<tr>
-						<td>品種</td>
-						<td><input type="TEXT" name="adopt" size="45"
-							value="${param.adopt}"></td>
-					</tr>
-					<tr>
-						<td>機構</td>
-						<td><input type="TEXT" name="mech" size="45"
-							value="${param.mech}"></td>
-					</tr>
-					<tr>
-						<td>名字</td>
-						<td><input type="TEXT" name="name" size="45"
-							value="${param.name}"></td>
-					</tr>
-					<tr>
-						<td>年齡</td>
-						<td><input type="TEXT" name="year" size="45"
-							value="${param.year}"></td>
-					</tr>
-					<tr>
-						<td>目前狀態</td>
-						<td><input type="TEXT" name="sit" size="45"
-							value="${param.sit}"></td>
-					</tr>
-					</tr>
-					<tr>
-						<td>圖片上傳</td>
-						<td><input type="file" name="photo" id="photo" size="45">
-					</tr>
-					<jsp:useBean id="ImfSvc" scope="session"
-						class="com.adopt_imf.model.ImfService" />
-				</table>
-				<br> <input type="hidden" name="action" value="inserImf">
-				<input type="submit" value="送出新增"> <a id
-					href="add_adopt.jsp">檢視上傳圖片</a>
+						<h5>寵物類別：						
+						<select name="adopt" required>
+							<option value="">選擇類別</option>
+							<c:forEach var="varietyVO" items="${varietylist}">
+							<option value="${varietyVO.varId}">${varietyVO.varName}</option>
+		                    </c:forEach>
+						</select>					
+				</tr>
+				<tr>	
+				<h5>所在機構：
+					<select name="mech" required>
+						<option value="">請選擇所在地機構</option>
+						<c:forEach var="mechanismVO" items="${mechanismlist}">
+							<option value="${mechanismVO.id}">${mechanismVO.name}</option>
+	                    </c:forEach>
+					</select>	
+				</h5>												
+				</tr>
+				<tr>
+					<h5>名字
+					<input type="TEXT" name="name" size="20"
+						value="${param.name}"></td>
+				</tr>
+				<tr>
+					<h5>年齡
+					<input type="TEXT" name="year" size="20"
+						value="${param.year}"></td>
+				</tr>
+				<tr>
+					<h5>目前狀態
+					<input type="TEXT" name="sit" size="20"
+						value="${param.sit}"></td>
+				</tr>
+				<tr>					
+					<h5>上傳圖片
+					<input type="file" name="photo" id="photo" size="45">
+				</tr>
+				<jsp:useBean id="ImfSvc" scope="session" class="com.adopt_imf.model.ImfService" />
+			</table>
+			<br> <input type="hidden" name="action" value="inserImf">
+			<input type="submit" value="送出新增"> <a id href="add_adopt.jsp">檢視上傳圖片</a>
 			</FORM>
 		</div>
 		</body>

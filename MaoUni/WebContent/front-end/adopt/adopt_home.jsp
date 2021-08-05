@@ -6,25 +6,40 @@
 <%@ page import="com.adopt_mechanism.model.*"%>
 <%@ page import="com.variety.model.*"%>
 <%@ page import="com.variety.model.VarietyVO"%>
-<%@ page import="com.member.model.*"%>
+<%@ page import="com.member.model.MemberVO"%>
 <%@ page import="com.tracking_adopt.model.TrackingVO"%>
+<%@ page import="com.adopt_mechanism.model.*"%>
+<%@ page import="com.member.model.*"%>
+
 
 
 <%
 	ImfService ImfSvc = new ImfService();
 	List<ImfVO> list = ImfSvc.getAll();
 	pageContext.setAttribute("list", list);
+	
 	VarietyService varSvc = new VarietyService();
 	List<VarietyVO> varlist = varSvc.getAll();
 	pageContext.setAttribute("varlist", varlist);
+	
+	
+	MechanismService mechanismSvc=new MechanismService();
+	List<MechanismVO> Mechlist = mechanismSvc.getAll();
+// 	MechanismVO mechanismVO = new MechanismVO();
+// 	String tel = mechanismVO.getTel();
+	pageContext.setAttribute("Mechlist", Mechlist);
+	
+	
 
-	MemberVO memberVO = new MemberVO();
-	memberVO.setMemId(1);
-	pageContext.setAttribute("memberVO", memberVO);
+// 	MemberVO memberVO = new MemberVO();
+// 	memberVO.setMemId(1);
+// 	pageContext.setAttribute("memberVO", memberVO);
+	
+	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
 
-	// 	MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
-	// 	Integer memId=memberVO.getMemId();
-	// 	pageContext.setAttribute("memberVO",memberVO);
+// 		MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+// 		Integer memId=memberVO.getMemId();
+// 		pageContext.setAttribute("memberVO",memberVO);
 	// 	TrackingService trackingSvc = new TrackingService();
 	// 	List<TrackingVO> Trackinglist = trackingSvc.getMemberByid(memId);
 	// 	pageContext.setAttribute("Trackinglist", Trackinglist);
@@ -77,7 +92,7 @@ table {
 	background-color: #bbb;
 	font-size: 20px;
 	font-family: DFKai-sb;
-	margin-top: 150px;
+	margin-top: 300px;
 }
 
 .Photo {
@@ -193,6 +208,7 @@ table {
 				<th>動物編號</th>
 				<th>動物品種</th>
 				<th>所在機構</th>
+				<th>機構電話</th>
 				<th>名字</th>
 				<th>年齡</th>
 				<th>身體狀態</th>
@@ -207,11 +223,17 @@ table {
 					<td>${ImfVO.id}</td>
 
 					<td><c:forEach var="VarietyVO" items="${varlist}">
-							<c:if test="${ImfVO.adopt==VarietyVO.varId}">
-	                  ${VarietyVO.varName}
-                    </c:if>
+						<c:if test="${ImfVO.adopt==VarietyVO.varId}">
+	                 	 ${VarietyVO.varName}
+                   	    </c:if>
 						</c:forEach></td>
 					<td>${ImfVO.mech2}</td>
+					<td>
+					<c:forEach var="MechanismVO" items="${Mechlist}">
+						<c:if test="${ImfVO.mech==MechanismVO.id}">
+						${MechanismVO.tel}
+						</c:if>
+					</c:forEach></td>
 					<td>${ImfVO.name}</td>
 					<td>${ImfVO.year}</td>
 					<td>${ImfVO.sit}</td>
@@ -231,15 +253,12 @@ table {
 
 		</table>
 
-		<form METHOD="post"
-			ACTION="<%=request.getContextPath()%>/TrackingController" class="confirm">
-			<input type="hidden" name="id" value="${memberVO.memId}"> <input
-				type="hidden" name="action" value="getOne_For_Display">
-			<button type="submit">追蹤清單</button>
-		</form>
-
-		<%-- 	<a href="<%=request.getContextPath()%>/front-end/adopt/getonetracking.jsp" class="confirm" >查詢清單</a> --%>
-
+<!-- 		<form METHOD="post" -->
+<%-- 			ACTION="<%=request.getContextPath()%>/TrackingController" class="confirm"> --%>
+<%-- 			<input type="hidden" name="id" value="${memberVO.memId}"> <input --%>
+<!-- 				type="hidden" name="action" value="getOne_For_Display"> -->
+<!-- 			<button type="submit">追蹤清單</button> -->
+<!-- 		</form> -->
 
 		<footer class="footer">
 			<ul class="r-footer">

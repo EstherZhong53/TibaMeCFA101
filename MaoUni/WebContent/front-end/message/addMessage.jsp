@@ -2,9 +2,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.message.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <%
 	MessageVO messageVO = (MessageVO) request.getAttribute("MessageVO");
+
+// 	MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+// 	Integer memId=memberVO.getMemId();
+// 	pageContext.setAttribute("memberVO",memberVO);
+
+	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
+
 %>
 
 <!DOCTYPE html>
@@ -501,7 +509,7 @@ h2 {
 
 				<table class="add" border="1">					
 					<tr>
-						<td class="td2">會員編號:</td>
+						<td class="td2" type="hidden">會員編號:</td>
 						<td><input type="text" name="memId" class="member1"></td>
 					</tr>
 					<tr>
