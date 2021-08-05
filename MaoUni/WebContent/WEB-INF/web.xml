@@ -214,27 +214,26 @@
 	</filter> 
 	
  	<filter-mapping>
- 	<filter-name>loginFilter</filter-name>
- 	<url-pattern>/front-end/groomer/groomer_appointment_manage.jsp</url-pattern>
- 	<url-pattern>/front-end/groomer/groomer_application.jsp</url-pattern>
- 	<url-pattern>/front-end/groomer/groomer_infoEdit.jsp</url-pattern>
- 	<url-pattern>/front-end/groomer/groomer_schedule.jsp</url-pattern>
- 	<url-pattern>/front-end/chatbox/chatbox.jsp</url-pattern>
- 	<url-pattern>/front-end/shop/order_confirm.jsp</url-pattern>
- 	<url-pattern>/front-end/adopt/getonetracking.jsp</url-pattern>
- 	<url-pattern>/front-end/message/addMessage.jsp</url-pattern>
- 	<url-pattern>/front-end/member/grooming_appointment_manage.jsp</url-pattern>
- 	<url-pattern>/front-end/member/grooming_groomerInfo.jsp</url-pattern>
- 	<url-pattern>/front-end/member/obuypage.jsp</url-pattern>
- 	<url-pattern>/front-end/member/memberpage.jsp</url-pattern>
- 	<url-pattern>/front-end/member/petadd.jsp</url-pattern>
- 	<url-pattern>/front-end/member/petpage.jsp</url-pattern>
- 	<url-pattern>/front-end/member/petUpdate.jsp</url-pattern>
- 	<url-pattern>/front-end/member/Update_member.jsp</url-pattern>
- 	<url-pattern>/front-end/member/updatepassword.jsp</url-pattern>
- 	
- 	
- 	
+ 	<filter-name>adminFilter</filter-name>
+ 	<url-pattern>/back-end/adopt/*</url-pattern>
+ 	<url-pattern>/back-end/announcemet/*</url-pattern>
+ 	<url-pattern>/back-end/article/*</url-pattern>
+ 	<url-pattern>/back-end/forumPost/*</url-pattern>
+ 	<url-pattern>/back-end/function/*</url-pattern>
+ 	<url-pattern>/back-end/groomer/*</url-pattern>
+ 	<url-pattern>/back-end/member/*</url-pattern>
+ 	<url-pattern>/back-end/message/*</url-pattern>
+ 	<url-pattern>/back-end/obuy/*</url-pattern>
+ 	<url-pattern>/back-end/pet/*</url-pattern>
+ 	<url-pattern>/back-end/staff/*</url-pattern>
+ 	<url-pattern>/back-end/item/addItem.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/item_select_page.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/itemHomePage.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/listAllItem.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/listItem_ByCompositeQuery.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/listOneItem.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/page1.jsp</url-pattern>
+ 	<url-pattern>/back-end/item/update_item_input.jsp</url-pattern>
  	</filter-mapping>
 
 

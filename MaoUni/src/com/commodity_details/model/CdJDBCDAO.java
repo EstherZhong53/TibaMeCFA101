@@ -19,9 +19,10 @@ public class CdJDBCDAO implements CdDAO_interface {
 
 	private static final String INSERT_STMT = "insert into COMMODITY_DETAILS (CD_O_ID, CD_ITEM_ID, CD_AMOUNT, CD_MONEY) values (?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT * FROM COMMODITY_DETAILS";
-	private static final String GET_ONE_STMT = "SELECT * FROM COMMODITY_DETAILS where CD_O_ID =?";
+	private static final String GET_ONE_STMT = "SELECT c.CD_O_ID, c.CD_ITEM_ID, c.CD_AMOUNT, c.CD_MONEY, c.CD_OTHER, i.ITEM_NAME FROM COMMODITY_DETAILS c join ITEM i on (c.CD_ITEM_ID = i.ITEM_ID) where CD_O_ID =?";
 	private static final String DELETE = "DELETE FROM COMMODITY_DETAILS where CD_O_ID = ?";
 	private static final String UPDATE = "UPDATE COMMODITY_DETAILS set CD_ITEM_ID=?, CD_AMOUNT=?, CD_MONEY=? WHERE CD_O_ID =?";
+//	private static final String CDPUSH = "SELECT c.CD_O_ID, c.CD_ITEM_ID, c.CD_AMOUNT, c.CD_MONEY, c.CD_OTHER, i.ITEM_NAME FROM COMMODITY_DETAILS c join ITEM i on (c.CD_ITEM_ID = i.ITEM_ID) where CD_O_ID =?";
  
 	
 	@Override
@@ -228,11 +229,11 @@ public class CdJDBCDAO implements CdDAO_interface {
 			while (rs.next()) {
 
 				CdVO cdVO = new CdVO();
-				cdVO.setCdoId(rs.getInt("CD_O_ID"));
-				cdVO.setCdItemId(rs.getInt("CD_ITEM_ID"));
-				cdVO.setCdAmount(rs.getInt("CD_AMOUNT"));
-				cdVO.setCdMoney(rs.getInt("CD_MONEY"));
-				System.out.println(rs.getInt("CD_O_ID"));
+				cdVO.setCdoId(rs.getInt("c.CD_O_ID"));
+				cdVO.setCdItemId(rs.getInt("c.CD_ITEM_ID"));
+				cdVO.setCdItemName(rs.getString("i.ITEM_NAME"));
+				cdVO.setCdAmount(rs.getInt("c.CD_AMOUNT"));
+				cdVO.setCdMoney(rs.getInt("c.CD_MONEY"));
 				list.add(cdVO);
 			}
 

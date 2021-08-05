@@ -11,7 +11,7 @@
 // 	Integer memId=memberVO.getMemId();
 // 	pageContext.setAttribute("memberVO",memberVO);
 
-	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
+// 	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
 
 %>
 
@@ -421,8 +421,9 @@ h2 {
 }
 
 .add{
-	width: 100%;
-	color:black;
+ width: 100%;
+ color:black;
+ margin-top:300px;
 }
 
 .add td,.add th{
@@ -508,10 +509,10 @@ h2 {
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/messageServlet" name="form1">
 
 				<table class="add" border="1">					
-					<tr>
-						<td class="td2" type="hidden">會員編號:</td>
-						<td><input type="text" name="memId" class="member1"></td>
-					</tr>
+					 <tr>
+					      <td class="td2" type="hidden">會員編號:</td>
+					      <td><input type="text" name="memId"  value:"${param.memid}" class="member1"></td>
+				     </tr>
 					<tr>
 						<td class="td2">輸入內容</td>
 						<td><textarea class="message-bt" placeholder="請勿輸入不雅字眼" rows="5" id="comment" type="TEXT" name="contain" value="${param.contain}" ></textarea></td>

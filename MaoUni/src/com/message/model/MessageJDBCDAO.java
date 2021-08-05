@@ -11,6 +11,8 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.member.model.MemberVO;
+
 
 
 public class MessageJDBCDAO implements MessageDAO_interface{
@@ -247,9 +249,9 @@ public class MessageJDBCDAO implements MessageDAO_interface{
 		}
 
 		@Override
-		public Set<memberVO> get_Member_byMessage(Integer memId) {
-			Set<memberVO> set = new LinkedHashSet<memberVO>();
-			memberVO memberVO = null;
+		public Set<MemberVO> get_Member_byMessage(Integer memId) {
+			Set<MemberVO> set = new LinkedHashSet<MemberVO>();
+			MemberVO memberVO = null;
 			
 			Connection con = null;
 			PreparedStatement pstmt = null;
@@ -262,7 +264,7 @@ public class MessageJDBCDAO implements MessageDAO_interface{
 				rs=pstmt.executeQuery();
 				
 				while(rs.next()){
-					com.message.model.memberVO  member = new memberVO();
+					MemberVO  member = new MemberVO();
 					member.setMemId(rs.getInt("id"));
 					member.setMemAddres(rs.getString("Addres"));
 					member.setMemBirthday(rs.getTimestamp("Birthday"));
@@ -275,7 +277,7 @@ public class MessageJDBCDAO implements MessageDAO_interface{
 					member.setMemPosition(rs.getInt("Position"));
 					member.setMemReserve(rs.getInt("Reserve"));					
 					member.setMemSurvive(rs.getInt("Survive"));
-					member.setMemUpdate(rs.getString("update"));
+					member.setMemUpdate(rs.getTimestamp("update"));
 					set.add(memberVO);
 					
 				}

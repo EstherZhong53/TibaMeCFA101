@@ -207,7 +207,12 @@
 	       <jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService" />
 	       <tr>
 		        <td style="width:120px;">商品類別：</td>
-		        <td>${itemVO.itemTypeName}</td>
+				<c:if test="${itemVO.itemTypeId == '1'}"><td scope="col" class="itemTypeId">毛孩食品</td></c:if>
+				<c:if test="${itemVO.itemTypeId == '2'}"><td scope="col" class="itemTypeId">毛孩玩具</td></c:if>
+				<c:if test="${itemVO.itemTypeId == '3'}"><td scope="col" class="itemTypeId">毛孩傢俱</td></c:if>
+				<c:if test="${itemVO.itemTypeId == '4'}"><td scope="col" class="itemTypeId">毛孩衣物</td></c:if>
+				<c:if test="${itemVO.itemTypeId == '5'}"><td scope="col" class="itemTypeId">毛孩清潔</td></c:if>
+				<c:if test="${itemVO.itemTypeId == '6'}"><td scope="col" class="itemTypeId">毛孩保養</td></c:if>
 	       </tr>
 	       <tr>
 		        <td>新增圖片：</td>

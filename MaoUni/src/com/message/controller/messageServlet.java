@@ -129,7 +129,7 @@ public class messageServlet extends HttpServlet {
 				MessageVO messageVO = MessageSvc.addMessage(memId, contain, status);
 				System.out.println("12345");
 				req.setAttribute("MessageVO", messageVO);
-				String url = "/front-end/Message/AllMessage.jsp";
+				String url = "/front-end/home/HomePage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 

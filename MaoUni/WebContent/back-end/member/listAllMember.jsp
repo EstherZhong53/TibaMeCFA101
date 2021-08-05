@@ -275,15 +275,15 @@ input.update:hover {
 												</td>
 
 												<td>
-													<FORM METHOD="post"
-														ACTION="<%=request.getContextPath()%>/member/member.do"
-														style="margin-bottom: 0px;">
-														<input class=update type="submit" class="button"
-															value="立即修改" style="border: 5px; border-radius: 5px;">
-														<input type="hidden" name="memId"
-															value="${memberVO.memId}"> 
-															<input type="hidden" name="action" value="getOne_For_Update">
-													</FORM>
+<!-- 													<FORM METHOD="post" -->
+<%-- 														ACTION="<%=request.getContextPath()%>/member/member.do" --%>
+<!-- 														style="margin-bottom: 0px;"> -->
+<!-- 														<input class=update type="submit" class="button" -->
+<!-- 															value="立即修改" style="border: 5px; border-radius: 5px;"> -->
+<!-- 														<input type="hidden" name="memId" -->
+<%-- 															value="${memberVO.memId}">  --%>
+<!-- 															<input type="hidden" name="action" value="getOne_For_Update"> -->
+<!-- 													</FORM> -->
 												</td>
 											</tr>
 							</div>

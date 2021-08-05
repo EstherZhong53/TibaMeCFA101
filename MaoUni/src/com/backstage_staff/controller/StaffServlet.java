@@ -411,6 +411,7 @@ public class StaffServlet extends HttpServlet {
 					successView.forward(req, res);
 					HttpSession session =req.getSession();
 					session.setAttribute(username, password);
+					session.setAttribute("staffVO", staffVO);
 		}
 		  if ("OutUser".equals(action)) {		
 			 req.getSession();

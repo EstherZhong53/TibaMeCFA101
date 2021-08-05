@@ -179,14 +179,14 @@
 			</div>
 		</form>	
 		
-				<form method="post" ACTION="<%=request.getContextPath()%>/pet/pet.do">
-				<input type="hidden" name="petId value="${petVO.petId}"> 
-				<input class="action" type="hidden" name="action" value="GET_ALL_STMT">
-				<button type="submit" class="btn btn-primary getList ml-4 my-1">
-					ALL
-				</button>
-			</div>
-		</form>	
+<%-- 				<form method="post" ACTION="<%=request.getContextPath()%>/pet/pet.do"> --%>
+<%-- 				<input type="hidden" name="petId value="${petVO.petId}">  --%>
+<!-- 				<input class="action" type="hidden" name="action" value="GET_ALL_STMT"> -->
+<!-- 				<button type="submit" class="btn btn-primary getList ml-4 my-1"> -->
+<!-- 					ALL -->
+<!-- 				</button> -->
+<!-- 			</div> -->
+<!-- 		</form>	 -->
 			    	
 			    
  <table class="table my-0" id="dataTable">
@@ -199,8 +199,11 @@
 		<th style="width: 90px;text-align: center;font-size:8px;">性別</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">年齡</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">狀態</th>
+
 	</tr>
+
 		<c:forEach var="petVO" items="${list}" >
+
 			<tr>
 				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petId}</td>
 				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petMemId}</td>
@@ -240,12 +243,18 @@
 			</tr>
 		</c:forEach>
 </table>
+
+
 		    	
 		    	</div> 
 				<!-- 以上為商城管理下面那個長方形,包含駝色表頭(所有商品資料) + 下面空白區域 -->
+
+
 				        
         </div> <!-- class="d-flex flex-column"的結尾標籤-->
 	</div> <!-- Class="Wrapper"的結尾標籤 -->
+
+
 	<!-- 以下為boostrap靜態檔引入,不可少!!! 路徑錯了會跑版-->
     <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script> 
     <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>
