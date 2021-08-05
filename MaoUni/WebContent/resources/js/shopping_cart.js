@@ -2,7 +2,7 @@ function init(){
 	// ============== 測試用  ==============
 	$(".fa-envelope").click(function(e){
 		$.ajax({
-			url: "/MaoUni//shoppingcart.do",
+			url: "/MaoUni/shoppingcart.do",
 			type: "POST",
 			data: {
 				action: "init"
@@ -47,7 +47,7 @@ function init(){
 		console.log(e.target);
 		if(e.target.classList.contains("deleteItem")){
 			$.ajax({
-				url: "/MaoUni//shoppingcart.do",
+				url: "/MaoUni/shoppingcart.do",
 				type: "POST",
 				data: {
 					action: "deleteItem",
@@ -69,7 +69,7 @@ function init(){
 
 function getCart(){
 	$.ajax({
-		url: "/MaoUni//shoppingcart.do",
+		url: "/MaoUni/shoppingcart.do",
 		type: "GET",
 		data: {
 			action: "getCart",

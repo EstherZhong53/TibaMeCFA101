@@ -1,9 +1,8 @@
 function init(){
 	// ============== 測試用  ==============
-	$("#headingOne").click(function(e){
-		console.log(e.target);
+
 		$.ajax({
-			url: "/MaoUni//shoppingcart.do",
+			url: "/MaoUni/shoppingcart.do",
 			type: "POST",
 			data: {
 				action: "init"
@@ -12,14 +11,13 @@ function init(){
 				getCart();	
 			}
 		})
-	})
 	// ===================================
 	
 	
 	$(".cartbody").click(function(e){
 		if(e.target.classList.contains("deleteItem")){
 			$.ajax({
-				url: "/MaoUni//shoppingcart.do",
+				url: "/MaoUni/shoppingcart.do",
 				type: "POST",
 				data: {
 					action: "deleteItem",
@@ -56,10 +54,9 @@ $("#orderForm").on("submit", function(e){
 		data: $(this).serialize(),
 		success: function(data){
 			deleteCart();		// 清空redis內購物車value，但仍保存key
-			swal("成功！","","success");
-//			.then((result) => {
-//				window.location.replace("/MaoUni/front-end/shop/order_complete.jsp");
-//			});
+			swal("成功！","","success").then((result) => {
+				window.location.replace("/MaoUni/front-end/member/obuypage.jsp");
+			});
 		}
 	})
 })
@@ -114,7 +111,7 @@ function getCart(){
 
 function deleteCart(){
 	$.ajax({
-		url: "/MaoUni//shoppingcart.do",
+		url: "/MaoUni/shoppingcart.do",
 		type: "POST",
 		data: {
 			action: "deleteCart",

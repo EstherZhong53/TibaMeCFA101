@@ -96,7 +96,7 @@
                                 <input type="text" class="form-control" name="obuyOther" placeholder="" required>
                             </div>
                             <div class="mt-3 d-flex justify-content-end">
-                                <button class="btn btn-secondary mr-2">繼續選購</button>
+                                <button class="btn btn-secondary mr-2"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" style="text-decoration:none; color: white;">繼續選購</button>
                                 <button type="submit" class="btn btn-primary">送出訂單</button>
                             </div>
 </form>
