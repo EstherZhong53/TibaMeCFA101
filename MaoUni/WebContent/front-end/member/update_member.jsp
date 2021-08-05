@@ -113,13 +113,12 @@ margin-left: 200px;
 <table class="update">
 	
 	
-     <h3>會員編號：</h3>
+	
+     <h3>會員編號：${memberVO.memId}</h3>
 
-     <h3>會員編號：</h3>
+     <h3>姓名：${memberVO.memName}</h3>
     
-    <div class="form-group">
-		<h5>信箱:<input type="TEXT" name="memEmail" size="20" value="${memberVO.memEmail}" required/>
-		</h5></div>
+	<h5>帳號：${memberVO.memEmail}</h5>
 
 	<div class="form-group">
 		<h5>身分證:

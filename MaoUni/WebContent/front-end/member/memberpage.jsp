@@ -672,7 +672,7 @@ background-color: #fff;
 <!--                 </button> -->
 
 <FORM  METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
-<input class="memstat" type="submit" value="編輯資料">
+<input class="memstat" type="submit" value="編輯資料" style="margin-left:80px;border: 5px; border-radius: 5px; height: 35px; width: 100px;">
 <input type="hidden" name="memId" value="${memberVO.memId}"> 
 <input type="hidden" name="action" value="getOne_For_Update">
 </FORM>
@@ -681,7 +681,7 @@ background-color: #fff;
 <!-- 	value="更改密碼" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%"> -->
 
 <input class=memstat type="submit" onclick="location.href='<%=request.getContextPath()%>/front-end/member/petadd.jsp'"
-	value="新增毛孩" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
+	value="新增毛孩" style="border: 5px; border-radius: 5px; height: 35px; width: 100px;margin-left:50px;">
  
 
 

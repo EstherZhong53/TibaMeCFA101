@@ -12,23 +12,29 @@
 
 <style>
 @import
-	url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap")
-	;
+	url("https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap");
+	
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
+header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 body {
 	align-items: center;
 	background: #dabfa0;
 	color: rgba(0, 0, 0, 0.8);
-	display: grid;
+ 	display: grid;
 	font-family: "Montserrat", sans-serif;
 	font-size: 14px;
 	font-weight: 400;
 	height: 100vh;
-	justify-items: center;
+	justify-items: center; 
+/* 	↑沒用的話整個版面會跑版 */
 	weight: 100vw;
 }
 .signup-container {
@@ -201,8 +207,20 @@ body {
 #next {
 	margin-left: 75%;
 }
+.set #setsignup{
+background-color:#D2B48C;
+color:white;
+margin-left:110px;
+font-weight:bold;
+}
 .set #setsignup:hover{
+background-color:#DEB887;
+color:white;
 cursor: pointer;
+font-weight:bold;
+}
+.select{
+width:100px;
 }
 </style>
 

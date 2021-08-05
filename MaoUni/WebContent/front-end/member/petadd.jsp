@@ -25,12 +25,15 @@ background-image: url("<%=request.getContextPath()%>/resources/images/petupdate.
  
 }
 .memberupdate{
-display: flex;
-align-items:center;
-line-height:100px;
+display:block;
+align-items: center;
+margin-top:20px;
 }
-.pettable{
-flex-direction:column;
+.petcen{
+display:flex;
+justify-content:center;
+margin:10px;
+line-height:40px;
 }
 .get_taital{
 	text-align: center;
@@ -88,22 +91,23 @@ margin-bottom:10px;
 	</ul>
 </c:if>
 
+<div class="petcen">
 <FORM class="memberupdate" METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do">
 <table class="pettable">
 
-	<div>
-		<td>毛孩名字:<input type="text" name="petName" size="" value="" required/>
-	</td></div>
-	
-		<div>
+
+	<tr>
+		<td>毛孩名字:<input type="text" name="petName" size="" value="" required/></td>
+	</tr>
+	<tr>
 		<td>毛孩類別:
 		<select size="" name="petSort" required>
 		<option value="狗">狗</option>
 		<option value="貓">貓</option>
 		</select>
-	</td></div>
-
-		<div>
+	</td>
+	</tr>
+	<tr>
 		<td>毛孩品種:
 		<select size="" name="petVarId" required>
 		<option value="1">馬爾濟斯</option>
@@ -126,34 +130,35 @@ margin-bottom:10px;
 		<option value="18">塞爾凱克捲毛貓</option>
 		<option value="19">加拿大無毛貓</option>
 		</select></td>
-	</div>
-	
-	
-	
-		<div>
+	</tr>
+<tr>
 		<td>性別:
 		<select size="1" name="petGender" required>
 		<option value="公">公</option>
 		<option value="母">母</option>
 		</select></td>
-	</div>
-	
-		<div>
+	</tr>
+	<tr>
 		<td>年齡:
-		<input type="text" name="petAge" size="3" value="" required/>
-		</td></div>
-
-		<div>
+		<input type="number" min="1" name="petAge" size="" value="" required/>
+		</td>
+	</tr>
+	<tr>
 		<td>狀態:
 		<select size="" name="petSurvive" required>
 		<option value="0">健康</option>
 		<option value="1">懷念</option>
-		</td></select>
-		</div>
+		</select></td>
+	</tr>
+
+		
+	
+
 
 </table>
 <br>
 <input type="hidden" name="action" value="insert">
 <input class="memstat" type="submit" value="增加毛孩">
 </FORM>
+</div>
 </body>

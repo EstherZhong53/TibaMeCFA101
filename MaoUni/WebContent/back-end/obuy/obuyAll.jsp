@@ -195,13 +195,13 @@
                     <button onclick="exportTableToExcel('dataTable')" class="btn" type="button" style="margin-left:60px;">匯出EXCEL</button>
                     </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="margin-top:5px;maring-left:-15px;width:200px;"></label></div>
-                </div>
-                <input class="action" type="hidden" name="action" value="getonemember">
-				<button type="submit" class="btn btn-primary getList ml-4 my-1">
-				查詢</button>
-            </div>
+<!--                 <div class="col-md-6"> -->
+<!--                   <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search" style="margin-top:5px;maring-left:-15px;width:200px;"></label></div> -->
+<!--                 </div> -->
+<!--                 <input class="action" type="hidden" name="action" value="getonemember"> -->
+<!-- 				<button type="submit" class="btn btn-primary getList ml-4 my-1"> -->
+<!-- 				查詢</button> -->
+<!--             </div> -->
             <div class="table-responsive table mt-2" id="dataTable-1" role="grid" aria-describedby="dataTable_info">
                 <table class="table my-0" id="dataTable">
                     <thead>
@@ -266,11 +266,11 @@
 								     <input type="hidden" name="action"	value="update">
 								     
 								     <c:if test="${obuyVO.oSurvive == '0'}">
-								     <button class=update type="submit" style="border:5px;border-radius:5px;">完成</button>
+								     <button class=update type="submit" style="border:5px;border-radius:5px;background-color:#02C874;color:white;">完成</button>
 								     </c:if>
 								<c:if test="${obuyVO.oSurvive == '1'}">
 						
-								     <button class=update type="submit" style="border:5px;border-radius:5px;"disabled>完成</button>
+								     <button class=update type="submit" style="border:5px;border-radius:5px;background-color:#FFB5B5;color:white;"disabled>完成</button>
 								     </c:if>
 
 								  </FORM>

@@ -194,9 +194,9 @@ input.update:hover {
 												<option value="25">25</option>
 												<option value="50">50</option>
 												<option value="100">100</option></select>&nbsp;
-										</label> <input class=update type="submit"
-											onclick="location.href='<%=request.getContextPath()%>/back-end/member/addMember.jsp'"
-											value="新增會員" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
+<!-- 										</label> <input class=update type="submit" -->
+<%-- 											onclick="location.href='<%=request.getContextPath()%>/back-end/member/addMember.jsp'" --%>
+<!-- 											value="新增會員" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%"> -->
 
 										<input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/pet/petlistAll.jsp'"
 											value="毛孩管理" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 5%;">
@@ -232,7 +232,7 @@ input.update:hover {
 											<th style="width: 91.5px; text-align: center; font-size:1.5px;">地址</th>
 											<th style="width: 98.5px; text-align: center; font-size:1.5px;">生日</th>
 											<th style="width: 91.5px; text-align: center; font-size:1.5px;">身分</th>
-											<th style="width: 70px; text-align: center; font-size:1.5px;">狀態</th>
+<!-- 											<th style="width: 70px; text-align: center; font-size:1.5px;">狀態</th> -->
 											<th style="width: 70px; text-align: center; font-size:1.5px;">更新時間</th>
 										</tr>
 									</thead>
@@ -263,11 +263,11 @@ input.update:hover {
 												</td>
 
 
-												<td style="width: 91.5px; text-align: center; font-size:2px;">
-													<c:if test="${memberVO.memSurvive == '0'}">審核中</c:if> <c:if
-														test="${memberVO.memSurvive == '1'}">正常</c:if> <c:if
-														test="${memberVO.memSurvive == '2'}">停權</c:if>
-												</td>
+<!-- 												<td style="width: 91.5px; text-align: center; font-size:2px;"> -->
+<%-- 													<c:if test="${memberVO.memSurvive == '0'}">審核中</c:if> <c:if --%>
+<%-- 														test="${memberVO.memSurvive == '1'}">正常</c:if> <c:if --%>
+<%-- 														test="${memberVO.memSurvive == '2'}">停權</c:if> --%>
+<!-- 												</td> -->
 												<td style="width: 90px; text-align: center; font-size:2px;">
 													<fmt:formatDate value="${memberVO.memUpdate}"
 														pattern="yyyy/MM/dd" />

@@ -212,11 +212,11 @@
 	<filter-name>loginFilter</filter-name>
 	<filter-class>com.Filter.loginFilter</filter-class>
 	</filter> 
+	
  	<filter-mapping>
  	<filter-name>loginFilter</filter-name>
- 	<url-pattern>/front-end/member/memberpage.jsp</url-pattern>
- 	<url-pattern>/front-end/groomer/groomer_application.jsp</url-pattern>
  	<url-pattern>/front-end/groomer/groomer_appointment_manage.jsp</url-pattern>
+ 	<url-pattern>/front-end/groomer/groomer_application.jsp</url-pattern>
  	<url-pattern>/front-end/groomer/groomer_infoEdit.jsp</url-pattern>
  	<url-pattern>/front-end/groomer/groomer_schedule.jsp</url-pattern>
  	<url-pattern>/front-end/chatbox/chatbox.jsp</url-pattern>
@@ -224,29 +224,30 @@
  	<url-pattern>/front-end/adopt/getonetracking.jsp</url-pattern>
  	<url-pattern>/front-end/message/addMessage.jsp</url-pattern>
  	<url-pattern>/front-end/member/grooming_appointment_manage.jsp</url-pattern>
+ 	<url-pattern>/front-end/member/grooming_groomerInfo.jsp</url-pattern>
  	<url-pattern>/front-end/member/obuypage.jsp</url-pattern>
+ 	<url-pattern>/front-end/member/memberpage.jsp</url-pattern>
  	<url-pattern>/front-end/member/petadd.jsp</url-pattern>
  	<url-pattern>/front-end/member/petpage.jsp</url-pattern>
  	<url-pattern>/front-end/member/petUpdate.jsp</url-pattern>
  	<url-pattern>/front-end/member/Update_member.jsp</url-pattern>
  	<url-pattern>/front-end/member/updatepassword.jsp</url-pattern>
-
  	
  	
  	
  	</filter-mapping>
 
 
-<!-- 	<filter> -->
-<!-- 	<filter-name>adminFilter</filter-name> -->
-<!-- 	<filter-class>com.Filter.adminFilter</filter-class> -->
-<!-- 	</filter> -->
+	<filter>
+	<filter-name>adminFilter</filter-name>
+	<filter-class>com.Filter.adminFilter</filter-class>
+	</filter>
 	 
-<!--  	<filter-mapping> -->
-<!--  	<filter-name>adminFilter</filter-name> -->
-<!--  	<url-pattern>/back-end/*</url-pattern> -->
+ 	<filter-mapping>
+ 	<filter-name>adminFilter</filter-name>
+ 	<url-pattern>/back-end/*</url-pattern>
 
-<!--  	</filter-mapping> -->
+ 	</filter-mapping>
 
   
      <servlet>
@@ -259,17 +260,7 @@
     <url-pattern>/buy/obuy.do</url-pattern>
   </servlet-mapping>
   
-<!--        <servlet> -->
-<!--     <servlet-name>CdServlet</servlet-name> -->
-<!--     <servlet-class>com.cd.controller.CdServlet</servlet-class> -->
-<!--   	</servlet>  -->
-  
-<!--     <servlet-mapping> -->
-<!--     <servlet-name>CdServlet</servlet-name> -->
-<!--     <url-pattern>/cd/cd.do</url-pattern> -->
-<!--   </servlet-mapping> -->
-  
-  
+    
        <servlet>
     <servlet-name>VarietyServlet</servlet-name>
     <servlet-class>com.variety.controller.VarietyServlet</servlet-class>

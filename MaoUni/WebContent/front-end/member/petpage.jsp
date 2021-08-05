@@ -694,11 +694,11 @@ background-color: #fff;
 <div class="membercard-stats">
 
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do">
-<input class="memstat" type="submit" value="編輯毛孩">
-<input type="hidden" name="petId" value="${petVO.petId}">
-<input type="hidden" name="action" value="GET_ONE_UPDATE">								
-</FORM>															
+<%-- <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do"> --%>
+<!-- <input class="memstat" type="submit" value="編輯毛孩"> -->
+<%-- <input type="hidden" name="petId" value="${petVO.petId}"> --%>
+<!-- <input type="hidden" name="action" value="GET_ONE_UPDATE">								 -->
+<!-- </FORM>															 -->
 																													
   					</div>
  			</div>
