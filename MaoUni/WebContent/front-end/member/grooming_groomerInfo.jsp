@@ -270,6 +270,7 @@ height: 350px;
                                                                 
                                                                 
         <select class="form-control pid apminput" name="pid">  
+        <option value="">選擇毛孩</option>
        <c:forEach var="petVO" items="${petVOList}">
 			<option value="${petVO.petId}">${petVO.petName}</option>
 		</c:forEach> 
