@@ -31,6 +31,10 @@ public class ListService {
 	public List<ListVO> getAll() {
 		return dao.getAll();
 	}
+	
+	public List<ListVO> getAll(Integer pid) {
+		return dao.getAll(pid);
+	}
 
 
 	}

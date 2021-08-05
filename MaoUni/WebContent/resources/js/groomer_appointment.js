@@ -85,37 +85,89 @@ window.onunload = function(){
 // 選擇寵物後，依據寵物類別載入可選的服務項目
 	
 	$(".pid").change(function(e){
-		console.log("groomerId: " + groomerId)
+		let detail = "";
+		let sickList = "";
+		let petSort;
+		// 取得疾病內容
 		$.ajax({
-			url: "/MaoUni/svcList.do",
+			url: "/MaoUni/sllist/sllist.do",
 			type: "GET",
 			dataType: "text",
 			data: {
-				groomerId: groomerId,
-				action: "getSvcList"
+				petId: $(".pid").val(),
+				action: "getPetSickList"
 			},
 			success: function(data){
-				let obj = JSON.parse(data);
-				let inner = "";
-				
-				for(let i = 0; i < obj.length; i++){
-					let svcPet = obj[i].svcPet;
-					// 須修正動態取得pid資訊，為貓或是狗
-					if(svcPet === "狗" ){  
-					inner += `
-						<tr>
-					  		<td>${obj[i].svcPet}</td>
-		    	        	<td>${obj[i].svcItem}</td>
-		    	        	<td data-svctime="${obj[i].svcTime}">${obj[i].svcTime * 30}</td>
-		    	        	<td>${obj[i].price}</td>
-							<td><input type="checkbox" class="item" name="svcId" value="${obj[i].svcId}"></td>
-		    	      	</tr>
-					`;
-					}
+				let sickListObj = JSON.parse(data);
+				for(let i = 0; i < sickListObj.length; i++){
+					sickList += `<li>${sickListObj[i].slName}</li>`;
 				}
-				$(".showSvcList").html(inner);
+
+				// 渲染毛孩資料於頁面
+				$.ajax({
+					url: "/MaoUni/pet/pet.do",
+					type: "GET",
+					dataType: "text",
+					data: {
+						petId: $(".pid").val(),
+						action: "getPetInfo"
+					},
+					success: function(data){
+						let info = JSON.parse(data);
+						let infoHtml = ""; 
+						petSort = info.petSort;
+						infoHtml += `
+							<div class="section-heading">
+		                        <span id="petdetail">毛孩資料</span>
+		                        <h2>${info.petName}</h2>
+		                    </div>
+		                    <ul>
+		                   		<li>${info.petSort}</li>
+		                   		<li>${info.petGender}</li>
+		                        <li>${info.petVarId} 歲</li>
+							`;
+						infoHtml += sickList + "</ul>";
+						$(".petinfomation").html(infoHtml);
+						
+						
+						// 取得服務項目
+						$.ajax({
+							url: "/MaoUni/svcList.do",
+							type: "GET",
+							dataType: "text",
+							data: {
+								groomerId: groomerId,
+								action: "getSvcList"
+							},
+							success: function(data){
+								let obj = JSON.parse(data);
+								let inner = "";
+								
+								for(let i = 0; i < obj.length; i++){
+									let svcPet = obj[i].svcPet;
+									// 須修正動態取得pid資訊，為貓或是狗
+									if(svcPet === petSort ){  
+									inner += `
+										<tr>
+									  		<td>${obj[i].svcPet}</td>
+						    	        	<td>${obj[i].svcItem}</td>
+						    	        	<td data-svctime="${obj[i].svcTime}">${obj[i].svcTime * 30}</td>
+						    	        	<td>${obj[i].price}</td>
+											<td><input type="checkbox" class="item" name="svcId" value="${obj[i].svcId}"></td>
+						    	      	</tr>
+									`;
+									}
+								}
+								$(".showSvcList").html(inner);
+							}
+						})
+
+					}
+				})
 			}
 		})
+
+		
 		
 	})
 	
@@ -258,6 +310,12 @@ window.onunload = function(){
 				return;
 			});		
 		}
+		if($("#memId").val() === ""){
+			swal("尚未登入會員","感謝您的支持，請先登入會員後再進行預約喔！","warning").then((result) => {
+				window.location.replace("/MaoUni/front-end/home/login.jsp");
+				return;
+			});	
+		}
 		$.ajax({
 			url: "/MaoUni/appointment.do",
 			type: "GET",
@@ -271,7 +329,7 @@ window.onunload = function(){
 							"message":"收到一筆新的預約！"
 						}
 						webSocket.send(JSON.stringify(jsonObj));
-					window.location.reload();
+					window.location.replace("/MaoUni/front-end/member/grooming_appointment_manage.jsp");
 				});
 			}
 		})

@@ -8,5 +8,8 @@ public interface ListDAO_interface {
       public void update(ListVO listVO);
       public ListVO findByPrimaryKey(Integer slScId);
       public List<ListVO> getAll();
+      
+      ///////// Esther 新增 /////////
+      public List<ListVO> getAll(Integer pid);
 
 }

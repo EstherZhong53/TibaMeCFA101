@@ -228,6 +228,79 @@ public class ListJDBCDAO implements ListDAO_interface{
 	}
 
 	
+///////////////// Esther 加  //////////////////
+	@Override
+	public List<ListVO> getAll(Integer pid) {
+		
+		List<ListVO> list = new ArrayList<ListVO>();
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			String finalSql = "select s.SL_PET_ID, c.SC_PAIN from SICK_LIST s join SICK_CLASS c on (s.SL_ID = c.SC_SL_ID) where s.SL_PET_ID = ?";
+			pstmt = con.prepareStatement(finalSql);
+			pstmt.setInt(1, pid);
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				ListVO listVO = new ListVO();
+				listVO.setSlName(rs.getString("c.SC_PAIN"));
+				list.add(listVO); 
+			}
+
+		
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. "
+					+ e.getMessage());
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. "
+					+ se.getMessage());
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		return list;
+	}
+//////////////////////////////////////////////	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 public static void main(String[] args) throws ClassNotFoundException, SQLException {
 //
 	ListJDBCDAO dao =new ListJDBCDAO();

@@ -1,6 +1,7 @@
 package com.pet.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.pet.model.PetService;
 import com.pet.model.PetVO;
 
@@ -227,5 +229,31 @@ public class PetServlet extends HttpServlet {
 					failureView.forward(req, res);
 				}
 			}
+			
+			
+			///////////////// Esther 加  //////////////////
+			if ("getPetInfo".equals(action)) { 
+				res.setContentType("text/plain");
+				res.setCharacterEncoding("utf-8");
+				Integer petId = new Integer(req.getParameter("petId").trim());
+
+				try {
+					PetService petSvc = new PetService();
+					PetVO petVO = petSvc.findByPrimaryKey(petId);
+					Gson gson = new Gson();
+					String petStr = gson.toJson(petVO);
+					
+					PrintWriter out = res.getWriter();
+					out.write(petStr);
+					out.flush();
+					out.close();
+					
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+			//////////////////////////////////////////////
+			
+			
 		}
 	}

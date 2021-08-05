@@ -8,6 +8,7 @@
 <%@ page import="com.appointment_form.model.*"%>
 <%@ page import="com.pet.model.*"%>
 <%@ page import="com.addressGeo.model.*"%>
+<%@ page import="com.member.model.*"%>
 
 <jsp:useBean id="worksSvc" scope="page" class="com.works.model.WorkService"/>
 <jsp:useBean id="svcListSvc" scope="page" class="com.service_list.model.SvcListService"/>
@@ -250,15 +251,26 @@ height: 350px;
 <!--                                                                 自動代入會員姓名 -->
 		<h3 class="apminput">會員姓名：  ${memberVO.memName}</h3>
 <%--         <input name="name" type="text" class="form-control apminput" id="name" value="${memberVO.memName}"> --%>
-        <input type="hidden" name="memId" value="${memberVO.memId}"> 
+        <input type="hidden" id="memId" name="memId" value="${memberVO.memId}"> 
 		<input type="hidden" name="groomerId" value="${param.groomerId}">
                                                                 </fieldset>
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <fieldset>
-        <select class="form-control pid apminput" name="pid">   
-			<option value="1">Cookie</option>
-			<option value="2">NueNue</option>
+                                                                
+ <%
+	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
+  	List<PetVO> petVOList = petSvc.findByMemId(memId);
+ 	pageContext.setAttribute("petVOList", petVOList);
+ %>                                                               
+                                                                
+                                                                
+                                                                
+                                                                
+        <select class="form-control pid apminput" name="pid">  
+       <c:forEach var="petVO" items="${petVOList}">
+			<option value="${petVO.petId}">${petVO.petName}</option>
+		</c:forEach> 
 		</select>
                                                                 </fieldset>
                                                             </div>
@@ -320,17 +332,17 @@ height: 350px;
                                                     <div class="right-content">
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <div class="content">
-                                                                    <div class="section-heading">
-                                                                        <span>毛孩資料</span>
-                                                                        <h2>妞妞</h2>
-                                                                    </div>
-                                                                    <ul>
-                                                                   		<li>馬爾濟斯</li>
-                                                                        <li>10歲</li>
-                                                                        <li>妹妹</li>
-                                                                        <li>心臟病</li>
-                                                                    </ul>
+                                                                <div class="content petinfomation">
+<!--                                                                     <div class="section-heading"> -->
+<!--                                                                         <span id="petdetail">毛孩資料</span> -->
+<!--                                                                         <h2>妞妞</h2> -->
+<!--                                                                     </div> -->
+<!--                                                                     <ul> -->
+<!--                                                                    		<li>馬爾濟斯</li> -->
+<!--                                                                         <li>10歲</li> -->
+<!--                                                                         <li>妹妹</li> -->
+<!--                                                                         <li>心臟病</li> -->
+<!--                                                                     </ul> -->
                                                                 </div>
                                                             </div>
                                                         </div>
