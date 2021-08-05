@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>hidden_menu</title>
+    <title>修改商品資料</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu.css"> 
   	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/hidden_menu2.css"> 
@@ -166,11 +166,6 @@
 								<input type="hidden" name="itemId" size="45" value="<%= (itemVO==null)? "" : itemVO.getItemId()%>" />
 							</tr>
 							<tr>
-								<td>寵物類別：</td>
-								<td><input type="TEXT" name="itemPetType" size="45" placeholder="請輸入寵物類別"
-									 value="<%= (itemVO==null)? "" : itemVO.getItemPetType()%>" /></td>
-							</tr>
-							<tr>
 								<td>商品名稱：</td>
 								<td><input type="TEXT" name="itemName" size="45" placeholder="請輸入商品名稱"
 									 value="<%= (itemVO==null)? "" : itemVO.getItemName()%>" /></td>
@@ -192,10 +187,18 @@
 							</tr>
 								<tr>
 								<td>商品狀態：</td>
-								<td><input type="TEXT" name="itemStatus" size="45" placeholder="請輸入商品狀態"
-									 value="<%= (itemVO==null)? "" : itemVO.getItemStatus()%>" /></td>
+								<td><select size="1" name="itemStatus">
+									<option value="<%= (itemVO!=null)? "1" : itemVO.getItemStatus()%>">上架中</option>
+									<option value="<%= (itemVO!=null)? "2" : itemVO.getItemStatus()%>">已下架</option>				
+									</select></td>
 							</tr>
-							
+							<tr>
+								<td>寵物類別：</td>
+								<td><select size="1" name="itemPetType">
+									<option value="<%= (itemVO!=null)? "貓" : itemVO.getItemStatus()%>">貓</option>
+									<option value="<%= (itemVO!=null)? "狗" : itemVO.getItemStatus()%>">狗</option>				
+									</select></td>
+							</tr>
 							<jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService" />
 							<tr>
 								<td>商品類別：</td>

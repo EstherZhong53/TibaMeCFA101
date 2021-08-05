@@ -3,7 +3,9 @@
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.item.model.*"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+<%@ page import="com.itemphotos.model.*"%>
+<jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService"/>
+
 
 <%
     ItemService itemSvc = new ItemService();
@@ -11,7 +13,13 @@
     pageContext.setAttribute("list",list);
 %>
     
-    
+<%
+  ItemVO itemVO = (ItemVO) request.getAttribute("itemVO");
+%>
+
+<%
+  ItemPhotosVO itemphotosVO = (ItemPhotosVO) request.getAttribute("itemphotosVO");
+%>    
     
     
     
@@ -702,103 +710,53 @@ cursor: pointer;
 
 <!--以上為header ***********************************************************************-->
 
-	<!--以下為輪播圖片slider處的html設定位子-->
+	<div class="abovemiddle" style="height:300px;">
 	
-	<div class="sliderbody">
-	    <div class="container" style="margin-top: 200px;">
-	      	<div class="slides">
-		        
-		        <!-- <radio buttons start>輪播按鈕設定(圓點點) -->
-		  <!--  <input class=rs type="radio" name="radio-btn" id="radio1">
-		        <input class=rs type="radio" name="radio-btn" id="radio2">
-		        <input class=rs type="radio" name="radio-btn" id="radio3">
-		        <input class=rs type="radio" name="radio-btn" id="radio4"> -->
-		        <!-- radio buttons end 輪播按鈕設定結束-->        
-		        
-		        
-		        <!-- 以下就是換照片的地方,只要替換圖片路徑即可,若還是不懂的話再問一下 -->
-		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/1.jpg" alt="" />
-		        </div>
-		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/2.jpg" alt="" />
-		        </div>
-		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/3.jpg" alt="" />
-		        </div>
-		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/4.jpg" alt="" />
-		        </div>
-				<!-- 以下就是換照片的地方,只要替換圖片路徑即可,若還是不懂的話再問一下 -->
-		
-		        <!-- automatic navigation start 按了按鈕有回應 -->        
-		  <!--  <div class="navigation-auto">
-		            <div class="auto-btn1"></div>
-		            <div class="auto-btn2"></div>
-		            <div class="auto-btn3"></div>
-		            <div class="auto-btn4"></div>            
-		        </div> -->
-		        <!-- automatic navigation end -->        
-	      
-	      	</div>
-	     
-	      	<!-- manual navigation start -->
-	 <!--	<div class="navigation-manual">
-	        	<label for="radio1" class="manual-btn"></label> 
-	        	<label for="radio2" class="manual-btn"></label>
-	        	<label for="radio3" class="manual-btn"></label>
-	        	<label for="radio4" class="manual-btn"></label> 
-	      	</div> -->
-	        <!-- manual navigation end -->
-	        <!--以上為輪播圖片處的html設定位子-->
-	      
-	      <div class="slide-controls">
-	        	<button id="prev-btn" style="margin-left:10px">
-	          		<i class="fas fa-chevron-left"></i>
-	        	</button>
-	        	<button id="next-btn" style="margin-right:10px">
-	          		<i class="fas fa-chevron-right"></i>
-	        	</button>
-	      </div>
-	    </div>
-	    
 	</div>
 	
-	
-	<!-- 以下為下拉式選擇清單,如果不需要可以直接刪掉 -->
-	<!-- 如果要調位置可直接調整下方的margin-top-->
-	
-
-		
-		<!-- 以上為下拉式選擇清單,如果不需要可以直接刪掉 -->
-		
-		
-		<!-- 下面這個DIV只是為了拉長高度來佔位，但沒放內容 -->
-		
-		
-		
-	
-	
-	
 	<!-- 以下為內容的區塊 -->
-	<div class="middleplace" style="display:flex;height:auto;margin-top:5px;">
+	<div class="middleplace" style="display:block;height:auto;margin-top:5px;">
 
-			
-			<div class="col-md-1" style="border: 2px solid yellow;height:1500px;">
-
+		<div class="topmiddle" style="display:flex;">	
+			<div class="col-md-1" style="border: 2px solid yellow;height:440px;">
+				<!-- 佔位DIV -->
 			</div>
 			
 			
-			<div class="col-md-10" style="border: 2px solid red;display:flex;height:1500px;">				
-				<div class="col-md-6" style="border: 2px solid blue;">
+			<div class="col-md-10" style="border: 2px solid red;display:flex;height:440px;padding:0px;">				
+				<div class="col-md-6" style="width:100%;border: 2px solid blue;">
 				</div>
-				<div class="col-md-6" style="border: 2px solid orange;">
+				<div class="col-md-6" style="width:100%;border: 2px solid orange;display:block;padding:0px;color:black;font-family:'Helvetica Neue','Helvetica','Arial','sans-serif';font-weight:600;">
+					<div class="itemName" style="height:60px;width:100%;border: 2px solid grey;">
+						<p name="itemId" style="font-size:40px;"><%= (itemVO==null)? "" : itemVO.getItemName()%></p>
+					</div>
+					
+					<div class="ItemTypePlusPetType" style="height:36px;width:100%;border: 2px solid grey;display:flex;font-size:13px;color:#585858;">
+						<p name="itemId" style="margin-top:5px;">${itemVO.itemTypeName}</p>
+						<p name="itemId" style="margin-top:5px;">(<%= (itemVO==null)? "" : itemVO.getItemPetType()%>)</p>
+					</div>
+					
+					<div class="itemContent" style="height:216px;width:100%;border: 2px solid grey;white-space: break-spaces;word-break: break-word;">
+						<p name="itemContent"  style="font-size:14px;font-family:'Microsoft JhengHei';"><%= (itemVO==null)? "" : itemVO.getItemContent()%></p>
+					</div>
+					
+					<div class="itemAmount" style="height:36px;width:100%;border: 2px solid grey;">
+					
+					</div>
+					
+					<div class="addIntoCart" style="height:72px;width:100%;border: 2px solid grey;">
+					
+					</div>
 				</div>
 			</div>
 		
-            <div class="col-md-1" style="border: 2px solid green;height:1500px;">				
-
+            <div class="col-md-1" style="border: 2px solid green;height:440px;">				
+				<!-- 佔位DIV -->
 			</div>
+		</div>
+		
+		<div class="bottommiddle" style="border: 2px solid black;height:730px;display:flex;">
+		</div>	
 	</div>
 	
 	<!-- 以下為FOOTER -->

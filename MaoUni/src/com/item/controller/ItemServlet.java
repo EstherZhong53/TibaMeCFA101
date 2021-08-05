@@ -24,6 +24,7 @@ public class ItemServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		
+		//後台商品詳細資料跳轉用
 		if ("getOne_For_Display".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -40,7 +41,7 @@ public class ItemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/item/item_select_page.jsp");
+							.getRequestDispatcher("/back-end/item/listAllItem.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -54,7 +55,7 @@ public class ItemServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					RequestDispatcher failureView = req
-							.getRequestDispatcher("/back-end/item/item_select_page.jsp");
+							.getRequestDispatcher("/back-end/item/listAllItem.jsp");
 					failureView.forward(req, res);
 					return;//程式中斷
 				}
@@ -90,6 +91,71 @@ public class ItemServlet extends HttpServlet {
 		}
 		
 		
+		//前台商品資料跳轉用
+		if ("getOne_For_Display_Shop".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/***************************1.接收請求參數 - 輸入格式的錯誤處理**********************/
+				String str = req.getParameter("itemId");
+				if (str == null || (str.trim()).length() == 0) {
+					errorMsgs.add("請輸入商品編號");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/shop/shopping_home.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				Integer itemId = null;
+				try {
+					itemId = new Integer(str);
+				} catch (Exception e) {
+					errorMsgs.add("商品編號格式不正確");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/shop/shopping_home.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************2.開始查詢資料*****************************************/
+				ItemService itemSvc = new ItemService();
+				ItemVO itemVO = itemSvc.getOneItem(itemId);
+				if (itemVO == null) {
+					errorMsgs.add("查無資料");
+				}
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					RequestDispatcher failureView = req
+							.getRequestDispatcher("/front-end/shop/shopping_home.jsp");
+					failureView.forward(req, res);
+					return;//程式中斷
+				}
+				
+				/***************************3.查詢完成,準備轉交(Send the Success view)*************/
+				req.setAttribute("itemVO", itemVO); // 資料庫取出的itemVO物件,存入req
+				String url = "/front-end/shop/shopping_details.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url); // 成功轉交 listOneItem.jsp
+				successView.forward(req, res);
+
+				/***************************其他可能的錯誤處理*************************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得資料:" + e.getMessage());
+				RequestDispatcher failureView = req
+						.getRequestDispatcher("/front-end/shop/shopping_home.jsp");
+				failureView.forward(req, res);
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

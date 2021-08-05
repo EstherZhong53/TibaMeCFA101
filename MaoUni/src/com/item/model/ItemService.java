@@ -72,6 +72,10 @@ public class ItemService {
 		return dao.getAll();
 	}
 	
+	public List<ItemVO> getAllByStatus() {
+		return dao.getAllByStatus();
+	}
+	
 	public List<ItemVO> getAll(Map<String, String[]> map) {
 		return dao.getAll(map);
 	}

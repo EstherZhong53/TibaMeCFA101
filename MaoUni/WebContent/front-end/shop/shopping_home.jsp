@@ -1,15 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.item.model.*"%>
+<jsp:useBean id="list" scope="page" class="com.item.model.ItemService" />
+
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<%
-    ItemService itemSvc = new ItemService();
-    List<ItemVO> list = itemSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
     
     
     
@@ -617,6 +614,8 @@ font-size: 20px;
 letter-spacing: 1px;
 line-height: 1.5;
 max-height: none;
+background: none;
+cursor: pointer;
 }
 .Label-price{
 margin-top: 5px;
@@ -627,6 +626,8 @@ font-weight: 800;
 font-size: 15px;
 letter-spacing: 1px;
 line-height: 1.5;
+background: none;
+cursor: pointer;
 }
 a:hover{
 cursor: pointer;
@@ -822,26 +823,37 @@ cursor: pointer;
 				<!-- 以下為右方商品清單資訊 -->
 				<div class="row" style="margin-top:20px;margin-left:50px;margin-right:10px;" >
 				
-				<c:forEach var="itemVO" items="${list}">
-
+				<c:forEach var="itemVO" items="${list.all}">
+				
+				
 					<div class="col-md-3" style="margin-top:45px;">
 						    <div class="card" >
-						    	<a class="ItemPhotos" href="#">
-						        <img src="data:image/jpeg; base64, ${itemVO.itemPhotoFirst}"/>
-						        </a>
+						    	<div class="ItemPhotos">
+						        <c:if test="${itemVO.itemStatus == '1'}"><img src="data:image/jpeg; base64, ${itemVO.itemPhotoFirst}"/></c:if>	
+						        </div>
 						        <div class="focus-content">
-						        <a id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a>
+						        <c:if test="${itemVO.itemStatus == '1'}"><a id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a></c:if>
 						        </div>				  
 						    </div>
-						    <a class="ItemIntro" href="#" style="text-decoration:none;">	  
-							<div class="Product-title Label mix-primary-text">${itemVO.itemName}</div>
-							<div class="Label-price sl-price">NT${itemVO.itemPrice}</div>
-							</a>
+							<div class="belowcard" style="text-align:center;margin-top:-5px;">
+							<c:if test="${itemVO.itemStatus == '1'}">
+			    				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
+								     <input class="Product-title Label mix-primary-text" type="submit" value="${itemVO.itemName}"  style="border:5px;border-radius:5px;background-color:none;border:none;">
+								     <input type="hidden" name="itemId"  value="${itemVO.itemId}">
+								     <input type="hidden" name="action"	value="getOne_For_Display_Shop">
+								</FORM>
+							</c:if>
+							
+							<c:if test="${itemVO.itemStatus == '1'}">
+			    				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
+								     <input class="Label-price sl-price" type="submit" value="NT${itemVO.itemPrice}"  style="border:5px;border-radius:5px;">
+								     <input type="hidden" name="itemId"  value="${itemVO.itemId}">
+								     <input type="hidden" name="action"	value="getOne_For_Display_Shop">
+								</FORM>
+							</c:if>
+							</div>
 					</div>
 					
-				
-
-				
 				</c:forEach>
 
 				</div>
