@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pet.model.*"%>
 
-<%
-  PetVO petVO = (PetVO) request.getAttribute("petVO"); 
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,10 +134,8 @@ margin-left: 200px;
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" name="form1">
 <table>
 	
-            <h3>毛孩編號:<%=petVO.getPetId()%></h3>
-
- 
-            <h3>毛孩名字 ${petVO.petName}</h3>
+        <h3>毛孩編號: ${petVO.petId}</h3>
+		<h3>毛孩名字 ${petVO.petName}</h3>
             
 		<tr>
 		<td>毛孩類別:</td>

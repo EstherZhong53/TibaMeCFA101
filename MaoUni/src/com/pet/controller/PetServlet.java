@@ -111,11 +111,10 @@ public class PetServlet extends HttpServlet {
 				// 這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				req.setAttribute("petVO", petVO); // 資料庫取出的VO物件,存入req
-				res.sendRedirect(req.getContextPath() + "/front-end/member/petUpdate.jsp");
 
-				// String url = "/front-end/member/petUpdate.jsp";
-//				RequestDispatcher successView = req.getRequestDispatcher(url);// 
-//				successView.forward(req, res);
+				String url = "/front-end/member/petUpdate.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 
+				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
@@ -160,7 +159,6 @@ public class PetServlet extends HttpServlet {
 
 		if ("update".equals(action)) { // 來自jsp的請求
 
-			System.out.println("11111111111111111111111111111111");
 			List<String> errorMsgs = new LinkedList<String>();
 
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -183,7 +181,7 @@ public class PetServlet extends HttpServlet {
 
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("petVO", petVO); // 含有輸入格式錯誤的VO物件,也存入req
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/pet/petlistAll.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/petpage.jsp");
 				failureView.forward(req, res);
 				return; // 程式中斷
 			}
@@ -194,7 +192,7 @@ public class PetServlet extends HttpServlet {
 
 			/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 			req.setAttribute("petVO", petVO);
-			String url = "/back-end/pet/petlistAll.jsp";
+			String url = "/front-end/member/petpage.jsp";
 			RequestDispatcher successView = req.getRequestDispatcher(url);
 			successView.forward(req, res);
 
@@ -206,9 +204,14 @@ public class PetServlet extends HttpServlet {
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 
+			
 			try {
 				/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-				Integer petMemId = new Integer(req.getParameter("petMemId").trim());
+				
+				HttpSession session = req.getSession();
+				MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+				Integer petMemId = memberVO.getMemId();
+				
 				String petName = req.getParameter("petName").trim();
 				String petSort = req.getParameter("petSort").trim();
 				Integer petVarId = new Integer(req.getParameter("petVarId").trim());
@@ -216,6 +219,8 @@ public class PetServlet extends HttpServlet {
 				Integer petAge = new Integer(req.getParameter("petAge").trim());
 				Integer petSurvive = new Integer(req.getParameter("petSurvive").trim());
 
+				
+				
 				PetVO petVO = new PetVO();
 				petVO.setPetMemId(petMemId);
 				petVO.setPetName(petName);
@@ -227,7 +232,7 @@ public class PetServlet extends HttpServlet {
 
 				/*************************** 2.開始新增資料 ***************************************/
 				PetService petSvc = new PetService();
-				petSvc.insert(petMemId, petName, petSort, petVarId, petGender, petAge, petSurvive);
+				petSvc.insert(petMemId,petName, petSort, petVarId, petGender, petAge, petSurvive);
 
 				/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 				String url = "/front-end/member/petpage.jsp";
@@ -290,7 +295,7 @@ public class PetServlet extends HttpServlet {
 				e.printStackTrace(System.err);
 			}
 		}
-	/////////////////////////////////////////////
+		//////////////////////////////////////////////
 
 	}
 }

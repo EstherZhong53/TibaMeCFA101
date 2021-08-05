@@ -175,7 +175,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	public void update(MemberVO memberVo) {
- System.out.println("所以");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -184,7 +183,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(UPDATE);
-
 			pstmt.setString(1, memberVo.getMemName());
 			pstmt.setString(2, memberVo.getMemEmail());
 			pstmt.setString(3, memberVo.getMemIdenity());
@@ -194,6 +192,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.setDate(7, memberVo.getMemBirthday());
 			pstmt.setInt(8, memberVo.getMemId());
 			pstmt.executeUpdate();
+			
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 
@@ -508,7 +507,6 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 			pstmt.setString(7, memberVo.getMemAddres());
 			pstmt.setDate(8, memberVo.getMemBirthday());
 			pstmt.executeUpdate();
-			System.out.println("upupsuupppppppppp");
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 

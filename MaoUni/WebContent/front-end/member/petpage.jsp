@@ -652,8 +652,7 @@ background-color: #fff;
 
             <div class="membercard-text">
 
-                <h2 style=" color:#c29174;">${petVO.petId}</h2>
-                <p>
+              
  
             <div class="membercard-text">
 

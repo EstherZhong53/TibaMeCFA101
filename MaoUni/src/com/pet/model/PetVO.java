@@ -11,6 +11,12 @@ public class PetVO implements java.io.Serializable {
 	private Integer petAge; //年齡
 	private Integer petSurvive; //狀態活著還是怎麼樣了
 	
+	@Override
+	public String toString() {
+		return "PetVO [petId=" + petId + ", petMemId=" + petMemId + ", petName=" + petName + ", petSort=" + petSort
+				+ ", petVarId=" + petVarId + ", petGender=" + petGender + ", petAge=" + petAge + ", petSurvive="
+				+ petSurvive + "]";
+	}
 	public Integer getPetId() {
 		return petId;
 	}

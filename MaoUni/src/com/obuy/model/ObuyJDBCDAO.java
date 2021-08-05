@@ -49,7 +49,7 @@ public class ObuyJDBCDAO implements ObuyDAO_interface {
 
 			ObuyVO obuyVO = new ObuyVO();
 			
-			obuyVO.setObuyId(rs.getInt("O_BUY_ID"));
+			obuyVO.setObuyId(rs.getInt("O_ID"));
 			obuyVO.setoMemId(rs.getInt("O_MEM_ID"));
 			obuyVO.setoMoney(rs.getInt("O_MONEY"));
 			obuyVO.setoDate(rs.getTimestamp("O_DATE"));

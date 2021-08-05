@@ -677,8 +677,8 @@ background-color: #fff;
 <input type="hidden" name="action" value="getOne_For_Update">
 </FORM>
 
-<input class=memstat type="submit" onclick="location.href='<%=request.getContextPath()%>/front-end/member/updatepassword.jsp'"
-	value="更改密碼" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
+<%-- <input class=memstat type="submit" onclick="location.href='<%=request.getContextPath()%>/front-end/member/updatepassword.jsp'" --%>
+<!-- 	value="更改密碼" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%"> -->
 
 <input class=memstat type="submit" onclick="location.href='<%=request.getContextPath()%>/front-end/member/petadd.jsp'"
 	value="新增毛孩" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">

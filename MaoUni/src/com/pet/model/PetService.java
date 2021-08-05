@@ -8,10 +8,10 @@ public class PetService {
 	public PetService() {
 		dao= new PetJDBCDAO();
 	}
-	public void insert(Integer petMemId,String petName,String petSort,Integer petVarId,String petGender,Integer petAge,Integer petSurvive) {
+	public PetVO insert(Integer petMemId, String petName,String petSort,Integer petVarId,String petGender,Integer petAge,Integer petSurvive) {
 
 		PetVO petVO =new PetVO();
-
+		
 		petVO.setPetMemId(petMemId);
 		petVO.setPetName(petName);
 		petVO.setPetSort(petSort);
@@ -19,9 +19,9 @@ public class PetService {
 		petVO.setPetGender(petGender);
 		petVO.setPetAge(petAge);
 		petVO.setPetSurvive(petSurvive);
-		
+		System.out.println(petVO);
 		dao.insert(petVO);
-		
+		return petVO; 
 	}
 	public void update(PetVO petVO) {
 		

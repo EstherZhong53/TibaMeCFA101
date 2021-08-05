@@ -33,7 +33,7 @@ public class loginFilter implements Filter {
 //		String contextPath = req.getContextPath();//抓取網址最後的值(就只有jsp)，其實不用用下面轉來轉去，單純用uri就可以去比對了
 //		String path = uri.substring(contextPath.length());
 
-		if (uri.contains("/member/memberpage.jsp")||uri.contains("/shop/order_confirm.jsp")||uri.contains("/shop/shopping_home.jsp")||uri.contains("/member/grooming_appointment_manage.jsp")||uri.contains("/groomer/groomer_application.jsp")||uri.contains("/groomer/groomer_appointment_manage.jsp")||uri.contains("/groomer/groomer_infoEdit.jsp")||uri.contains("/groomer/groomer_schedule.jsp")||uri.contains("/chatbox/chatbox.jsp")||uri.contains("/shop/order_confirm.jsp")||uri.contains("/shop/order_complete.jsp")||uri.contains("/adopt/adopt_home.jsp")||uri.contains("/adopt/getonetracking.jsp")||uri.contains("/message/addMessage.jsp")) {
+//		if (uri.contains("/member/memberpage.jsp")||uri.contains("/shop/order_confirm.jsp")||uri.contains("/shop/shopping_home.jsp")||uri.contains("/member/grooming_appointment_manage.jsp")||uri.contains("/groomer/groomer_application.jsp")||uri.contains("/groomer/groomer_appointment_manage.jsp")||uri.contains("/groomer/groomer_infoEdit.jsp")||uri.contains("/groomer/groomer_schedule.jsp")||uri.contains("/chatbox/chatbox.jsp")||uri.contains("/shop/order_confirm.jsp")||uri.contains("/shop/order_complete.jsp")||uri.contains("/adopt/adopt_home.jsp")||uri.contains("/adopt/getonetracking.jsp")||uri.contains("/message/addMessage.jsp")) {
 			// uri會抓到的當前位子（網址）關鍵字去對比，當前網址是否有「contains包含」，equals不知為何上次不成功
 
 			HttpSession session = req.getSession();
@@ -47,7 +47,7 @@ public class loginFilter implements Filter {
 				chain.doFilter(req, res); // session不是空的話就放行
 			}
 		}
-	}
+//	}
 
 	public void init(FilterConfig fConfig) throws ServletException {
 	}

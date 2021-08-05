@@ -16,9 +16,9 @@ List<ObuyVO> list = obuySvc.findByMemId(omemId);
 pageContext.setAttribute("list", list);
 %>
  
-<%-- <jsp:useBean id="obuy" scope="page" class="com.obuy.model.ObuyService" /> --%>
-<%-- <jsp:useBean id="cd" scope="page" class="com.commodity_details.model.CdService" /> --%>
-<%-- <jsp:useBean id="item" scope="page" class="com.item.model.ItemService" /> --%>
+<jsp:useBean id="obuy" scope="page" class="com.obuy.model.ObuyService" />
+<jsp:useBean id="cd" scope="page" class="com.commodity_details.model.CdService" />
+<jsp:useBean id="item" scope="page" class="com.item.model.ItemService" />
 
 <!DOCTYPE html>
 <html>
@@ -307,11 +307,11 @@ margin-top: -50px;
 					     	 	</div>		  
 <!-- 					     	 	花括弧內是外面大圈的id，cd.cdpush是cd的方法去帶全部的集合去串 -->
 										<c:forEach var="cda" items="${cd.cdpush(obuyVO.obuyId)}" >
-					     	 			<div class="row">
-					     	 			<div class="col-md-6" style="font-weight: bold">${cda.cdItemName}</div>
-					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdAmount}</div>
-					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdMoney}</div>
-					     	 			</div>
+						     	 			<div class="row">
+							     	 			<div class="col-md-6" style="font-weight: bold">${cda.cdItemName}</div>
+							     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdAmount}</div>
+							     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdMoney}</div>
+						     	 			</div>
 										</c:forEach>									     						     	 			      
 					      	  </div>
 					      </div>

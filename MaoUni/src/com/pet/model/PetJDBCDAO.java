@@ -16,7 +16,7 @@ public class PetJDBCDAO implements PetDAO_interface {
 	static String userid = "David";
 	static String passwd = "123456";
 
-	private static final String INSERT_STMT = "insert into PET(PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE) values (?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_STMT = "insert into PET(PET_MEM_ID,PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE) values (?,?, ?, ?, ?, ?, ?)";
 	private static final String GET_ALL_STMT = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET";
 	private static final String GET_ONE_STMT = "SELECT PET_ID, PET_MEM_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE FROM PET where PET_ID= ?";
 //	private static final String GET_ONE_STMT = "Select PET_ID, PET_NAME, PET_SORT, PET_VAR_ID, PET_GENDER, PET_AGE, PET_SURVIVE, e1.PET_MEM_ID as PET_MEM_ID, e2.MEM_ID FROM PET e1 left join MEMBER e2 on e1.PET_MEM_ID = e2.MEM_ID WHERE MEM_ID=?";
@@ -112,7 +112,6 @@ public class PetJDBCDAO implements PetDAO_interface {
 			Class.forName(driver);
 			con = DriverManager.getConnection(url, userid, passwd);
 			pstmt = con.prepareStatement(INSERT_STMT);
-			System.out.println("好想吃可麗露");
 			pstmt.setInt(1, petVO.getPetMemId());
 			pstmt.setString(2, petVO.getPetName());
 			pstmt.setString(3, petVO.getPetSort());
@@ -431,7 +430,7 @@ public class PetJDBCDAO implements PetDAO_interface {
 		  Class.forName(driver);
 		  con = DriverManager.getConnection(url, userid, passwd);
 		  pstmt = con.prepareStatement(INSERT_STMT);
-		  System.out.println("和尚端湯上塔塔滑湯灑湯燙塔");
+
 
 		  
 		  PetVO petVO = new PetVO();

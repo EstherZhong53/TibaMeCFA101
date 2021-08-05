@@ -21,6 +21,13 @@ public class MemberVO implements java.io.Serializable{
 	private Integer memSurvive; //狀態
 	private Timestamp memUpdate;//上次更新日期
 	
+	@Override
+	public String toString() {
+		return "MemberVO [memId=" + memId + ", memName=" + memName + ", memEmail=" + memEmail + ", memPassword="
+				+ memPassword + ", memIdenity=" + memIdenity + ", memGender=" + memGender + ", memPh=" + memPh
+				+ ", memAddres=" + memAddres + ", memBirthday=" + memBirthday + ", memPosition=" + memPosition
+				+ ", memReserve=" + memReserve + ", memSurvive=" + memSurvive + ", memUpdate=" + memUpdate + "]";
+	}
 	public Integer getMemId() {
 		return memId;
 	}

@@ -112,18 +112,18 @@ margin-left: 200px;
 <FORM class="memberupdate" METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do" name="update">
 <table class="update">
 	
-     <h3>會員編號:<%=memberVO.getMemId()%></h3>
+	
+     <h3>會員編號：</h3>
 
-
-     <h3>會員姓名:<%=memberVO.getMemName()%></h3>
+     <h3>會員編號：</h3>
     
     <div class="form-group">
-		<h5>信箱:<input type="TEXT" name="memEmail" size="20" value="<%=memberVO.getMemEmail()%>" required/>
+		<h5>信箱:<input type="TEXT" name="memEmail" size="20" value="${memberVO.memEmail}" required/>
 		</h5></div>
 
 	<div class="form-group">
 		<h5>身分證:
-		<input type="TEXT" name="memIdenity" size="10"	value="<%=memberVO.getMemIdenity()%>" required/>
+		<input type="TEXT" name="memIdenity" size="10"	value="${memberVO.memIdenity}" required/>
 		</h5></div>
 
 <div class="form-group">
@@ -136,19 +136,19 @@ margin-left: 200px;
 
 	<div class="form-group">
 		<h5>電話
-		<input type="TEXT" name="memPh" size="10" value="<%=memberVO.getMemPh()%>" required/>
+		<input type="TEXT" name="memPh" size="10" value="${memberVO.memPh}" required/>
 </h5>
 </div>
 
 	<div class="form-group">
 		<h5>地址
-		<input type="TEXT" name="memAddres" size="" value="<%=memberVO.getMemAddres()%>" required/>
+		<input type="TEXT" name="memAddres" size="" value="${memberVO.memAddres}" required/>
 </h5>
 </div>
 	
 <div class="form-group">
 		<h5>生日
-		<input type="date" name="memBirthday" size="" value="<%=memberVO.getMemBirthday()%>" required/>
+		<input type="date" name="memBirthday" size="" value="${memberVO.memBirthday}" required/>
 </h5></div>	
 	
 <!--     <div class="form-group">	 -->
@@ -173,8 +173,11 @@ margin-left: 200px;
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="memId" value="<%=memberVO.getMemId()%>">
-<input class="memstat" type="submit" value="送出修改"></FORM>
+<input type="hidden" name="memId" value="${memberVO.memId}"/>
+<input type="hidden" name="memName" value="${memberVO.memName}"/>
+<input class="memstat" type="submit" value="送出修改">
+
+</FORM>
 
    <script src="<%=request.getContextPath()%>/resources/bootstrap/jquery/jquery.min.js"></script>
     <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js"></script>

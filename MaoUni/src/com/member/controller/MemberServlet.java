@@ -85,14 +85,17 @@ public class MemberServlet extends HttpServlet {
 
 			try {
 				// 1.接收請求參數
-				Integer memId = new Integer(req.getParameter("memId"));
+				
+				HttpSession session = req.getSession();
+				MemberVO memberVO = (MemberVO) session.getAttribute("memberVO");
+				Integer memId = memberVO.getMemId();
 
 				// 2.開始查詢資料
 				MemberService memSvc = new MemberService();
-				MemberVO memberVO = memSvc.getOneMember(memId);
+				MemberVO memberVO2 = memSvc.getOneMember(memId);
 
 				// 3.查詢完成,準備轉交
-				req.setAttribute("memberVO", memberVO);
+				req.setAttribute("memberVO", memberVO2);
 				String url = "/front-end/member/Update_member.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
@@ -134,15 +137,18 @@ public class MemberServlet extends HttpServlet {
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			try {
-				/*************************** 1.接收請求參數 ****************************************/
+
+				
+				HttpSession session = req.getSession();
+
 				String memName = req.getParameter("memName");
+				Integer memId = new Integer(req.getParameter("memId").trim());	
 				String memEmail = req.getParameter("memEmail").trim();
 				String memIdenity = req.getParameter("memIdenity").trim();
 				String memGender = req.getParameter("memGender");
 				Integer memPh = new Integer(req.getParameter("memPh").trim()); // 因為前端輸入文字時都是String，因此需要轉型
 				String memAddres = req.getParameter("memAddres").trim();
 				Date memBirthday = java.sql.Date.valueOf(req.getParameter("memBirthday")); // Date要用這個方式輸入進去
-				Integer memId = new Integer(req.getParameter("memId"));
 
 				MemberVO memberVO = new MemberVO();
 				memberVO.setMemName(memName);
@@ -157,6 +163,8 @@ public class MemberServlet extends HttpServlet {
 				/*************************** 2.開始查詢資料 ****************************************/
 				MemberService memSvc = new MemberService();
 				memSvc.update(memberVO);
+				
+				session.setAttribute("memberVO", memberVO);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 				String url = "/front-end/member/memberpage.jsp";
