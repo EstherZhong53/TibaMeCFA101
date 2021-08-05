@@ -125,7 +125,7 @@ public class ImfServlet extends HttpServlet {
 				imfVO = ImfSvc.addImf(adopt, mech, name, year, sit, photo);
 
 				req.setAttribute("imfVO", imfVO);
-				String url ="/front-end/adopt/add_adopt.jsp";
+				String url ="/back-end/adopt/adopt_home.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 				

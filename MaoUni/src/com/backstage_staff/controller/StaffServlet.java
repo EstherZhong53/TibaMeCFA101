@@ -388,7 +388,7 @@ public class StaffServlet extends HttpServlet {
 											
 					}else if(!username.trim().matches(usernameReg)) {
 						errorMsgs.put("username", "請輸入有效的帳號");
-						String url = "/back-end/staff/login.jsp";
+						String url = "/front-end/home/adminlogin.jsp";
 						RequestDispatcher failureView = req.getRequestDispatcher(url);
 						failureView.forward(req, res);
 					}				
@@ -401,7 +401,7 @@ public class StaffServlet extends HttpServlet {
 					}
 					if(!errorMsgs.isEmpty()) {
 						req.getSession().setAttribute(username, password);
-						req.getRequestDispatcher("/back-end/staff/login.jsp").forward(req, res);
+						req.getRequestDispatcher("/front-end/home/adminlogin.jsp").forward(req, res);
 									
 					}
 					StaffService staffSvc = new StaffService();
@@ -412,9 +412,15 @@ public class StaffServlet extends HttpServlet {
 					HttpSession session =req.getSession();
 					session.setAttribute(username, password);
 		}
-					
-	
+		  if ("OutUser".equals(action)) {		
+			 req.getSession();
+			  HttpSession session = req.getSession();
+			   session.removeAttribute("staffVO");
+			   res.sendRedirect(req.getContextPath() + "/front-end/home/adminlogin.jsp");
+			   
+		  }
 	}
+	
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 

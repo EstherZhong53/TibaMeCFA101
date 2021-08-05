@@ -62,7 +62,6 @@ table#table-1 h4 {
 	margin-bottom: 10px;
 }
 
-.
 h4 {
 	color: blue;
 	display: inline;
@@ -239,6 +238,7 @@ body {
 			</div>
 		</nav>
 		<div align="center">
+
 			<table align="center" cellpadding="10" border='2'>
 				<tr>
 <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/MaoUni/ImfServlet" enctype="multipart/form-data" name="form1">
