@@ -140,8 +140,8 @@ img {
           <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/shop/shopping_home.jsp" 
                                                             style="font-size:15px;">有你來買</a></p>
                                                             
-          <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp" 
-                                                            style="font-size:15px;">有你來講</a></p>
+<%--           <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/forumPost/forumPost_home.jsp"  --%>
+<!--                                                             style="font-size:15px;">有你來講</a></p> -->
                                                             
           <p class="hover-underline-animation pb-0"><a href="<%= request.getContextPath() %>/front-end/member/grooming_home.jsp" 
                                                           style="font-size:15px;">到府美容</a></p>
