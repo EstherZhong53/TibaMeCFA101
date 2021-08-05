@@ -644,7 +644,7 @@ background-color: #fff;
         <c:if test="${memberVO.memPosition == '0'}">
         <a href="<%=request.getContextPath()%>/front-end/groomer/groomer_application.jsp">加入美容</a>
         </c:if>
-
+		<a href="<%= request.getContextPath() %>/back-end/adopt/getonetracking.jsp">認養清單</a>
         <a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
 
 </div>
