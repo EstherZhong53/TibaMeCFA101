@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.item.model.*"%>
-<jsp:useBean id="list" scope="page" class="com.item.model.ItemService" />
+<jsp:useBean id="list" scope="page" class="com.item.model.ItemService"/>
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
@@ -839,14 +839,14 @@ cursor: pointer;
 							<c:if test="${itemVO.itemStatus == '1'}">
 			    				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
 								     <input class="Product-title Label mix-primary-text" type="submit" value="${itemVO.itemName}"  style="border:5px;border-radius:5px;background-color:none;border:none;">
-								     <input type="hidden" name="itemId"  value="${itemVO.itemId}">
+								     <input type="hidden" name="itemId" value="${itemVO.itemId}">
 								     <input type="hidden" name="action"	value="getOne_For_Display_Shop">
 								</FORM>
 							</c:if>
 							
 							<c:if test="${itemVO.itemStatus == '1'}">
 			    				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/back-end/Item/ItemServlet">
-								     <input class="Label-price sl-price" type="submit" value="NT${itemVO.itemPrice}"  style="border:5px;border-radius:5px;">
+								     <input class="Label-price sl-price" type="submit" value="NT$${itemVO.itemPrice}" style="border:5px;border-radius:5px;">
 								     <input type="hidden" name="itemId"  value="${itemVO.itemId}">
 								     <input type="hidden" name="action"	value="getOne_For_Display_Shop">
 								</FORM>

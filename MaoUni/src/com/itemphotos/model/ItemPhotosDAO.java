@@ -28,6 +28,7 @@ public class ItemPhotosDAO implements ItemPhotosDAO_interface{
 	private final String GET_ONE_FOR_IPID = 
 		"SELECT * FROM MAOUNI.ITEM_PHOTOS WHERE IP_ITEM_ID = ?";
 	private final String GET_ONELIST_STMT = "SELECT * FROM IP_ITEM WHERE IP_ITEM_ID = ?";	
+
 	
 	//新增
 	@Override
@@ -188,39 +189,6 @@ public class ItemPhotosDAO implements ItemPhotosDAO_interface{
 		String pic = Base64.getEncoder().encodeToString(b);
 		return pic;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
 

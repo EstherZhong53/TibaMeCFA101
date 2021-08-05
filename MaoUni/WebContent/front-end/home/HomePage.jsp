@@ -634,16 +634,16 @@ background-color: #fff;
 		        
 		        <!-- 以下就是換照片的地方,只要替換圖片路徑即可,若還是不懂的話再問一下 -->
 		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/pic0.jpg" alt="" />
+		          <img src="<%=request.getContextPath()%>/resources/images/homepage/bg1.png" alt="" />
 		        </div>
 		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/pic1.png" alt="" />
+		          <img src="<%=request.getContextPath()%>/resources/images/homepage/bg2.jpg" alt="" />
 		        </div>
 		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/pic2.jpg" alt="" />
+		          <img src="<%=request.getContextPath()%>/resources/images/homepage/bg3.jpg" alt="" />
 		        </div>
 		        <div class="slide">
-		          <img src="<%=request.getContextPath()%>/resources/images/pic/pic3.png" alt="" />
+		          <img src="<%=request.getContextPath()%>/resources/images/homepage/bg4.jpg" alt="" />
 		        </div>
 				<!-- 以下就是換照片的地方,只要替換圖片路徑即可,若還是不懂的話再問一下 -->
 		
@@ -681,38 +681,7 @@ background-color: #fff;
 	</div>
 	
 	
-	<!-- 以下為下拉式選擇清單,如果不需要可以直接刪掉 -->
-	<!-- 如果要調位置可直接調整下方的margin-top-->
-	
-	<div class="test" style="margin-top:20px;">
-		<div class="SearchSorting">
-		    
-		    <select style="color:#a0591f;border-color:#a0591f;margin-left:10px;">
-			    <option value="volvo" style="display:none">請選擇毛孩類別</option>
-			    <option value="saab">貓</option>
-			    <option value="opel">狗勾</option>
-		    </select>
-		
-			<select style="color:#a0591f;border-color:#a0591f;">
-			    <option value="volvo" style="display:none">請選擇商品類別</option>
-			    <option value="saab">罐頭</option>
-			    <option value="opel">生食</option>
-			    <option value="audi">玩具</option>
-		    </select>
-		    
-		    <select style="color:#a0591f;border-color:#a0591f;">
-			    <option value="volvo" style="display:none">請選擇排序方式</option>
-			    <option value="saab">熱門商品</option>
-			    <option value="opel">價格由高至低</option>
-			    <option value="audi">價格由低至高</option>
-		    </select>
-		
-		    <input type="text" placeholder="請輸入搜尋關鍵字" style="margin-left:20px;color:#b89063;font-size: 14px;"/>
-		    <a href="#" class="iconbth1"><i class="fas fa-search fa-1x" style="color:#b89063;margin-left:4px;"></i></a>
-		
-		</div>
-		
-		<!-- 以上為下拉式選擇清單,如果不需要可以直接刪掉 -->
+
 		
 		
 		<!-- 下面這個DIV只是為了拉長高度來佔位，但沒放內容 -->

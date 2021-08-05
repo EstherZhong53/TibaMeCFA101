@@ -5,21 +5,17 @@
 <%@ page import="com.item.model.*"%>
 <%@ page import="com.itemphotos.model.*"%>
 <jsp:useBean id="itemTypeSvc" scope="page" class="com.itemtype.model.ItemTypeService"/>
+<jsp:useBean id="itemPhotosSvc" scope="page" class="com.itemphotos.model.ItemPhotosService"/>
 
 
-<%
-    ItemService itemSvc = new ItemService();
-    List<ItemVO> list = itemSvc.getAll();
-    pageContext.setAttribute("list",list);
-%>
+
     
 <%
-  ItemVO itemVO = (ItemVO) request.getAttribute("itemVO");
+  	ItemVO itemVO = (ItemVO) request.getAttribute("itemVO");
+	List<ItemPhotosVO> list = itemPhotosSvc.getItemPhoto(itemVO.getItemId());
+	pageContext.setAttribute("list",list);
 %>
 
-<%
-  ItemPhotosVO itemphotosVO = (ItemPhotosVO) request.getAttribute("itemphotosVO");
-%>    
     
     
     
@@ -602,14 +598,14 @@ background-color: #fff;
 .card:hover img, .card:focus-within img {
   margin-top: -40px;
 }
-a.btn1{
+div a.btn1{
   color: white;
   background: #d4af81;
   text-align: center;
   height: 40px;
   padding: 8px 0px 0px 0px;
 }
-a.btn1:hover{
+div a.btn1:hover{
   background-color: #75543e;
   color: #fff;
   text-decoration: none;
@@ -710,52 +706,67 @@ cursor: pointer;
 
 <!--以上為header ***********************************************************************-->
 
-	<div class="abovemiddle" style="height:300px;">
+	<div class="abovemiddle" style="height:333px;">
 	
 	</div>
-	
+	<hr style="margin-top:-40px;">
 	<!-- 以下為內容的區塊 -->
 	<div class="middleplace" style="display:block;height:auto;margin-top:5px;">
 
 		<div class="topmiddle" style="display:flex;">	
-			<div class="col-md-1" style="border: 2px solid yellow;height:440px;">
+			<div class="col-md-1" style="height:400px;">
 				<!-- 佔位DIV -->
 			</div>
 			
 			
-			<div class="col-md-10" style="border: 2px solid red;display:flex;height:440px;padding:0px;">				
-				<div class="col-md-6" style="width:100%;border: 2px solid blue;">
+			<div class="col-md-10" style="display:flex;height:400px;padding:0px;">	
+						
+				<div class="col-md-6" style="width:100%;height:100%;">
+					<c:forEach var="itemPhotosVO" items="${list}">
+					<img src="data:image/png;base64, ${itemPhotosVO.ipItemBase64}" class="img-fluid">
+					</c:forEach>
 				</div>
-				<div class="col-md-6" style="width:100%;border: 2px solid orange;display:block;padding:0px;color:black;font-family:'Helvetica Neue','Helvetica','Arial','sans-serif';font-weight:600;">
-					<div class="itemName" style="height:60px;width:100%;border: 2px solid grey;">
+			
+				<div class="col-md-6" style="margin:0px 5px 0px 15px;;width:100%;display:block;color:black;font-family:'Helvetica Neue','Helvetica','Arial','sans-serif';font-weight:600;padding:0px 30px 30px 10px;">
+					<div class="itemName" style="height:60px;width:100%;letter-spacing:1px;margin-left:-5px;margin-top:-10px;">
 						<p name="itemId" style="font-size:40px;"><%= (itemVO==null)? "" : itemVO.getItemName()%></p>
 					</div>
 					
-					<div class="ItemTypePlusPetType" style="height:36px;width:100%;border: 2px solid grey;display:flex;font-size:13px;color:#585858;">
-						<p name="itemId" style="margin-top:5px;">${itemVO.itemTypeName}</p>
+					<div class="ItemTypePlusPetType" style="height:36px;width:100%;display:flex;font-size:13px;color:#585858;">
+						<p name="itemId" style="margin-top:5px;"> ${itemVO.itemTypeName}</p>
 						<p name="itemId" style="margin-top:5px;">(<%= (itemVO==null)? "" : itemVO.getItemPetType()%>)</p>
 					</div>
-					
-					<div class="itemContent" style="height:216px;width:100%;border: 2px solid grey;white-space: break-spaces;word-break: break-word;">
-						<p name="itemContent"  style="font-size:14px;font-family:'Microsoft JhengHei';"><%= (itemVO==null)? "" : itemVO.getItemContent()%></p>
+					<hr style="margin-top:-5px;">
+					<div class="itemContent" style="height:130px;width:100%;">
+						<p name="itemContent"  style="font-size:20px;font-weight:450;font-family:'Helvetica Neue','Helvetica','Arial','sans-serif';margin-top:15px;"><%= (itemVO==null)? "" : itemVO.getItemContent()%></p>
+					</div>
+					<hr>
+					<div class="itemPrice" style="height:36px;width:100%;font-size: 15px;letter-spacing: 1px;">
+						<p name="itemPrice"  style="font-size:20px;font-weight:600;color: #d6b187;">NT$<%= (itemVO==null)? "" : itemVO.getItemPrice()%></p>
 					</div>
 					
-					<div class="itemAmount" style="height:36px;width:100%;border: 2px solid grey;">
-					
+					<div class="itemAmount" style="height:36px;width:100%;">
+						<div style="margin-top:3px;display:flex;">
+							<p>庫存現貨只剩</p>
+							<p name="itemId" style="color:#e05348;"><%= (itemVO==null)? "" : itemVO.getItemAmount()%></p>
+							<p>件</p>
+						</div>
 					</div>
 					
-					<div class="addIntoCart" style="height:72px;width:100%;border: 2px solid grey;">
-					
+					<div class="addIntoCart" style="height:72px;width:100%;">
+						<div style="margin-top:35px;">
+						<c:if test="${itemVO.itemStatus == '1'}"><a id="${itemVO.itemId}" class="btn1 btn-sm d-block addItem" style="margin-top:-16px;color:#fff;"><i class="fas fa-shopping-cart addItem"></i>&nbsp加入購物車</a></c:if>
+						</div>
 					</div>
 				</div>
 			</div>
 		
-            <div class="col-md-1" style="border: 2px solid green;height:440px;">				
+            <div class="col-md-1" style="height:400px;">				
 				<!-- 佔位DIV -->
 			</div>
 		</div>
 		
-		<div class="bottommiddle" style="border: 2px solid black;height:730px;display:flex;">
+		<div class="bottommiddle" style="height:100px;display:flex;">
 		</div>	
 	</div>
 	

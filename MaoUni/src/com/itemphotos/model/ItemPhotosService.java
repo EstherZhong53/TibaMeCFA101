@@ -44,6 +44,9 @@ public class ItemPhotosService {
 		dao.insert(itemPhotosVO);
 	}
 	
+	public List<ItemPhotosVO> getItemPhoto(Integer ipItemId){
+		return dao.getItemPhoto(ipItemId);
+	}
 	
 	public void delete(Integer ipId) {
 		dao.delete(ipId);
