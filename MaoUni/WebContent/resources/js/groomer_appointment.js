@@ -69,6 +69,13 @@ window.onunload = function(){
 // 選擇預約後，自動生成未來30日班表
 	
 	$("#modBtn").click(function(e){
+		if($("#memId").val() === ""){
+			swal("尚未登入會員","感謝您的支持，請先登入會員後再進行預約喔！","warning").then((result) => {
+				window.location.replace("/MaoUni/front-end/home/login.jsp");
+				return;
+			});	
+		}
+		
 		$.ajax({
 			url: "/MaoUni/schedule.do",
 			type: "GET",

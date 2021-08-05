@@ -259,9 +259,11 @@ height: 350px;
                                                                 <fieldset>
                                                                 
  <%
-	Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
-  	List<PetVO> petVOList = petSvc.findByMemId(memId);
- 	pageContext.setAttribute("petVOList", petVOList);
+ 	if(session.getAttribute("memberVO") != null){
+ 		Integer memId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
+ 	  	List<PetVO> petVOList = petSvc.findByMemId(memId);
+ 	 	pageContext.setAttribute("petVOList", petVOList);
+ 	}
  %>                                                               
                                                                 
                                                                 
@@ -312,12 +314,6 @@ height: 350px;
 
 																</fieldset> 
 															</div>
-<!--                                                                 <fieldset> -->
-<!--                                                                     <textarea name="message" rows="6" -->
-<!--                                                                         class="form-control" id="message" -->
-<!--                                                                         placeholder="Your message..." -->
-<!--                                                                         required=""></textarea> -->
-<!--                                                                 </fieldset> -->
                                                             </div>
                                                             <div class="col-md-12">
                                                                 <fieldset>
@@ -333,16 +329,6 @@ height: 350px;
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="content petinfomation">
-<!--                                                                     <div class="section-heading"> -->
-<!--                                                                         <span id="petdetail">毛孩資料</span> -->
-<!--                                                                         <h2>妞妞</h2> -->
-<!--                                                                     </div> -->
-<!--                                                                     <ul> -->
-<!--                                                                    		<li>馬爾濟斯</li> -->
-<!--                                                                         <li>10歲</li> -->
-<!--                                                                         <li>妹妹</li> -->
-<!--                                                                         <li>心臟病</li> -->
-<!--                                                                     </ul> -->
                                                                 </div>
                                                             </div>
                                                         </div>
