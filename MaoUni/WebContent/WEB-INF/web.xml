@@ -188,81 +188,98 @@
 
 
 	<!-- ============================ 思瑤 ============================ -->
-   <servlet>
-    <servlet-name>MemberServlet</servlet-name>
-    <servlet-class>com.member.controller.MemberServlet</servlet-class>
-  </servlet> 
-  
-    <servlet-mapping>
-    <servlet-name>MemberServlet</servlet-name>
-    <url-pattern>/member/member.do</url-pattern>
-  </servlet-mapping>
-  
-    <servlet>
-    <servlet-name>PetServlet</servlet-name>
-    <servlet-class>com.pet.controller.PetServlet</servlet-class>
-  	</servlet> 
-  
-    <servlet-mapping>
-    <servlet-name>PetServlet</servlet-name>
-    <url-pattern>/pet/pet.do</url-pattern>
-  </servlet-mapping>
- 
+	<servlet>
+		<servlet-name>MemberServlet</servlet-name>
+		<servlet-class>com.member.controller.MemberServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>MemberServlet</servlet-name>
+		<url-pattern>/member/member.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>PetServlet</servlet-name>
+		<servlet-class>com.pet.controller.PetServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PetServlet</servlet-name>
+		<url-pattern>/pet/pet.do</url-pattern>
+	</servlet-mapping>
+
 	<filter>
 		<filter-name>loginFilter</filter-name>
 		<filter-class>com.Filter.loginFilter</filter-class>
-	</filter> 
- 	<filter-mapping>
- 	<filter-name>loginFilter</filter-name>
- 	<url-pattern>/front-end/member/memberpage.jsp</url-pattern>
- 	
- 	</filter-mapping>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/front-end/member/memberpage.jsp</url-pattern>
 
-  
-     <servlet>
-    <servlet-name>ObuyServlet</servlet-name>
-    <servlet-class>com.obuy.controller.ObuyServlet</servlet-class>
-  	</servlet> 
-  
-    <servlet-mapping>
-    <servlet-name>ObuyServlet</servlet-name>
-    <url-pattern>/buy/obuy.do</url-pattern>
-  </servlet-mapping>
-  
-  
-       <servlet>
-    <servlet-name>VarietyServlet</servlet-name>
-    <servlet-class>com.variety.controller.VarietyServlet</servlet-class>
-  	</servlet> 
-  
-    <servlet-mapping>
-    <servlet-name>VarietyServlet</servlet-name>
-    <url-pattern>/variety/variety.do</url-pattern>
-  </servlet-mapping>
-  
-     <servlet>
-    <servlet-name>SickListServlet</servlet-name>
-    <servlet-class>com.sicklist.controller.SickListServlet</servlet-class>
-  	</servlet> 
-  
-    <servlet-mapping>
-    <servlet-name>SickListServlet</servlet-name>
-    <url-pattern>/sllist/sllist.do</url-pattern>
-  </servlet-mapping> 
-  
-     <servlet>
-    <servlet-name>CheckmemberServlet</servlet-name>
-    <servlet-class>com.member.controller.CheckmemberServlet</servlet-class>
-  	</servlet> 
-  
-    <servlet-mapping>
-    <servlet-name>CheckmemberServlet</servlet-name>
-    <url-pattern>/check/check.do</url-pattern>
-  </servlet-mapping>   
-  
-      <session-config>
-        <session-timeout>-1</session-timeout>
-    </session-config>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/front-end/shop/order_confirm.jsp</url-pattern>
+
+	</filter-mapping>
+
+
+
+
+	<servlet>
+		<servlet-name>ObuyServlet</servlet-name>
+		<servlet-class>com.obuy.controller.ObuyServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ObuyServlet</servlet-name>
+		<url-pattern>/buy/obuy.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- <servlet> -->
+	<!-- <servlet-name>CdServlet</servlet-name> -->
+	<!-- <servlet-class>com.cd.controller.CdServlet</servlet-class> -->
+	<!-- </servlet> -->
+
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>CdServlet</servlet-name> -->
+	<!-- <url-pattern>/cd/cd.do</url-pattern> -->
+	<!-- </servlet-mapping> -->
+
+
+	<servlet>
+		<servlet-name>VarietyServlet</servlet-name>
+		<servlet-class>com.variety.controller.VarietyServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>VarietyServlet</servlet-name>
+		<url-pattern>/variety/variety.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>SickListServlet</servlet-name>
+		<servlet-class>com.sicklist.controller.SickListServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SickListServlet</servlet-name>
+		<url-pattern>/sllist/sllist.do</url-pattern>	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>CheckmemberServlet</servlet-name>
+		<servlet-class>com.member.controller.CheckmemberServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CheckmemberServlet</servlet-name>
+		<url-pattern>/check/check.do</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>-1</session-timeout>
+	</session-config>
 
 	<!-- ============================================================== -->
 

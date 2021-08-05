@@ -303,171 +303,78 @@ display: flex;
     font-family:"poppins";
     
     }
-.testtest{
-    display: flex;
-    justify-content: space-between;
-    color: white;
-}    
-h5{
-color:#c29e74 ;
-}
-.test2{
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    color: white;
-}
-.add{
-margin-top: 20px;
-color: white;
-}
-.memberupadatebutton{
-margin-left: 80%;
-margin-bottom: 20px;
-}
-.memberupadatebutton button{
-    color: white;
-    background-color: #c29e74;
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    font-size: 14px;
-    padding: 7px 20px;
-    font-weight: 500px;
-    font-family: monospace;
-    transition-duration:1s;  
-}
-.memberleft{
-display: flex;
-flex-direction: column;
-/* 讓文字變直的 */
-width: 100px;
-justify-content: flex-end;
-align-items: center;
-margin-top: 40%;
-margin-left: 5%;
-}
-.memberleft button{
-    color: white;
-    background-color: #c29e74;
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    font-size: 14px;
-    padding: 7px 20px;
-    font-weight: 500px;
-    font-family: monospace;
-    transition-duration:1s;  
-    margin-bottom: 7px; 
-}
-.memberleft button:hover{
-    
-    font-weight:bold;
-    color:#563F2E;
-}
 /* yao的page */
-*{
-    padding:0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family:"poppins";
-    
-    }
-    
-    div.membercontainer{
-    
-        position: absolute;
-        top: 120%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        background-color: #FFF7E8;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 50px 60px -50px #563F2E;
-    
-    }
-    
-    div.membercontainer div.switchform{
-    
-        width: 400px;
-        height:250px;
-        border-radius: 3px;
-         margin-right: 30px;
-    }
-    
-    div.membercontainer div.switchform h2{
-    
-    color:#c29e74;
-    margin-bottom: 50px;
-    font-family: monospace;
-    font-size: 25px;
-    
-    }
-    
-.membertext{
-    color:#c29e74;
-    font-family: monospace;
-    text-align:center;
-    /* margin-left: 50px; */
+.bigbody{
+display:flex;
+margin-top:300px;
+margin-bottom:50px;
 }
- .bt{
-    
-    color: white;
-    background-color: #c29e74;
-    border:none;
-    outline: none;
-    border-radius:3px;
-    font-size: 14px;
-    padding: 7px 20px;
-    font-family: monospace;
-    transition-duration:1s;
-    }
-    
-#btpassword{
-    display: flex;
-    justify-items: flex-start;
-    align-items: flex-end;
-    margin-top: 170px;
+.cardmemberbody{
+width: 100%;
+display: flex;
+/* align-items: center; */
+justify-content: center;
+overflow: hidden;
 }
-   .bt:hover{
-    
-        font-weight:bold;
-        color:#563F2E;
-        font-weight:bold;
-        cursor: pointer;
-    
-    }
-    
-    .bt:active{
-        opacity: 0.8;
-        background-color:#FFF7E8;
-    }
-    .memberpageimage{
-        margin-left: 26%;
-        margin-top: 20%;
-    }
-   div.memberpageimage img{
-    
-    width: 350px;
-    border-radius: 5px;
-    margin-bottom:200px;
-    }
-    
-    .memberswitch{
+.membercard{
+display: grid;
+grid-template-columns: 400px;
+grid-row: 210px 210px 90px;
+height: 500px;
+grid-template-areas: "image" "text" "stats";
+font-family: roboto;
+border-radius: 18px;
+background: #FFF7E8;
+box-shadow: 5px 5px 15px rgba(100, 96, 96, 0.9);
+text-align:center;
+/* margin-bottom:30%; */
+}
+.membercard-text{
+grid-area: text;
+margin: 25px;
+}
+.membercard-text p{
+color:gray;
+font-size: 15px;
+font-weight: 300;
+}
+.membercard-stats{
+grid-area: stats;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr;
+border-bottom-left-radius:15px ;
+border-bottom-right-radius:15px ;
+}
+.membercard-stats .memstat{
+display: flex;
+align-items: center;
+justify-content: center;
+/* flex-direction: column; */
+/* height: 20px; */
+/* width: 120px; */
+height: 35px; 
+width: 200px
+padding: 12px;
+color: white;
+background:#d4af81 ;
+border-radius: 5px;
+border-style:none;
+font-weight:bold;
+}
+.membercard-stats .memstat:hover{
+background-color:#E8C497;
+cursor: pointer;
+font-weight:bold;
+}
+    .memberswitch{ 
+/*     這串是側邊的選擇連結 */
         display: flex;
-        flex-direction: column;
+       flex-direction: column;
         /* 讓文字變直的 */
         width: 100px;
-        justify-content: flex-end;
         align-items: center;
-        margin-top: 40%;
         margin-left: 5%;
-        border-right-style:double;
-        border-color: #c5945b;
- 
         }
         
 a {
@@ -718,17 +625,13 @@ background-color: #fff;
 	</header>
 
 <!--以上為header ***********************************************************************-->
-<main>
-    
-
-
-
 
 
 	<!--滑動top請抓以上為止-->		
 		<!-- 以下這個範圍只是為了拉長版面顯示可實作的範圍,可直接在這邊開始做你的版面摟! -->
-		
- <div class="memberswitch">
+<div class="bigbody" style="width:100% ;height:1200px;">		
+ <div class="memberswitch" style="display:block;">
+ <div class="co" style="width:100%;height:180px;border-right-style:double;border-color: #c5945b;margin-top:20px;line-height:30px;">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
         <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
         <a href="<%=request.getContextPath()%>/front-end/member/obuypage.jsp">訂單紀錄</a>
@@ -741,78 +644,69 @@ background-color: #fff;
         <c:if test="${memberVO.memPosition == '0'}">
         <a href="<%=request.getContextPath()%>/front-end/groomer/groomer_application.jsp">加入美容</a>
         </c:if>
-        
-        <a href="">追蹤清單</a>
-        
+
         <a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
+
 </div>
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do" name="memberpage">
-    <div class="membercontainer">
-    <div class="switchform">
+<div class="co2" style="width:100%;height:1030px;display:none;"></div>
 
-            <h2>會員資料</h2>
-            
-            <div class="membertext">
-                <table>
-             
-                <tr>
-                <td>${memberVO.memName}</td>
-               </tr>
-            
-                <tr>
-                <td>${memberVO.memEmail}</td>   
-                </tr>
-	
-				 <tr>
-                <td>${memberVO.memGender}</td>   
-                </tr>
-	
- 				 <tr>    
-                <td>${memberVO.memBirthday}</td>   
-            	</tr>
-            	
-            	
-            	<tr>
-                <td>${memberVO.memIdenity}</td>   
-                </tr>
-             
-                <tr>
-                <td>${memberVO.memPh}</td>     
-                </tr>
-                
-                <tr>
-                <td>${memberVO.memAddres}</td>    
-                </tr>
-            </table>
-        </div>
-             
+</div>
 
-</FORM>
+    <div class="cardmemberbody">
+        <div class="membercard">
+        
+            <div class="membercard-text">
 
-<FORM id="btpassword" METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
-<input class=bt type="submit"  value="更改密碼">
-<input type="hidden" name="memId" value="${memberVO.memId}"> 
-<input type="hidden" name="action" value="updatePassword">
-</FORM>            
-   
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
-<input class=bt type="submit" value="編輯資料">
+                <h2 style=" color:#c29174;">${memberVO.memName}</h2>
+                <p>${memberVO.memEmail}</p>
+                <p>${memberVO.memGender}</p>
+                <p>${memberVO.memBirthday}</p>
+                <p>${memberVO.memIdenity}</p>
+                <p>${memberVO.memPh}</p>
+                <p>${memberVO.memAddres}</p>
+            </div>
+            <div class="membercard-stats">
+
+<!--                 <button class="memstat"> -->
+<!--                     <div class="membervalye">修改資料</div> -->
+<!--                 </button> -->
+
+<FORM  METHOD="post" ACTION="<%=request.getContextPath()%>/member/member.do">
+<input class="memstat" type="submit" value="編輯資料">
 <input type="hidden" name="memId" value="${memberVO.memId}"> 
 <input type="hidden" name="action" value="getOne_For_Update">
-</FORM>     
+</FORM>
+
+<input class=memstat type="submit" onclick="location.href='<%=request.getContextPath()%>/front-end/member/updatepassword.jsp'"
+	value="更改密碼" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
+
+<input class=memstat type="submit" onclick="location.href='<%=request.getContextPath()%>/front-end/member/petadd.jsp'"
+	value="新增毛孩" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
+ 
+
+
+<!-- 	            <button class="memstat"> -->
+<!-- 	                <div class="membervalye">更改密碼</div> -->
+<!-- 	            </button> -->
+
+<!-- 		        <button class="memstat"> -->
+<!-- 		            <div class="membervalye">增加毛孩</div> -->
+<!-- 		        </button> -->
+
+    	  </div>
+    </div>
+    </div>
+
+
+   
 </div>
-<div class="memberpageimage">
-  <img src="${pageContext.request.contextPath}/resources/images/valeriia.jpg" width="300" height="399.8"/> 
-</div>
-</div>
-		<div class="textttt" style=" width: 100%;height: 2000px;">	
-		</div>
+
 	
 	<!-- 以下為底部FOOTER -->
 	<footer class="footer">
         <ul class="r-footer">
 	        <li>
-	            <h2>About</h2>
+	            <>About</h2>
 		        <ul class="box">
 			        <li><a class="ff1" href="#">品牌故事</a></li>
 			        <li><a class="ff2" href="#">最新文章</a></li>

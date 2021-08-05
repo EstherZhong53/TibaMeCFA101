@@ -301,189 +301,76 @@ display: flex;
     font-family:"poppins";
     
     }
-    /* 
-    body{
-    
-    
-    
-    } */
-.testtest{
-    display: flex;
-    justify-content: space-between;
-    color: white;
-}    
-h5{
-color:#c29e74 ;
+.bigbody{
+display:flex;
+margin-top:300px;
+margin-bottom:50px;
 }
-.test2{
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    color: white;
-}
-.add{
-margin-top: 20px;
-color: white;
-}
-.memberupadatebutton{
-margin-left: 80%;
-margin-bottom: 20px;
-}
-.memberupadatebutton button{
-    color: white;
-    background-color: #c29e74;
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    font-size: 14px;
-    padding: 7px 20px;
-    font-weight: 500px;
-    font-family: monospace;
-    transition-duration:1s;  
-}
-.memberleft{
+.cardmemberbody{
+width: 100%;
 display: flex;
-flex-direction: column;
-/* 讓文字變直的 */
-width: 100px;
-justify-content: flex-end;
+/* align-items: center; */
+justify-content: center;
+overflow: hidden;
+}
+.membercard{
+display: grid;
+grid-template-columns: 400px;
+grid-row: 210px 210px 90px;
+height: 500px;
+grid-template-areas: "image" "text" "stats";
+font-family: roboto;
+border-radius: 18px;
+background: #FFF7E8;
+box-shadow: 5px 5px 15px rgba(100, 96, 96, 0.9);
+text-align:center;
+/* margin-bottom:30%; */
+}
+.membercard-text{
+grid-area: text;
+margin: 25px;
+}
+.membercard-text p{
+color:gray;
+font-size: 15px;
+font-weight: 300;
+}
+.membercard-stats{
+grid-area: stats;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-template-rows: 1fr;
+border-bottom-left-radius:15px ;
+border-bottom-right-radius:15px ;
+}
+.membercard-stats .memstat{
+display: flex;
 align-items: center;
-margin-top: 40%;
-margin-left: 5%;
+justify-content: center;
+/* flex-direction: column; */
+height: 40px;
+width: 120px;
+padding: 12px;
+font-size:14px;
+color: white;
+background:#d4af81 ;
+border-radius: 5px;
+border-style:none;
+font-weight:bold;
 }
-.memberleft button{
-    color: white;
-    background-color: #c29e74;
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    font-size: 14px;
-    padding: 7px 20px;
-    font-weight: 500px;
-    font-family: monospace;
-    transition-duration:1s;  
-    margin-bottom: 7px; 
+.membercard-stats .memstat:hover{
+background-color:#E8C497;
+cursor: pointer;
+font-weight:bold;
 }
-.memberleft button:hover{
-    
-    font-weight:bold;
-    color:#563F2E;
-}
-/* yao的page */
-*{
-    padding:0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family:"poppins";
-    
-    }
-    
-    div.membercontainer{
-    
-        position: absolute;
-        top: 120%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+.memberswitch{ 
+/*     這串是側邊的選擇連結 */
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        background-color: #FFF7E8;
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 50px 60px -50px #563F2E;
-/*         z-index: -1; */
-    
-    }
-    
-    div.membercontainer div.switchform{
-    
-        width: 600px;
-        height: 400px;
-        border-radius: 3px;
-        margin-right: 30px;
-/*         z-index: -1; */
-    }
-    
-    div.membercontainer div.switchform h2{
-    
-    color:#c29e74;
-    margin-bottom: 50px;
-    font-family: monospace;
-    font-size: 25px;
-    
-    }
-    
-.membertext{
-    color:#c29e74;
-    font-family: monospace;
-    text-align:center;
-    margin-left: 50px;
-}
-    div.membercontainer div.switchform input{
-    
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    background-color: #FFF7E8;
-    width: 100%;
-    border-bottom:2px solid #563F2E;
-    margin-bottom: 25px;
-    padding: 7px 0;
-    border-radius: 3px;
-    font-size: 14px;
-    transition-duration:1s;
-    }
-    
- .bt{
-    
-    color: white;
-    background-color: #c29e74;
-    border:none;
-    outline: none;
-    border-radius: 3px;
-    font-size: 14px;
-    padding: 7px 20px;
-    font-weight: 500px;
-    font-family: monospace;
-    transition-duration:1s;
-    align-items: flex-end;
-    }
-    
-   .bt:hover{
-    
-        font-weight:bold;
-        color:#563F2E;
-        font-weight:bold;
-        cursor: pointer;
-    
-    }
-    
-    .bt:active{
-        opacity: 0.8;
-        background-color:#FFF7E8;
-    }
-    
-     div.image img{
-    
-     z-index: 1; 
-    width: 290px; 
-     border-radius: 5px; 
-   margin-left: 53%; 
-    margin-bottom:200px;
-     }
-    
-    .memberswitch{
-        display: flex;
-        flex-direction: column;
+       flex-direction: column;
         /* 讓文字變直的 */
         width: 100px;
-        justify-content: flex-end;
         align-items: center;
-        margin-top: 40%;
         margin-left: 5%;
-        border-right-style:double;
-        border-color: #c5945b;
- 
         }
         
 a {
@@ -494,6 +381,7 @@ a {
 }
 a:hover{
     color:#865d2e;
+    text-decoration:none;
 }
 /* yao的page結束 */    
 /* 以下為FOOTER CSS */
@@ -732,18 +620,13 @@ background-color: #fff;
 	</header>
 
 <!--以上為header ***********************************************************************-->
-    
-
-
-
-
-
-	<!--滑動top請抓以上為止-->		
+    		
 		<!-- 以下這個範圍只是為了拉長版面顯示可實作的範圍,可直接在這邊開始做你的版面摟! -->
 		
 <!-- 以下三個連結之後都要換成getone去抓當下使用者的資訊 -->
-
- <div class="memberswitch">
+<div class="bigbody" style="width:100% ;height:1200px;">		
+ <div class="memberswitch" style="display:block;">
+ <div class="co" style="width:100%;height:180px;border-right-style:double;border-color: #c5945b;margin-top:20px;line-height:30px;">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
         <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
         <a href="<%=request.getContextPath()%>/front-end/member/obuypage.jsp">訂單紀錄</a>
@@ -758,69 +641,79 @@ background-color: #fff;
         </c:if>
         
         
-        <a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
+<a href="<%=request.getContextPath()%>/member/member.do?action=OutUser">登出</a>
 </div>
+<div class="co2" style="width:100%;height:1030px;display:none;"></div>
+
 </div>
+  <c:forEach var="petVO" items="${list}">
+   <div class="cardmemberbody">
+        <div class="membercard">
 
- <c:forEach var="petVO" items="${list}">
-    <div class="membercontainer">
-    <form class="form" id="form">
-    <div class="switchform">
+            <div class="membercard-text">
 
-            <h2>毛孩資料</h2>
-            
-            <div class="membertext">
-                <table>
-          
-                <tr>
-                <td>${petVO.petName}</td>
-                </tr>
-            
-                <tr>
-                <td>${petVO.petVarId}</td>   
-                </tr>
-            
-                <tr>
-                <td>${petVO.petVarId}</td>
-            </tr>
-			<tr>            
-                <td>${petVO.petGender}</td>   
-            </tr>
+                <h2 style=" color:#c29174;">${petVO.petId}</h2>
+                <p>
+ 
+            <div class="membercard-text">
 
-            <tr>
-                <td>${petVO.petAge}歲</td>   
-                </tr>
-             
-                <tr>
-                <td>${petVO.petSurvive}</td>     
-                </tr>
-
-
+                <h2 style=" color:#c29174;">${petVO.petName}</h2>
+                <p>
+                
+                <c:if test="${petVO.petVarId == '1'}">馬爾濟斯</c:if>
+				<c:if test="${petVO.petVarId == '2'}">哈士奇</c:if>
+				<c:if test="${petVO.petVarId == '3'}">黃金獵犬</c:if>
+				<c:if test="${petVO.petVarId == '4'}">拉不拉多</c:if>
+				<c:if test="${petVO.petVarId == '5'}">吉娃娃</c:if>
+				<c:if test="${petVO.petVarId == '6'}">米克斯</c:if>
+				<c:if test="${petVO.petVarId == '7'}">博美</c:if>
+				<c:if test="${petVO.petVarId == '8'}">約克夏</c:if>
+				<c:if test="${petVO.petVarId == '9'}">臘腸</c:if>
+				<c:if test="${petVO.petVarId == '10'}">柴犬</c:if>
+				<c:if test="${petVO.petVarId == '11'}">豹貓</c:if>
+				<c:if test="${petVO.petVarId == '12'}">英國短毛貓</c:if>
+				<c:if test="${petVO.petVarId == '13'}">熱帶草原貓</c:if>
+				<c:if test="${petVO.petVarId == '14'}">蘇格蘭折耳貓</c:if>
+				<c:if test="${petVO.petVarId == '15'}">緬因貓</c:if>
+				<c:if test="${petVO.petVarId == '16'}">挪威森林貓</c:if>
+				<c:if test="${petVO.petVarId == '17'}">波斯貓</c:if>
+				<c:if test="${petVO.petVarId == '18'}">塞爾凱克捲毛貓</c:if>
+				<c:if test="${petVO.petVarId == '19'}">加拿大無毛貓</c:if>
+                
+                
+                </p>
+                <p>${petVO.petSort}</p>
+                <p>${petVO.petGender}</p>
+                <p>${petVO.petAge}歲</p>
+                
+                <p>
+                <c:if test="${petVO.petSurvive == '0'}">健康</c:if>
+				<c:if test="${petVO.petSurvive == '1'}">懷念</c:if>
+                
+                </p>
             </div>
-</c:forEach>
-      </table>
-            
-        </div>
-</div>
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" name="form1">
-<input type="hidden" name="action" value="Update">
-<input type="hidden" name="petId" value="${param.petId}">
-<input class="bt" type="submit" value="GET_ONE_STMT"></FORM>								
-															
-															
-				
-            
+<div class="membercard-stats">
+
+
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do">
+<input class="memstat" type="submit" value="編輯毛孩">
+<input type="hidden" name="petId" value="${petVO.petId}">
+<input type="hidden" name="action" value="GET_ONE_UPDATE">								
+</FORM>															
+																													
+  					</div>
+ 			</div>
+		</div>
+	</c:forEach>
+		
+</div>			
 </div>
 
-<!-- <div class="image"> -->
-<%--         <img src="${pageContext.request.contextPath}/resources/images/milada.jpg" width="300" height="399.8"/>  --%>
-<!-- </div> -->
 
 
 	
-<%-- <input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/front-end/Home/HomePage.jsp'" value="回首頁" style="border:5px;border-radius:5px;">		 --%>
-		<div class="textttt" style=" width: 100%;height: 2000px;">	
-		</div>
+<div class="textttt" style=" width: 100%;height: 2000px;">	
+</div>
 	
 	<!-- 以下為底部FOOTER -->
 	<footer class="footer">

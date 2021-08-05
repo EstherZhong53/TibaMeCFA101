@@ -264,8 +264,14 @@
 								     <input type="hidden" name="obuyId"  value="${obuyVO.obuyId}">
 								     <input type="hidden" name="oSurvive" value="1">
 								     <input type="hidden" name="action"	value="update">
-								     <button class=update type="submit" style="border:5px;border-radius:5px;">完成</button>
 								     
+								     <c:if test="${obuyVO.oSurvive == '0'}">
+								     <button class=update type="submit" style="border:5px;border-radius:5px;">完成</button>
+								     </c:if>
+								<c:if test="${obuyVO.oSurvive == '1'}">
+						
+								     <button class=update type="submit" style="border:5px;border-radius:5px;"disabled>完成</button>
+								     </c:if>
 
 								  </FORM>
 								</td>
@@ -285,16 +291,15 @@
 					      <div class="modal-body">
 					     	 <div class="container-fluid">
 					     	 	<div class="row">
-					     	 			<div class="col-md-3" style="font-weight: bold">訂單編號</div>
-					     	 			<div class="col-md-3" style="font-weight: bold">商品編號</div>
+				
+					     	 			<div class="col-md-6" style="font-weight: bold">商品名稱</div>
 					     	 			<div class="col-md-3" style="font-weight: bold">商品數量</div>
 					     	 			<div class="col-md-3" style="font-weight: bold">金額</div>
 					     	 	</div>		  
 <!-- 					     	 	花括弧內是外面大圈的id，cd.cdpush是cd的方法去帶全部的集合去串 -->
 										<c:forEach var="cda" items="${cd.cdpush(obuyVO.obuyId)}" >
 					     	 			<div class="row">
-					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdoId}</div>
-					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdItemId}</div>
+					     	 			<div class="col-md-6" style="font-weight: bold">${cda.cdItemName}</div>
 					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdAmount}</div>
 					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdMoney}</div>
 					     	 			</div>

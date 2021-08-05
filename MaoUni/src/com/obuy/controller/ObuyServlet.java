@@ -19,6 +19,8 @@ import com.commodity_details.model.CdVO;
 import com.google.gson.Gson;
 import com.obuy.model.ObuyService;
 import com.obuy.model.ObuyVO;
+import com.pet.model.PetService;
+import com.pet.model.PetVO;
 import com.shopping_cart.model.ShoppingCartItemVO;
 import com.shopping_cart.model.ShoppingCartService;
 import com.commodity_details.model.CdVO;
@@ -68,6 +70,39 @@ public class ObuyServlet extends HttpServlet {
 
 		}
 
+		//會員一對多個訂單
+		if ("findByMemId".equals(action)) { 
+
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			try {
+				/*************************** 1.接收請求參數 ****************************************/
+				Integer oMemId = new Integer(req.getParameter("oMemId").trim());
+
+				/*************************** 2.開始查詢資料 ****************************************/
+				ObuyService obuySvc = new ObuyService();
+				List<ObuyVO> obuyVO = obuySvc.findByMemId(oMemId);
+				HttpSession session = req.getSession();
+				session.setAttribute("obuyVO", obuyVO);
+				
+				
+				//這邊svc要叫出來的是在Service時會用哪個方法的名稱，跟dao那邊無關	
+				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+				req.setAttribute("obuyVO", obuyVO); // 資料庫取出的VO物件,存入req
+				String url = "/front-end/member/obuypage.jsp";
+				RequestDispatcher successView = req.getRequestDispatcher(url);// 
+				successView.forward(req, res);
+
+				/*************************** 其他可能的錯誤處理 **********************************/
+			} catch (Exception e) {
+				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/obuypage.jsp");
+				failureView.forward(req, res);
+			}
+		}				
+		
+		
 		if ("GET_ONE_STMT".equals(action)) { 
 
 			List<String> errorMsgs = new LinkedList<String>();

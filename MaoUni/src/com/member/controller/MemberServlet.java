@@ -77,7 +77,7 @@ public class MemberServlet extends HttpServlet {
 			}
 		}
 
-		// 修改用 => 後台_listAllMember.jsp的請求
+		// 修改用 => 前台會員資料修改的請求
 		if ("getOne_For_Update".equals(action)) {
 			// 集合存在請求範圍中，發送 Error
 			List<String> errorMsgs = new LinkedList<String>();
@@ -93,14 +93,14 @@ public class MemberServlet extends HttpServlet {
 
 				// 3.查詢完成,準備轉交
 				req.setAttribute("memberVO", memberVO);
-				String url = "/back-end/member/Update_member.jsp";
+				String url = "/front-end/member/Update_member.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				// 其他可能的錯誤處理
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/listAllMember.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front/member/memberpage.jsp");
 				failureView.forward(req, res);
 			}
 		}
@@ -127,7 +127,8 @@ public class MemberServlet extends HttpServlet {
 				}
 			}
 		}
-		if ("update".equals(action)) { // 來自請求
+		
+		if ("update".equals(action)) {
 
 			List<String> errorMsgs = new LinkedList<String>();
 			req.setAttribute("errorMsgs", errorMsgs);
@@ -136,44 +137,36 @@ public class MemberServlet extends HttpServlet {
 				/*************************** 1.接收請求參數 ****************************************/
 				String memName = req.getParameter("memName");
 				String memEmail = req.getParameter("memEmail").trim();
-				String memPassword = req.getParameter("memPassword");
 				String memIdenity = req.getParameter("memIdenity").trim();
 				String memGender = req.getParameter("memGender");
 				Integer memPh = new Integer(req.getParameter("memPh").trim()); // 因為前端輸入文字時都是String，因此需要轉型
 				String memAddres = req.getParameter("memAddres").trim();
 				Date memBirthday = java.sql.Date.valueOf(req.getParameter("memBirthday")); // Date要用這個方式輸入進去
-				Integer memPosition = new Integer(req.getParameter("memPosition").trim());
-				Integer memReserve = new Integer(req.getParameter("memReserve").trim());
-				Integer memSurvive = new Integer(req.getParameter("memSurvive").trim());
 				Integer memId = new Integer(req.getParameter("memId"));
 
 				MemberVO memberVO = new MemberVO();
 				memberVO.setMemName(memName);
 				memberVO.setMemEmail(memEmail);
-				memberVO.setMemPassword(memPassword);
 				memberVO.setMemIdenity(memIdenity);
 				memberVO.setMemGender(memGender);
 				memberVO.setMemPh(memPh);
 				memberVO.setMemAddres(memAddres);
 				memberVO.setMemBirthday(memBirthday);
-				memberVO.setMemPosition(memPosition);
-				memberVO.setMemReserve(memReserve);
-				memberVO.setMemSurvive(memSurvive);
 				memberVO.setMemId(memId);
-
+			
 				/*************************** 2.開始查詢資料 ****************************************/
 				MemberService memSvc = new MemberService();
 				memSvc.update(memberVO);
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-				String url = "/back-end/member/update_member.jsp";
+				String url = "/front-end/member/memberpage.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);
 				successView.forward(req, res);
 
 				/*************************** 其他可能的錯誤處理 **********************************/
 			} catch (Exception e) {
 				errorMsgs.add("無法取得要修改的資料:" + e.getMessage());
-				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/member/update_member.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/front-end/member/memberpage.jsp");
 				failureView.forward(req, res);
 			}
 		}

@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.commodity_details.model.CdVO;
+import com.pet.model.PetVO;
 
 public class ObuyService {
 
@@ -53,4 +54,9 @@ public class ObuyService {
 		dao.insertWithco(obuyVO, list);
 	}
 
+	public List<ObuyVO> findByMemId(Integer oMemId) {
+		
+		return dao.findByMemId(oMemId);
+	}
+	
 }

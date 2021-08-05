@@ -22,7 +22,8 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 //	private static final String GET_ONEPOSITION = " SELECT MEM_NAME, MEM_EMAIL, MEM_PASSWORD, MEM_IDENTITY, MEM_GENDER, MEM_PH, MEM_ADDRES, MEM_BIRTHDAT,��MEM_SURVIVE FROM MEMBER where MEM_POSITION = ?";
 	// 美容師檢測
 	private static final String DELETE = "DELETE FROM MEMBER where MEM_ID = ?";
-	private static final String UPDATE = "UPDATE MEMBER set MEM_NAME =?, MEM_EMAIL=?, MEM_PASSWORD=?, MEM_IDENTITY=? , MEM_GENDER=?, MEM_PH=?, MEM_ADDRES=?, MEM_BIRTHDAY=?, MEM_POSITION=? ,MEM_RESERVE=?, MEM_SURVIVE=? ,MEM_UPDATE=now() where MEM_ID = ?";
+	private static final String UPDATE = "UPDATE MEMBER set MEM_NAME =?, MEM_EMAIL=?, MEM_IDENTITY=? , MEM_GENDER=?, MEM_PH=?, MEM_ADDRES=?, MEM_BIRTHDAY=? ,MEM_UPDATE=now() where MEM_ID = ?";
+//	最早的檢查:UPDATE MEMBER set MEM_NAME =?, MEM_EMAIL=?, MEM_PASSWORD=?, MEM_IDENTITY=? , MEM_GENDER=?, MEM_PH=?, MEM_ADDRES=?, MEM_BIRTHDAY=?, MEM_POSITION=? ,MEM_RESERVE=?, MEM_SURVIVE=? ,MEM_UPDATE=now() where MEM_ID = ?";
 	private static final String CHECK = "SELECT * FROM MEMBER where MEM_EMAIL = ?";
 	private static final String UPDATE_POSITION = "UPDATE MEMBER set MEM_POSITION=?  where MEM_ID = ?";
 	private static final String UPDATE_PASSWORD = "UPDATE MEMBER SET MEM_PASSWORD = ? WHERE MEM_EMAIL = ?";
@@ -174,7 +175,7 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 	}
 
 	public void update(MemberVO memberVo) {
-
+ System.out.println("所以");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -186,18 +187,13 @@ public class MemberJDBCDAO implements MemberDAO_interface {
 
 			pstmt.setString(1, memberVo.getMemName());
 			pstmt.setString(2, memberVo.getMemEmail());
-			pstmt.setString(3, memberVo.getMemPassword());
-			pstmt.setString(4, memberVo.getMemIdenity());
-			pstmt.setString(5, memberVo.getMemGender());
-			pstmt.setInt(6, memberVo.getMemPh());
-			pstmt.setString(7, memberVo.getMemAddres());
-			pstmt.setDate(8, memberVo.getMemBirthday());
-			pstmt.setInt(9, memberVo.getMemPosition());
-			pstmt.setInt(10, memberVo.getMemReserve());
-			pstmt.setInt(11, memberVo.getMemSurvive());
-			pstmt.setInt(12, memberVo.getMemId());
+			pstmt.setString(3, memberVo.getMemIdenity());
+			pstmt.setString(4, memberVo.getMemGender());
+			pstmt.setInt(5, memberVo.getMemPh());
+			pstmt.setString(6, memberVo.getMemAddres());
+			pstmt.setDate(7, memberVo.getMemBirthday());
+			pstmt.setInt(8, memberVo.getMemId());
 			pstmt.executeUpdate();
-
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
 

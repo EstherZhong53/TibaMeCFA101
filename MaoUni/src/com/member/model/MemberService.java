@@ -35,8 +35,8 @@ public class MemberService {
 		return dao.checkemail(memEmail);
 	}
 
-	public MemberVO getOneMember(Integer memid) { // 查單筆
-		return dao.findByPrimaryKey(memid);
+	public MemberVO getOneMember(Integer memId) { // 查單筆
+		return dao.findByPrimaryKey(memId);
 	}
 
 	public void insert(String memName, String memEmail, String memPassword, String memIdenity, String memGender,
@@ -79,7 +79,7 @@ public class MemberService {
 		mailSvc.setSubject("MaoUni毛孩有你  註冊成功通知");
 		StringBuffer messageText = new StringBuffer();
 
-		messageText.append("嗨，親愛的毛爸媽，歡迎您加入MaoUni！請點選網址登入：") ;
+		messageText.append("嗨，親愛的毛爸媽，歡迎您加入MaoUni！") ;
 //		message.setContent("<h1>嗨，親愛的毛爸媽，歡迎您加入MaoUni</h1><br><a href=\"http://localhost:8081/MaoUni/front-end/home/login.jsp">請點擊連結進行登入</a>",\"text/html;charset=UTF-8\");
 		
 		mailSvc.setMessageText(messageText.toString());

@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.commodity_details.model.CdJDBCDAO;
 import com.commodity_details.model.CdVO;
+import com.pet.model.PetVO;
 
 public class ObuyJDBCDAO implements ObuyDAO_interface {
 
@@ -25,8 +26,66 @@ public class ObuyJDBCDAO implements ObuyDAO_interface {
 	private static final String GET_ALL_STMT = "SELECT * FROM OBUY";
 	private static final String GET_ONE_STMT = "SELECT O_ID, O_MEM_ID, O_MONEY, O_DATE, O_PAYING, O_SEND, O_SURVIVE, O_OTHER FROM OBUY where O_ID = ?";
 	private static final String UPDATE = "UPDATE OBUY  set O_SURVIVE=? WHERE O_ID =?";
+	private static final String GET_ONE_OBUYMEM = "SELECT O_ID, O_MEM_ID, O_MONEY, O_DATE, O_PAYING, O_SEND, O_SURVIVE, O_OTHER FROM OBUY where O_MEM_ID = ?";
 
+	@Override
+	public List<ObuyVO> findByMemId(Integer oMemId) { //一個會員找多筆商品訂單
 
+		List<ObuyVO> list = new ArrayList<ObuyVO>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+
+			Class.forName(driver);
+			con = DriverManager.getConnection(url, userid, passwd);
+			pstmt = con.prepareStatement(GET_ONE_OBUYMEM);
+
+			pstmt.setInt(1, oMemId);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+
+			ObuyVO obuyVO = new ObuyVO();
+			
+			obuyVO.setObuyId(rs.getInt("O_BUY_ID"));
+			obuyVO.setoMemId(rs.getInt("O_MEM_ID"));
+			obuyVO.setoMoney(rs.getInt("O_MONEY"));
+			obuyVO.setoDate(rs.getTimestamp("O_DATE"));
+			obuyVO.setoPaying(rs.getInt("O_PAYING"));
+			obuyVO.setoSend(rs.getInt("O_SEND"));
+			obuyVO.setoSurvive(rs.getInt("O_SURVIVE"));
+			obuyVO.setObuyOther(rs.getString("O_OTHER"));
+
+			list.add(obuyVO);
+			}
+
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("Couldn't load database driver. " + e.getMessage());
+
+		} catch (SQLException se) {
+			throw new RuntimeException("A database error occured. " + se.getMessage());
+
+		} finally {
+			if (pstmt != null) {
+				try {
+					pstmt.close();
+				} catch (SQLException se) {
+					se.printStackTrace(System.err);
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					e.printStackTrace(System.err);
+				}
+			}
+		}
+		
+		return list;
+	}
 
 	@Override
 	public void update(Integer obuyId, Integer oSurvive) {

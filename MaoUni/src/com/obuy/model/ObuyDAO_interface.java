@@ -12,6 +12,6 @@ public interface ObuyDAO_interface {
     public void insertWithco(ObuyVO obuyVO , List<CdVO> list); //同時新增訂單與清單 ()
     
     //查詢(一對多)(回傳 Set)
-//    public Set<ObuyVO> getEmpsByDeptno(Integer OId);
+    public List<ObuyVO> findByMemId(Integer oMemIdId);
     
 }

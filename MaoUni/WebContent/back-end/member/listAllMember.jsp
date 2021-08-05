@@ -197,28 +197,28 @@ input.update:hover {
 												<option value="100">100</option></select>&nbsp;
 										</label> <input class=update type="submit"
 											onclick="location.href='<%=request.getContextPath()%>/back-end/member/addMember.jsp'"
-											value="新增會員"
-											style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
+											value="新增會員" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 21%">
 
-										<input class=update type="button"
-											onclick="location.href='<%=request.getContextPath()%>/back-end/pet/petlistAll.jsp'"
-											value="毛孩管理"
-											style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 5%;">
+										<input class=update type="button" onclick="location.href='<%=request.getContextPath()%>/back-end/pet/petlistAll.jsp'"
+											value="毛孩管理" style="border: 5px; border-radius: 5px; height: 35px; width: 100px; margin-left: 5%;">
 									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="text-md-right dataTables_filter"
-										id="dataTable_filter">
-										<label><input type="search"
-											class="form-control form-control-sm"
-											aria-controls="dataTable" placeholder="Search"
-											style="margin-top: 5px; maring-left: -22px; width: 200px;"></label>
-								<input class="action" type="hidden" name="action" value="getonemember">
-								<button type="submit" class="btn btn-primary getList ml-4 my-1">
-								查詢</button>
-									</div>
-								</div>
-							</div>
+
+							
+		<form method="post" ACTION="<%=request.getContextPath()%>/member/member.do">
+			<div class="searchGM row" style="margin-left:-40px;">
+				<div class="col-md-3 my-1" style="margin-left:width:300px;">
+					<input class="form-control" name="memId" type="number" min="1" placeholder="會員編號">
+				</div>
+				<input type="hidden" name="memId" value="${memberVO.memId}"> 
+				<input class="action" type="hidden" name="action" value="findByPrimaryKey">
+				<button type="submit" class="btn btn-primary getList ml-4 my-1">
+					查詢
+				</button>
+			</div>
+		</form>		
+							
+							
 							<div class="table-responsive table mt-2" id="dataTable-1"
 								role="grid" aria-describedby="dataTable_info">
 								<table class="table my-0" id="dataTable">

@@ -138,27 +138,69 @@
 
 
 				<!-- 以下為商城管理下面那個長方形,包含駝色表頭(所有商品資料) + 下面空白區域 -->
-			    <div class="card" style="margin-left:-8px; margin-right: 25px;">
-			    
-			        <div class="card-header py-3" style="background-color:#e8c497;margin-top:-20px">
-			            <p class="allitemtitle" style="margin: 1px;font-size: 20px;">所有毛孩資訊</p>
-			        </div>
+				<!-- 以下為所有商品資料那一米駝色的橫條 -->
+				<div class="container-fluid"
+					style="margin-top: 45px; margin-left: -10px;">
+					<div class="card" style="margin-left: -13px;">
+						<div class="card-header py-3" style="background-color: #e8c497;">
+							<p class="allitemtitle" style="margin: 1px; font-size: 20px;">毛孩列表</p>
+						</div>
+						<!-- 以上為所有商品資料那一米駝色的橫條 -->
+
+
+						<!-- 以下為空白內容，這個位置原本擺放我的列表，大家可以自行增加自己需要的頁面資訊 -->
+						<div class="card-body" style="height: 563px;">
+							<div class="row"></div>
+							<div class="table-responsive table mt-2" id="dataTable-1"
+								role="grid" aria-describedby="dataTable_info">
+								
+								<main>
+	
+	<c:if test="${not empty errorMsgs}">
+		<c:forEach var="message" items="${errorMsgs}">
+	 		<p style="color: red">${message}</p>
+		</c:forEach>
+	</c:if>
+	
+	<div class="container">
+	
+	
+		<form method="post" ACTION="<%=request.getContextPath()%>/pet/pet.do">
+			<div class="searchGM row">
+				<div class="col-md-3 my-1">
+					<input class="form-control" name="petId" type="number" min="1" placeholder="毛孩編號">
+				</div>
+				
+				<input type="hidden" name="petId" value="${petVO.petId}"> 
+				<input class="action" type="hidden" name="action" value="GET_ONE_STMT">
+				<button type="submit" class="btn btn-primary getList ml-4 my-1">
+					查詢
+				</button>
+			</div>
+		</form>	
+		
+				<form method="post" ACTION="<%=request.getContextPath()%>/pet/pet.do">
+				<input type="hidden" name="petId value="${petVO.petId}"> 
+				<input class="action" type="hidden" name="action" value="GET_ALL_STMT">
+				<button type="submit" class="btn btn-primary getList ml-4 my-1">
+					ALL
+				</button>
+			</div>
+		</form>	
+			    	
 			    
  <table class="table my-0" id="dataTable">
 	<tr>
 		<th style="width: 90px;text-align: center;font-size:12px;">毛孩編號</th>
-		<th style="width: 90px;text-align: center;font-size:8px;">毛主人編號</th>
+		<th style="width: 90px;text-align: center;font-size:8px;">毛爸媽編號</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">毛孩名字</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">毛孩種類</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">品種</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">性別</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">年齡</th>
 		<th style="width: 90px;text-align: center;font-size:8px;">狀態</th>
-
 	</tr>
-
 		<c:forEach var="petVO" items="${list}" >
-
 			<tr>
 				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petId}</td>
 				<td style="width: 90px;text-align: center;font-size:8px;">${petVO.petMemId}</td>
@@ -194,31 +236,16 @@
 				
 				<c:if test="${petVO.petSurvive == '0'}">健康</c:if>
 				<c:if test="${petVO.petSurvive == '1'}">懷念</c:if>
-				</td>
-
-<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/pet/pet.do" style="margin-bottom: 0px;">
-			     <input class=update type="submit" value="立即修改" style="border:5px;border-radius:5px;">
-			     <input type="hidden" name="petId"  value="${petVO.petId}">
-			     <input type="hidden" name="action"	value="GET_ONE_STMT">
-			     </FORM>
-			</td>
-			
+				</td>			
 			</tr>
 		</c:forEach>
 </table>
-
-
 		    	
 		    	</div> 
 				<!-- 以上為商城管理下面那個長方形,包含駝色表頭(所有商品資料) + 下面空白區域 -->
-
-
 				        
         </div> <!-- class="d-flex flex-column"的結尾標籤-->
 	</div> <!-- Class="Wrapper"的結尾標籤 -->
-
-
 	<!-- 以下為boostrap靜態檔引入,不可少!!! 路徑錯了會跑版-->
     <script src="<%=request.getContextPath()%>/resources/js/jquery.min.js"></script> 
     <script src="<%=request.getContextPath()%>/resources/js/bootstrap.min.js"></script>

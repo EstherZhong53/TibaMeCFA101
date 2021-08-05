@@ -15,17 +15,5 @@ public class ClassService {
 	public List<ClassVO> getAll() {
 		return dao.getAll();
 	}
-	
-//	public Integer update(String scPain) {
-//		return dao.update(scPain);
-//	}
-	
-//	public void delete(Integer ScId) {
-//		dao.delete(ScId);
-//	}
-//	public ClassVO findByPrimaryKey(Integer ScId) {
-//		return dao.findByPrimaryKey(ScId);
-//	}
-	
-	
+
 }

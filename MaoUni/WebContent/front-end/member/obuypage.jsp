@@ -3,22 +3,28 @@
 <%@ page import="java.util.*"%>
 <%@ page import="java.io.*"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="com.item.model.*"%>
 <%@ page import="com.obuy.model.*"%>
+<%@ page import="com.commodity_details.model.*"%>
 <%@ page import="com.member.model.*"%>
 
 
 <%
-    ObuyService obuySvc = new ObuyService();
-    List<ObuyVO> list = obuySvc.getAll();
-    pageContext.setAttribute("list",list);
+ObuyService obuySvc = new ObuyService();
+Integer omemId = ((MemberVO) session.getAttribute("memberVO")).getMemId();
+List<ObuyVO> list = obuySvc.findByMemId(omemId);
+pageContext.setAttribute("list", list);
 %>
-<jsp:useBean id="obuy" scope="page" class="com.obuy.model.ObuyService" />
+ 
+<%-- <jsp:useBean id="obuy" scope="page" class="com.obuy.model.ObuyService" /> --%>
+<%-- <jsp:useBean id="cd" scope="page" class="com.commodity_details.model.CdService" /> --%>
+<%-- <jsp:useBean id="item" scope="page" class="com.item.model.ItemService" /> --%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>毛孩有你 MaoUni</title>
+<title>毛孩有你 MaoUni歷史訂單紀錄</title>
 
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="description" content="">
@@ -211,54 +217,12 @@ margin-top: -50px;
 				<div class="col-lg-12 col-12 text-center">
 		            <h2 class="text-secondary mt-5" data-aos="fade-up" data-aos-delay="200">歷史訂單紀錄</h2>
 		        </div>
-<!-- 				<form method="get" id="serchForm" > -->
-<!-- 					<div class="searchGM col-md-12 row mt-0"> -->
-<!-- 						<div class="col-md-3 my-1"> -->
-<!-- 							<select class="form-control condition" name="month"> -->
-<!-- 								<option value="" selected>月份</option> -->
-<!-- 								<option value="1">01</option> -->
-<!-- 								<option value="2">02</option> -->
-<!-- 								<option value="3">03</option> -->
-<!-- 								<option value="4">04</option> -->
-<!-- 								<option value="5">05</option> -->
-<!-- 								<option value="6">06</option> -->
-<!-- 								<option value="7">07</option> -->
-<!-- 								<option value="8">08</option> -->
-<!-- 								<option value="9">09</option> -->
-<!-- 								<option value="10">10</option> -->
-<!-- 								<option value="11">11</option> -->
-<!-- 								<option value="12">12</option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-4 my-1"> -->
-<!-- 							<input class="form-control condition" name=apmDate type="date" > -->
-<!-- 						</div> -->
-<!-- 						<div class="col-md-3 my-1"> -->
-<!-- 							<select class="form-control condition" name="apmStatus"> -->
-<!-- 								<option value="">ALL</option> -->
-<!-- 								<option value="0">待審核</option> -->
-<!-- 								<option value="1">拒絕</option> -->
-<!-- 								<option value="2">接受</option> -->
-<!-- 								<option value="3">完成</option> -->
-<!-- 								<option value="4">取消</option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 						<input class="action" type="hidden" name="groomerId" value="1"> -->
-<!-- 						<input class="action" type="hidden" name="action" value="getAll"> -->
-<!-- 						<div class="col-md-1 my-1"> -->
-<!-- 							<i class=" fas fa-search search mt-4 fa-2x"></i> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</form> -->
-			<!------------------------ search appointment end --------------------->	
-	<!------------------------------------------------------ appointment list start ------------------------------------------------>			
-				<section class="showList row">
+<section class="showList row">
 				
 				
 				
 				
-				
-<div class="memberswitch col-2">
+		<div class="memberswitch col-2">
         <a href="<%=request.getContextPath()%>/front-end/member/memberpage.jsp">會員資料</a>
         <a href="<%=request.getContextPath()%>/front-end/member/petpage.jsp">毛孩資料</a>
         <a href="<%=request.getContextPath()%>/front-end/member/obuypage.jsp">訂單紀錄</a>
@@ -286,13 +250,14 @@ margin-top: -50px;
 									<th scope="col" style="width:30px;">金額</th>
 									<th scope="col" style="width:30px;">狀態</th>
 									<th scope="col" style="width:80px;">備註</th>
+									<th scope="col" style="width:80px;">明細</th>
 								</tr>
 							</thead>
 							
 			<!------------------------ 列表  --------------------->
 			
 							<tbody class="appointmentList">
-							<c:forEach var="obuyVO" items="${list}" >
+							<c:forEach var="obuyVO" items="${list}" varStatus="varst">
 							<tr style="width: 70px;text-align: center;">
 								<td style="width: 90px;text-align: center;font-size:3px;">${obuyVO.obuyId}</td>
 								<td style="width: 91.5px;text-align: center;font-size:3px;">
@@ -320,90 +285,49 @@ margin-top: -50px;
 								
 								
 								<td style="width: 91.5px;text-align: center;font-size:3px;">${obuyVO.obuyOther}</td>
-								
+								<td><i class="far fa-address-card btn-primary" data-toggle="modal" data-target="#e${obuyVO.obuyId}"></i></td>
+							<!-- ---------------------跳出視窗-->
 
-<!-- Modal -->
-								<div class="modal fade" id="commentForm${apmVO.apmId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								  <div class="modal-dialog" role="document">
-								    <div class="modal-content">
-								      <div class="modal-header">
-								        <h5 class="modal-title" id="exampleModalLabel">	評價</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								          <span aria-hidden="true">&times;</span>
-								        </button>
-								      </div>
-<!----------------------------------------------- Comment Form ----------------------------------------->
-								      <div class="modal-body">							      		
-										<form method="POST" class="commentForm" enctype="multipart/form-data">
-											<input type="hidden" name="action" value="addComment">
-									      	<input type="hidden" name="apmId" value="${apmVO.apmId}">
-										  	<input type="hidden" name="groomerId" value="${apmVO.groomerId}">
-									      	<div class="commentForm">
-									      	 	<div class="form-group">
-											   		 <label for="star">請給分</label>
-											   		 <select class="form-control star" name="star" required>
-													      <option>1</option>
-													      <option>2</option>
-													      <option>3</option>
-													      <option>4</option>
-													      <option>5</option>
-												    </select>
-										  		</div>
-									      		<textarea name="apmComment" placeholder="有話大聲說！" style="width: 70%; height: 200px; word-wrap: break-word;"></textarea>
-												<div class="custom-file mt-3">
-												    <input type="file" class="custom-file-input" name="photo" required>
-												    <label class="custom-file-label" for="validatedCustomFile">選擇照片...</label>
-												</div>
-										 	 </div>
-										
-								      </div>
-								      <div class="modal-footer">
-								      	<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-								      	<button type="submit" class="btn btn-primary submitForm">送出</button>
-								      </div>
-								      </form>
-								    </div>
-								  </div>
-								</div>
-<!-- Modal -->
-								<div class="modal fade" id="reportForm${apmVO.apmId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								  <div class="modal-dialog" role="document">
-								    <div class="modal-content">
-								      <div class="modal-header">
-								        <h5 class="modal-title" id="exampleModalLabel">檢舉</h5>
-								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								          <span aria-hidden="true">&times;</span>
-								        </button>
-								      </div>
-<!----------------------------------------------- Grept Form ----------------------------------------->
-									  <form type="POST" class="reportForm">
-								     	  <div class="modal-body">							      		
-									      	<div class="reportForm">
-									      	 	<div class="form-group">
-													<input type="hidden" name="action" value="addGreport">
-													<input type="hidden" name="apmId" value="${apmVO.apmId}">
-													<input type="hidden" name="memId" value="${apmVO.memId}">
-													<input type="hidden" name="groomerId" value="${apmVO.groomerId}">
-													<textarea name="content" placeholder="有話大聲說！" style="width: 70%; height: 200px; word-wrap: break-word;" require></textarea>
-										  		</div>
-										 	 </div>
-								     	  </div>
-									      <div class="modal-footer">
-									      	<button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-									      	<button type="submit" class="btn btn-primary submitForm">送出</button>
-									      </div>
-								      </form>
-								    </div>
-								  </div>
-								</div>
-
-	</c:forEach>		
-							</tobdy>
-				</table>
+					<div class="modal fade" id="e${obuyVO.obuyId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+					    <div class="modal-content" style="width:500px;">
+					      <div class="modal-header">	
+					        <h5 class="modal-title" id="exampleModalCenterTitle">訂單明細</h5>
+					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					          <span aria-hidden="true">&times;</span>
+					        </button>
+					      </div>
+					      <div class="modal-body">
+					     	 <div class="container-fluid">
+					     	 	<div class="row">
 				
+					     	 			<div class="col-md-6" style="font-weight: bold">商品名稱</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">商品數量</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">金額</div>
+					     	 	</div>		  
+<!-- 					     	 	花括弧內是外面大圈的id，cd.cdpush是cd的方法去帶全部的集合去串 -->
+										<c:forEach var="cda" items="${cd.cdpush(obuyVO.obuyId)}" >
+					     	 			<div class="row">
+					     	 			<div class="col-md-6" style="font-weight: bold">${cda.cdItemName}</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdAmount}</div>
+					     	 			<div class="col-md-3" style="font-weight: bold">${cda.cdMoney}</div>
+					     	 			</div>
+										</c:forEach>									     						     	 			      
+					      	  </div>
+					      </div>
+					      
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					      </div>
+					    </div>
+					  </div>
+					</div> 
+					     
+					</c:forEach>		
+ 					</tbody>
+					</table>
+			</div>
 		</div>
-	</section>
-
 </main>
 
     <script>

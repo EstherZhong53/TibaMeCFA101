@@ -250,7 +250,7 @@ cursor: pointer;
 								onchange="check(this)"><span id="sp"></span></input>
 						</div>
 						<div class='pets-birthday'>
-							<label for='pets-birthday'>生日</label> <input type="text"
+							<label for='pets-birthday'>生日</label> <input type="date"
 								placeholder='YYYY-MM-DD' id="memBirthday" name="memBirthday"
 								value="${param.memBirthday}" required></input>
 						</div>
