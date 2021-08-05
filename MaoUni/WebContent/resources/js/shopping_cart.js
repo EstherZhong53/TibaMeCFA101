@@ -1,6 +1,4 @@
 function init(){
-	// ============== 測試用  ==============
-	$(".fa-envelope").click(function(e){
 		$.ajax({
 			url: "/MaoUni/shoppingcart.do",
 			type: "POST",
@@ -11,9 +9,6 @@ function init(){
 				getCart();	
 			}
 		})
-	})
-	// ===================================
-	
 	
 	
 	$(".addItem").click(function(e){

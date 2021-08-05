@@ -26,6 +26,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">  <!-- 左邊這個是右上角會員/信箱/購物車/搜尋ICON使用的fontawesomeCDN,使用靜態檔會跑掉 -->
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/sweetalert2.css">  
     <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/newheader.css" type="text/css"/>
+    
+    <script src="<%= request.getContextPath() %>/resources/js/jquery_1.12.4.min.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/popper.min.js"></script>
+    <script src="<%= request.getContextPath() %>/resources/js/sweetalert2.js"></script>
 
 <style>
  body 
